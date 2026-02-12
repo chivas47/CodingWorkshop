@@ -4,13 +4,13 @@ A 4-session beginner-friendly workshop where you'll learn to code by creating in
 
 ## 🌐 Live Website
 
-**Main Page:** https://yourusername.github.io/code-create/
+**Main Page:** https://chivas47.github.io/CodingWorkshop/
 
 **Sessions:**
-- [Session 1: What is Code?](https://yourusername.github.io/code-create/session1/)
-- [Session 2: Generative Art](https://yourusername.github.io/code-create/session2/)
-- [Session 3: Interactive Game](https://yourusername.github.io/code-create/session3/)
-- [Session 4: Music Visualizer](https://yourusername.github.io/code-create/session4/)
+- [Session 1: What is Code?](https://chivas47.github.io/CodingWorkshop/session1/)
+- [Session 2: Generative Art](https://chivas47.github.io/CodingWorkshop/session2/)
+- [Session 3: Interactive Game](https://chivas47.github.io/CodingWorkshop/session3/)
+- [Session 4: Music Visualizer](https://chivas47.github.io/CodingWorkshop/session4/)
 
 ## 📚 What You'll Learn
 
