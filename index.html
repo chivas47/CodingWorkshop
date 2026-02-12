@@ -3,1052 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Session 1: What is Code? Making Your First Marks</title>
+    <title>Code & Create - Creative Coding Workshop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 1.5em;
+            color: #6b7280;
+            margin-bottom: 50px;
+        }
+
+        .info {
+            background: #f3f4f6;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .info-item {
+            padding: 15px;
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .sessions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .session-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .session-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
+        }
+
+        .session-number {
+            font-size: 3em;
+            font-weight: bold;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .session-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .session-desc {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .tagline {
+                font-size: 1.2em;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🎨 Session 1: What is Code?</h1>
-            <p>Making Your First Marks</p>
-            <div class="session-info">
-                <div class="info-badge">⏱️ 150 minutes</div>
-                <div class="info-badge">👥 Beginner-Friendly</div>
-                <div class="info-badge">🎯 Interactive Learning</div>
-            </div>
-        </header>
+        <h1>🎨 Code & Create</h1>
+        <p class="tagline">Interactive Art with JavaScript</p>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'intro')">
-                <span class="tab-number">👋</span>
-                Intro
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'timeline')">
-                <span class="tab-number">⏰</span>
-                Timeline
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'what-is-code')">
-                <span class="tab-number">💡</span>
-                What is Code?
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'variables')">
-                <span class="tab-number">📦</span>
-                Variables
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'functions')">
-                <span class="tab-number">🍳</span>
-                Functions
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'practice1')">
-                <span class="tab-number">🎨</span>
-                Practice 1
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'practice2')">
-                <span class="tab-number">🖱️</span>
-                Practice 2
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'drawing')">
-                <span class="tab-number">✏️</span>
-                Drawing
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'cheatsheet')">
-                <span class="tab-number">📋</span>
-                Cheat Sheet
-            </button>
-        </div>
-
-        <!-- INTRO TAB -->
-        <div id="intro" class="tab-content active">
-            <div class="section">
-                <h2>👋 Welcome to Code & Create!</h2>
-                <p style="font-size: 1.2em; line-height: 1.8;">
-                    Today you'll learn the fundamentals of coding by <strong>creating interactive art</strong>. 
-                    No prior experience needed - we'll start from absolute zero and build up gradually.
-                </p>
-            </div>
-
-            <div class="section">
-                <h3>🎯 What You'll Learn Today</h3>
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h4>💡 Core Concepts</h4>
-                        <ul style="padding-left: 20px; margin-top: 10px;">
-                            <li>What is code?</li>
-                            <li>Variables (boxes)</li>
-                            <li>Functions (recipes)</li>
-                            <li>Events (interactions)</li>
-                        </ul>
-                    </div>
-                    <div class="demo-card">
-                        <h4>🛠️ Practical Skills</h4>
-                        <ul style="padding-left: 20px; margin-top: 10px;">
-                            <li>Change colors & sizes</li>
-                            <li>Respond to clicks</li>
-                            <li>Create counters</li>
-                            <li>Draw on canvas</li>
-                        </ul>
-                    </div>
-                    <div class="demo-card">
-                        <h4>🎨 What You'll Make</h4>
-                        <ul style="padding-left: 20px; margin-top: 10px;">
-                            <li>Color-changing box</li>
-                            <li>Click counter</li>
-                            <li>Simple drawing app</li>
-                            <li>YOUR creative ideas!</li>
-                        </ul>
-                    </div>
+        <div class="info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>4</strong>
+                    <span>Sessions</span>
                 </div>
-            </div>
-
-            <div class="checkpoint">
-                <h4>✅ By the End of Today</h4>
-                <p>You'll be able to:</p>
-                <ul style="padding-left: 20px; margin-top: 10px;">
-                    <li>✓ Explain what variables and functions are</li>
-                    <li>✓ Write simple JavaScript code</li>
-                    <li>✓ Make things change when clicked</li>
-                    <li>✓ Create a basic drawing app</li>
-                    <li>✓ Call yourself a developer! 🎉</li>
-                </ul>
-            </div>
-
-            <div class="tip">
-                <h4>💡 Learning Philosophy</h4>
-                <p><strong>Confusion is GOOD!</strong> It means you're learning.</p>
-                <p>Don't worry about memorizing everything - focus on understanding the concepts.</p>
-                <p>We'll repeat everything multiple times in different ways.</p>
-            </div>
-        </div>
-
-        <!-- TIMELINE TAB -->
-        <div id="timeline" class="tab-content">
-            <div class="section">
-                <h2>⏰ Session Timeline (150 min)</h2>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-time">0-20 min</div>
-                        <strong>Introduction: What is Code?</strong>
-                        <p>Analogies, live demos, understanding HTML/CSS/JavaScript</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">20-40 min</div>
-                        <strong>Concept: Variables</strong>
-                        <p>Boxes with labels, storing information, console practice</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">40-60 min</div>
-                        <strong>Concept: Functions</strong>
-                        <p>Recipes, reusable code, parameters</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">60-80 min</div>
-                        <strong>Practice 1: Changing Things</strong>
-                        <p>Make box change colors, sizes, emojis</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">80-100 min</div>
-                        <strong>Practice 2: Click Events</strong>
-                        <p>Build a click counter, understand events</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">100-130 min</div>
-                        <strong>Mini-Project: Drawing App</strong>
-                        <p>Simple canvas drawing with mouse</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">130-145 min</div>
-                        <strong>Showcase & Play</strong>
-                        <p>Share creations, explore, customize</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-time">145-150 min</div>
-                        <strong>Wrap-up</strong>
-                        <p>Review, homework, preview next session</p>
-                    </div>
+                <div class="info-item">
+                    <strong>2.5h</strong>
+                    <span>Each Session</span>
+                </div>
+                <div class="info-item">
+                    <strong>10h</strong>
+                    <span>Total Learning</span>
+                </div>
+                <div class="info-item">
+                    <strong>💯</strong>
+                    <span>Beginner-Friendly</span>
                 </div>
             </div>
         </div>
 
-        <!-- WHAT IS CODE TAB -->
-        <div id="what-is-code" class="tab-content">
-            <div class="section">
-                <h2>💡 What is Code?</h2>
-                
-                <div class="concept-box">
-                    <h3>Code = Instructions for Computers</h3>
-                    <p style="font-size: 1.1em;">
-                        Code is simply a way to tell computers what to do. 
-                        Just like you follow a recipe to bake a cake, 
-                        computers follow code to do tasks.
-                    </p>
+        <h2 style="text-align: center; margin-bottom: 30px; color: #1f2937;">Workshop Sessions</h2>
+
+        <div class="sessions">
+            <a href="session1/" class="session-card">
+                <div class="session-number">01</div>
+                <div class="session-title">What is Code?</div>
+                <div class="session-desc">
+                    Learn fundamentals: variables, functions, events. 
+                    Build your first interactive elements!
                 </div>
+            </a>
 
-                <h3>🎭 Three Languages of the Web</h3>
-
-                <div class="analogy">
-                    <h4>Think of a House 🏠</h4>
-                    <ul style="padding-left: 20px; margin-top: 10px; line-height: 1.8;">
-                        <li><strong>HTML</strong> = The structure (walls, doors, rooms)</li>
-                        <li><strong>CSS</strong> = The decoration (paint, furniture, style)</li>
-                        <li><strong>JavaScript</strong> = The functionality (lights turn on, doors open)</li>
-                    </ul>
+            <a href="session2/" class="session-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                <div class="session-number">02</div>
+                <div class="session-title">Generative Art</div>
+                <div class="session-desc">
+                    Create algorithmic art with loops and randomness. 
+                    Every refresh = unique masterpiece!
                 </div>
+            </a>
 
-                <h3>📺 Or Think of a TV</h3>
-
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h4>HTML = The TV</h4>
-                        <p>The physical device. It exists, it has structure.</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>CSS = Picture Settings</h4>
-                        <p>Brightness, color, contrast. How it LOOKS.</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>JavaScript = Remote Control</h4>
-                        <p>Makes things HAPPEN. Change channel, adjust volume.</p>
-                    </div>
+            <a href="session3/" class="session-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                <div class="session-number">03</div>
+                <div class="session-title">Interactive Game</div>
+                <div class="session-desc">
+                    Build a real browser game! Learn collision detection, 
+                    scoring, and game loops.
                 </div>
+            </a>
 
-                <h3>👀 Live Demo</h3>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Watch How Code Builds a Website</div>
-                    
-                    <div style="margin: 20px 0;">
-                        <button onclick="showStep1()">Step 1: HTML Only</button>
-                        <button onclick="showStep2()">Step 2: Add CSS</button>
-                        <button onclick="showStep3()">Step 3: Add JavaScript</button>
-                        <button onclick="resetDemo()">Reset</button>
-                    </div>
-
-                    <div id="demoOutput" style="min-height: 100px; padding: 20px; background: var(--light); border-radius: 10px;">
-                        <p style="text-align: center; color: var(--gray);">Click "Step 1" to start!</p>
-                    </div>
-
-                    <div class="code-example" id="demoCode" style="margin-top: 20px; display: none;">
-                        <div class="code-label">Code</div>
-                        <pre id="codeDisplay"></pre>
-                    </div>
+            <a href="session4/" class="session-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                <div class="session-number">04</div>
+                <div class="session-title">Music Visualizer</div>
+                <div class="session-desc">
+                    Create visuals that dance to music! 
+                    Combine everything you learned.
                 </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Key Takeaway</h4>
-                    <p>HTML, CSS, and JavaScript work TOGETHER to create interactive websites.</p>
-                    <p>Today we focus on <strong>JavaScript</strong> - making things interactive!</p>
-                </div>
-            </div>
+            </a>
         </div>
 
-        <!-- VARIABLES TAB -->
-        <div id="variables" class="tab-content">
-            <div class="section">
-                <h2>📦 Variables: Boxes with Labels</h2>
-
-                <div class="concept-box">
-                    <h3>What is a Variable?</h3>
-                    <p style="font-size: 1.1em; line-height: 1.8;">
-                        A variable is like a <strong>labeled box</strong> where you can store information.
-                        You can put things in, take things out, and change what's inside!
-                    </p>
-                </div>
-
-                <div class="analogy">
-                    <h4>🎁 Real-Life Example</h4>
-                    <p>Imagine you have a box labeled "FAVORITE_FOOD".</p>
-                    <p>Inside, you put a note that says "Pizza".</p>
-                    <p>Anytime you need to remember your favorite food, you look in that box!</p>
-                    <p>Later, you can change it to "Sushi" by replacing the note.</p>
-                </div>
-
-                <h3>💻 In Code</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Create a box called "myName" and put "Sofia" inside
-let myName = "Sofia";
-
-// Create a box for age
-let age = 25;
-
-// Create a box for favorite color
-let favoriteColor = "blue";
-
-// Show what's in the box
-console.log(myName);  // Shows: Sofia</pre>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Understanding the Syntax</h4>
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><code>let</code> = "Create a new box"</li>
-                        <li><code>myName</code> = The label on the box</li>
-                        <li><code>=</code> = "Put this inside"</li>
-                        <li><code>"Sofia"</code> = What goes in the box</li>
-                        <li><code>;</code> = End of instruction (period)</li>
-                    </ul>
-                </div>
-
-                <h3>🔄 Variables Can Change!</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>let mood = "happy";
-console.log(mood);  // Shows: happy
-
-// Later... change the mood!
-mood = "excited";
-console.log(mood);  // Shows: excited</pre>
-                </div>
-
-                <h3>📝 Types of Things You Can Store</h3>
-
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h4>Text (Strings)</h4>
-                        <code>let name = "Maria";</code>
-                        <p style="margin-top: 10px;">Use quotes!</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>Numbers</h4>
-                        <code>let age = 30;</code>
-                        <p style="margin-top: 10px;">No quotes needed</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>True/False</h4>
-                        <code>let isHappy = true;</code>
-                        <p style="margin-top: 10px;">Called "boolean"</p>
-                    </div>
-                </div>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Try It: Variable Playground</div>
-                    <p style="text-align: center; margin: 15px 0;">Open your browser console (F12) and try these:</p>
-                    
-                    <div class="code-example">
-                        <div class="code-label">Try This!</div>
-                        <pre>// Create a variable with YOUR name
-let myName = "Your Name Here";
-console.log(myName);
-
-// Create a variable with your age
-let myAge = 25;
-console.log(myAge);
-
-// Change it!
-myAge = 26;
-console.log(myAge);</pre>
-                    </div>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Can You Answer?</h4>
-                    <ul style="padding-left: 20px;">
-                        <li>What is a variable? → <em>A labeled box that holds information</em></li>
-                        <li>Can variables change? → <em>Yes! That's why they're called "variable"</em></li>
-                        <li>What does <code>let</code> do? → <em>Creates a new variable</em></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- FUNCTIONS TAB -->
-        <div id="functions" class="tab-content">
-            <div class="section">
-                <h2>🍳 Functions: Recipes You Can Reuse</h2>
-
-                <div class="concept-box">
-                    <h3>What is a Function?</h3>
-                    <p style="font-size: 1.1em; line-height: 1.8;">
-                        A function is like a <strong>recipe</strong> - a set of instructions you can use over and over.
-                        Write once, use many times!
-                    </p>
-                </div>
-
-                <div class="analogy">
-                    <h4>🍞 Recipe Analogy</h4>
-                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
-                        <strong>Recipe: Make Toast</strong>
-                        <ol style="padding-left: 20px; margin-top: 10px; line-height: 2;">
-                            <li>Get bread</li>
-                            <li>Put in toaster</li>
-                            <li>Wait 2 minutes</li>
-                            <li>Take out</li>
-                            <li>Add butter</li>
-                        </ol>
-                        <p style="margin-top: 15px;">
-                            Now you can make toast ANYTIME just by saying "makeToast()"!
-                            You don't have to repeat all the steps every time.
-                        </p>
-                    </div>
-                </div>
-
-                <h3>💻 In Code</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Define the function (write the recipe)
-function sayHello() {
-    console.log("Hello!");
-    console.log("Welcome!");
-    console.log("Nice to meet you!");
-}
-
-// Use the function (follow the recipe)
-sayHello();  // Runs all 3 console.logs
-
-// Use it again!
-sayHello();  // Runs again!</pre>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Understanding Function Syntax</h4>
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><code>function</code> = "I'm creating a recipe"</li>
-                        <li><code>sayHello</code> = Name of the recipe</li>
-                        <li><code>()</code> = "Ingredients go here" (empty for now)</li>
-                        <li><code>{...}</code> = The actual instructions</li>
-                        <li><code>sayHello()</code> = "Execute the recipe!"</li>
-                    </ul>
-                </div>
-
-                <h3>🎛️ Functions with Inputs (Parameters)</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Function that needs an INPUT
-function greet(name) {
-    console.log("Hello, " + name + "!");
-}
-
-// Use it with different inputs
-greet("Maria");   // Shows: Hello, Maria!
-greet("João");    // Shows: Hello, João!
-greet("Sofia");   // Shows: Hello, Sofia!</pre>
-                </div>
-
-                <div class="analogy">
-                    <h4>🍞 Toast Recipe with Options</h4>
-                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
-                        <strong>Recipe: Make Toast (with slices parameter)</strong>
-                        <ol style="padding-left: 20px; margin-top: 10px; line-height: 2;">
-                            <li>Get <strong>[numberOfSlices]</strong> slices of bread</li>
-                            <li>Put in toaster</li>
-                            <li>Wait 2 minutes</li>
-                            <li>Take out</li>
-                            <li>Add butter</li>
-                        </ol>
-                        <p style="margin-top: 15px;">
-                            <code>makeToast(1)</code> → Makes 1 slice<br>
-                            <code>makeToast(4)</code> → Makes 4 slices!
-                        </p>
-                    </div>
-                </div>
-
-                <h3>🔙 Functions Can Return Values</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Function that GIVES BACK a result
-function addNumbers(a, b) {
-    let sum = a + b;
-    return sum;  // Give back the answer
-}
-
-// Use the result
-let result = addNumbers(5, 3);
-console.log(result);  // Shows: 8
-
-// Or use it directly
-console.log(addNumbers(10, 20));  // Shows: 30</pre>
-                </div>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Try It: Function Playground</div>
-                    
-                    <div class="code-example">
-                        <div class="code-label">Try in Console (F12)</div>
-                        <pre>// Create a function
-function makeExcited(word) {
-    return word + "!!!";
-}
-
-// Use it!
-console.log(makeExcited("Hello"));
-console.log(makeExcited("Wow"));
-console.log(makeExcited("Amazing"));</pre>
-                    </div>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Can You Answer?</h4>
-                    <ul style="padding-left: 20px;">
-                        <li>What is a function? → <em>A reusable recipe/set of instructions</em></li>
-                        <li>What are parameters? → <em>Inputs the function needs</em></li>
-                        <li>What does <code>return</code> do? → <em>Gives back a result</em></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- PRACTICE 1 TAB -->
-        <div id="practice1" class="tab-content">
-            <div class="section">
-                <h2>🎨 Practice 1: Changing Things</h2>
-                <p style="font-size: 1.1em;">Now let's PUT IT INTO ACTION! Change colors, sizes, and emojis!</p>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Interactive Demo: Magic Box</div>
-                    
-                    <div id="demoBox">😊</div>
-                    
-                    <div class="controls">
-                        <button onclick="makeRed()">🔴 Make Red</button>
-                        <button onclick="makeBlue()">🔵 Make Blue</button>
-                        <button onclick="makeGreen()">🟢 Make Green</button>
-                        <button onclick="makeBig()">📏 Make BIG</button>
-                        <button onclick="makeSmall()">🔍 Make Small</button>
-                        <button onclick="changeEmoji()">🎲 Random Emoji</button>
-                    </div>
-                </div>
-
-                <h3>💻 How It Works - Step by Step</h3>
-
-                <div class="concept-box">
-                    <h3>Challenge 1: Make It Red</h3>
-                    <p>When someone clicks "Make Red", we want the box to turn red.</p>
-                </div>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>function makeRed() {
-    // Step 1: GRAB the box (find it on the page)
-    let box = document.getElementById('demoBox');
-    
-    // Step 2: CHANGE its background color
-    box.style.background = 'red';
-    
-    console.log('Box is now red! 🔴');
-}</pre>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Breaking It Down</h4>
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><code>document</code> = The whole webpage</li>
-                        <li><code>getElementById('demoBox')</code> = Find element with id="demoBox"</li>
-                        <li><code>.style.background</code> = Its background color property</li>
-                        <li><code>= 'red'</code> = Change it to red!</li>
-                    </ul>
-                </div>
-
-                <div class="concept-box">
-                    <h3>Challenge 2: Make It Big</h3>
-                    <p>Let's change the SIZE instead of color!</p>
-                </div>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>function makeBig() {
-    let box = document.getElementById('demoBox');
-    
-    // Change width AND height
-    box.style.width = '400px';
-    box.style.height = '400px';
-    
-    console.log('Box is now BIG! 📏');
-}</pre>
-                </div>
-
-                <div class="concept-box">
-                    <h3>Challenge 3: Change the Emoji</h3>
-                    <p>This time we change the TEXT inside!</p>
-                </div>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>function changeEmoji() {
-    let box = document.getElementById('demoBox');
-    
-    // Array of emojis to choose from
-    let emojis = ['😊', '🎉', '🌟', '🎨', '🔥', '💎', '🚀', '✨'];
-    
-    // Pick a random one
-    let randomIndex = Math.floor(Math.random() * emojis.length);
-    let randomEmoji = emojis[randomIndex];
-    
-    // Change the text
-    box.textContent = randomEmoji;
-    
-    console.log('New emoji: ' + randomEmoji);
-}</pre>
-                </div>
-
-                <div class="warning">
-                    <h4>⚠️ Common Mistakes</h4>
-                    <ul style="padding-left: 20px;">
-                        <li><strong>Typo in ID:</strong> <code>getElementById('demobox')</code> vs <code>getElementById('demoBox')</code> - Case matters!</li>
-                        <li><strong>Forgetting quotes:</strong> <code>= red</code> should be <code>= 'red'</code></li>
-                        <li><strong>Missing semicolons:</strong> End lines with <code>;</code></li>
-                    </ul>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Try It Yourself!</h4>
-                    <p>Can you add a button that:</p>
-                    <ul style="padding-left: 20px;">
-                        <li>Makes the box purple?</li>
-                        <li>Makes the box spin? (Hint: <code>transform: rotate(45deg)</code>)</li>
-                        <li>Changes the border?</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- PRACTICE 2 TAB -->
-        <div id="practice2" class="tab-content">
-            <div class="section">
-                <h2>🖱️ Practice 2: Click Events</h2>
-                <p style="font-size: 1.1em;">Let's learn about EVENTS - things that happen!</p>
-
-                <div class="concept-box">
-                    <h3>What are Events?</h3>
-                    <p style="font-size: 1.1em; line-height: 1.8;">
-                        Events are things that HAPPEN on a webpage:
-                    </p>
-                    <ul style="padding-left: 20px; margin-top: 10px; line-height: 1.8;">
-                        <li>Someone <strong>clicks</strong> a button → <code>click</code> event</li>
-                        <li>Mouse <strong>moves</strong> → <code>mousemove</code> event</li>
-                        <li>Key is <strong>pressed</strong> → <code>keypress</code> event</li>
-                        <li>Page <strong>loads</strong> → <code>load</code> event</li>
-                    </ul>
-                </div>
-
-                <h3>🎯 Interactive Demo: Click Counter</h3>
-
-                <div class="interactive-demo">
-                    <div id="clickArea">
-                        Click Me!
-                    </div>
-                    <p style="text-align: center; font-size: 1.5em; margin-top: 20px;">
-                        Clicks: <strong><span id="clickCounter">0</span></strong>
-                    </p>
-                    <div style="text-align: center; margin-top: 10px;">
-                        <button onclick="resetCounter()">🔄 Reset Counter</button>
-                    </div>
-                </div>
-
-                <h3>💻 How the Counter Works</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Step 1: Create a variable to store the count
-let clickCount = 0;
-
-// Step 2: Grab the elements we need
-let area = document.getElementById('clickArea');
-let counter = document.getElementById('clickCounter');
-
-// Step 3: Listen for clicks
-area.addEventListener('click', function() {
-    // Add 1 to the count
-    clickCount = clickCount + 1;
-    
-    // Update the number on screen
-    counter.textContent = clickCount;
-    
-    // Change color after 10 clicks
-    if (clickCount > 10) {
-        area.style.background = 'gold';
-    }
-    
-    console.log('Total clicks:', clickCount);
-});</pre>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Understanding addEventListener</h4>
-                    <p style="margin: 10px 0; line-height: 1.8;">
-                        Think of it like this:<br>
-                        <strong>"Hey computer, LISTEN to this element. When someone CLICKS it, run this function!"</strong>
-                    </p>
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><code>addEventListener</code> = "Start listening"</li>
-                        <li><code>'click'</code> = What to listen for</li>
-                        <li><code>function() {...}</code> = What to do when it happens</li>
-                    </ul>
-                </div>
-
-                <h3>🔢 Understanding the Counter Logic</h3>
-
-                <div class="code-example">
-                    <div class="code-label">Step by Step</div>
-                    <pre>// Start with 0
-let clickCount = 0;
-
-// First click:
-clickCount = clickCount + 1;  // 0 + 1 = 1
-counter.textContent = 1;       // Show "1"
-
-// Second click:
-clickCount = clickCount + 1;  // 1 + 1 = 2
-counter.textContent = 2;       // Show "2"
-
-// Third click:
-clickCount = clickCount + 1;  // 2 + 1 = 3
-counter.textContent = 3;       // Show "3"
-
-// And so on...</pre>
-                </div>
-
-                <div class="analogy">
-                    <h4>📊 Shortcut Way to Add</h4>
-                    <p>Instead of <code>clickCount = clickCount + 1;</code></p>
-                    <p>You can write: <code>clickCount++;</code></p>
-                    <p>It means the exact same thing! Programmers love shortcuts.</p>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Try It!</h4>
-                    <p>Can you modify the code to:</p>
-                    <ul style="padding-left: 20px;">
-                        <li>Add 2 each click instead of 1?</li>
-                        <li>Show a message after 5 clicks?</li>
-                        <li>Change color at different numbers?</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- DRAWING TAB -->
-        <div id="drawing" class="tab-content">
-            <div class="section">
-                <h2>✏️ Mini-Project: Simple Drawing App</h2>
-                <p style="font-size: 1.1em;">Now let's combine EVERYTHING we learned to make a drawing app!</p>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">🎨 Your Drawing Canvas</div>
-                    
-                    <canvas id="drawCanvas" width="800" height="400"></canvas>
-                    
-                    <div class="controls">
-                        <button onclick="setColor('black')">⚫ Black</button>
-                        <button onclick="setColor('red')">🔴 Red</button>
-                        <button onclick="setColor('blue')">🔵 Blue</button>
-                        <button onclick="setColor('green')">🟢 Green</button>
-                        <button onclick="setColor('purple')">🟣 Purple</button>
-                        <button onclick="clearCanvas()">🗑️ Clear</button>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 15px; color: var(--gray);">
-                        Click and drag to draw! Try different colors!
-                    </p>
-                </div>
-
-                <h3>💻 How Drawing Works</h3>
-
-                <div class="concept-box">
-                    <h3>The Magic: Canvas Element</h3>
-                    <p style="line-height: 1.8;">
-                        <code>&lt;canvas&gt;</code> is a special HTML element where we can draw using JavaScript!
-                        Think of it as a digital canvas where code becomes art.
-                    </p>
-                </div>
-
-                <h3>📝 Step 1: Setup</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Grab the canvas
-let canvas = document.getElementById('drawCanvas');
-
-// Get the "context" - our drawing tool
-let ctx = canvas.getContext('2d');
-
-// Variables to track drawing
-let isDrawing = false;
-let currentColor = 'black';</pre>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 What is "ctx"?</h4>
-                    <p style="margin: 10px 0; line-height: 1.8;">
-                        <code>ctx</code> stands for "context" - think of it as your paintbrush!<br>
-                        It's the tool that actually draws on the canvas.
-                    </p>
-                </div>
-
-                <h3>📝 Step 2: Mouse Events</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// When mouse is PRESSED
-canvas.addEventListener('mousedown', function(event) {
-    isDrawing = true;  // Turn drawing ON
-    
-    // Start drawing from mouse position
-    let x = event.offsetX;
-    let y = event.offsetY;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-});
-
-// When mouse MOVES
-canvas.addEventListener('mousemove', function(event) {
-    // Only draw if mouse is pressed
-    if (isDrawing) {
-        let x = event.offsetX;
-        let y = event.offsetY;
-        
-        // Draw line to new position
-        ctx.lineTo(x, y);
-        ctx.strokeStyle = currentColor;
-        ctx.lineWidth = 5;
-        ctx.stroke();
-    }
-});
-
-// When mouse is RELEASED
-canvas.addEventListener('mouseup', function() {
-    isDrawing = false;  // Turn drawing OFF
-});</pre>
-                </div>
-
-                <div class="analogy">
-                    <h4>🖊️ Think of it Like:</h4>
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><code>mousedown</code> = Put pen on paper</li>
-                        <li><code>mousemove</code> = Move pen while touching paper</li>
-                        <li><code>mouseup</code> = Lift pen off paper</li>
-                        <li><code>isDrawing</code> = Is pen touching paper? (true/false)</li>
-                    </ul>
-                </div>
-
-                <h3>📝 Step 3: Helper Functions</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Change drawing color
-function setColor(newColor) {
-    currentColor = newColor;
-    console.log('Color changed to:', newColor);
-}
-
-// Clear everything
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log('Canvas cleared! 🧹');
-}</pre>
-                </div>
-
-                <h3>🎨 Understanding Drawing Commands</h3>
-
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h4>beginPath()</h4>
-                        <p>Start a new drawing path (pick up pen)</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>moveTo(x, y)</h4>
-                        <p>Move to position without drawing</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>lineTo(x, y)</h4>
-                        <p>Draw line from last position</p>
-                    </div>
-                    <div class="demo-card">
-                        <h4>stroke()</h4>
-                        <p>Actually draw the line!</p>
-                    </div>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Congratulations!</h4>
-                    <p>You just built a REAL drawing app using:</p>
-                    <ul style="padding-left: 20px;">
-                        <li>✓ Variables (to store state)</li>
-                        <li>✓ Functions (to organize code)</li>
-                        <li>✓ Events (to respond to mouse)</li>
-                        <li>✓ Canvas API (to draw)</li>
-                    </ul>
-                    <p style="margin-top: 15px;"><strong>You're officially a developer! 🎉</strong></p>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Homework Ideas</h4>
-                    <ul style="padding-left: 20px;">
-                        <li>Add more colors</li>
-                        <li>Add a brush size slider</li>
-                        <li>Add an eraser tool</li>
-                        <li>Add a save button (downloads your drawing!)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- CHEAT SHEET TAB -->
-        <div id="cheatsheet" class="tab-content">
-            <div class="section">
-                <h2>📋 Cheat Sheet - Session 1</h2>
-                <p style="font-size: 1.1em;">Quick reference for everything we learned today!</p>
-
-                <div class="concept-box">
-                    <h3>🎯 Key Concepts</h3>
-                    <ul style="padding-left: 20px; line-height: 2;">
-                        <li><strong>Code</strong> = Instructions for computers</li>
-                        <li><strong>HTML</strong> = Structure (what's there)</li>
-                        <li><strong>CSS</strong> = Style (how it looks)</li>
-                        <li><strong>JavaScript</strong> = Behavior (what it does)</li>
-                    </ul>
-                </div>
-
-                <h3>📦 Variables</h3>
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Create variable
-let myName = "Sofia";
-let age = 25;
-let isHappy = true;
-
-// Change variable
-myName = "Maria";
-
-// Use variable
-console.log(myName);</pre>
-                </div>
-
-                <h3>🍳 Functions</h3>
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Define function
-function sayHello() {
-    console.log("Hello!");
-}
-
-// Use function
-sayHello();
-
-// Function with parameter
-function greet(name) {
-    console.log("Hello, " + name);
-}
-
-greet("João");  // Hello, João</pre>
-                </div>
-
-                <h3>🎨 Changing Things</h3>
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Get element
-let box = document.getElementById('myBox');
-
-// Change color
-box.style.background = 'red';
-
-// Change size
-box.style.width = '200px';
-
-// Change text
-box.textContent = 'New text!';</pre>
-                </div>
-
-                <h3>🖱️ Events</h3>
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Listen for click
-element.addEventListener('click', function() {
-    console.log('Clicked!');
-});
-
-// Common events:
-'click'      // Mouse click
-'mousemove'  // Mouse moves
-'mousedown'  // Mouse pressed
-'mouseup'    // Mouse released
-'keypress'   // Key pressed</pre>
-                </div>
-
-                <h3>🎨 Canvas Drawing</h3>
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>let canvas = document.getElementById('myCanvas');
-let ctx = canvas.getContext('2d');
-
-// Start drawing
-ctx.beginPath();
-
-// Move to position
-ctx.moveTo(x, y);
-
-// Draw line to position
-ctx.lineTo(x, y);
-
-// Set color and width
-ctx.strokeStyle = 'red';
-ctx.lineWidth = 5;
-
-// Actually draw it
-ctx.stroke();
-
-// Clear canvas
-ctx.clearRect(0, 0, canvas.width, canvas.height);</pre>
-                </div>
-
-                <h3>⚠️ Common Mistakes</h3>
-                <div class="warning">
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li>❌ <code>let name = Sofia</code> → ✅ <code>let name = "Sofia"</code> (use quotes!)</li>
-                        <li>❌ <code>getElementById('mybox')</code> → ✅ <code>getElementById('myBox')</code> (case matters!)</li>
-                        <li>❌ Forgetting <code>;</code> at end of lines</li>
-                        <li>❌ <code>function sayHello</code> → ✅ <code>function sayHello()</code> (need parentheses!)</li>
-                    </ul>
-                </div>
-
-                <h3>💡 Tips</h3>
-                <div class="tip">
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li>Use <code>console.log()</code> to see what's happening</li>
-                        <li>Open Console (F12) to see errors</li>
-                        <li>Google is your friend! "How to [thing] in JavaScript"</li>
-                        <li>Errors are GOOD - they tell you what's wrong!</li>
-                        <li>Copy-paste is OK while learning - but try to understand!</li>
-                    </ul>
-                </div>
-
-                <h3>📚 Resources</h3>
-                <div class="demo-grid">
-                    <div class="demo-card">
-                        <h4>MDN Web Docs</h4>
-                        <p>Official JavaScript documentation</p>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Visit →</a>
-                    </div>
-                    <div class="demo-card">
-                        <h4>JavaScript.info</h4>
-                        <p>Beginner-friendly tutorials</p>
-                        <a href="https://javascript.info/" target="_blank">Visit →</a>
-                    </div>
-                    <div class="demo-card">
-                        <h4>CodePen</h4>
-                        <p>Practice and share code</p>
-                        <a href="https://codepen.io/" target="_blank">Visit →</a>
-                    </div>
-                </div>
-            </div>
+        <div class="cta">
+            <a href="session1/" class="btn">🚀 Start with Session 1</a>
         </div>
 
         <footer>
-            <h3 style="margin-bottom: 10px;">🎨 Code & Create Workshop</h3>
-            <p>Session 1: What is Code? Making Your First Marks</p>
-            <p style="margin-top: 20px; opacity: 0.8;">
-                Remember: Confusion is part of learning! Keep experimenting! 🚀
+            <p><strong>Code & Create Workshop</strong></p>
+            <p style="margin-top: 10px;">From zero to creative coder in 4 weeks</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                Questions? Contact: nuno.menezes12@email.com
             </p>
         </footer>
     </div>
