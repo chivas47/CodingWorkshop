@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Session 1: What is Code? Learn JavaScript fundamentals through interactive examples and build your first drawing app!">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+    <title>Session 1: What is Code? | Code & Create Workshop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f3f4f6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .workshop-nav {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .workshop-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .workshop-nav a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .workshop-nav .current {
+            opacity: 1;
+            border-bottom: 2px solid white;
+            padding-bottom: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .session-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--dark);
+            overflow-x: auto;
+            position: sticky;
+            top: 52px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            background: none;
+            border: none;
+            color: white;
+            padding: 18px 15px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .tab-btn.active {
+            background: rgba(255,255,255,0.15);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-number {
+            display: block;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px 20px;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .section h3 {
+            color: var(--dark);
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #e0e7ff, #fce7f3);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary);
+        }
+
+        .concept-box h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .analogy {
+            background: #fffbeb;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--warning);
+            margin: 20px 0;
+        }
+
+        .code-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .code-example pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .code-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+
+        .interactive-demo {
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .demo-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .checkpoint {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--success);
+            margin: 20px 0;
+        }
+
+        .checkpoint h4 {
+            color: #065f46;
+            margin-bottom: 10px;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--danger);
+            margin: 20px 0;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3b82f6;
+            margin: 20px 0;
+        }
+
+        .timeline {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            padding: 15px;
+            border-left: 3px solid var(--primary);
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .demo-card {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+        }
+
+        #demoBox {
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+            margin: 20px auto;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            transition: all 0.3s;
+        }
+
+        #clickArea {
+            width: 300px;
+            height: 200px;
+            background: #e5e7eb;
+            margin: 20px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        #clickArea:hover {
+            background: #d1d5db;
+        }
+
+        canvas {
+            border: 4px solid var(--dark);
+            border-radius: 10px;
+            cursor: crosshair;
+            display: block;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .tabs {
+                position: relative;
+                top: 0;
+            }
+
+            .workshop-nav {
+                position: relative;
+            }
+
+            .tab-btn {
+                font-size: 0.85em;
+                padding: 12px 10px;
+            }
+
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+
+            .workshop-nav a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Workshop Navigation -->
+    <div class="workshop-nav">
+        <strong>🎨 Code & Create Workshop</strong>
+        <span style="opacity: 0.8;"> | </span>
+        <a href="../index.html">Home</a>
+        <a href="../session1/index.html" class="current">Session 1</a>
+        <a href="../session2/index.html">Session 2</a>
+        <a href="../session3/index.html">Session 3</a>
+        <a href="../session4/index.html">Session 4</a>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🎨 Session 1: What is Code?</h1>
+            <p>Making Your First Marks</p>
+            <div class="session-info">
+                <div class="info-badge">⏱️ 150 minutes</div>
+                <div class="info-badge">👥 Beginner-Friendly</div>
+                <div class="info-badge">🎯 Hands-On Learning</div>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'intro')">
+                <span class="tab-number">👋</span>
+                Intro
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'timeline')">
+                <span class="tab-number">⏰</span>
+                Timeline
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'what-is-code')">
+                <span class="tab-number">💡</span>
+                What is Code?
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'variables')">
+                <span class="tab-number">📦</span>
+                Variables
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'functions')">
+                <span class="tab-number">🍳</span>
+                Functions
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'practice1')">
+                <span class="tab-number">🎨</span>
+                Practice 1
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'practice2')">
+                <span class="tab-number">🖱️</span>
+                Practice 2
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'drawing')">
+                <span class="tab-number">✏️</span>
+                Drawing
+            </button>
+            <button class="tab-btn" onclick="openTab(event, 'cheatsheet')">
+                <span class="tab-number">📋</span>
+                Cheat Sheet
+            </button>
+        </div>
+
+        <!-- INTRO TAB -->
+        <div id="intro" class="tab-content active">
+            <div class="section">
+                <h2>👋 Welcome to Code & Create!</h2>
+                <p style="font-size: 1.2em; line-height: 1.8;">
+                    Today you'll learn the fundamentals of coding by <strong>creating interactive art</strong>. 
+                    No prior experience needed - we'll start from absolute zero and build up gradually.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>🎯 What You'll Learn Today</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>💡 Core Concepts</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>What is code?</li>
+                            <li>Variables (boxes)</li>
+                            <li>Functions (recipes)</li>
+                            <li>Events (interactions)</li>
+                        </ul>
+                    </div>
+                    <div class="demo-card">
+                        <h4>🛠️ Practical Skills</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Change colors & sizes</li>
+                            <li>Respond to clicks</li>
+                            <li>Create counters</li>
+                            <li>Draw on canvas</li>
+                        </ul>
+                    </div>
+                    <div class="demo-card">
+                        <h4>🎨 What You'll Make</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Color-changing box</li>
+                            <li>Click counter</li>
+                            <li>Simple drawing app</li>
+                            <li>YOUR creative ideas!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkpoint">
+                <h4>✅ By the End of Today</h4>
+                <p>You'll be able to:</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>✓ Explain what variables and functions are</li>
+                    <li>✓ Write simple JavaScript code</li>
+                    <li>✓ Make things change when clicked</li>
+                    <li>✓ Create a basic drawing app</li>
+                    <li>✓ Call yourself a developer! 🎉</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <h4>💡 Learning Philosophy</h4>
+                <p><strong>Confusion is GOOD!</strong> It means you're learning.</p>
+                <p>Don't worry about memorizing everything - focus on understanding the concepts.</p>
+                <p>We'll repeat everything multiple times in different ways.</p>
+            </div>
+        </div>
+
+        <!-- TIMELINE TAB -->
+        <div id="timeline" class="tab-content">
+            <div class="section">
+                <h2>⏰ Session Timeline (150 min)</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">0-20 min</div>
+                        <strong>Introduction: What is Code?</strong>
+                        <p>Analogies, live demos, understanding HTML/CSS/JavaScript</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">20-40 min</div>
+                        <strong>Concept: Variables</strong>
+                        <p>Boxes with labels, storing information, console practice</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">40-60 min</div>
+                        <strong>Concept: Functions</strong>
+                        <p>Recipes, reusable code, parameters</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">60-80 min</div>
+                        <strong>Practice 1: Changing Things</strong>
+                        <p>Make box change colors, sizes, emojis</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">80-100 min</div>
+                        <strong>Practice 2: Click Events</strong>
+                        <p>Build a click counter, understand events</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">100-130 min</div>
+                        <strong>Mini-Project: Drawing App</strong>
+                        <p>Simple canvas drawing with mouse</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">130-145 min</div>
+                        <strong>Showcase & Play</strong>
+                        <p>Share creations, explore, customize</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-time">145-150 min</div>
+                        <strong>Wrap-up</strong>
+                        <p>Review, homework, preview next session</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHAT IS CODE TAB -->
+        <div id="what-is-code" class="tab-content">
+            <div class="section">
+                <h2>💡 What is Code?</h2>
+                
+                <div class="concept-box">
+                    <h3>Code = Instructions for Computers</h3>
+                    <p style="font-size: 1.1em;">
+                        Code is simply a way to tell computers what to do. 
+                        Just like you follow a recipe to bake a cake, 
+                        computers follow code to do tasks.
+                    </p>
+                </div>
+
+                <h3>🎭 Three Languages of the Web</h3>
+
+                <div class="analogy">
+                    <h4>Think of a House 🏠</h4>
+                    <ul style="padding-left: 20px; margin-top: 10px; line-height: 1.8;">
+                        <li><strong>HTML</strong> = The structure (walls, doors, rooms)</li>
+                        <li><strong>CSS</strong> = The decoration (paint, furniture, style)</li>
+                        <li><strong>JavaScript</strong> = The functionality (lights turn on, doors open)</li>
+                    </ul>
+                </div>
+
+                <h3>📺 Or Think of a TV</h3>
+
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>HTML = The TV</h4>
+                        <p>The physical device. It exists, it has structure.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>CSS = Picture Settings</h4>
+                        <p>Brightness, color, contrast. How it LOOKS.</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>JavaScript = Remote Control</h4>
+                        <p>Makes things HAPPEN. Change channel, adjust volume.</p>
+                    </div>
+                </div>
+
+                <h3>👀 Live Demo</h3>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">Watch How Code Builds a Website</div>
+                    
+                    <div style="margin: 20px 0;">
+                        <button onclick="showStep1()">Step 1: HTML Only</button>
+                        <button onclick="showStep2()">Step 2: Add CSS</button>
+                        <button onclick="showStep3()">Step 3: Add JavaScript</button>
+                        <button onclick="resetDemo()">Reset</button>
+                    </div>
+
+                    <div id="demoOutput" style="min-height: 100px; padding: 20px; background: var(--light); border-radius: 10px;">
+                        <p style="text-align: center; color: var(--gray);">Click "Step 1" to start!</p>
+                    </div>
+
+                    <div class="code-example" id="demoCode" style="margin-top: 20px; display: none;">
+                        <div class="code-label">Code</div>
+                        <pre id="codeDisplay"></pre>
+                    </div>
+                </div>
+
+                <div class="checkpoint">
+                    <h4>✅ Key Takeaway</h4>
+                    <p>HTML, CSS, and JavaScript work TOGETHER to create interactive websites.</p>
+                    <p>Today we focus on <strong>JavaScript</strong> - making things interactive!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VARIABLES TAB -->
+        <div id="variables" class="tab-content">
+            <div class="section">
+                <h2>📦 Variables: Boxes with Labels</h2>
+
+                <div class="concept-box">
+                    <h3>What is a Variable?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        A variable is like a <strong>labeled box</strong> where you can store information.
+                        You can put things in, take things out, and change what's inside!
+                    </p>
+                </div>
+
+                <div class="analogy">
+                    <h4>🎁 Real-Life Example</h4>
+                    <p>Imagine you have a box labeled "FAVORITE_FOOD".</p>
+                    <p>Inside, you put a note that says "Pizza".</p>
+                    <p>Anytime you need to remember your favorite food, you look in that box!</p>
+                    <p>Later, you can change it to "Sushi" by replacing the note.</p>
+                </div>
+
+                <h3>💻 In Code</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Create a box called "myName" and put "Sofia" inside
+let myName = "Sofia";
+
+// Create a box for age
+let age = 25;
+
+// Create a box for favorite color
+let favoriteColor = "blue";
+
+// Show what's in the box
+console.log(myName);  // Shows: Sofia</pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Understanding the Syntax</h4>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li><code>let</code> = "Create a new box"</li>
+                        <li><code>myName</code> = The label on the box</li>
+                        <li><code>=</code> = "Put this inside"</li>
+                        <li><code>"Sofia"</code> = What goes in the box</li>
+                        <li><code>;</code> = End of instruction (period)</li>
+                    </ul>
+                </div>
+
+                <h3>🔄 Variables Can Change!</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>let mood = "happy";
+console.log(mood);  // Shows: happy
+
+// Later... change the mood!
+mood = "excited";
+console.log(mood);  // Shows: excited</pre>
+                </div>
+
+                <h3>📝 Types of Things You Can Store</h3>
+
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>Text (Strings)</h4>
+                        <code>let name = "Maria";</code>
+                        <p style="margin-top: 10px;">Use quotes!</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Numbers</h4>
+                        <code>let age = 30;</code>
+                        <p style="margin-top: 10px;">No quotes needed</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>True/False</h4>
+                        <code>let isHappy = true;</code>
+                        <p style="margin-top: 10px;">Called "boolean"</p>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">Try It: Variable Playground</div>
+                    <p style="text-align: center; margin: 15px 0;">Open your browser console (F12) and try these:</p>
+                    
+                    <div class="code-example">
+                        <div class="code-label">Try This!</div>
+                        <pre>// Create a variable with YOUR name
+let myName = "Your Name Here";
+console.log(myName);
+
+// Create a variable with your age
+let myAge = 25;
+console.log(myAge);
+
+// Change it!
+myAge = 26;
+console.log(myAge);</pre>
+                    </div>
+                </div>
+
+                <div class="checkpoint">
+                    <h4>✅ Can You Answer?</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>What is a variable? → <em>A labeled box that holds information</em></li>
+                        <li>Can variables change? → <em>Yes! That's why they're called "variable"</em></li>
+                        <li>What does <code>let</code> do? → <em>Creates a new variable</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FUNCTIONS TAB -->
+        <div id="functions" class="tab-content">
+            <div class="section">
+                <h2>🍳 Functions: Recipes You Can Reuse</h2>
+
+                <div class="concept-box">
+                    <h3>What is a Function?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        A function is like a <strong>recipe</strong> - a set of instructions you can use over and over.
+                        Write once, use many times!
+                    </p>
+                </div>
+
+                <div class="analogy">
+                    <h4>🍞 Recipe Analogy</h4>
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Recipe: Make Toast</strong>
+                        <ol style="padding-left: 20px; margin-top: 10px; line-height: 2;">
+                            <li>Get bread</li>
+                            <li>Put in toaster</li>
+                            <li>Wait 2 minutes</li>
+                            <li>Take out</li>
+                            <li>Add butter</li>
+                        </ol>
+                        <p style="margin-top: 15px;">
+                            Now you can make toast ANYTIME just by saying "makeToast()"!
+                            You don't have to repeat all the steps every time.
+                        </p>
+                    </div>
+                </div>
+
+                <h3>💻 In Code</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Define the function (write the recipe)
+function sayHello() {
+    console.log("Hello!");
+    console.log("Welcome!");
+    console.log("Nice to meet you!");
+}
+
+// Use the function (follow the recipe)
+sayHello();  // Runs all 3 console.logs
+
+// Use it again!
+sayHello();  // Runs again!</pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Understanding Function Syntax</h4>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li><code>function</code> = "I'm creating a recipe"</li>
+                        <li><code>sayHello</code> = Name of the recipe</li>
+                        <li><code>()</code> = "Ingredients go here" (empty for now)</li>
+                        <li><code>{...}</code> = The actual instructions</li>
+                        <li><code>sayHello()</code> = "Execute the recipe!"</li>
+                    </ul>
+                </div>
+
+                <h3>🎛️ Functions with Inputs (Parameters)</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Function that needs an INPUT
+function greet(name) {
+    console.log("Hello, " + name + "!");
+}
+
+// Use it with different inputs
+greet("Maria");   // Shows: Hello, Maria!
+greet("João");    // Shows: Hello, João!
+greet("Sofia");   // Shows: Hello, Sofia!</pre>
+                </div>
+
+                <div class="analogy">
+                    <h4>🍞 Toast Recipe with Options</h4>
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Recipe: Make Toast (with slices parameter)</strong>
+                        <ol style="padding-left: 20px; margin-top: 10px; line-height: 2;">
+                            <li>Get <strong>[numberOfSlices]</strong> slices of bread</li>
+                            <li>Put in toaster</li>
+                            <li>Wait 2 minutes</li>
+                            <li>Take out</li>
+                            <li>Add butter</li>
+                        </ol>
+                        <p style="margin-top: 15px;">
+                            <code>makeToast(1)</code> → Makes 1 slice<br>
+                            <code>makeToast(4)</code> → Makes 4 slices!
+                        </p>
+                    </div>
+                </div>
+
+                <h3>🔙 Functions Can Return Values</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Function that GIVES BACK a result
+function addNumbers(a, b) {
+    let sum = a + b;
+    return sum;  // Give back the answer
+}
+
+// Use the result
+let result = addNumbers(5, 3);
+console.log(result);  // Shows: 8
+
+// Or use it directly
+console.log(addNumbers(10, 20));  // Shows: 30</pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">Try It: Function Playground</div>
+                    
+                    <div class="code-example">
+                        <div class="code-label">Try in Console (F12)</div>
+                        <pre>// Create a function
+function makeExcited(word) {
+    return word + "!!!";
+}
+
+// Use it!
+console.log(makeExcited("Hello"));
+console.log(makeExcited("Wow"));
+console.log(makeExcited("Amazing"));</pre>
+                    </div>
+                </div>
+
+                <div class="checkpoint">
+                    <h4>✅ Can You Answer?</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>What is a function? → <em>A reusable recipe/set of instructions</em></li>
+                        <li>What are parameters? → <em>Inputs the function needs</em></li>
+                        <li>What does <code>return</code> do? → <em>Gives back a result</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE 1 TAB -->
+        <div id="practice1" class="tab-content">
+            <div class="section">
+                <h2>🎨 Practice 1: Changing Things</h2>
+                <p style="font-size: 1.1em;">Now let's PUT IT INTO ACTION! Change colors, sizes, and emojis!</p>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">Interactive Demo: Magic Box</div>
+                    
+                    <div id="demoBox">😊</div>
+                    
+                    <div class="controls">
+                        <button onclick="makeRed()">🔴 Make Red</button>
+                        <button onclick="makeBlue()">🔵 Make Blue</button>
+                        <button onclick="makeGreen()">🟢 Make Green</button>
+                        <button onclick="makeBig()">📏 Make BIG</button>
+                        <button onclick="makeSmall()">🔍 Make Small</button>
+                        <button onclick="changeEmoji()">🎲 Random Emoji</button>
+                    </div>
+                </div>
+
+                <h3>💻 How It Works - Step by Step</h3>
+
+                <div class="concept-box">
+                    <h3>Challenge 1: Make It Red</h3>
+                    <p>When someone clicks "Make Red", we want the box to turn red.</p>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>function makeRed() {
+    // Step 1: GRAB the box (find it on the page)
+    let box = document.getElementById('demoBox');
+    
+    // Step 2: CHANGE its background color
+    box.style.background = 'red';
+    
+    console.log('Box is now red! 🔴');
+}</pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Breaking It Down</h4>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li><code>document</code> = The whole webpage</li>
+                        <li><code>getElementById('demoBox')</code> = Find element with id="demoBox"</li>
+                        <li><code>.style.background</code> = Its background color property</li>
+                        <li><code>= 'red'</code> = Change it to red!</li>
+                    </ul>
+                </div>
+
+                <div class="concept-box">
+                    <h3>Challenge 2: Make It Big</h3>
+                    <p>Let's change the SIZE instead of color!</p>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>function makeBig() {
+    let box = document.getElementById('demoBox');
+    
+    // Change width AND height
+    box.style.width = '400px';
+    box.style.height = '400px';
+    
+    console.log('Box is now BIG! 📏');
+}</pre>
+                </div>
+
+                <div class="concept-box">
+                    <h3>Challenge 3: Change the Emoji</h3>
+                    <p>This time we change the TEXT inside!</p>
+                </div>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>function changeEmoji() {
+    let box = document.getElementById('demoBox');
+    
+    // Array of emojis to choose from
+    let emojis = ['😊', '🎉', '🌟', '🎨', '🔥', '💎', '🚀', '✨'];
+    
+    // Pick a random one
+    let randomIndex = Math.floor(Math.random() * emojis.length);
+    let randomEmoji = emojis[randomIndex];
+    
+    // Change the text
+    box.textContent = randomEmoji;
+    
+    console.log('New emoji: ' + randomEmoji);
+}</pre>
+                </div>
+
+                <div class="warning">
+                    <h4>⚠️ Common Mistakes</h4>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Typo in ID:</strong> <code>getElementById('demobox')</code> vs <code>getElementById('demoBox')</code> - Case matters!</li>
+                        <li><strong>Forgetting quotes:</strong> <code>= red</code> should be <code>= 'red'</code></li>
+                        <li><strong>Missing semicolons:</strong> End lines with <code>;</code></li>
+                    </ul>
+                </div>
+
+                <div class="checkpoint">
+                    <h4>✅ Try It Yourself!</h4>
+                    <p>Can you add a button that:</p>
+                    <ul style="padding-left: 20px;">
+                        <li>Makes the box purple?</li>
+                        <li>Makes the box spin? (Hint: <code>transform: rotate(45deg)</code>)</li>
+                        <li>Changes the border?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE 2 TAB -->
+        <div id="practice2" class="tab-content">
+            <div class="section">
+                <h2>🖱️ Practice 2: Click Events</h2>
+                <p style="font-size: 1.1em;">Let's learn about EVENTS - things that happen!</p>
+
+                <div class="concept-box">
+                    <h3>What are Events?</h3>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Events are things that HAPPEN on a webpage:
+                    </p>
+                    <ul style="padding-left: 20px; margin-top: 10px; line-height: 1.8;">
+                        <li>Someone <strong>clicks</strong> a button → <code>click</code> event</li>
+                        <li>Mouse <strong>moves</strong> → <code>mousemove</code> event</li>
+                        <li>Key is <strong>pressed</strong> → <code>keypress</code> event</li>
+                        <li>Page <strong>loads</strong> → <code>load</code> event</li>
+                    </ul>
+                </div>
+
+                <h3>🎯 Interactive Demo: Click Counter</h3>
+
+                <div class="interactive-demo">
+                    <div id="clickArea">
+                        Click Me!
+                    </div>
+                    <p style="text-align: center; font-size: 1.5em; margin-top: 20px;">
+                        Clicks: <strong><span id="clickCounter">0</span></strong>
+                    </p>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <button onclick="resetCounter()">🔄 Reset Counter</button>
+                    </div>
+                </div>
+
+                <h3>💻 How the Counter Works</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Step 1: Create a variable to store the count
+let clickCount = 0;
+
+// Step 2: Grab the elements we need
+let area = document.getElementById('clickArea');
+let counter = document.getElementById('clickCounter');
+
+// Step 3: Listen for clicks
+area.addEventListener('click', function() {
+    // Add 1 to the count
+    clickCount = clickCount + 1;
+    
+    // Update the number on screen
+    counter.textContent = clickCount;
+    
+    // Change color after 10 clicks
+    if (clickCount > 10) {
+        area.style.background = 'gold';
+    }
+    
+    console.log('Total clicks:', clickCount);
+});</pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Understanding addEventListener</h4>
+                    <p style="margin: 10px 0; line-height: 1.8;">
+                        Think of it like this:<br>
+                        <strong>"Hey computer, LISTEN to this element. When someone CLICKS it, run this function!"</strong>
+                    </p>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li><code>addEventListener</code> = "Start listening"</li>
+                        <li><code>'click'</code> = What to listen for</li>
+                        <li><code>function() {...}</code> = What to do when it happens</li>
+                    </ul>
+                </div>
+
+                <h3>🔢 Understanding the Counter Logic</h3>
+
+                <div class="code-example">
+                    <div class="code-label">Step by Step</div>
+                    <pre>// Start with 0
+let clickCount = 0;
+
+// First click:
+clickCount = clickCount + 1;  // 0 + 1 = 1
+counter.textContent = 1;       // Show "1"
+
+// Second click:
+clickCount = clickCount + 1;  // 1 + 1 = 2
+counter.textContent = 2;       // Show "2"
+
+// Third click:
+clickCount = clickCount + 1;  // 2 + 1 = 3
+counter.textContent = 3;       // Show "3"
+
+// And so on...</pre>
+                </div>
+
+                <div class="analogy">
+                    <h4>📊 Shortcut Way to Add</h4>
+                    <p>Instead of <code>clickCount = clickCount + 1;</code></p>
+                    <p>You can write: <code>clickCount++;</code></p>
+                    <p>It means the exact same thing! Programmers love shortcuts.</p>
+                </div>
+
+                <div class="checkpoint">
+                    <h4>✅ Try It!</h4>
+                    <p>Can you modify the code to:</p>
+                    <ul style="padding-left: 20px;">
+                        <li>Add 2 each click instead of 1?</li>
+                        <li>Show a message after 5 clicks?</li>
+                        <li>Change color at different numbers?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DRAWING TAB -->
+        <div id="drawing" class="tab-content">
+            <div class="section">
+                <h2>✏️ Mini-Project: Simple Drawing App</h2>
+                <p style="font-size: 1.1em;">Now let's combine EVERYTHING we learned to make a drawing app!</p>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">🎨 Your Drawing Canvas</div>
+                    
+                    <canvas id="drawCanvas" width="800" height="400"></canvas>
+                    
+                    <div class="controls">
+                        <button onclick="setColor('black')">⚫ Black</button>
+                        <button onclick="setColor('red')">🔴 Red</button>
+                        <button onclick="setColor('blue')">🔵 Blue</button>
+                        <button onclick="setColor('green')">🟢 Green</button>
+                        <button onclick="setColor('purple')">🟣 Purple</button>
+                        <button onclick="clearCanvas()">🗑️ Clear</button>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 15px; color: var(--gray);">
+                        Click and drag to draw! Try different colors!
+                    </p>
+                </div>
+
+                <h3>💻 How Drawing Works</h3>
+
+                <div class="concept-box">
+                    <h3>The Magic: Canvas Element</h3>
+                    <p style="line-height: 1.8;">
+                        <code>&lt;canvas&gt;</code> is a special HTML element where we can draw using JavaScript!
+                        Think of it as a digital canvas where code becomes art.
+                    </p>
+                </div>
+
+                <h3>📝 Step 1: Setup</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Grab the canvas
+let canvas = document.getElementById('drawCanvas');
+
+// Get the "context" - our drawing tool
+let ctx = canvas.getContext('2d');
+
+// Variables to track drawing
+let isDrawing = false;
+let currentColor = 'black';</pre>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 What is "ctx"?</h4>
+                    <p style="margin: 10px 0; line-height: 1.8;">
+                        <code>ctx</code> stands for "context" - think of it as your paintbrush!<br>
+                        It's the tool that actually draws on the canvas.
+                    </p>
+                </div>
+
+                <h3>📝 Step 2: Mouse Events</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// When mouse is PRESSED
+canvas.addEventListener('mousedown', function(event) {
+    isDrawing = true;  // Turn drawing ON
+    
+    // Start drawing from mouse position
+    let x = event.offsetX;
+    let y = event.offsetY;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+});
+
+// When mouse MOVES
+canvas.addEventListener('mousemove', function(event) {
+    // Only draw if mouse is pressed
+    if (isDrawing) {
+        let x = event.offsetX;
+        let y = event.offsetY;
+        
+        // Draw line to new position
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = 5;
+        ctx.stroke();
+    }
+});
+
+// When mouse is RELEASED
+canvas.addEventListener('mouseup', function() {
+    isDrawing = false;  // Turn drawing OFF
+});</pre>
+                </div>
+
+                <div class="analogy">
+                    <h4>🖊️ Think of it Like:</h4>
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li><code>mousedown</code> = Put pen on paper</li>
+                        <li><code>mousemove</code> = Move pen while touching paper</li>
+                        <li><code>mouseup</code> = Lift pen off paper</li>
+                        <li><code>isDrawing</code> = Is pen touching paper? (true/false)</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Step 3: Helper Functions</h3>
+
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Change drawing color
+function setColor(newColor) {
+    currentColor = newColor;
+    console.log('Color changed to:', newColor);
+}
+
+// Clear everything
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    console.log('Canvas cleared! 🧹');
+}</pre>
+                </div>
+
+                <h3>🎨 Understanding Drawing Commands</h3>
+
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>beginPath()</h4>
+                        <p>Start a new drawing path (pick up pen)</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>moveTo(x, y)</h4>
+                        <p>Move to position without drawing</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>lineTo(x, y)</h4>
+                        <p>Draw line from last position</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>stroke()</h4>
+                        <p>Actually draw the line!</p>
+                    </div>
+                </div>
+
+                <div class="checkpoint">
+                    <h4>✅ Congratulations!</h4>
+                    <p>You just built a REAL drawing app using:</p>
+                    <ul style="padding-left: 20px;">
+                        <li>✓ Variables (to store state)</li>
+                        <li>✓ Functions (to organize code)</li>
+                        <li>✓ Events (to respond to mouse)</li>
+                        <li>✓ Canvas API (to draw)</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>You're officially a developer! 🎉</strong></p>
+                </div>
+
+                <div class="tip">
+                    <h4>💡 Homework Ideas</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Add more colors</li>
+                        <li>Add a brush size slider</li>
+                        <li>Add an eraser tool</li>
+                        <li>Add a save button (downloads your drawing!)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHEAT SHEET TAB -->
+        <div id="cheatsheet" class="tab-content">
+            <div class="section">
+                <h2>📋 Cheat Sheet - Session 1</h2>
+                <p style="font-size: 1.1em;">Quick reference for everything we learned today!</p>
+
+                <div class="concept-box">
+                    <h3>🎯 Key Concepts</h3>
+                    <ul style="padding-left: 20px; line-height: 2;">
+                        <li><strong>Code</strong> = Instructions for computers</li>
+                        <li><strong>HTML</strong> = Structure (what's there)</li>
+                        <li><strong>CSS</strong> = Style (how it looks)</li>
+                        <li><strong>JavaScript</strong> = Behavior (what it does)</li>
+                    </ul>
+                </div>
+
+                <h3>📦 Variables</h3>
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Create variable
+let myName = "Sofia";
+let age = 25;
+let isHappy = true;
+
+// Change variable
+myName = "Maria";
+
+// Use variable
+console.log(myName);</pre>
+                </div>
+
+                <h3>🍳 Functions</h3>
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Define function
+function sayHello() {
+    console.log("Hello!");
+}
+
+// Use function
+sayHello();
+
+// Function with parameter
+function greet(name) {
+    console.log("Hello, " + name);
+}
+
+greet("João");  // Hello, João</pre>
+                </div>
+
+                <h3>🎨 Changing Things</h3>
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Get element
+let box = document.getElementById('myBox');
+
+// Change color
+box.style.background = 'red';
+
+// Change size
+box.style.width = '200px';
+
+// Change text
+box.textContent = 'New text!';</pre>
+                </div>
+
+                <h3>🖱️ Events</h3>
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>// Listen for click
+element.addEventListener('click', function() {
+    console.log('Clicked!');
+});
+
+// Common events:
+'click'      // Mouse click
+'mousemove'  // Mouse moves
+'mousedown'  // Mouse pressed
+'mouseup'    // Mouse released
+'keypress'   // Key pressed</pre>
+                </div>
+
+                <h3>🎨 Canvas Drawing</h3>
+                <div class="code-example">
+                    <div class="code-label">JavaScript</div>
+                    <pre>let canvas = document.getElementById('myCanvas');
+let ctx = canvas.getContext('2d');
+
+// Start drawing
+ctx.beginPath();
+
+// Move to position
+ctx.moveTo(x, y);
+
+// Draw line to position
+ctx.lineTo(x, y);
+
+// Set color and width
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 5;
+
+// Actually draw it
+ctx.stroke();
+
+// Clear canvas
+ctx.clearRect(0, 0, canvas.width, canvas.height);</pre>
+                </div>
+
+                <h3>⚠️ Common Mistakes</h3>
+                <div class="warning">
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li>❌ <code>let name = Sofia</code> → ✅ <code>let name = "Sofia"</code> (use quotes!)</li>
+                        <li>❌ <code>getElementById('mybox')</code> → ✅ <code>getElementById('myBox')</code> (case matters!)</li>
+                        <li>❌ Forgetting <code>;</code> at end of lines</li>
+                        <li>❌ <code>function sayHello</code> → ✅ <code>function sayHello()</code> (need parentheses!)</li>
+                    </ul>
+                </div>
+
+                <h3>💡 Tips</h3>
+                <div class="tip">
+                    <ul style="padding-left: 20px; line-height: 1.8;">
+                        <li>Use <code>console.log()</code> to see what's happening</li>
+                        <li>Open Console (F12) to see errors</li>
+                        <li>Google is your friend! "How to [thing] in JavaScript"</li>
+                        <li>Errors are GOOD - they tell you what's wrong!</li>
+                        <li>Copy-paste is OK while learning - but try to understand!</li>
+                    </ul>
+                </div>
+
+                <h3>📚 Resources</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>MDN Web Docs</h4>
+                        <p>Official JavaScript documentation</p>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" style="color: var(--primary);">Visit →</a>
+                    </div>
+                    <div class="demo-card">
+                        <h4>JavaScript.info</h4>
+                        <p>Beginner-friendly tutorials</p>
+                        <a href="https://javascript.info/" target="_blank" style="color: var(--primary);">Visit →</a>
+                    </div>
+                    <div class="demo-card">
+                        <h4>CodePen</h4>
+                        <p>Practice and share code</p>
+                        <a href="https://codepen.io/" target="_blank" style="color: var(--primary);">Visit →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h3 style="margin-bottom: 10px;">🎨 Code & Create Workshop</h3>
+            <p>Session 1: What is Code? Making Your First Marks</p>
+            <p style="margin-top: 20px;">
+                <a href="../">← Back to Workshop Home</a> | 
+                <a href="../session2/index.html">Next: Session 2 →</a>
+            </p>
+            <p style="margin-top: 20px; opacity: 0.8;">
+                Remember: Confusion is part of learning! Keep experimenting! 🚀
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // ========================================
+        // TAB NAVIGATION
+        // ========================================
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ========================================
+        // WHAT IS CODE DEMO
+        // ========================================
+        function showStep1() {
+            const output = document.getElementById('demoOutput');
+            output.innerHTML = '<h1>Hello!</h1>';
+            
+            const codeDisplay = document.getElementById('codeDisplay');
+            codeDisplay.textContent = '<h1>Hello!</h1>';
+            document.getElementById('demoCode').style.display = 'block';
+        }
+
+        function showStep2() {
+            const output = document.getElementById('demoOutput');
+            output.innerHTML = '<h1 style="color: red; font-size: 3em;">Hello!</h1>';
+            
+            const codeDisplay = document.getElementById('codeDisplay');
+            codeDisplay.textContent = '<h1 style="color: red; font-size: 3em;">Hello!</h1>';
+            document.getElementById('demoCode').style.display = 'block';
+        }
+
+        function showStep3() {
+            const output = document.getElementById('demoOutput');
+            output.innerHTML = '<h1 style="color: red; font-size: 3em; cursor: pointer;" onclick="alert(\'You clicked me! This is JavaScript!\')">Hello! (Click me!)</h1>';
+            
+            const codeDisplay = document.getElementById('codeDisplay');
+            codeDisplay.textContent = `<h1 style="color: red;" onclick="alert('You clicked!')">
+  Hello!
+</h1>
+
+<script>
+  // JavaScript makes it interactive!
+<\/script>`;
+            document.getElementById('demoCode').style.display = 'block';
+        }
+
+        function resetDemo() {
+            const output = document.getElementById('demoOutput');
+            output.innerHTML = '<p style="text-align: center; color: #6b7280;">Click "Step 1" to start!</p>';
+            document.getElementById('demoCode').style.display = 'none';
+        }
+
+        // ========================================
+        // PRACTICE 1: DEMO BOX
+        // ========================================
+        function makeRed() {
+            const box = document.getElementById('demoBox');
+            box.style.background = 'red';
+            console.log('Box is now red! 🔴');
+        }
+
+        function makeBlue() {
+            const box = document.getElementById('demoBox');
+            box.style.background = 'blue';
+            console.log('Box is now blue! 🔵');
+        }
+
+        function makeGreen() {
+            const box = document.getElementById('demoBox');
+            box.style.background = 'green';
+            console.log('Box is now green! 🟢');
+        }
+
+        function makeBig() {
+            const box = document.getElementById('demoBox');
+            box.style.width = '400px';
+            box.style.height = '400px';
+            box.style.fontSize = '96px';
+            console.log('Box is now BIG! 📏');
+        }
+
+        function makeSmall() {
+            const box = document.getElementById('demoBox');
+            box.style.width = '100px';
+            box.style.height = '100px';
+            box.style.fontSize = '24px';
+            console.log('Box is now small! 🔍');
+        }
+
+        function changeEmoji() {
+            const box = document.getElementById('demoBox');
+            const emojis = ['😊', '🎉', '🌟', '🎨', '🔥', '💎', '🚀', '✨', '🌈', '⭐'];
+            const randomIndex = Math.floor(Math.random() * emojis.length);
+            box.textContent = emojis[randomIndex];
+            console.log('New emoji:', emojis[randomIndex]);
+        }
+
+        // ========================================
+        // PRACTICE 2: CLICK COUNTER
+        // ========================================
+        let clickCount = 0;
+        const clickArea = document.getElementById('clickArea');
+        const clickCounter = document.getElementById('clickCounter');
+
+        if (clickArea) {
+            clickArea.addEventListener('click', function() {
+                clickCount++;
+                clickCounter.textContent = clickCount;
+                
+                if (clickCount > 10) {
+                    clickArea.style.background = 'gold';
+                    clickArea.textContent = '🎉 WOW! Over 10 clicks!';
+                } else if (clickCount > 5) {
+                    clickArea.style.background = 'lightgreen';
+                }
+                
+                console.log('Total clicks:', clickCount);
+            });
+        }
+
+        function resetCounter() {
+            clickCount = 0;
+            clickCounter.textContent = '0';
+            clickArea.style.background = '#e5e7eb';
+            clickArea.textContent = 'Click Me!';
+            console.log('Counter reset! 🔄');
+        }
+
+        // ========================================
+        // DRAWING APP
+        // ========================================
+        const canvas = document.getElementById('drawCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentColor = 'black';
+
+        if (canvas) {
+            // Mouse down - start drawing
+            canvas.addEventListener('mousedown', function(event) {
+                isDrawing = true;
+                const x = event.offsetX;
+                const y = event.offsetY;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            });
+
+            // Mouse move - draw
+            canvas.addEventListener('mousemove', function(event) {
+                if (isDrawing) {
+                    const x = event.offsetX;
+                    const y = event.offsetY;
+                    ctx.lineTo(x, y);
+                    ctx.strokeStyle = currentColor;
+                    ctx.lineWidth = 5;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                }
+            });
+
+            // Mouse up - stop drawing
+            canvas.addEventListener('mouseup', function() {
+                isDrawing = false;
+            });
+
+            // Mouse leave - stop drawing
+            canvas.addEventListener('mouseleave', function() {
+                isDrawing = false;
+            });
+
+            // Touch support for mobile
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                isDrawing = true;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            });
+
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                if (isDrawing) {
+                    const touch = e.touches[0];
+                    const rect = canvas.getBoundingClientRect();
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    ctx.lineTo(x, y);
+                    ctx.strokeStyle = currentColor;
+                    ctx.lineWidth = 5;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                }
+            });
+
+            canvas.addEventListener('touchend', function() {
+                isDrawing = false;
+            });
+        }
+
+        function setColor(color) {
+            if (!ctx) return;  
+            currentColor = color;
+            console.log('Color changed to:', color);
+        }
+
+        function clearCanvas() {
+            if (!canvas || !ctx) return;  
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                console.log('Canvas cleared! 🧹');
+        }
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        console.log('🎨 Session 1 website loaded!');
+        console.log('💡 Tip: Open this console (F12) to see messages as you interact!');
+    </script>
+</body>
+</html>
