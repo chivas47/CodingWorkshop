@@ -3,1050 +3,3106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
-    <meta name="description" content="Session 2: Generative Art - Create algorithmic art with loops, arrays, and randomness!">
-    <title>Session 2: Generative Art | Code & Create Workshop</title>
+    <meta name="description" content="Session 2: Generative Art — Create algorithmic art with loops, arrays, and randomness!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌈</text></svg>">
+    <title>Session 2: Generative Art | Code & Create</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #f093fb;
-            --secondary: #f5576c;
+            --ink:     #0d0f14;
+            --paper:   #f7f5f0;
+            --card:    #ffffff;
+            --accent:  #f093fb;
+            --accent2: #f5576c;
+            --accent3: #ffd93d;
+            --purple:  #a78bfa;
+            --border:  #e2ddd5;
+            --code-bg: #141820;
+            --code-fg: #e8f4f8;
+            --muted:   #6b7280;
             --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --dark: #1f2937;
-            --gray: #6b7280;
-            --light: #f3f4f6;
+            --step-bg: #f0fdf4;
+            --font-sans: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --radius:    12px;
+            --radius-lg: 20px;
+            --shadow:    0 4px 20px rgba(0,0,0,0.08);
         }
 
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background: var(--light);
+            font-family: var(--font-sans);
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+            width: 100%;
         }
 
-        .workshop-nav {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
+        /* ── TOP NAV ── */
+        .top-nav {
+            background: var(--ink);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
             position: sticky;
             top: 0;
-            z-index: 1001;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .workshop-nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            opacity: 0.9;
-            font-weight: 600;
-        }
-
-        .workshop-nav a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        .workshop-nav .current {
-            opacity: 1;
-            border-bottom: 2px solid white;
-            padding-bottom: 2px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 60px 20px 40px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.3em;
-            opacity: 0.95;
-        }
-
-        .session-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            z-index: 200;
             flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
         }
-
-        .info-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 10px 20px;
-            border-radius: 20px;
+        .nav-brand {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.8rem;
             font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
+        .nav-links a:hover { color: white; background: rgba(255,255,255,0.1); }
+        .nav-links a.current { color: var(--accent); background: rgba(240,147,251,0.12); }
 
-        .tabs {
-            display: flex;
-            background: var(--dark);
-            overflow-x: auto;
-            position: sticky;
-            top: 52px;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .tab-btn {
-            flex: 1;
-            min-width: 120px;
-            background: none;
-            border: none;
+        /* ── HEADER ── */
+        header {
+            background: var(--ink);
             color: white;
-            padding: 18px 15px;
-            cursor: pointer;
-            font-size: 0.95em;
-            font-weight: 600;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
+            padding: clamp(40px, 8vw, 80px) 20px clamp(30px, 6vw, 60px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
         }
-
-        .tab-btn:hover {
-            background: rgba(255,255,255,0.1);
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 60% at 20% 50%, rgba(240,147,251,0.1) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 60% at 80% 50%, rgba(245,87,108,0.08) 0%, transparent 70%);
         }
-
-        .tab-btn.active {
-            background: rgba(255,255,255,0.15);
-            border-bottom-color: var(--primary);
-        }
-
-        .tab-number {
-            display: block;
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-
-        .tab-content {
-            display: none;
-            padding: 40px 20px;
-            animation: fadeIn 0.3s;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section h2 {
-            color: var(--primary);
-            font-size: 2em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--primary);
-        }
-
-        .section h3 {
-            color: var(--dark);
-            font-size: 1.5em;
-            margin: 30px 0 15px 0;
-        }
-
-        .concept-box {
-            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border-left: 5px solid var(--primary);
-        }
-
-        .concept-box h3 {
-            color: var(--primary);
-            margin-top: 0;
-        }
-
-        .code-example {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
+        .header-badge {
+            display: inline-block;
+            background: rgba(240,147,251,0.15);
+            color: var(--accent);
+            border: 1px solid rgba(240,147,251,0.3);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
             position: relative;
         }
-
-        .code-example pre {
-            margin: 0;
-            white-space: pre-wrap;
+        header h1 {
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        header h1 span { color: var(--accent); }
+        header p {
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            color: rgba(255,255,255,0.7);
+            max-width: 550px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        .header-pills {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            position: relative;
+            padding: 0 10px;
+        }
+        .pill {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.85);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
-        .code-label {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 5px;
-            font-size: 0.85em;
+        /* ── TABS ── */
+        .tabs-wrapper {
+            background: var(--ink);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 45px;
+            z-index: 100;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .tabs-wrapper::-webkit-scrollbar { display: none; }
+        .tabs { display: flex; min-width: max-content; padding: 0 8px; }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            padding: 14px 16px;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tab-btn:hover { color: white; }
+        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .tab-icon { font-size: 1rem; }
+
+        .progress-bar { height: 3px; background: rgba(255,255,255,0.05); }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            transition: width 0.4s ease;
         }
 
-        .interactive-demo {
-            background: white;
-            border: 3px solid var(--primary);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        /* ── TAB CONTENT ── */
+        .tab-content {
+            display: none;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px);
+            animation: fadeUp 0.3s ease;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        .tab-content.active { display: block; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .demo-title {
-            text-align: center;
-            color: var(--primary);
-            font-size: 1.3em;
-            font-weight: bold;
+        /* ── TYPOGRAPHY ── */
+        .section-title {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-sub { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; }
+        h3 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 12px; color: var(--ink); }
+        p { margin-bottom: 12px; }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
             margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
         }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+            width: 100%;
+        }
+        .mini-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            min-width: 0;
+        }
+        .mini-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+
+        /* ── CONCEPT / TIP / WARN / CHECKPOINT ── */
+        .concept-box {
+            background: var(--ink);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+        .concept-box h3 { color: var(--accent); margin-top: 0; }
+
+        .analogy {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+        .analogy h4 { color: #92400e; font-size: 0.9rem; margin-bottom: 8px; }
+
+        .tip-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+        .tip-box h4 { color: #1e40af; font-size: 0.9rem; margin-bottom: 8px; }
+
+        .warn-box {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+        .warn-box h4 { color: #be123c; font-size: 0.9rem; margin-bottom: 8px; }
 
         .checkpoint {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            background: var(--step-bg);
+            border: 1px solid #a7f3d0;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+        .checkpoint h4 { color: #065f46; font-size: 0.9rem; margin-bottom: 8px; }
+
+        /* ── CODE BLOCKS ── */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-fg);
+            border-radius: var(--radius);
             padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid var(--success);
+            margin: 16px 0;
+            overflow-x: auto;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+            max-width: 100%;
+        }
+        .code-block pre {
+            font-family: var(--font-mono);
+            font-size: clamp(0.72rem, 2vw, 0.85rem);
+            line-height: 1.8;
+            white-space: pre;
+            word-break: normal;
+            display: block;
+            min-width: 0;
+        }
+        .code-tag {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(240,147,251,0.15);
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .kw  { color: #ff79c6; }
+        .fn  { color: #50fa7b; }
+        .str { color: #f1fa8c; }
+        .num { color: #bd93f9; }
+        .cmt { color: #6272a4; font-style: italic; }
+        .var { color: #8be9fd; }
+
+        /* ── RUNNER ── */
+        .runner {
+            background: var(--card);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
             margin: 20px 0;
+            box-shadow: 0 0 0 4px rgba(240,147,251,0.08);
         }
-
-        .checkpoint h4 {
-            color: #065f46;
-            margin-bottom: 10px;
+        .runner-header {
+            background: var(--ink);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
         }
-
-        .tip {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #3b82f6;
-            margin: 20px 0;
+        .runner-title {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
         }
+        .runner-body { padding: 16px; }
+        .runner-instructions { font-size: 0.88rem; color: var(--muted); margin-bottom: 10px; }
+        .code-editor {
+            width: 100%;
+            min-height: 140px;
+            background: var(--code-bg);
+            color: var(--code-fg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            padding: 14px;
+            font-family: var(--font-mono);
+            font-size: clamp(0.72rem, 2vw, 0.85rem);
+            line-height: 1.8;
+            resize: vertical;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .code-editor:focus { outline: none; border-color: var(--accent); }
+        .runner-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 
-        button {
-            padding: 12px 24px;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
             border: none;
             border-radius: 8px;
-            background: var(--primary);
-            color: white;
-            font-weight: bold;
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
-            margin: 5px;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
+        .btn-primary { background: var(--accent); color: var(--ink); }
+        .btn-primary:hover { background: #e070f0; transform: translateY(-1px); }
+        .btn-secondary { background: var(--paper); color: var(--ink); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+        .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
 
-        button:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        .run-output {
+            margin-top: 12px;
+            background: var(--code-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 14px;
+            min-height: 50px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--accent);
+            display: none;
         }
+        .run-output.visible { display: block; }
+        .run-output.error { color: #ff6b6b; }
 
-        button:active {
-            transform: translateY(0);
+        /* ── STEPS ── */
+        .step-list {
+            counter-reset: steps;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 16px 0;
         }
+        .step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 20px 20px 60px;
+            position: relative;
+            counter-increment: steps;
+        }
+        .step::before {
+            content: counter(steps);
+            position: absolute;
+            left: 16px;
+            top: 18px;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+        .step p  { margin-bottom: 0; font-size: 0.9rem; color: #374151; }
 
+        /* ── CANVAS DEMO AREA ── */
+        .demo-area {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+        .demo-title {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
         canvas {
-            border: 4px solid var(--dark);
-            border-radius: 10px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
             display: block;
-            margin: 20px auto;
+            margin: 0 auto 16px;
             background: white;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow);
             max-width: 100%;
             height: auto;
+            touch-action: none;
         }
-
-        .controls {
+        .btn-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin: 10px 0;
+            max-width: 100%;
         }
 
+        /* ── PHASE LABELS ── */
+        .phase-html { display:inline-flex;align-items:center;gap:8px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:6px 14px; }
+        .phase-html strong { color:#9a3412; font-size:0.95rem; }
+        .phase-css  { display:inline-flex;align-items:center;gap:8px;background:#fdf4ff;border:1px solid #e9d5ff;border-radius:8px;padding:6px 14px; }
+        .phase-css  strong { color:#6b21a8; font-size:0.95rem; }
+        .phase-js   { display:inline-flex;align-items:center;gap:8px;background:#fefce8;border:1px solid #fef08a;border-radius:8px;padding:6px 14px; }
+        .phase-js   strong { color:#854d0e; font-size:0.95rem; }
+
+        /* ── CHECKLIST ── */
+        ul.check-list { list-style: none; padding-left: 0; }
+        ul.check-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+        ul.check-list li { line-height: 1.9; font-size: 0.9rem; }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #7c3aed;
+        }
+
+        /* ── ADVANCED TAB ── */
+        .adv-theme-btn, .adv-style-btn {
+            padding: 6px 14px; border-radius: 6px; font-size: 0.8rem;
+            font-weight: 700; cursor: pointer; transition: all 0.15s;
+            font-family: var(--font-sans);
+        }
+        .adv-style-btn {
+            background: rgba(240,147,251,0.07);
+            border: 1.5px solid rgba(240,147,251,0.25);
+            color: #9b59b6;
+        }
+        .adv-style-btn:hover { background: rgba(240,147,251,0.15); border-color: #f093fb; color: var(--ink); }
+        .adv-style-btn.active { background: #f093fb; border-color: #f093fb; color: var(--ink); }
+
+        /* ── FOOTER ── */
         footer {
-            background: var(--dark);
+            background: var(--ink);
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        footer p { margin-bottom: 8px; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
 
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            .tabs {
-                position: relative;
-                top: 0;
-            }
-
-            .workshop-nav {
-                position: relative;
-            }
-
-            .tab-btn {
-                font-size: 0.85em;
-                padding: 12px 10px;
-            }
-
-            canvas {
-                width: 100%;
-                height: auto;
-            }
-
-            .workshop-nav a {
-                display: block;
-                margin: 5px 0;
-            }
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .step { padding: 16px 16px 16px 52px; }
+            .step::before { left: 12px; top: 14px; }
+            .demo-area { padding: 16px 12px; }
         }
     </style>
 </head>
 <body>
-    <!-- Workshop Navigation -->
-    <div class="workshop-nav">
-        <strong>🎨 Code & Create Workshop</strong>
-        <span style="opacity: 0.8;"> | </span>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+    <span class="nav-brand">🎨 Code & Create</span>
+    <div class="nav-links">
         <a href="../index.html">Home</a>
-        <a href="../session1/index.html">Session 1</a>
-        <a href="../session2/index.html" class="current">Session 2</a>
-        <a href="../session3/index.html">Session 3</a>
-        <a href="../session4/index.html">Session 4</a>
+        <a href="../session1/index.html">S1</a>
+        <a href="../session2/index.html" class="current">S2</a>
+        <a href="../session3/index.html">S3</a>
+        <a href="../session4/index.html">S4</a>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+    <div class="header-badge">Session 02 / 04</div>
+    <h1><span>Generative</span> Art</h1>
+    <p>Create algorithmic beauty — every refresh is a new unique masterpiece.</p>
+    <div class="header-pills">
+        <span class="pill">⏱ 150 minutes</span>
+        <span class="pill">🔄 Loops</span>
+        <span class="pill">🎲 Randomness</span>
+        <span class="pill">🎨 Patterns</span>
+    </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('intro', this)"><span class="tab-icon">👋</span> Intro</button>
+        <button class="tab-btn" onclick="openTab('loops', this)"><span class="tab-icon">🔄</span> Loops</button>
+        <button class="tab-btn" onclick="openTab('randomness', this)"><span class="tab-icon">🎲</span> Randomness</button>
+        <button class="tab-btn" onclick="openTab('arrays', this)"><span class="tab-icon">📚</span> Arrays</button>
+        <button class="tab-btn" onclick="openTab('patterns', this)"><span class="tab-icon">🔶</span> Patterns</button>
+        <button class="tab-btn" onclick="openTab('project', this)"><span class="tab-icon">🎨</span> Project</button>
+        <button class="tab-btn" onclick="openTab('cheatsheet', this)"><span class="tab-icon">📋</span> Cheat Sheet</button>
+        <button class="tab-btn" onclick="openTab('advanced', this)"><span class="tab-icon">🚀</span> Advanced</button>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:14%"></div>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     INTRO
+══════════════════════════════════════════ -->
+<div id="intro" class="tab-content active">
+    <h2 class="section-title">👋 Welcome to Generative Art!</h2>
+    <p class="section-sub">Today you learn to make art with code — art that is different every single time.</p>
+
+    <div class="concept-box">
+        <h3>🎨 What is Generative Art?</h3>
+        <p>Generative art is art made by writing a set of rules in code, then letting the computer create the result. You are the <strong>composer</strong> — you write the rules. The computer is the <strong>performer</strong> — it plays them differently every time.</p>
+        <p style="margin-bottom:0;">Artists like Vera Molnár and Sol LeWitt pioneered this in the 1960s. Today you'll do the same thing — but in a browser.</p>
     </div>
 
-    <div class="container">
-        <header>
-            <h1>🌈 Session 2: Generative Art</h1>
-            <p>Create Algorithmic Beauty</p>
-            <div class="session-info">
-                <div class="info-badge">⏱️ 150 minutes</div>
-                <div class="info-badge">🎨 Creative Coding</div>
-                <div class="info-badge">🔄 Loops & Randomness</div>
-            </div>
-        </header>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'intro')">
-                <span class="tab-number">👋</span>
-                Intro
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'loops')">
-                <span class="tab-number">🔄</span>
-                Loops
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'randomness')">
-                <span class="tab-number">🎲</span>
-                Randomness
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'patterns')">
-                <span class="tab-number">🔶</span>
-                Patterns
-            </button>
-            <button class="tab-btn" onclick="openTab(event, 'project')">
-                <span class="tab-number">🎨</span>
-                Art Generator
-            </button>
+    <h3>🎯 What You'll Learn</h3>
+    <div class="card-grid">
+        <div class="mini-card">
+            <h4>🔄 Loops</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Repeat an action hundreds of times with just 3 lines of code</p>
         </div>
-
-        <!-- INTRO TAB -->
-        <div id="intro" class="tab-content active">
-            <div class="section">
-                <h2>👋 Welcome to Generative Art!</h2>
-                <p style="font-size: 1.2em; line-height: 1.8;">
-                    Today you'll learn to create <strong>algorithmic art</strong> - art generated by code!
-                    Every time you refresh, you'll get a unique masterpiece.
-                </p>
-            </div>
-
-            <div class="concept-box">
-                <h3>🎨 What is Generative Art?</h3>
-                <p style="font-size: 1.1em; line-height: 1.8;">
-                    Generative art uses <strong>code + randomness + patterns</strong> to create unique visual experiences.
-                    The artist writes the rules, but the computer creates infinite variations!
-                </p>
-            </div>
-
-            <div class="section">
-                <h3>🎯 What You'll Learn Today</h3>
-                <ul style="padding-left: 40px; line-height: 2; font-size: 1.1em;">
-                    <li><strong>Loops:</strong> Repeat actions efficiently</li>
-                    <li><strong>Randomness:</strong> Add unpredictability</li>
-                    <li><strong>Arrays:</strong> Store collections of data</li>
-                    <li><strong>Patterns:</strong> Create beautiful geometric designs</li>
-                    <li><strong>Art Generator:</strong> Build your own unique art machine!</li>
-                </ul>
-            </div>
-
-            <div class="checkpoint">
-                <h4>✅ By the End of Today</h4>
-                <p>You'll be able to:</p>
-                <ul style="padding-left: 20px; margin-top: 10px;">
-                    <li>✓ Use loops to draw hundreds of shapes efficiently</li>
-                    <li>✓ Create random variations in your art</li>
-                    <li>✓ Generate unique patterns every time</li>
-                    <li>✓ Build a complete generative art system</li>
-                    <li>✓ Share your algorithmic masterpieces! 🎉</li>
-                </ul>
-            </div>
-
-            <div class="tip">
-                <h4>💡 Today's Mindset</h4>
-                <p><strong>Embrace the unexpected!</strong></p>
-                <p>The beauty of generative art is that you often discover patterns you never imagined.</p>
-                <p>Happy accidents are part of the creative process!</p>
-            </div>
+        <div class="mini-card">
+            <h4>🎲 Randomness</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Make every run different using <code>Math.random()</code></p>
         </div>
+        <div class="mini-card">
+            <h4>📚 Arrays</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Store lists of colours, sizes, and positions</p>
+        </div>
+        <div class="mini-card">
+            <h4>🔶 Patterns</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Combine loops and maths for spirals, grids, and waves</p>
+        </div>
+    </div>
 
-        <!-- LOOPS TAB -->
-        <div id="loops" class="tab-content">
-            <div class="section">
-                <h2>🔄 Loops: Repeat Without Repeating Yourself</h2>
+    <div class="checkpoint">
+        <h4>✅ By the End of Today</h4>
+        <ul class="check-list">
+            <li>Use a <code>for</code> loop to draw shapes automatically</li>
+            <li>Generate random colours, positions, and sizes</li>
+            <li>Store and use a palette with an array</li>
+            <li>Combine loops + maths to create geometric patterns</li>
+            <li>Build a complete generative art file from scratch</li>
+        </ul>
+    </div>
 
-                <div class="concept-box">
-                    <h3>Why Loops?</h3>
-                    <p style="font-size: 1.1em; line-height: 1.8;">
-                        Imagine drawing 100 circles. You could write the same code 100 times... OR use a loop!
-                        Loops let you repeat actions efficiently.
-                    </p>
-                </div>
+    <div class="tip-box">
+        <h4>💡 Today's Mindset — Embrace Happy Accidents</h4>
+        <p>In generative art, you often discover things you never planned. A small change in one number can completely transform the output. <strong>Experiment freely.</strong> There is no wrong result — only interesting ones.</p>
+    </div>
 
-                <h3>💻 For Loop - The Classic</h3>
+    <div class="card" style="text-align:center; padding:28px;">
+        <p style="font-size:1.1rem;font-weight:700;margin-bottom:12px;">Ready to begin?</p>
+        <button class="btn btn-primary" onclick="openTab('loops', document.querySelectorAll('.tab-btn')[1])">Next: Loops →</button>
+    </div>
+</div>
 
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Draw 10 circles in a row
-for (let i = 0; i < 10; i++) {
-    let x = i * 50 + 25;  // Spread them out
-    let y = 100;
-    
-    ctx.beginPath();
-    ctx.arc(x, y, 20, 0, Math.PI * 2);
-    ctx.fill();
+
+<!-- ══════════════════════════════════════════
+     LOOPS
+══════════════════════════════════════════ -->
+<div id="loops" class="tab-content">
+    <h2 class="section-title">🔄 Loops</h2>
+    <p class="section-sub">Repeat an action many times without rewriting the same code.</p>
+
+    <div class="concept-box">
+        <h3>The Problem Loops Solve</h3>
+        <p>Imagine you want to draw 100 circles. You <em>could</em> write <code>ctx.arc()</code> one hundred times — that's hundreds of lines. OR you use a loop that says: <strong>"do this 100 times."</strong></p>
+        <p style="margin-bottom:0;">Loops are the single most powerful tool in generative art. Almost every piece of algorithmic art you have ever seen uses loops.</p>
+    </div>
+
+    <h3>Anatomy of a <code>for</code> loop — Step by Step</h3>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>The keyword <code>for</code></h4>
+            <p>"I want to repeat something."</p>
+        </div>
+        <div class="step">
+            <h4>The counter variable — <code>let i = 0</code></h4>
+            <p>This is the loop's counter. We create a variable called <code>i</code> and start it at <code>0</code>. Think of it as a tally mark.</p>
+        </div>
+        <div class="step">
+            <h4>The condition — <code>i &lt; 10</code></h4>
+            <p>Keep looping as long as this is true. When <code>i</code> reaches <code>10</code>, the loop stops. So the loop runs for <code>i = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code> — ten times total.</p>
+        </div>
+        <div class="step">
+            <h4>The increment — <code>i++</code></h4>
+            <p>After each loop, add 1 to <code>i</code>. (<code>i++</code> is shorthand for <code>i = i + 1</code>.) Without this the loop would run forever!</p>
+        </div>
+        <div class="step">
+            <h4>The body — everything inside <code>{ }</code></h4>
+            <p>This is the code that runs on every iteration. Inside here, <code>i</code> has a different value each time — you can use it to calculate positions, colours, sizes.</p>
+        </div>
+    </div>
+
+    <div class="code-block">
+        <span class="code-tag">JavaScript</span>
+        <pre><span class="cmt">// This draws 10 circles in a row</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="num">10</span>; <span class="var">i</span>++) {
+
+    <span class="cmt">// i changes each loop: 0, 1, 2, 3 ... 9</span>
+    <span class="kw">let</span> <span class="var">x</span> = <span class="var">i</span> * <span class="num">60</span> + <span class="num">30</span>;   <span class="cmt">// spread circles out by 60px</span>
+    <span class="kw">let</span> <span class="var">y</span> = <span class="num">150</span>;
+
+    ctx.<span class="fn">beginPath</span>();
+    ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">20</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+    ctx.<span class="fn">fill</span>();
 }</pre>
-                </div>
+    </div>
 
-                <div class="tip">
-                    <h4>💡 Understanding For Loops</h4>
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><code>let i = 0</code> → Start at 0</li>
-                        <li><code>i < 10</code> → Keep going while i is less than 10</li>
-                        <li><code>i++</code> → Add 1 after each loop</li>
-                        <li>So i will be: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9</li>
-                    </ul>
-                </div>
+    <div class="analogy">
+        <h4>🔑 The Key Insight — <code>i</code> is useful</h4>
+        <p>The loop counter <code>i</code> isn't just a way to count — it's a number you can <strong>use</strong> inside the loop. Multiply it by 60 to spread circles out. Use it in a colour formula to shift the hue. The value of <code>i</code> changing is what creates patterns.</p>
+    </div>
 
-                <h3>🎨 Interactive Demo: Loop Art</h3>
+    <h3>🎨 See It — Loop Demo</h3>
 
-                <div class="interactive-demo">
-                    <div class="demo-title">Watch Loops in Action</div>
-                    
-                    <canvas id="loopCanvas" width="800" height="400"></canvas>
-                    
-                    <div class="controls">
-                        <button onclick="drawRow()">Draw Row</button>
-                        <button onclick="drawGrid()">Draw Grid</button>
-                        <button onclick="drawSpiral()">Draw Spiral</button>
-                        <button onclick="clearLoopCanvas()">Clear</button>
-                    </div>
-                </div>
+    <div class="demo-area">
+        <div class="demo-title">Click each button to see what the loop produces</div>
+        <canvas id="loopCanvas" width="760" height="300"></canvas>
+        <div class="btn-row">
+            <button class="btn btn-secondary btn-sm" onclick="demoRow()">Row of circles</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoGrid()">Grid (nested loops)</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoRainbow()">Rainbow row</button>
+            <button class="btn btn-secondary btn-sm" onclick="clearLoop()">Clear</button>
+        </div>
+    </div>
 
-                <h3>🔢 Nested Loops - Grids!</h3>
+    <h3>Nested Loops — Drawing a Grid</h3>
+    <p>A loop inside a loop. The outer loop controls rows; the inner loop controls columns. Together they visit every cell in a grid.</p>
 
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Draw a 10x10 grid of circles
-for (let row = 0; row < 10; row++) {
-    for (let col = 0; col < 10; col++) {
-        let x = col * 50 + 25;
-        let y = row * 50 + 25;
-        
-        ctx.beginPath();
-        ctx.arc(x, y, 15, 0, Math.PI * 2);
-        ctx.fill();
+    <div class="code-block">
+        <span class="code-tag">JavaScript — nested loops</span>
+        <pre><span class="cmt">// rows loop (top to bottom)</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">row</span> = <span class="num">0</span>; <span class="var">row</span> &lt; <span class="num">5</span>; <span class="var">row</span>++) {
+
+    <span class="cmt">// columns loop (left to right)</span>
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">col</span> = <span class="num">0</span>; <span class="var">col</span> &lt; <span class="num">10</span>; <span class="var">col</span>++) {
+
+        <span class="kw">let</span> <span class="var">x</span> = <span class="var">col</span> * <span class="num">60</span> + <span class="num">30</span>;
+        <span class="kw">let</span> <span class="var">y</span> = <span class="var">row</span> * <span class="num">60</span> + <span class="num">30</span>;
+
+        ctx.<span class="fn">beginPath</span>();
+        ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">20</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+        ctx.fillStyle = <span class="str">`hsl(${(<span class="var">row</span> + <span class="var">col</span>) * <span class="num">15</span>}, 70%, 60%)`</span>;
+        ctx.<span class="fn">fill</span>();
     }
 }</pre>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Loop Power!</h4>
-                    <p>With 2 lines of loop code, you just drew 100 circles!</p>
-                    <p>Without loops, that would be 500+ lines of code. 🤯</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- RANDOMNESS TAB -->
-        <div id="randomness" class="tab-content">
-            <div class="section">
-                <h2>🎲 Randomness: Making Every Piece Unique</h2>
-
-                <div class="concept-box">
-                    <h3>Math.random() - Your Creative Friend</h3>
-                    <p style="font-size: 1.1em; line-height: 1.8;">
-                        <code>Math.random()</code> gives you a random number between 0 and 1.
-                        We can scale it to create random colors, positions, sizes, and more!
-                    </p>
-                </div>
-
-                <h3>💻 Random Examples</h3>
-
-                <div class="code-example">
-                    <div class="code-label">JavaScript</div>
-                    <pre>// Random number between 0 and 1
-let rand = Math.random();  // Example: 0.7382...
-
-// Random number between 0 and 100
-let rand100 = Math.random() * 100;  // Example: 73.82...
-
-// Random whole number between 0 and 99
-let randInt = Math.floor(Math.random() * 100);  // Example: 73
-
-// Random position on canvas
-let x = Math.random() * canvas.width;
-let y = Math.random() * canvas.height;
-
-// Random color
-let r = Math.floor(Math.random() * 256);
-let g = Math.floor(Math.random() * 256);
-let b = Math.floor(Math.random() * 256);
-let color = `rgb(${r}, ${g}, ${b})`;</pre>
-                </div>
-
-                <h3>🎨 Interactive Demo: Randomness</h3>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Click to See Random Magic</div>
-                    
-                    <canvas id="randomCanvas" width="800" height="400"></canvas>
-                    
-                    <div class="controls">
-                        <button onclick="drawRandomCircles()">Random Circles</button>
-                        <button onclick="drawRandomColors()">Random Colors</button>
-                        <button onclick="drawRandomSizes()">Random Sizes</button>
-                        <button onclick="clearRandomCanvas()">Clear</button>
-                    </div>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Pro Tip: Random Ranges</h4>
-                    <p>Want a random number between MIN and MAX?</p>
-                    <div class="code-example">
-                        <div class="code-label">Formula</div>
-                        <pre>function randomRange(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-// Random size between 10 and 50
-let size = randomRange(10, 50);</pre>
-                    </div>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Randomness = Infinite Variety</h4>
-                    <p>Every time you run your code, you get something NEW!</p>
-                    <p>That's the magic of generative art. 🎨✨</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- PATTERNS TAB -->
-        <div id="patterns" class="tab-content">
-            <div class="section">
-                <h2>🔶 Patterns: Loops + Math = Beauty</h2>
-
-                <div class="concept-box">
-                    <h3>Combining Loops with Math</h3>
-                    <p style="font-size: 1.1em; line-height: 1.8;">
-                        When you combine loops with mathematical formulas, you create PATTERNS.
-                        Circles, spirals, waves, fractals - all from simple math!
-                    </p>
-                </div>
-
-                <h3>🎨 Interactive Demo: Pattern Gallery</h3>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Explore Mathematical Patterns</div>
-                    
-                    <canvas id="patternCanvas" width="800" height="400"></canvas>
-                    
-                    <div class="controls">
-                        <button onclick="drawCirclePattern()">Concentric Circles</button>
-                        <button onclick="drawSpiralPattern()">Spiral</button>
-                        <button onclick="drawWavePattern()">Wave</button>
-                        <button onclick="drawGridPattern()">Grid</button>
-                        <button onclick="clearPatternCanvas()">Clear</button>
-                    </div>
-                </div>
-
-                <h3>💻 Pattern Code Examples</h3>
-
-                <div class="code-example">
-                    <div class="code-label">Concentric Circles</div>
-                    <pre>// Draw circles from center outward
-let centerX = canvas.width / 2;
-let centerY = canvas.height / 2;
-
-for (let i = 1; i <= 10; i++) {
-    let radius = i * 20;
-    
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = `hsl(${i * 36}, 70%, 50%)`;
-    ctx.lineWidth = 3;
-    ctx.stroke();
-}</pre>
-                </div>
-
-                <div class="code-example">
-                    <div class="code-label">Spiral Pattern</div>
-                    <pre>// Draw a spiral using polar coordinates
-let centerX = canvas.width / 2;
-let centerY = canvas.height / 2;
-
-for (let angle = 0; angle < Math.PI * 10; angle += 0.1) {
-    let distance = angle * 3;
-    let x = centerX + Math.cos(angle) * distance;
-    let y = centerY + Math.sin(angle) * distance;
-    
-    ctx.beginPath();
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fill();
-}</pre>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Math Makes Art!</h4>
-                    <p>Who knew trigonometry could be so beautiful? 📐✨</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- PROJECT TAB -->
-        <div id="project" class="tab-content">
-            <div class="section">
-                <h2>🎨 Final Project: Generative Art Generator</h2>
-                <p style="font-size: 1.1em;">Combine everything to create unique art!</p>
-
-                <div class="interactive-demo">
-                    <div class="demo-title">Your Art Generator</div>
-                    
-                    <canvas id="artCanvas" width="800" height="600"></canvas>
-                    
-                    <div class="controls">
-                        <button onclick="generateArt()">🎨 Generate New Art</button>
-                        <button onclick="saveArt()">💾 Save Image</button>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 15px; color: var(--gray);">
-                        Each generation is unique! Click "Generate" for a new masterpiece.
-                    </p>
-                </div>
-
-                <div class="checkpoint">
-                    <h4>✅ Congratulations!</h4>
-                    <p>You've created a generative art system that can produce infinite unique artworks!</p>
-                    <ul style="padding-left: 20px; margin-top: 10px;">
-                        <li>✓ You understand loops</li>
-                        <li>✓ You can use randomness creatively</li>
-                        <li>✓ You've created algorithmic patterns</li>
-                        <li>✓ You're a generative artist! 🎨</li>
-                    </ul>
-                </div>
-
-                <div class="tip">
-                    <h4>💡 Take It Further</h4>
-                    <ul style="padding-left: 20px;">
-                        <li>Add more pattern types</li>
-                        <li>Create color palettes</li>
-                        <li>Add user controls (sliders for complexity)</li>
-                        <li>Animate your patterns!</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <h3 style="margin-bottom: 10px;">🎨 Code & Create Workshop</h3>
-            <p>Session 2: Generative Art</p>
-            <p style="margin-top: 20px;">
-                <a href="../session1/index.html">← Session 1</a> | 
-                <a href="../index.html">Home</a> | 
-                <a href="../session3/index.html">Session 3 →</a>
-            </p>
-            <p style="margin-top: 20px; opacity: 0.8;">
-                Every refresh is a new creation! 🌈
-            </p>
-        </footer>
     </div>
 
-    <script>
-        // ========================================
-        // TAB NAVIGATION
-        // ========================================
-        function openTab(evt, tabName) {
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-            
-            const tabButtons = document.getElementsByClassName('tab-btn');
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove('active');
-            }
-            
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    <h3>🧪 Try It — Live Loop Runner</h3>
+
+    <div class="runner">
+        <div class="runner-header">
+            <span class="runner-title">▶ Live Code Runner</span>
+            <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">Edit and run!</span>
+        </div>
+        <div class="runner-body">
+            <p class="runner-instructions">This code uses the loop canvas above. Change the numbers and run to see the effect!</p>
+            <textarea class="code-editor" id="loopRunner">// Change 10 to a bigger number — what happens?
+for (let i = 0; i < 10; i++) {
+    let x = i * 60 + 30;
+    let y = 150;
+
+    // i * 36 shifts the hue by 36 degrees each time
+    loopCtx.beginPath();
+    loopCtx.arc(x, y, 20, 0, Math.PI * 2);
+    loopCtx.fillStyle = `hsl(${i * 36}, 70%, 60%)`;
+    loopCtx.fill();
+}
+console.log("Loop done! Drew " + 10 + " circles.");</textarea>
+            <div class="runner-actions">
+                <button class="btn btn-primary" onclick="runLoopCode()">▶ Run Code</button>
+                <button class="btn btn-secondary" onclick="clearLoop(); document.getElementById('loopOut').className='run-output';">↺ Clear</button>
+            </div>
+            <div class="run-output" id="loopOut"></div>
+        </div>
+    </div>
+
+    <div class="checkpoint">
+        <h4>✅ Before Moving On</h4>
+        <ul class="check-list">
+            <li>What does <code>i</code> represent? (A counter that changes each loop)</li>
+            <li>What would <code>i &lt; 50</code> do? (Run the loop 50 times)</li>
+            <li>Why are nested loops useful? (To work with grids — row × column)</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     RANDOMNESS
+══════════════════════════════════════════ -->
+<div id="randomness" class="tab-content">
+    <h2 class="section-title">🎲 Randomness</h2>
+    <p class="section-sub">Make every run different — the secret ingredient of generative art.</p>
+
+    <div class="concept-box">
+        <h3>Math.random() — Your Creative Partner</h3>
+        <p>JavaScript has a built-in function called <code>Math.random()</code>. Every time you call it, it returns a random decimal number between <code>0</code> and <code>1</code>. From this single tool, you can create random positions, colours, sizes, and more.</p>
+        <p style="margin-bottom:0;">Think of it like rolling a dice — but a dice with infinite sides.</p>
+    </div>
+
+    <h3>From 0–1 to Any Range — Step by Step</h3>
+
+    <div class="step-list">
+        <div class="step">
+            <h4><code>Math.random()</code> gives a decimal between 0 and 1</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">r</span> = Math.<span class="fn">random</span>();
+<span class="cmt">// Could be: 0.0, 0.34, 0.72, 0.99...</span>
+console.<span class="fn">log</span>(<span class="var">r</span>);</pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Multiply to scale the range</h4>
+            <p>Multiply by <code>500</code> to get a random number between <code>0</code> and <code>500</code> (like a canvas width):</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">x</span> = Math.<span class="fn">random</span>() * <span class="num">500</span>;
+<span class="cmt">// Random number: 0 to 500</span></pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Use <code>Math.floor()</code> to get a whole number</h4>
+            <p><code>Math.floor()</code> rounds down. Combine with <code>Math.random()</code> to get random whole numbers — useful for picking items from a list:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">n</span> = Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="num">100</span>);
+<span class="cmt">// Random whole number: 0, 1, 2 ... 99</span></pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Random colour with HSL</h4>
+            <p>HSL colours take a hue (0–360), saturation (%), and lightness (%). Randomise just the hue for colourful but not garish results:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">hue</span> = Math.<span class="fn">random</span>() * <span class="num">360</span>;
+ctx.fillStyle = <span class="str">`hsl(${<span class="var">hue</span>}, 70%, 60%)`</span>;
+<span class="cmt">// Random colour, always vivid</span></pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Random number in a custom range with a helper function</h4>
+            <p>Write this once at the top of your file and use it everywhere:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">function</span> <span class="fn">rand</span>(min, max) {
+    <span class="kw">return</span> Math.<span class="fn">random</span>() * (max - min) + min;
+}
+
+<span class="cmt">// Use it:</span>
+<span class="kw">let</span> <span class="var">size</span> = <span class="fn">rand</span>(<span class="num">10</span>, <span class="num">50</span>);  <span class="cmt">// 10 to 50</span>
+<span class="kw">let</span> <span class="var">x</span>    = <span class="fn">rand</span>(<span class="num">0</span>, <span class="num">800</span>);  <span class="cmt">// 0 to 800</span></pre>
+            </div>
+        </div>
+    </div>
+
+    <h3>🎨 See It — Randomness Demo</h3>
+
+    <div class="demo-area">
+        <div class="demo-title">Click each button — every click is different!</div>
+        <canvas id="randomCanvas" width="760" height="300"></canvas>
+        <div class="btn-row">
+            <button class="btn btn-secondary btn-sm" onclick="demoRandPos()">Random positions</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoRandColor()">Random colours</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoRandSize()">Random sizes</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoRandAll()">All random!</button>
+            <button class="btn btn-secondary btn-sm" onclick="clearRandom()">Clear</button>
+        </div>
+    </div>
+
+    <h3>🧪 Try It — Live Randomness Runner</h3>
+
+    <div class="runner">
+        <div class="runner-header">
+            <span class="runner-title">▶ Live Code Runner</span>
+        </div>
+        <div class="runner-body">
+            <p class="runner-instructions">Run this several times — you'll get a different result each time!</p>
+            <textarea class="code-editor" id="randRunner">// Clear the canvas first
+randomCtx.clearRect(0, 0, randomCanvas.width, randomCanvas.height);
+
+// Draw 30 random circles
+for (let i = 0; i < 30; i++) {
+    let x    = Math.random() * randomCanvas.width;
+    let y    = Math.random() * randomCanvas.height;
+    let size = Math.random() * 40 + 5;
+    let hue  = Math.random() * 360;
+
+    randomCtx.beginPath();
+    randomCtx.arc(x, y, size, 0, Math.PI * 2);
+    randomCtx.fillStyle = `hsl(${hue}, 70%, 65%)`;
+    randomCtx.globalAlpha = 0.7;
+    randomCtx.fill();
+}
+randomCtx.globalAlpha = 1;
+
+console.log("Drew 30 random circles!");</textarea>
+            <div class="runner-actions">
+                <button class="btn btn-primary" onclick="runRandCode()">▶ Run Code</button>
+                <button class="btn btn-secondary" onclick="clearRandom()">↺ Clear Canvas</button>
+            </div>
+            <div class="run-output" id="randOut"></div>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <h4>💡 Why HSL is Better Than RGB for Generative Art</h4>
+        <p>RGB mixes red, green, blue — random RGB often produces muddy browns. HSL separates <em>what colour</em> (hue) from <em>how vivid</em> (saturation) and <em>how bright</em> (lightness). By fixing saturation at 70% and lightness at 60%, random hue values always produce vivid, harmonious colours.</p>
+    </div>
+
+    <div class="checkpoint">
+        <h4>✅ Before Moving On</h4>
+        <ul class="check-list">
+            <li>What does <code>Math.random()</code> return? (A decimal between 0 and 1)</li>
+            <li>How do you get a random number 0–100? (<code>Math.random() * 100</code>)</li>
+            <li>Why use HSL for random colours? (Easier to control vibrancy)</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     ARRAYS
+══════════════════════════════════════════ -->
+<div id="arrays" class="tab-content">
+    <h2 class="section-title">📚 Arrays</h2>
+    <p class="section-sub">A list of values stored in one variable — perfect for colour palettes.</p>
+
+    <div class="concept-box">
+        <h3>What is an Array?</h3>
+        <p>An array is a variable that holds <strong>multiple values</strong> in a list, separated by commas, wrapped in square brackets <code>[ ]</code>. Instead of storing one colour, you can store ten — and pick from them using a loop or randomness.</p>
+        <p style="margin-bottom:0;">Arrays unlock colour palettes, lists of shapes, and much more.</p>
+    </div>
+
+    <h3>Creating and Using Arrays — Step by Step</h3>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Create an array with square brackets <code>[ ]</code></h4>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="cmt">// An array of colours</span>
+<span class="kw">let</span> <span class="var">palette</span> = [<span class="str">'#ff6b6b'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#6bcb77'</span>, <span class="str">'#4d96ff'</span>];
+
+<span class="cmt">// An array of numbers</span>
+<span class="kw">let</span> <span class="var">sizes</span> = [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>];</pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Access items by their index (position)</h4>
+            <p>Items are numbered starting from <code>0</code>. The first item is at index <code>0</code>, the second at index <code>1</code>, and so on.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">palette</span> = [<span class="str">'#ff6b6b'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#6bcb77'</span>];
+
+console.<span class="fn">log</span>(<span class="var">palette</span>[<span class="num">0</span>]);  <span class="cmt">// '#ff6b6b' (first)</span>
+console.<span class="fn">log</span>(<span class="var">palette</span>[<span class="num">1</span>]);  <span class="cmt">// '#ffd93d' (second)</span>
+console.<span class="fn">log</span>(<span class="var">palette</span>[<span class="num">2</span>]);  <span class="cmt">// '#6bcb77' (third)</span></pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Check how many items with <code>.length</code></h4>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">palette</span> = [<span class="str">'#ff6b6b'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#6bcb77'</span>];
+console.<span class="fn">log</span>(<span class="var">palette</span>.length);  <span class="cmt">// 3</span></pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Loop through every item with a <code>for</code> loop</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">palette</span> = [<span class="str">'#ff6b6b'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#6bcb77'</span>, <span class="str">'#4d96ff'</span>];
+
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="var">palette</span>.length; <span class="var">i</span>++) {
+    <span class="cmt">// palette[i] is the current colour</span>
+    ctx.fillStyle = <span class="var">palette</span>[<span class="var">i</span>];
+
+    ctx.<span class="fn">fillRect</span>(<span class="var">i</span> * <span class="num">100</span>, <span class="num">50</span>, <span class="num">80</span>, <span class="num">80</span>);
+}</pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Pick a random item from an array</h4>
+            <p>Combine <code>Math.floor</code> + <code>Math.random</code> + <code>.length</code> to pick a random index:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">palette</span> = [<span class="str">'#ff6b6b'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#6bcb77'</span>, <span class="str">'#4d96ff'</span>];
+
+<span class="cmt">// Random index between 0 and palette.length - 1</span>
+<span class="kw">let</span> <span class="var">randomIndex</span> = Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="var">palette</span>.length);
+
+<span class="cmt">// Use that item</span>
+ctx.fillStyle = <span class="var">palette</span>[<span class="var">randomIndex</span>];
+ctx.<span class="fn">fillRect</span>(<span class="num">100</span>, <span class="num">100</span>, <span class="num">80</span>, <span class="num">80</span>);</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="analogy">
+        <h4>🎨 The Colour Palette Analogy</h4>
+        <p>A real painter has a palette with chosen colours. They don't use every colour in the universe — they pick a <em>curated set</em> that works together, then use those throughout the painting.</p>
+        <p>An array lets you do the same in code: define your palette once, then pick from it throughout your art. The result feels cohesive and intentional even though positions and sizes are random.</p>
+    </div>
+
+    <h3>🧪 Try It — Arrays Live</h3>
+
+    <div class="runner">
+        <div class="runner-header">
+            <span class="runner-title">▶ Live Code Runner</span>
+        </div>
+        <div class="runner-body">
+            <p class="runner-instructions">Try changing the colours in the palette array and re-running!</p>
+            <textarea class="code-editor" id="arrayRunner">// Define a colour palette
+let palette = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#c77dff'];
+
+// Clear first
+randomCtx.clearRect(0, 0, randomCanvas.width, randomCanvas.height);
+
+// Draw 50 circles, each picking a random colour from the palette
+for (let i = 0; i < 50; i++) {
+    let x = Math.random() * randomCanvas.width;
+    let y = Math.random() * randomCanvas.height;
+    let size = Math.random() * 30 + 10;
+
+    // Pick a random colour from the palette
+    let index = Math.floor(Math.random() * palette.length);
+    randomCtx.fillStyle = palette[index];
+
+    randomCtx.beginPath();
+    randomCtx.arc(x, y, size, 0, Math.PI * 2);
+    randomCtx.fill();
+}
+
+console.log("Palette used: " + palette.join(", "));</textarea>
+            <div class="runner-actions">
+                <button class="btn btn-primary" onclick="runArrayCode()">▶ Run Code</button>
+                <button class="btn btn-secondary" onclick="clearRandom()">↺ Clear Canvas</button>
+            </div>
+            <div class="run-output" id="arrayOut"></div>
+        </div>
+    </div>
+
+    <div class="checkpoint">
+        <h4>✅ Before Moving On</h4>
+        <ul class="check-list">
+            <li>What are square brackets for? (Creating an array)</li>
+            <li>What index is the first item? (<code>0</code>, not <code>1</code>!)</li>
+            <li>How do you get the number of items? (<code>.length</code>)</li>
+            <li>How do you pick a random item? (<code>palette[Math.floor(Math.random() * palette.length)]</code>)</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PATTERNS
+══════════════════════════════════════════ -->
+<div id="patterns" class="tab-content">
+    <h2 class="section-title">🔶 Patterns</h2>
+    <p class="section-sub">Combine loops with maths to create geometric beauty.</p>
+
+    <div class="concept-box">
+        <h3>Loops + Maths = Patterns</h3>
+        <p>So far our loops have placed things in straight rows and grids. But when you plug <code>i</code> into a mathematical formula, things get interesting — circles, spirals, waves, and more emerge from simple equations.</p>
+        <p style="margin-bottom:0;">You don't need to understand all the maths. Just recognise the pattern, use it, and tweak the numbers to explore.</p>
+    </div>
+
+    <h3>🎨 Pattern Gallery — Click to Explore</h3>
+
+    <div class="demo-area">
+        <div class="demo-title">Each button runs a different mathematical pattern</div>
+        <canvas id="patternCanvas" width="760" height="360"></canvas>
+        <div class="btn-row">
+            <button class="btn btn-secondary btn-sm" onclick="demoConcentricCircles()">Concentric circles</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoSpiral()">Spiral</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoWaves()">Waves</button>
+            <button class="btn btn-secondary btn-sm" onclick="demoStarburst()">Starburst</button>
+            <button class="btn btn-secondary btn-sm" onclick="clearPattern()">Clear</button>
+        </div>
+    </div>
+
+    <h3>How Each Pattern Works</h3>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Concentric Circles — loop counter = radius</h4>
+            <p>Each loop iteration draws a circle with a bigger radius. Multiply <code>i</code> by a fixed amount to space them evenly. Use <code>i</code> in the HSL hue to shift colour each ring:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>;
+<span class="kw">let</span> <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
+
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">1</span>; <span class="var">i</span> &lt;= <span class="num">10</span>; <span class="var">i</span>++) {
+    ctx.<span class="fn">beginPath</span>();
+    ctx.<span class="fn">arc</span>(<span class="var">cx</span>, <span class="var">cy</span>, <span class="var">i</span> * <span class="num">20</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+    ctx.strokeStyle = <span class="str">`hsl(${<span class="var">i</span> * <span class="num">36</span>}, 70%, 55%)`</span>;
+    ctx.lineWidth = <span class="num">3</span>;
+    ctx.<span class="fn">stroke</span>();
+}</pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Spiral — angle drives both distance and position</h4>
+            <p><code>Math.cos(angle)</code> and <code>Math.sin(angle)</code> give the X and Y direction on a circle. Multiplying by a growing <code>distance</code> spirals outward. This uses <strong>polar coordinates</strong> — don't worry about the name, just use the formula:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">let</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>;
+<span class="kw">let</span> <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
+
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">a</span> = <span class="num">0</span>; <span class="var">a</span> &lt; Math.PI * <span class="num">10</span>; <span class="var">a</span> += <span class="num">0.15</span>) {
+    <span class="kw">let</span> <span class="var">dist</span> = <span class="var">a</span> * <span class="num">4</span>;          <span class="cmt">// grow outward</span>
+    <span class="kw">let</span> <span class="var">x</span> = <span class="var">cx</span> + Math.<span class="fn">cos</span>(<span class="var">a</span>) * <span class="var">dist</span>;
+    <span class="kw">let</span> <span class="var">y</span> = <span class="var">cy</span> + Math.<span class="fn">sin</span>(<span class="var">a</span>) * <span class="var">dist</span>;
+
+    ctx.<span class="fn">beginPath</span>();
+    ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">4</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+    ctx.fillStyle = <span class="str">`hsl(${<span class="var">a</span> * <span class="num">20</span>}, 80%, 60%)`</span>;
+    ctx.<span class="fn">fill</span>();
+}</pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Waves — <code>Math.sin()</code> creates oscillation</h4>
+            <p><code>Math.sin(x)</code> produces a smooth wave between -1 and 1. Multiply by an amplitude to control height. Loop across X and draw a dot at the wave height:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <pre><span class="kw">for</span> (<span class="kw">let</span> <span class="var">x</span> = <span class="num">0</span>; <span class="var">x</span> &lt; canvas.width; <span class="var">x</span> += <span class="num">4</span>) {
+    <span class="kw">let</span> <span class="var">y</span> = canvas.height / <span class="num">2</span>
+           + Math.<span class="fn">sin</span>(<span class="var">x</span> * <span class="num">0.03</span>) * <span class="num">80</span>; <span class="cmt">// amplitude = 80</span>
+
+    ctx.<span class="fn">beginPath</span>();
+    ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">3</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+    ctx.fillStyle = <span class="str">`hsl(${<span class="var">x</span> * <span class="num">0.4</span>}, 70%, 60%)`</span>;
+    ctx.<span class="fn">fill</span>();
+}</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <h4>💡 The Numbers to Tweak</h4>
+        <p>In every pattern there are "magic numbers" — try changing them and see what happens:</p>
+        <ul style="padding-left:16px; line-height:2; font-size:0.88rem; margin-top:4px;">
+            <li>The step in the loop (<code>0.15</code> → try <code>0.05</code> or <code>0.5</code>)</li>
+            <li>The distance multiplier (<code>* 4</code> → try <code>* 2</code> or <code>* 8</code>)</li>
+            <li>The wave frequency (<code>* 0.03</code> → try <code>* 0.01</code> or <code>* 0.1</code>)</li>
+            <li>The amplitude (<code>* 80</code> → try <code>* 20</code> or <code>* 150</code>)</li>
+        </ul>
+    </div>
+
+    <div class="checkpoint">
+        <h4>✅ Key Takeaway</h4>
+        <p>You don't need to derive these formulas — recognise them, use them, tweak them. That's what working programmers do too.</p>
+        <ul class="check-list">
+            <li>Concentric circles: loop counter × fixed amount = radius</li>
+            <li>Spiral: <code>cos/sin(angle) × growing distance</code></li>
+            <li>Wave: <code>Math.sin(x × frequency) × amplitude</code></li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PROJECT
+══════════════════════════════════════════ -->
+<div id="project" class="tab-content">
+    <h2 class="section-title">🎨 Mini-Project: Art Generator</h2>
+    <p class="section-sub">Build this file from scratch — step by step — using everything you learned today.</p>
+
+    <!-- LIVE RESULT -->
+    <div class="demo-area">
+        <div class="demo-title">🎯 What You're Building — Try It First!</div>
+        <canvas id="artCanvas" width="760" height="420"></canvas>
+        <div class="btn-row">
+            <button class="btn btn-primary" onclick="generateArt()">🎲 Generate New Art</button>
+            <button class="btn btn-secondary btn-sm" onclick="saveArt()">💾 Save Image</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:10px;">Every click produces a unique piece. This is exactly what you'll build below.</p>
+    </div>
+
+    <!-- SETUP -->
+    <div class="concept-box">
+        <h3>📁 Before You Start — Create Your File</h3>
+        <p>Open VS Code (or any text editor). Create a new file called <strong>art-generator.html</strong> and save it somewhere you can find it. Everything — HTML, CSS, and JavaScript — goes in this one file.</p>
+    </div>
+
+    <!-- PHASE 1: HTML -->
+    <div style="margin:32px 0 8px;">
+        <span class="phase-html"><span style="font-size:1.2rem;">🧱</span><strong>PHASE 1 — HTML: The Structure</strong></span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">We need a canvas to draw on, a button to generate new art, and a save button.</p>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Start with the HTML skeleton</h4>
+            <p>Copy this into your new file exactly as written:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">art-generator.html</span>
+                <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Art Generator&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;!-- Content goes here --&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and open in browser. You should see a blank white page.</p>
+        </div>
+
+        <div class="step">
+            <h4>Add a heading and the canvas</h4>
+            <p>Replace <code>&lt;!-- Content goes here --&gt;</code> with:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;body&gt;</span>
+                <pre>&lt;h1&gt;🎨 My Art Generator&lt;/h1&gt;
+
+&lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. You won't see the canvas yet — it's invisible without CSS.</p>
+        </div>
+
+        <div class="step">
+            <h4>Add the two buttons</h4>
+            <p>Below the canvas, add a Generate button and a Save button:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;body&gt;, after &lt;canvas&gt;</span>
+                <pre>&lt;div id="controls"&gt;
+    &lt;button onclick="generateArt()"&gt;🎲 Generate New Art&lt;/button&gt;
+    &lt;button onclick="saveArt()"&gt;💾 Save Image&lt;/button&gt;
+&lt;/div&gt;</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. Buttons appear but clicking them shows an error — we haven't written the functions yet.</p>
+        </div>
+    </div>
+
+    <div class="checkpoint" style="margin:24px 0;">
+        <h4>✅ End of Phase 1 — Full HTML so far:</h4>
+        <div class="code-block" style="margin-top:10px;">
+            <span class="code-tag">art-generator.html</span>
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Art Generator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;🎨 My Art Generator&lt;/h1&gt;
+
+    &lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;
+
+    &lt;div id="controls"&gt;
+        &lt;button onclick="generateArt()"&gt;🎲 Generate New Art&lt;/button&gt;
+        &lt;button onclick="saveArt()"&gt;💾 Save Image&lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+    </div>
+
+    <!-- PHASE 2: CSS -->
+    <div style="margin:32px 0 8px;">
+        <span class="phase-css"><span style="font-size:1.2rem;">🎨</span><strong>PHASE 2 — CSS: Making It Look Good</strong></span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">Make the canvas visible, centre everything, and style the buttons.</p>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Add a <code>&lt;style&gt;</code> tag inside <code>&lt;head&gt;</code></h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;head&gt;, after &lt;title&gt;</span>
+                <pre>&lt;style&gt;
+    /* CSS rules go here */
+&lt;/style&gt;</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Style the body and heading</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;style&gt;</span>
+                <pre>body {
+    background: #0d0f14;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+}</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. Dark background, white heading.</p>
+        </div>
+
+        <div class="step">
+            <h4>Style the canvas</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;style&gt;</span>
+                <pre>#myCanvas {
+    background: #1a1a2e;   /* dark drawing surface */
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto 20px;   /* centred, 20px gap below */
+    max-width: 100%;       /* don't overflow on mobile */
+}</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. You should now see a dark rectangle — your canvas!</p>
+        </div>
+
+        <div class="step">
+            <h4>Style the buttons</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;style&gt;</span>
+                <pre>#controls {
+    margin-top: 10px;
+}
+
+#controls button {
+    padding: 12px 24px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+#controls button:first-child {
+    background: #f093fb;   /* pink — generate button */
+    color: #0d0f14;
+}
+
+#controls button:last-child {
+    background: transparent;
+    color: white;
+    border: 2px solid #555;
+}
+
+#controls button:hover {
+    transform: translateY(-2px);
+}</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. Buttons now look styled.</p>
+        </div>
+    </div>
+
+    <!-- PHASE 3: JS -->
+    <div style="margin:32px 0 8px;">
+        <span class="phase-js"><span style="font-size:1.2rem;">⚡</span><strong>PHASE 3 — JavaScript: The Art Logic</strong></span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">Now the fun part — writing the code that generates a unique artwork every time the button is clicked.</p>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Add a <code>&lt;script&gt;</code> tag before <code>&lt;/body&gt;</code></h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">just before &lt;/body&gt;</span>
+                <pre>&lt;script&gt;
+    // JavaScript goes here
+&lt;/script&gt;</pre>
+            </div>
+            <div class="warn-box" style="margin-top:10px;">
+                <h4>⚠️ Always at the bottom of &lt;body&gt;</h4>
+                <p>If the script runs before the HTML exists, <code>getElementById</code> finds nothing and the code breaks. At the bottom of <code>&lt;body&gt;</code> guarantees the canvas exists first.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Grab the canvas and set up variables</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="cmt">// Grab the canvas and get the drawing context</span>
+<span class="kw">let</span> <span class="var">canvas</span> = document.<span class="fn">getElementById</span>(<span class="str">'myCanvas'</span>);
+<span class="kw">let</span> <span class="var">ctx</span>    = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);
+
+<span class="cmt">// A helper function for random numbers in a range</span>
+<span class="kw">function</span> <span class="fn">rand</span>(min, max) {
+    <span class="kw">return</span> Math.<span class="fn">random</span>() * (max - min) + min;
+}</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Create your colour palette array</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="cmt">// Define a colour palette</span>
+<span class="cmt">// Change these to any colours you like!</span>
+<span class="kw">let</span> <span class="var">palette</span> = [
+    <span class="str">'#f093fb'</span>,  <span class="cmt">// pink</span>
+    <span class="str">'#f5576c'</span>,  <span class="cmt">// red</span>
+    <span class="str">'#ffd93d'</span>,  <span class="cmt">// yellow</span>
+    <span class="str">'#6bcb77'</span>,  <span class="cmt">// green</span>
+    <span class="str">'#4d96ff'</span>,  <span class="cmt">// blue</span>
+    <span class="str">'#c77dff'</span>   <span class="cmt">// purple</span>
+];</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write a helper to pick a random palette colour</h4>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="kw">function</span> <span class="fn">randomColor</span>() {
+    <span class="kw">let</span> <span class="var">i</span> = Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="var">palette</span>.length);
+    <span class="kw">return</span> <span class="var">palette</span>[<span class="var">i</span>];
+}</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write the <code>generateArt()</code> function — paint a background</h4>
+            <p>This is the main function. Start by painting a solid dark background so each new generation is clean:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="kw">function</span> <span class="fn">generateArt</span>() {
+
+    <span class="cmt">// Step 1: Clear with a dark background</span>
+    ctx.fillStyle = <span class="str">'#1a1a2e'</span>;
+    ctx.<span class="fn">fillRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);
+
+}</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and click the Generate button. The canvas should fill with dark blue.</p>
+        </div>
+
+        <div class="step">
+            <h4>Add Pattern 1 — scattered circles</h4>
+            <p>Inside <code>generateArt()</code>, after the background, add a loop that draws 80 random circles using the palette:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside generateArt(), after the background</span>
+                <pre>    <span class="cmt">// Step 2: Draw 80 random circles</span>
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="num">80</span>; <span class="var">i</span>++) {
+        <span class="kw">let</span> <span class="var">x</span>    = <span class="fn">rand</span>(<span class="num">0</span>, canvas.width);
+        <span class="kw">let</span> <span class="var">y</span>    = <span class="fn">rand</span>(<span class="num">0</span>, canvas.height);
+        <span class="kw">let</span> <span class="var">size</span> = <span class="fn">rand</span>(<span class="num">5</span>, <span class="num">50</span>);
+
+        ctx.<span class="fn">beginPath</span>();
+        ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="var">size</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+        ctx.fillStyle = <span class="fn">randomColor</span>();
+        ctx.globalAlpha = <span class="fn">rand</span>(<span class="num">0.3</span>, <span class="num">0.9</span>);  <span class="cmt">// semi-transparent</span>
+        ctx.<span class="fn">fill</span>();
+    }
+    ctx.globalAlpha = <span class="num">1</span>;  <span class="cmt">// always reset alpha!</span></pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and click Generate. You should see colourful circles! Click again — a new pattern each time.</p>
+        </div>
+
+        <div class="step">
+            <h4>Add Pattern 2 — a spiral on top</h4>
+            <p>After the circles loop, add a spiral using the maths from the Patterns tab:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside generateArt(), after circles loop</span>
+                <pre>    <span class="cmt">// Step 3: Draw a spiral on top</span>
+    <span class="kw">let</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>;
+    <span class="kw">let</span> <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
+    <span class="kw">let</span> <span class="var">spiralColor</span> = <span class="fn">randomColor</span>();
+
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">a</span> = <span class="num">0</span>; <span class="var">a</span> &lt; Math.PI * <span class="num">12</span>; <span class="var">a</span> += <span class="num">0.15</span>) {
+        <span class="kw">let</span> <span class="var">dist</span> = <span class="var">a</span> * <span class="num">5</span>;
+        <span class="kw">let</span> <span class="var">x</span> = <span class="var">cx</span> + Math.<span class="fn">cos</span>(<span class="var">a</span>) * <span class="var">dist</span>;
+        <span class="kw">let</span> <span class="var">y</span> = <span class="var">cy</span> + Math.<span class="fn">sin</span>(<span class="var">a</span>) * <span class="var">dist</span>;
+
+        ctx.<span class="fn">beginPath</span>();
+        ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">3</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+        ctx.fillStyle = <span class="var">spiralColor</span>;
+        ctx.<span class="fn">fill</span>();
+    }</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and click Generate. A spiral now overlays the circles!</p>
+        </div>
+
+        <div class="step">
+            <h4>Write the <code>saveArt()</code> function</h4>
+            <p>This converts the canvas to an image file and triggers a download:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;, after generateArt()</span>
+                <pre><span class="kw">function</span> <span class="fn">saveArt</span>() {
+    <span class="cmt">// Create a temporary link element</span>
+    <span class="kw">let</span> <span class="var">link</span> = document.<span class="fn">createElement</span>(<span class="str">'a'</span>);
+    <span class="var">link</span>.download = <span class="str">'my-art.png'</span>;
+    <span class="var">link</span>.href = canvas.<span class="fn">toDataURL</span>();
+    <span class="var">link</span>.<span class="fn">click</span>();
+}</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Generate some art then click Save. A .png file downloads to your computer!</p>
+        </div>
+
+        <div class="step">
+            <h4>Auto-generate on page load</h4>
+            <p>Call <code>generateArt()</code> at the very end of your script so art appears immediately when the page opens:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">last line inside &lt;script&gt;</span>
+                <pre><span class="cmt">// Generate art as soon as the page loads</span>
+<span class="fn">generateArt</span>();</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPLETE FILE -->
+    <div class="checkpoint" style="margin:24px 0;">
+        <h4>✅ Complete File — art-generator.html</h4>
+        <div class="code-block" style="margin-top:10px;">
+            <span class="code-tag">Full finished file</span>
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Art Generator&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background: #0d0f14;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { margin-bottom: 20px; font-size: 2em; }
+        #myCanvas {
+            background: #1a1a2e;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+        }
+        #controls { margin-top: 10px; }
+        #controls button {
+            padding: 12px 24px;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        #controls button:first-child { background: #f093fb; color: #0d0f14; }
+        #controls button:last-child  { background: transparent; color: white; border: 2px solid #555; }
+        #controls button:hover { transform: translateY(-2px); }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;🎨 My Art Generator&lt;/h1&gt;
+    &lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;
+    &lt;div id="controls"&gt;
+        &lt;button onclick="generateArt()"&gt;🎲 Generate New Art&lt;/button&gt;
+        &lt;button onclick="saveArt()"&gt;💾 Save Image&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        let canvas = document.getElementById('myCanvas');
+        let ctx    = canvas.getContext('2d');
+
+        function rand(min, max) {
+            return Math.random() * (max - min) + min;
         }
 
-        // ========================================
-        // LOOP DEMOS
-        // ========================================
-        const loopCanvas = document.getElementById('loopCanvas');
-        const loopCtx = loopCanvas ? loopCanvas.getContext('2d') : null;
+        let palette = ['#f093fb','#f5576c','#ffd93d','#6bcb77','#4d96ff','#c77dff'];
 
-        function drawRow() {
-            if (!loopCtx) return;
-            clearLoopCanvas();
-            
-            for (let i = 0; i < 15; i++) {
-                let x = i * 50 + 30;
-                let y = 200;
-                
-                loopCtx.beginPath();
-                loopCtx.arc(x, y, 20, 0, Math.PI * 2);
-                loopCtx.fillStyle = `hsl(${i * 24}, 70%, 60%)`;
-                loopCtx.fill();
-            }
+        function randomColor() {
+            return palette[Math.floor(Math.random() * palette.length)];
         }
-
-        function drawGrid() {
-            if (!loopCtx) return;
-            clearLoopCanvas();
-            
-            for (let row = 0; row < 8; row++) {
-                for (let col = 0; col < 16; col++) {
-                    let x = col * 50 + 25;
-                    let y = row * 50 + 25;
-                    
-                    loopCtx.beginPath();
-                    loopCtx.arc(x, y, 15, 0, Math.PI * 2);
-                    loopCtx.fillStyle = `hsl(${(row + col) * 10}, 70%, 60%)`;
-                    loopCtx.fill();
-                }
-            }
-        }
-
-        function drawSpiral() {
-            if (!loopCtx) return;
-            clearLoopCanvas();
-            
-            let centerX = loopCanvas.width / 2;
-            let centerY = loopCanvas.height / 2;
-            
-            for (let angle = 0; angle < Math.PI * 8; angle += 0.2) {
-                let distance = angle * 4;
-                let x = centerX + Math.cos(angle) * distance;
-                let y = centerY + Math.sin(angle) * distance;
-                
-                loopCtx.beginPath();
-                loopCtx.arc(x, y, 5, 0, Math.PI * 2);
-                loopCtx.fillStyle = `hsl(${angle * 20}, 70%, 60%)`;
-                loopCtx.fill();
-            }
-        }
-
-        function clearLoopCanvas() {
-            if (!loopCtx) return;
-            loopCtx.clearRect(0, 0, loopCanvas.width, loopCanvas.height);
-        }
-
-        // ========================================
-        // RANDOMNESS DEMOS
-        // ========================================
-        const randomCanvas = document.getElementById('randomCanvas');
-        const randomCtx = randomCanvas ? randomCanvas.getContext('2d') : null;
-
-        function drawRandomCircles() {
-            if (!randomCtx) return;
-            clearRandomCanvas();
-            
-            for (let i = 0; i < 50; i++) {
-                let x = Math.random() * randomCanvas.width;
-                let y = Math.random() * randomCanvas.height;
-                
-                randomCtx.beginPath();
-                randomCtx.arc(x, y, 20, 0, Math.PI * 2);
-                randomCtx.fillStyle = '#f093fb';
-                randomCtx.fill();
-            }
-        }
-
-        function drawRandomColors() {
-            if (!randomCtx) return;
-            clearRandomCanvas();
-            
-            for (let i = 0; i < 50; i++) {
-                let x = Math.random() * randomCanvas.width;
-                let y = Math.random() * randomCanvas.height;
-                let hue = Math.random() * 360;
-                
-                randomCtx.beginPath();
-                randomCtx.arc(x, y, 25, 0, Math.PI * 2);
-                randomCtx.fillStyle = `hsl(${hue}, 70%, 60%)`;
-                randomCtx.fill();
-            }
-        }
-
-        function drawRandomSizes() {
-            if (!randomCtx) return;
-            clearRandomCanvas();
-            
-            for (let i = 0; i < 40; i++) {
-                let x = Math.random() * randomCanvas.width;
-                let y = Math.random() * randomCanvas.height;
-                let size = Math.random() * 40 + 5;
-                
-                randomCtx.beginPath();
-                randomCtx.arc(x, y, size, 0, Math.PI * 2);
-                randomCtx.fillStyle = '#f5576c';
-                randomCtx.globalAlpha = 0.6;
-                randomCtx.fill();
-            }
-            randomCtx.globalAlpha = 1;
-        }
-
-        function clearRandomCanvas() {
-            if (!randomCtx) return;
-            randomCtx.clearRect(0, 0, randomCanvas.width, randomCanvas.height);
-        }
-
-        // ========================================
-        // PATTERN DEMOS
-        // ========================================
-        const patternCanvas = document.getElementById('patternCanvas');
-        const patternCtx = patternCanvas ? patternCanvas.getContext('2d') : null;
-
-        function drawCirclePattern() {
-            if (!patternCtx) return;
-            clearPatternCanvas();
-            
-            let centerX = patternCanvas.width / 2;
-            let centerY = patternCanvas.height / 2;
-            
-            for (let i = 1; i <= 12; i++) {
-                let radius = i * 15;
-                
-                patternCtx.beginPath();
-                patternCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-                patternCtx.strokeStyle = `hsl(${i * 30}, 70%, 50%)`;
-                patternCtx.lineWidth = 3;
-                patternCtx.stroke();
-            }
-        }
-
-        function drawSpiralPattern() {
-            if (!patternCtx) return;
-            clearPatternCanvas();
-            
-            let centerX = patternCanvas.width / 2;
-            let centerY = patternCanvas.height / 2;
-            
-            patternCtx.beginPath();
-            for (let angle = 0; angle < Math.PI * 12; angle += 0.1) {
-                let distance = angle * 3;
-                let x = centerX + Math.cos(angle) * distance;
-                let y = centerY + Math.sin(angle) * distance;
-                
-                if (angle === 0) {
-                    patternCtx.moveTo(x, y);
-                } else {
-                    patternCtx.lineTo(x, y);
-                }
-            }
-            patternCtx.strokeStyle = '#f093fb';
-            patternCtx.lineWidth = 2;
-            patternCtx.stroke();
-        }
-
-        function drawWavePattern() {
-            if (!patternCtx) return;
-            clearPatternCanvas();
-            
-            for (let y = 0; y < patternCanvas.height; y += 20) {
-                patternCtx.beginPath();
-                for (let x = 0; x < patternCanvas.width; x += 5) {
-                    let waveY = y + Math.sin(x * 0.02) * 30;
-                    
-                    if (x === 0) {
-                        patternCtx.moveTo(x, waveY);
-                    } else {
-                        patternCtx.lineTo(x, waveY);
-                    }
-                }
-                patternCtx.strokeStyle = `hsl(${y}, 70%, 60%)`;
-                patternCtx.lineWidth = 2;
-                patternCtx.stroke();
-            }
-        }
-
-        function drawGridPattern() {
-            if (!patternCtx) return;
-            clearPatternCanvas();
-            
-            for (let row = 0; row < 8; row++) {
-                for (let col = 0; col < 16; col++) {
-                    let x = col * 50 + 25;
-                    let y = row * 50 + 25;
-                    let size = 20;
-                    
-                    patternCtx.fillStyle = `hsl(${(row * col) * 5}, 70%, 60%)`;
-                    patternCtx.fillRect(x - size/2, y - size/2, size, size);
-                }
-            }
-        }
-
-        function clearPatternCanvas() {
-            if (!patternCtx) return;
-            patternCtx.clearRect(0, 0, patternCanvas.width, patternCanvas.height);
-        }
-
-        // ========================================
-        // GENERATIVE ART PROJECT
-        // ========================================
-        const artCanvas = document.getElementById('artCanvas');
-        const artCtx = artCanvas ? artCanvas.getContext('2d') : null;
 
         function generateArt() {
-            if (!artCtx) return;
-            
-            // Clear canvas
-            artCtx.clearRect(0, 0, artCanvas.width, artCanvas.height);
-            
-            // Random background
-            let bgHue = Math.random() * 360;
-            artCtx.fillStyle = `hsl(${bgHue}, 30%, 95%)`;
-            artCtx.fillRect(0, 0, artCanvas.width, artCanvas.height);
-            
-            // Random pattern type
-            let patternType = Math.floor(Math.random() * 4);
-            
-            if (patternType === 0) {
-                // Circles pattern
-                for (let i = 0; i < 100; i++) {
-                    let x = Math.random() * artCanvas.width;
-                    let y = Math.random() * artCanvas.height;
-                    let size = Math.random() * 50 + 10;
-                    let hue = Math.random() * 360;
-                    
-                    artCtx.beginPath();
-                    artCtx.arc(x, y, size, 0, Math.PI * 2);
-                    artCtx.fillStyle = `hsla(${hue}, 70%, 60%, 0.5)`;
-                    artCtx.fill();
-                }
-            } else if (patternType === 1) {
-                // Grid pattern
-                for (let row = 0; row < 12; row++) {
-                    for (let col = 0; col < 16; col++) {
-                        let x = col * 50 + 25;
-                        let y = row * 50 + 25;
-                        let size = Math.random() * 40 + 5;
-                        let hue = (row + col) * 15 + Math.random() * 60;
-                        
-                        artCtx.beginPath();
-                        artCtx.arc(x, y, size, 0, Math.PI * 2);
-                        artCtx.fillStyle = `hsl(${hue}, 70%, 60%)`;
-                        artCtx.fill();
-                    }
-                }
-            } else if (patternType === 2) {
-                // Spiral pattern
-                let centerX = artCanvas.width / 2;
-                let centerY = artCanvas.height / 2;
-                
-                for (let angle = 0; angle < Math.PI * 20; angle += 0.1) {
-                    let distance = angle * 4;
-                    let x = centerX + Math.cos(angle) * distance;
-                    let y = centerY + Math.sin(angle) * distance;
-                    let size = Math.random() * 10 + 2;
-                    
-                    artCtx.beginPath();
-                    artCtx.arc(x, y, size, 0, Math.PI * 2);
-                    artCtx.fillStyle = `hsl(${angle * 10}, 70%, 60%)`;
-                    artCtx.fill();
-                }
-            } else {
-                // Lines pattern
-                for (let i = 0; i < 50; i++) {
-                    let x1 = Math.random() * artCanvas.width;
-                    let y1 = Math.random() * artCanvas.height;
-                    let x2 = Math.random() * artCanvas.width;
-                    let y2 = Math.random() * artCanvas.height;
-                    
-                    artCtx.beginPath();
-                    artCtx.moveTo(x1, y1);
-                    artCtx.lineTo(x2, y2);
-                    artCtx.strokeStyle = `hsla(${Math.random() * 360}, 70%, 60%, 0.3)`;
-                    artCtx.lineWidth = Math.random() * 5 + 1;
-                    artCtx.stroke();
-                }
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < 80; i++) {
+                let x    = rand(0, canvas.width);
+                let y    = rand(0, canvas.height);
+                let size = rand(5, 50);
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle    = randomColor();
+                ctx.globalAlpha  = rand(0.3, 0.9);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+
+            let cx = canvas.width / 2;
+            let cy = canvas.height / 2;
+            let spiralColor = randomColor();
+            for (let a = 0; a &lt; Math.PI * 12; a += 0.15) {
+                let dist = a * 5;
+                let x = cx + Math.cos(a) * dist;
+                let y = cy + Math.sin(a) * dist;
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = spiralColor;
+                ctx.fill();
             }
         }
 
         function saveArt() {
-            if (!artCanvas) return;
-            
-            const link = document.createElement('a');
-            const timestamp = new Date().getTime();
-            link.download = `generative-art-${timestamp}.png`;
-            link.href = artCanvas.toDataURL();
+            let link = document.createElement('a');
+            link.download = 'my-art.png';
+            link.href = canvas.toDataURL();
             link.click();
-            
-            console.log('Art saved! 🎨');
         }
 
-        // ========================================
-        // INITIALIZATION
-        // ========================================
-        console.log('🌈 Session 2: Generative Art loaded!');
-        console.log('💡 Create infinite unique artworks!');
-    </script>
+        generateArt();
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+    </div>
+
+    <!-- WHAT YOU USED -->
+    <div class="concept-box">
+        <h3>🎉 What You Just Built — And What You Used</h3>
+        <div class="card-grid" style="margin-top:12px;">
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
+                <strong style="color:var(--accent3);">🧱 HTML</strong>
+                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+                    <li><code>&lt;canvas&gt;</code> element</li>
+                    <li>Buttons with <code>onclick</code></li>
+                </ul>
+            </div>
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
+                <strong style="color:var(--accent3);">🎨 CSS</strong>
+                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+                    <li>Dark theme background</li>
+                    <li>Centred canvas layout</li>
+                    <li>Hover transitions</li>
+                </ul>
+            </div>
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
+                <strong style="color:var(--accent3);">⚡ JavaScript</strong>
+                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+                    <li>Arrays — colour palette</li>
+                    <li>Loops — 80 circles + spiral</li>
+                    <li>Randomness — all positions/sizes</li>
+                    <li>Functions — <code>rand()</code>, <code>randomColor()</code></li>
+                    <li>Canvas API — <code>arc</code>, <code>fillRect</code></li>
+                    <li>Save — <code>canvas.toDataURL()</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h3>🚀 Challenges — Make It Your Own</h3>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Challenge 1 — Change the palette</h4>
+            <p>Replace the colours in your <code>palette</code> array with colours of your choice. Try using a website like <a href="https://coolors.co" target="_blank" style="color:var(--accent);">coolors.co</a> to generate harmonious palettes.</p>
+        </div>
+        <div class="step">
+            <h4>Challenge 2 — Add a third pattern layer</h4>
+            <p>After the spiral, add a wave pattern using <code>Math.sin()</code> from the Patterns tab. Add it as a dashed line using <code>ctx.setLineDash([5, 10])</code>.</p>
+        </div>
+        <div class="step">
+            <h4>Challenge 3 — Randomly choose which patterns to draw</h4>
+            <p>Use <code>Math.random() &gt; 0.5</code> as a condition — if true draw circles, if false draw rectangles. Now each generation chooses randomly which elements to include.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">Hint</span>
+                <pre><span class="kw">if</span> (Math.<span class="fn">random</span>() &gt; <span class="num">0.5</span>) {
+    <span class="cmt">// draw circles</span>
+} <span class="kw">else</span> {
+    <span class="cmt">// draw rectangles instead</span>
+}</pre>
+            </div>
+        </div>
+        <div class="step">
+            <h4>Challenge 4 — Random canvas background</h4>
+            <p>Instead of always using <code>'#1a1a2e'</code>, pick a random dark colour for the background using <code>hsl(${Math.random()*360}, 30%, 10%)</code>. Low saturation and lightness keeps it dark and moody.</p>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <h4>💡 Something Not Working?</h4>
+        <ul style="padding-left:16px;line-height:2;font-size:0.88rem;">
+            <li>Press <strong>F12</strong> → Console to see error messages</li>
+            <li>Check that <code>id="myCanvas"</code> in HTML exactly matches <code>'myCanvas'</code> in JavaScript</li>
+            <li>Make sure <code>&lt;script&gt;</code> is before <code>&lt;/body&gt;</code></li>
+            <li>After <code>globalAlpha</code> changes, always reset with <code>ctx.globalAlpha = 1</code></li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     CHEAT SHEET
+══════════════════════════════════════════ -->
+<div id="cheatsheet" class="tab-content">
+    <h2 class="section-title">📋 Cheat Sheet</h2>
+    <p class="section-sub">Everything from today on one page.</p>
+
+    <div class="card">
+        <h3 style="margin-top:0;">🔄 For Loop</h3>
+        <div class="code-block">
+            <pre><span class="cmt">// Basic loop — runs 10 times (i = 0,1,2...9)</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="num">10</span>; <span class="var">i</span>++) {
+    <span class="cmt">// code here runs 10 times</span>
+    <span class="cmt">// use i as the counter value</span>
+}
+
+<span class="cmt">// Nested loop — grid (rows × columns)</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">row</span> = <span class="num">0</span>; <span class="var">row</span> &lt; <span class="num">5</span>; <span class="var">row</span>++) {
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">col</span> = <span class="num">0</span>; <span class="var">col</span> &lt; <span class="num">10</span>; <span class="var">col</span>++) {
+        <span class="cmt">// runs 50 times total</span>
+    }
+}</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0;">🎲 Randomness</h3>
+        <div class="code-block">
+            <pre><span class="cmt">// Between 0 and 1</span>
+Math.<span class="fn">random</span>();
+
+<span class="cmt">// Between 0 and 500</span>
+Math.<span class="fn">random</span>() * <span class="num">500</span>;
+
+<span class="cmt">// Whole number 0–99</span>
+Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="num">100</span>);
+
+<span class="cmt">// Custom range helper</span>
+<span class="kw">function</span> <span class="fn">rand</span>(min, max) {
+    <span class="kw">return</span> Math.<span class="fn">random</span>() * (max - min) + min;
+}
+
+<span class="cmt">// Random HSL colour</span>
+<span class="str">`hsl(${Math.random() * 360}, 70%, 60%)`</span></pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0;">📚 Arrays</h3>
+        <div class="code-block">
+            <pre><span class="cmt">// Create</span>
+<span class="kw">let</span> <span class="var">colours</span> = [<span class="str">'red'</span>, <span class="str">'blue'</span>, <span class="str">'green'</span>];
+
+<span class="cmt">// Access by index (starts at 0)</span>
+<span class="var">colours</span>[<span class="num">0</span>];  <span class="cmt">// 'red'</span>
+<span class="var">colours</span>[<span class="num">2</span>];  <span class="cmt">// 'green'</span>
+
+<span class="cmt">// How many items</span>
+<span class="var">colours</span>.length;  <span class="cmt">// 3</span>
+
+<span class="cmt">// Loop through all items</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="var">colours</span>.length; <span class="var">i</span>++) {
+    console.<span class="fn">log</span>(<span class="var">colours</span>[<span class="var">i</span>]);
+}
+
+<span class="cmt">// Random item</span>
+<span class="var">colours</span>[Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="var">colours</span>.length)];</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0;">🔶 Pattern Formulas</h3>
+        <div class="code-block">
+            <pre><span class="cmt">// Concentric circles</span>
+ctx.<span class="fn">arc</span>(cx, cy, <span class="var">i</span> * <span class="num">20</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+
+<span class="cmt">// Spiral</span>
+<span class="kw">let</span> <span class="var">x</span> = cx + Math.<span class="fn">cos</span>(angle) * (angle * <span class="num">4</span>);
+<span class="kw">let</span> <span class="var">y</span> = cy + Math.<span class="fn">sin</span>(angle) * (angle * <span class="num">4</span>);
+
+<span class="cmt">// Wave</span>
+<span class="kw">let</span> <span class="var">y</span> = centreY + Math.<span class="fn">sin</span>(x * <span class="num">0.03</span>) * <span class="num">80</span>;</pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0;">✏️ Canvas Extras</h3>
+        <div class="code-block">
+            <pre><span class="cmt">// Semi-transparent drawing</span>
+ctx.globalAlpha = <span class="num">0.5</span>;  <span class="cmt">// 0=invisible, 1=solid</span>
+ctx.<span class="fn">fill</span>();
+ctx.globalAlpha = <span class="num">1</span>;    <span class="cmt">// ALWAYS reset after!</span>
+
+<span class="cmt">// Draw a filled rectangle</span>
+ctx.<span class="fn">fillRect</span>(x, y, width, height);
+
+<span class="cmt">// Draw an outlined rectangle</span>
+ctx.<span class="fn">strokeRect</span>(x, y, width, height);
+
+<span class="cmt">// Save canvas as image file</span>
+<span class="kw">let</span> <span class="var">link</span> = document.<span class="fn">createElement</span>(<span class="str">'a'</span>);
+<span class="var">link</span>.download = <span class="str">'art.png'</span>;
+<span class="var">link</span>.href = canvas.<span class="fn">toDataURL</span>();
+<span class="var">link</span>.<span class="fn">click</span>();</pre>
+        </div>
+    </div>
+
+    <div class="warn-box">
+        <h4>⚠️ Common Mistakes</h4>
+        <ul style="padding-left:16px;line-height:2;font-size:0.88rem;">
+            <li>Loop runs forever: forgetting <code>i++</code> means <code>i</code> never grows past the condition</li>
+            <li>Array index off by 1: first item is <code>[0]</code>, not <code>[1]</code></li>
+            <li>Forgetting <code>ctx.globalAlpha = 1</code> after using transparency — everything stays faded</li>
+            <li>Canvas appears blank: check <code>id</code> spelling in HTML vs JavaScript</li>
+        </ul>
+    </div>
+
+    <div class="tip-box">
+        <h4>💡 Experimentation Tips</h4>
+        <ul style="padding-left:16px;line-height:2;font-size:0.88rem;">
+            <li>Change the loop limit (<code>i &lt; 10</code>) to see more or fewer elements</li>
+            <li>Adjust spacing multipliers (<code>* 60</code>) to pack things tighter or spread them out</li>
+            <li>Stack multiple patterns on one canvas — they layer beautifully</li>
+            <li>Use <code>console.log(i)</code> inside a loop to watch it count</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     ADVANCED — ARTIST TOOLKIT
+══════════════════════════════════════════ -->
+<div id="advanced" class="tab-content">
+    <h2 class="section-title">🚀 Advanced — Artist Toolkit</h2>
+    <p class="section-sub">Everything you've learned today, combined into something you'll actually use: a personal promo poster and album art generator.</p>
+
+    <!-- LIVE DEMO -->
+    <div class="demo-area">
+        <div class="demo-title">🎯 What You're Building — Try It First!</div>
+        <canvas id="posterCanvas" width="800" height="800" style="max-height:480px;"></canvas>
+        <div style="display:flex;flex-direction:column;gap:10px;max-width:480px;margin:16px auto 0;text-align:left;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div>
+                    <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:4px;font-weight:700;">ARTIST / YOUR NAME</label>
+                    <input id="adv-name" type="text" value="My Artist Name"
+                        style="width:100%;padding:9px 12px;border-radius:8px;border:1.5px solid var(--border);font-family:var(--font-sans);font-size:0.92rem;background:var(--card);color:var(--ink);">
+                </div>
+                <div>
+                    <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:4px;font-weight:700;">RELEASE / SUBTITLE</label>
+                    <input id="adv-subtitle" type="text" value="New Release 2025"
+                        style="width:100%;padding:9px 12px;border-radius:8px;border:1.5px solid var(--border);font-family:var(--font-sans);font-size:0.92rem;background:var(--card);color:var(--ink);">
+                </div>
+            </div>
+            <div>
+                <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:6px;font-weight:700;">COLOUR THEME</label>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;" id="adv-themes">
+                    <button class="adv-theme-btn active" data-theme="neon"       style="background:#0d0f14;color:#f093fb;border:2px solid #f093fb;">Neon</button>
+                    <button class="adv-theme-btn"        data-theme="warm"       style="background:#0d0f14;color:#ffd93d;border:2px solid #ffd93d;">Warm</button>
+                    <button class="adv-theme-btn"        data-theme="cool"       style="background:#0d0f14;color:#4d96ff;border:2px solid #4d96ff;">Cool</button>
+                    <button class="adv-theme-btn"        data-theme="earth"      style="background:#0d0f14;color:#6bcb77;border:2px solid #6bcb77;">Earth</button>
+                    <button class="adv-theme-btn"        data-theme="mono"       style="background:#0d0f14;color:#e0e0e0;border:2px solid #e0e0e0;">Mono</button>
+                </div>
+            </div>
+            <div>
+                <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:6px;font-weight:700;">BACKGROUND STYLE</label>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;" id="adv-styles">
+                    <button class="adv-style-btn active" data-style="circles">Circles</button>
+                    <button class="adv-style-btn"        data-style="spiral">Spiral</button>
+                    <button class="adv-style-btn"        data-style="waves">Waves</button>
+                    <button class="adv-style-btn"        data-style="starburst">Starburst</button>
+                    <button class="adv-style-btn"        data-style="combo">Combo</button>
+                </div>
+            </div>
+        </div>
+        <div class="btn-row" style="margin-top:14px;">
+            <button class="btn btn-primary" onclick="advGenerate()">🎲 Generate Poster</button>
+            <button class="btn btn-secondary btn-sm" onclick="advDownload()">💾 Download (PNG)</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:10px;">Type your name, pick a theme, hit Generate. Every click creates a unique variation.</p>
+    </div>
+
+    <!-- WHY THIS MATTERS -->
+    <div class="concept-box">
+        <h3>🎨 Why This Is Useful For You As An Artist</h3>
+        <p>You're going to need dozens — maybe hundreds — of unique promo images. Social media headers, album art, event flyers, SoundCloud thumbnails. Hiring a designer for each one is expensive. Using the same static image is boring.</p>
+        <p style="margin-bottom:0;">With 60 lines of JavaScript, you can generate a <strong>unique, professional-looking visual every single time</strong> — personalised with your name, in your colours. Change one number and the entire aesthetic shifts. This is how real artists and labels use code.</p>
+    </div>
+
+    <h3>🎯 What You'll Learn in This Tab</h3>
+    <div class="card-grid">
+        <div class="mini-card">
+            <h4>📝 Text on Canvas</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Draw text at any size, font, and position using <code>ctx.fillText()</code></p>
+        </div>
+        <div class="mini-card">
+            <h4>🎨 Colour Themes</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Store palettes in arrays and switch between them based on user input</p>
+        </div>
+        <div class="mini-card">
+            <h4>⌨️ Input Elements</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Read text from an <code>&lt;input&gt;</code> in real time with <code>element.value</code></p>
+        </div>
+        <div class="mini-card">
+            <h4>💾 High-Res Export</h4>
+            <p style="font-size:0.85rem;color:var(--muted);">Scale the canvas to 2× for crisp downloads on any screen</p>
+        </div>
+    </div>
+
+    <!-- ── BEFORE YOU START ── -->
+    <div class="concept-box" style="margin-top:28px;">
+        <h3>📁 Before You Start — Create Your File</h3>
+        <p>Create a new file called <strong>poster-generator.html</strong>. This builds on everything from Session 2 — loops, randomness, arrays, and patterns — but now it actually <em>does something</em> for you as an artist.</p>
+    </div>
+
+    <!-- ══ PHASE 1: HTML ══ -->
+    <div style="margin:32px 0 8px;">
+        <span class="phase-html"><span style="font-size:1.2rem;">🧱</span><strong>PHASE 1 — HTML: The Controls</strong></span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">We need a canvas to draw on, two text inputs (name + subtitle), and buttons for theme, style, and download.</p>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Start with the HTML skeleton</h4>
+            <p>This is the same boilerplate as always — copy it as-is:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">poster-generator.html</span>
+                <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Poster Generator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- Content goes here --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Add the heading, canvas, and text inputs</h4>
+            <p>Replace <code>&lt;!-- Content goes here --&gt;</code> with the following. The <code>&lt;input&gt;</code> elements let users type their name and subtitle — JavaScript will read these later with <code>.value</code>.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;body&gt;</span>
+                <pre>&lt;h1&gt;🎨 Poster Generator&lt;/h1&gt;
+
+&lt;canvas id="poster" width="800" height="800"&gt;&lt;/canvas&gt;
+
+&lt;div id="controls"&gt;
+
+    &lt;!-- Text inputs ──────────────────── --&gt;
+    &lt;div class="row"&gt;
+        &lt;input id="artistName" type="text"
+               placeholder="Your Name / Artist Name"
+               value="My Artist Name"&gt;
+
+        &lt;input id="subtitle" type="text"
+               placeholder="Release Title or Subtitle"
+               value="New Release 2025"&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Colour theme buttons ─────────── --&gt;
+    &lt;p class="label"&gt;Colour Theme&lt;/p&gt;
+    &lt;div id="themeRow"&gt;
+        &lt;button class="theme active" data-theme="neon"&gt;Neon&lt;/button&gt;
+        &lt;button class="theme"        data-theme="warm"&gt;Warm&lt;/button&gt;
+        &lt;button class="theme"        data-theme="cool"&gt;Cool&lt;/button&gt;
+        &lt;button class="theme"        data-theme="earth"&gt;Earth&lt;/button&gt;
+        &lt;button class="theme"        data-theme="mono"&gt;Mono&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Background style buttons ────── --&gt;
+    &lt;p class="label"&gt;Background Style&lt;/p&gt;
+    &lt;div id="styleRow"&gt;
+        &lt;button class="style active" data-style="circles"&gt;Circles&lt;/button&gt;
+        &lt;button class="style"        data-style="spiral"&gt;Spiral&lt;/button&gt;
+        &lt;button class="style"        data-style="waves"&gt;Waves&lt;/button&gt;
+        &lt;button class="style"        data-style="starburst"&gt;Starburst&lt;/button&gt;
+        &lt;button class="style"        data-style="combo"&gt;Combo&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Action buttons ───────────────── --&gt;
+    &lt;div class="actions"&gt;
+        &lt;button id="generateBtn"&gt;🎲 Generate&lt;/button&gt;
+        &lt;button id="downloadBtn"&gt;💾 Download PNG&lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. You'll see the text inputs and buttons, but no styling yet.</p>
+        </div>
+    </div>
+
+    <div class="checkpoint" style="margin:20px 0;">
+        <h4>💡 New HTML Concept — <code>&lt;input&gt;</code> elements</h4>
+        <p>An <code>&lt;input type="text"&gt;</code> creates a text box the user can type into. The <code>value</code> attribute sets the default text. In JavaScript, you read whatever the user has typed with <code>document.getElementById('artistName').value</code>. The <code>placeholder</code> is the grey hint text that disappears when typing starts.</p>
+        <p style="margin-bottom:0;">The <code>data-theme</code> and <code>data-style</code> attributes on the buttons are <strong>custom data attributes</strong> — a way to attach extra information to any HTML element that JavaScript can then read.</p>
+    </div>
+
+    <!-- ══ PHASE 2: CSS ══ -->
+    <div style="margin:32px 0 8px;">
+        <span class="phase-css"><span style="font-size:1.2rem;">🎨</span><strong>PHASE 2 — CSS: The Layout</strong></span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">Style the inputs, buttons, and layout so it looks professional.</p>
+
+    <div class="step-list">
+        <div class="step">
+            <h4>Add a <code>&lt;style&gt;</code> tag — body and canvas</h4>
+            <p>Inside <code>&lt;head&gt;</code>, add a style tag with these rules. The canvas becomes square — perfect for album art and Instagram posts.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;head&gt;</span>
+                <pre>&lt;style&gt;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #0d0f14;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 24px 16px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+}
+
+#poster {
+    background: #111;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto 24px;
+    max-width: 100%;        /* shrinks on mobile */
+    max-height: 80vw;       /* stays square-ish */
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. You should now see a dark square canvas centred on the page.</p>
+        </div>
+
+        <div class="step">
+            <h4>Style the controls panel</h4>
+            <p>Add this inside the same <code>&lt;style&gt;</code> tag, after what you just wrote:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">continuing inside &lt;style&gt;</span>
+                <pre>#controls {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* The two text inputs in a row */
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    border: 1.5px solid #333;
+    background: #1a1a2e;
+    color: white;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+    border-color: #f093fb;      /* highlight when typing */
+}
+
+/* Section label */
+.label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #888;
+    text-align: left;
+    margin-bottom: -8px;        /* pull the buttons up slightly */
+}
+
+/* Button rows */
+#themeRow, #styleRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.theme, .style {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1.5px solid #444;
+    background: transparent;
+    color: #aaa;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.theme:hover, .style:hover  { border-color: #f093fb; color: white; }
+.theme.active, .style.active { background: #f093fb; border-color: #f093fb; color: #0d0f14; }
+
+/* Main action buttons */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+#generateBtn {
+    flex: 1;
+    padding: 13px;
+    font-size: 1rem;
+    font-weight: 700;
+    background: #f093fb;
+    color: #0d0f14;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+}
+#generateBtn:hover { filter: brightness(1.12); transform: translateY(-2px); }
+
+#downloadBtn {
+    padding: 13px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: transparent;
+    color: white;
+    border: 1.5px solid #444;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+#downloadBtn:hover { border-color: #f093fb; }
+
+&lt;/style&gt;</pre>
+            </div>
+            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. The controls now look polished. Clicking buttons doesn't work yet — that's Phase 3.</p>
+        </div>
+    </div>
+
+    <!-- ══ PHASE 3: JAVASCRIPT ══ -->
+    <div style="margin:32px 0 8px;">
+        <span class="phase-js"><span style="font-size:1.2rem;">⚡</span><strong>PHASE 3 — JavaScript: Making It Work</strong></span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">We'll write five functions, then wire them together. Each function has one clear job.</p>
+
+    <div class="step-list">
+
+        <div class="step">
+            <h4>Add a <code>&lt;script&gt;</code> tag and set up the variables</h4>
+            <p>Just before <code>&lt;/body&gt;</code>, add a script tag with these starting variables. We grab the canvas once at the top so we don't have to keep looking it up.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">just before &lt;/body&gt;</span>
+                <pre>&lt;script&gt;
+
+<span class="cmt">// ── Canvas setup ──────────────────────────────────</span>
+<span class="kw">const</span> <span class="var">canvas</span> = document.<span class="fn">getElementById</span>(<span class="str">'poster'</span>);
+<span class="kw">const</span> <span class="var">ctx</span>    = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);
+
+<span class="cmt">// ── State ─────────────────────────────────────────
+// These store the user's current selections.
+// We read them inside generate() when the button is clicked.</span>
+<span class="kw">let</span> <span class="var">currentTheme</span> = <span class="str">'neon'</span>;
+<span class="kw">let</span> <span class="var">currentStyle</span> = <span class="str">'circles'</span>;
+
+<span class="cmt">// ── Colour themes ─────────────────────────────────
+// Each theme is an array of hex colours.
+// We use arrays here exactly as we learned in the Arrays tab.</span>
+<span class="kw">const</span> <span class="var">themes</span> = {
+    neon:  [<span class="str">'#f093fb'</span>, <span class="str">'#c77dff'</span>, <span class="str">'#4cc9f0'</span>, <span class="str">'#f5576c'</span>, <span class="str">'#ffd93d'</span>],
+    warm:  [<span class="str">'#ffd93d'</span>, <span class="str">'#ff9a3c'</span>, <span class="str">'#f5576c'</span>, <span class="str">'#ff6b6b'</span>, <span class="str">'#ffa07a'</span>],
+    cool:  [<span class="str">'#4d96ff'</span>, <span class="str">'#4cc9f0'</span>, <span class="str">'#06d6a0'</span>, <span class="str">'#118ab2'</span>, <span class="str">'#90e0ef'</span>],
+    earth: [<span class="str">'#6bcb77'</span>, <span class="str">'#4d9e6a'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#8b9d6a'</span>, <span class="str">'#c5e8b0'</span>],
+    mono:  [<span class="str">'#ffffff'</span>, <span class="str">'#d0d0d0'</span>, <span class="str">'#a0a0a0'</span>, <span class="str">'#606060'</span>, <span class="str">'#303030'</span>]
+};
+
+<span class="cmt">// ── Helper: random number in a range ─────────────</span>
+<span class="kw">function</span> <span class="fn">rand</span>(min, max) {
+    <span class="kw">return</span> Math.<span class="fn">random</span>() * (max - min) + min;
+}
+
+<span class="cmt">// ── Helper: random colour from the active palette ─</span>
+<span class="kw">function</span> <span class="fn">pickColor</span>() {
+    <span class="kw">const</span> <span class="var">palette</span> = themes[<span class="var">currentTheme</span>];
+    <span class="kw">return</span> <span class="var">palette</span>[Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="var">palette</span>.length)];
+}</pre>
+            </div>
+            <div class="analogy" style="margin-top:10px;">
+                <h4>🔑 Concept — <code>const</code> vs <code>let</code></h4>
+                <p><code>const</code> is for things that never get reassigned — the canvas, the ctx, the themes object. <code>let</code> is for things that change — <code>currentTheme</code> changes when the user clicks a different theme button. Always use <code>const</code> unless you know it needs to change.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write the background drawing functions</h4>
+            <p>These are <strong>the exact same patterns</strong> from the Patterns tab — just organised as named functions so we can call them by name. Add all of these inside your script tag:</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="cmt">// ── 1. Scattered circles ──────────────────────────
+// Uses loops and randomness (from Loops + Randomness tabs)</span>
+<span class="kw">function</span> <span class="fn">drawCircles</span>() {
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="num">120</span>; <span class="var">i</span>++) {
+        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
+        <span class="var">ctx</span>.<span class="fn">arc</span>(<span class="fn">rand</span>(<span class="num">0</span>, canvas.width), <span class="fn">rand</span>(<span class="num">0</span>, canvas.height),
+                  <span class="fn">rand</span>(<span class="num">4</span>, <span class="num">80</span>), <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+        <span class="var">ctx</span>.fillStyle   = <span class="fn">pickColor</span>();
+        <span class="var">ctx</span>.globalAlpha = <span class="fn">rand</span>(<span class="num">0.12</span>, <span class="num">0.6</span>);
+        <span class="var">ctx</span>.<span class="fn">fill</span>();
+    }
+    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
+}
+
+<span class="cmt">// ── 2. Spiral ─────────────────────────────────────
+// From the Patterns tab: cos/sin × growing angle</span>
+<span class="kw">function</span> <span class="fn">drawSpiral</span>() {
+    <span class="kw">const</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>, <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">a</span> = <span class="num">0</span>; <span class="var">a</span> &lt; Math.PI * <span class="num">16</span>; <span class="var">a</span> += <span class="num">0.1</span>) {
+        <span class="kw">const</span> <span class="var">d</span> = <span class="var">a</span> * <span class="num">20</span>;  <span class="cmt">// distance grows with angle</span>
+        <span class="kw">const</span> <span class="var">x</span> = <span class="var">cx</span> + Math.<span class="fn">cos</span>(<span class="var">a</span>) * <span class="var">d</span>;
+        <span class="kw">const</span> <span class="var">y</span> = <span class="var">cy</span> + Math.<span class="fn">sin</span>(<span class="var">a</span>) * <span class="var">d</span>;
+        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
+        <span class="var">ctx</span>.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">3.5</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+        <span class="var">ctx</span>.fillStyle   = <span class="fn">pickColor</span>();
+        <span class="var">ctx</span>.globalAlpha = <span class="num">0.7</span>;
+        <span class="var">ctx</span>.<span class="fn">fill</span>();
+    }
+    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
+}
+
+<span class="cmt">// ── 3. Waves ──────────────────────────────────────
+// Math.sin() creates the wavy shape (from Patterns tab)</span>
+<span class="kw">function</span> <span class="fn">drawWaves</span>() {
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">yOff</span> = <span class="num">20</span>; <span class="var">yOff</span> &lt; canvas.height; <span class="var">yOff</span> += <span class="num">36</span>) {
+        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
+        <span class="kw">for</span> (<span class="kw">let</span> <span class="var">x</span> = <span class="num">0</span>; <span class="var">x</span> &lt;= canvas.width; <span class="var">x</span> += <span class="num">4</span>) {
+            <span class="kw">const</span> <span class="var">y</span> = <span class="var">yOff</span> + Math.<span class="fn">sin</span>(<span class="var">x</span> * <span class="num">0.018</span> + <span class="var">yOff</span> * <span class="num">0.04</span>) * <span class="num">40</span>;
+            <span class="var">x</span> === <span class="num">0</span> ? <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">x</span>, <span class="var">y</span>) : <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">x</span>, <span class="var">y</span>);
+        }
+        <span class="var">ctx</span>.strokeStyle = <span class="fn">pickColor</span>();
+        <span class="var">ctx</span>.globalAlpha = <span class="fn">rand</span>(<span class="num">0.25</span>, <span class="num">0.65</span>);
+        <span class="var">ctx</span>.lineWidth   = <span class="fn">rand</span>(<span class="num">1</span>, <span class="num">4</span>);
+        <span class="var">ctx</span>.<span class="fn">stroke</span>();
+    }
+    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
+}
+
+<span class="cmt">// ── 4. Starburst ──────────────────────────────────
+// Lines radiating from centre at every angle</span>
+<span class="kw">function</span> <span class="fn">drawStarburst</span>() {
+    <span class="kw">const</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>, <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
+    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">a</span> = <span class="num">0</span>; <span class="var">a</span> &lt; Math.PI * <span class="num">2</span>; <span class="var">a</span> += <span class="num">0.08</span>) {
+        <span class="kw">const</span> <span class="var">len</span> = <span class="fn">rand</span>(<span class="num">200</span>, canvas.width * <span class="num">0.65</span>);
+        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
+        <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">cx</span>, <span class="var">cy</span>);
+        <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">cx</span> + Math.<span class="fn">cos</span>(<span class="var">a</span>) * <span class="var">len</span>, <span class="var">cy</span> + Math.<span class="fn">sin</span>(<span class="var">a</span>) * <span class="var">len</span>);
+        <span class="var">ctx</span>.strokeStyle = <span class="fn">pickColor</span>();
+        <span class="var">ctx</span>.globalAlpha = <span class="fn">rand</span>(<span class="num">0.15</span>, <span class="num">0.5</span>);
+        <span class="var">ctx</span>.lineWidth   = <span class="fn">rand</span>(<span class="num">0.5</span>, <span class="num">3</span>);
+        <span class="var">ctx</span>.<span class="fn">stroke</span>();
+    }
+    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
+}
+
+<span class="cmt">// ── 5. Combo — all patterns layered ──────────────</span>
+<span class="kw">function</span> <span class="fn">drawCombo</span>() {
+    <span class="fn">drawCircles</span>();
+    <span class="fn">drawWaves</span>();
+    <span class="fn">drawSpiral</span>();
+}</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write the text overlay function</h4>
+            <p>This is new. <code>ctx.fillText()</code> draws text on the canvas, just like drawing a shape. We set the font, size, and position, then call fillText with the string we want to draw. The <code>textAlign = 'center'</code> setting makes it easy to centre text horizontally.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="cmt">// ── Draw the artist name and subtitle ─────────────</span>
+<span class="kw">function</span> <span class="fn">drawText</span>(name, subtitle) {
+
+    <span class="kw">const</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>;    <span class="cmt">// horizontal centre</span>
+    <span class="kw">const</span> <span class="var">cy</span> = canvas.height / <span class="num">2</span>;   <span class="cmt">// vertical centre</span>
+    <span class="kw">const</span> <span class="var">accent</span> = themes[<span class="var">currentTheme</span>][<span class="num">0</span>];  <span class="cmt">// first colour in the palette</span>
+
+    <span class="var">ctx</span>.textAlign    = <span class="str">'center'</span>;
+    <span class="var">ctx</span>.textBaseline = <span class="str">'middle'</span>;
+
+    <span class="cmt">// Dark semi-transparent backing rectangle
+    // This makes the text readable over any background</span>
+    <span class="var">ctx</span>.fillStyle   = <span class="str">'rgba(0, 0, 0, 0.55)'</span>;
+    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
+    <span class="var">ctx</span>.<span class="fn">fillRect</span>(<span class="num">0</span>, <span class="var">cy</span> - <span class="num">90</span>, canvas.width, <span class="num">180</span>);
+
+    <span class="cmt">// Thin accent line above the name</span>
+    <span class="var">ctx</span>.strokeStyle = <span class="var">accent</span>;
+    <span class="var">ctx</span>.lineWidth   = <span class="num">3</span>;
+    <span class="var">ctx</span>.<span class="fn">beginPath</span>();
+    <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">cx</span> - <span class="num">140</span>, <span class="var">cy</span> - <span class="num">66</span>);
+    <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">cx</span> + <span class="num">140</span>, <span class="var">cy</span> - <span class="num">66</span>);
+    <span class="var">ctx</span>.<span class="fn">stroke</span>();
+
+    <span class="cmt">// Artist name — large and bold</span>
+    <span class="var">ctx</span>.font      = <span class="str">'bold 78px Arial'</span>;
+    <span class="var">ctx</span>.fillStyle = <span class="str">'white'</span>;
+    <span class="var">ctx</span>.<span class="fn">fillText</span>(<span class="var">name</span>, <span class="var">cx</span>, <span class="var">cy</span> - <span class="num">10</span>);
+
+    <span class="cmt">// Subtitle — smaller, in the accent colour</span>
+    <span class="var">ctx</span>.font      = <span class="str">'28px Arial'</span>;
+    <span class="var">ctx</span>.fillStyle = <span class="var">accent</span>;
+    <span class="var">ctx</span>.letterSpacing = <span class="str">'0.15em'</span>;
+    <span class="var">ctx</span>.<span class="fn">fillText</span>(<span class="var">subtitle</span>.toUpperCase(), <span class="var">cx</span>, <span class="var">cy</span> + <span class="num">46</span>);
+
+    <span class="cmt">// Thin accent line below the subtitle</span>
+    <span class="var">ctx</span>.strokeStyle = <span class="var">accent</span>;
+    <span class="var">ctx</span>.<span class="fn">beginPath</span>();
+    <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">cx</span> - <span class="num">140</span>, <span class="var">cy</span> + <span class="num">74</span>);
+    <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">cx</span> + <span class="num">140</span>, <span class="var">cy</span> + <span class="num">74</span>);
+    <span class="var">ctx</span>.<span class="fn">stroke</span>();
+
+    ctx.letterSpacing = <span class="str">'0'</span>; <span class="cmt">// reset</span>
+}</pre>
+            </div>
+            <div class="why-box" style="margin-top:10px;">
+                <h4>💜 Why a backing rectangle?</h4>
+                <p>Without it, light text on a light background becomes invisible. The dark semi-transparent rectangle (<code>rgba(0,0,0,0.55)</code>) creates a band that darkens the area behind the text just enough to guarantee legibility — regardless of what colours or patterns are underneath. This is a standard technique in poster design.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write the main <code>generate()</code> function</h4>
+            <p>This is the function called when the Generate button is clicked. It reads the text inputs, draws the background in the chosen style, then lays the text on top. The order matters — background first, text second.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="kw">function</span> <span class="fn">generate</span>() {
+
+    <span class="cmt">// Step 1: Read what the user typed</span>
+    <span class="kw">const</span> <span class="var">name</span>     = document.<span class="fn">getElementById</span>(<span class="str">'artistName'</span>).value || <span class="str">'My Name'</span>;
+    <span class="kw">const</span> <span class="var">subtitle</span> = document.<span class="fn">getElementById</span>(<span class="str">'subtitle'</span>).value   || <span class="str">'Release 2025'</span>;
+
+    <span class="cmt">// Step 2: Fill the background with a dark colour
+    // hsl(hue, saturation, lightness) — low saturation = subtle
+    // Math.random() * 360 gives us a different hue every time</span>
+    <span class="var">ctx</span>.fillStyle = <span class="str">`hsl(${Math.random() * 360}, 18%, 8%)`</span>;
+    <span class="var">ctx</span>.<span class="fn">fillRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);
+
+    <span class="cmt">// Step 3: Draw the chosen background pattern
+    // currentStyle is set when the user clicks a style button</span>
+    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'circles'</span>)   <span class="fn">drawCircles</span>();
+    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'spiral'</span>)    <span class="fn">drawSpiral</span>();
+    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'waves'</span>)     <span class="fn">drawWaves</span>();
+    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'starburst'</span>) <span class="fn">drawStarburst</span>();
+    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'combo'</span>)     <span class="fn">drawCombo</span>();
+
+    <span class="cmt">// Step 4: Draw the text on top of the background</span>
+    <span class="fn">drawText</span>(<span class="var">name</span>, <span class="var">subtitle</span>);
+}</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write the download function</h4>
+            <p>This creates a download link invisibly, points it at the canvas image data, and clicks it programmatically. The user gets a <code>.png</code> file, perfect for uploading to Instagram, SoundCloud, or anywhere else.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="kw">function</span> <span class="fn">downloadPoster</span>() {
+    <span class="kw">const</span> <span class="var">link</span>      = document.<span class="fn">createElement</span>(<span class="str">'a'</span>);
+    <span class="var">link</span>.download   = <span class="str">`poster-${Date.now()}.png`</span>;  <span class="cmt">// unique filename</span>
+    <span class="var">link</span>.href       = canvas.<span class="fn">toDataURL</span>(<span class="str">'image/png'</span>);
+    <span class="var">link</span>.<span class="fn">click</span>();
+}</pre>
+            </div>
+            <div class="analogy" style="margin-top:10px;">
+                <h4>🔑 What is <code>toDataURL()</code>?</h4>
+                <p><code>canvas.toDataURL()</code> converts every pixel on the canvas into a long text string starting with <code>data:image/png;base64,...</code>. A browser can use that string exactly like a real image URL — so we set it as the <code>href</code> of a download link and click it. No server, no upload — everything happens locally in the browser.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Wire up all the buttons</h4>
+            <p>This is the "glue" code. We find every button, listen for clicks, update state, update the active class, and call generate. This pattern — listening for events and updating state — is the foundation of all interactive web apps.</p>
+            <div class="code-block" style="margin-top:10px;">
+                <span class="code-tag">inside &lt;script&gt;</span>
+                <pre><span class="cmt">// ── Wire theme buttons ────────────────────────────</span>
+document.<span class="fn">getElementById</span>(<span class="str">'themeRow'</span>)
+    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(<span class="var">e</span>) {
+        <span class="kw">if</span> (!<span class="var">e</span>.target.dataset.theme) <span class="kw">return</span>;  <span class="cmt">// clicked empty space</span>
+
+        <span class="cmt">// Update state</span>
+        <span class="var">currentTheme</span> = <span class="var">e</span>.target.dataset.theme;
+
+        <span class="cmt">// Move the .active class to the clicked button</span>
+        document.<span class="fn">querySelectorAll</span>(<span class="str">'.theme'</span>)
+            .<span class="fn">forEach</span>(<span class="var">b</span> => <span class="var">b</span>.classList.<span class="fn">remove</span>(<span class="str">'active'</span>));
+        <span class="var">e</span>.target.classList.<span class="fn">add</span>(<span class="str">'active'</span>);
+
+        <span class="fn">generate</span>();  <span class="cmt">// regenerate immediately</span>
+    });
+
+<span class="cmt">// ── Wire style buttons ────────────────────────────</span>
+document.<span class="fn">getElementById</span>(<span class="str">'styleRow'</span>)
+    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(<span class="var">e</span>) {
+        <span class="kw">if</span> (!<span class="var">e</span>.target.dataset.style) <span class="kw">return</span>;
+
+        <span class="var">currentStyle</span> = <span class="var">e</span>.target.dataset.style;
+
+        document.<span class="fn">querySelectorAll</span>(<span class="str">'.style'</span>)
+            .<span class="fn">forEach</span>(<span class="var">b</span> => <span class="var">b</span>.classList.<span class="fn">remove</span>(<span class="str">'active'</span>));
+        <span class="var">e</span>.target.classList.<span class="fn">add</span>(<span class="str">'active'</span>);
+
+        <span class="fn">generate</span>();
+    });
+
+<span class="cmt">// ── Wire Generate button ──────────────────────────</span>
+document.<span class="fn">getElementById</span>(<span class="str">'generateBtn'</span>)
+    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="fn">generate</span>);
+
+<span class="cmt">// ── Wire Download button ──────────────────────────</span>
+document.<span class="fn">getElementById</span>(<span class="str">'downloadBtn'</span>)
+    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="fn">downloadPoster</span>);
+
+<span class="cmt">// ── Generate one on page load ─────────────────────</span>
+<span class="fn">generate</span>();
+
+&lt;/script&gt;</pre>
+            </div>
+            <div class="tip-box" style="margin-top:10px;">
+                <h4>💡 Event delegation — one listener for many buttons</h4>
+                <p>Instead of adding a click listener to each button individually, we add <em>one</em> listener to the <em>parent</em> <code>div</code>. When any button inside is clicked, the event "bubbles up" to the parent. We check <code>e.target.dataset.theme</code> to know which button was clicked. This technique is called <strong>event delegation</strong> — it's cleaner and works even if buttons are added or removed later.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULL FILE CHECKPOINT -->
+    <div class="checkpoint" style="margin:24px 0;">
+        <h4>✅ End of Phase 3 — Your complete file:</h4>
+        <p style="font-size:0.88rem;color:#374151;margin-bottom:10px;">Here is everything together. Compare yours to this if something isn't working.</p>
+        <div class="code-block">
+            <span class="code-tag">poster-generator.html — full file</span>
+            <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Poster Generator&lt;/title&gt;
+    &lt;style&gt;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0d0f14; color: white;
+               font-family: Arial, sans-serif;
+               text-align: center; padding: 24px 16px; }
+        h1 { font-size: 1.8rem; margin-bottom: 20px; }
+        #poster { background: #111; border-radius: 12px;
+                  display: block; margin: 0 auto 24px;
+                  max-width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
+        #controls { max-width: 540px; margin: 0 auto;
+                    display: flex; flex-direction: column; gap: 14px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        input[type="text"] { width: 100%; padding: 10px 14px; font-size: 0.95rem;
+            border-radius: 8px; border: 1.5px solid #333;
+            background: #1a1a2e; color: white; outline: none; }
+        input[type="text"]:focus { border-color: #f093fb; }
+        .label { font-size: 0.72rem; font-weight: 700;
+                 letter-spacing: 0.12em; color: #888; text-align: left; }
+        #themeRow, #styleRow { display: flex; flex-wrap: wrap; gap: 6px; }
+        .theme, .style { padding: 7px 14px; border-radius: 6px;
+            border: 1.5px solid #444; background: transparent;
+            color: #aaa; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+        .theme.active, .style.active { background: #f093fb;
+            border-color: #f093fb; color: #0d0f14; }
+        .actions { display: flex; gap: 10px; }
+        #generateBtn { flex: 1; padding: 13px; font-size: 1rem; font-weight: 700;
+            background: #f093fb; color: #0d0f14; border: none;
+            border-radius: 8px; cursor: pointer; }
+        #downloadBtn { padding: 13px 20px; font-size: 0.9rem; font-weight: 700;
+            background: transparent; color: white;
+            border: 1.5px solid #444; border-radius: 8px; cursor: pointer; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;🎨 Poster Generator&lt;/h1&gt;
+    &lt;canvas id="poster" width="800" height="800"&gt;&lt;/canvas&gt;
+    &lt;div id="controls"&gt;
+        &lt;div class="row"&gt;
+            &lt;input id="artistName" type="text" value="My Artist Name"&gt;
+            &lt;input id="subtitle" type="text" value="New Release 2025"&gt;
+        &lt;/div&gt;
+        &lt;p class="label"&gt;Colour Theme&lt;/p&gt;
+        &lt;div id="themeRow"&gt;
+            &lt;button class="theme active" data-theme="neon"&gt;Neon&lt;/button&gt;
+            &lt;button class="theme" data-theme="warm"&gt;Warm&lt;/button&gt;
+            &lt;button class="theme" data-theme="cool"&gt;Cool&lt;/button&gt;
+            &lt;button class="theme" data-theme="earth"&gt;Earth&lt;/button&gt;
+            &lt;button class="theme" data-theme="mono"&gt;Mono&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;p class="label"&gt;Background Style&lt;/p&gt;
+        &lt;div id="styleRow"&gt;
+            &lt;button class="style active" data-style="circles"&gt;Circles&lt;/button&gt;
+            &lt;button class="style" data-style="spiral"&gt;Spiral&lt;/button&gt;
+            &lt;button class="style" data-style="waves"&gt;Waves&lt;/button&gt;
+            &lt;button class="style" data-style="starburst"&gt;Starburst&lt;/button&gt;
+            &lt;button class="style" data-style="combo"&gt;Combo&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="actions"&gt;
+            &lt;button id="generateBtn"&gt;🎲 Generate&lt;/button&gt;
+            &lt;button id="downloadBtn"&gt;💾 Download PNG&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        const canvas = document.getElementById('poster');
+        const ctx    = canvas.getContext('2d');
+        let currentTheme = 'neon', currentStyle = 'circles';
+
+        const themes = {
+            neon:  ['#f093fb','#c77dff','#4cc9f0','#f5576c','#ffd93d'],
+            warm:  ['#ffd93d','#ff9a3c','#f5576c','#ff6b6b','#ffa07a'],
+            cool:  ['#4d96ff','#4cc9f0','#06d6a0','#118ab2','#90e0ef'],
+            earth: ['#6bcb77','#4d9e6a','#ffd93d','#8b9d6a','#c5e8b0'],
+            mono:  ['#ffffff','#d0d0d0','#a0a0a0','#606060','#303030']
+        };
+
+        function rand(min, max) { return Math.random() * (max - min) + min; }
+        function pickColor() {
+            const p = themes[currentTheme];
+            return p[Math.floor(Math.random() * p.length)];
+        }
+
+        function drawCircles() {
+            for (let i = 0; i &lt; 120; i++) {
+                ctx.beginPath();
+                ctx.arc(rand(0, canvas.width), rand(0, canvas.height),
+                        rand(4, 80), 0, Math.PI * 2);
+                ctx.fillStyle = pickColor();
+                ctx.globalAlpha = rand(0.12, 0.6);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+        function drawSpiral() {
+            const cx = canvas.width/2, cy = canvas.height/2;
+            for (let a = 0; a &lt; Math.PI*16; a += 0.1) {
+                const d = a*20, x = cx+Math.cos(a)*d, y = cy+Math.sin(a)*d;
+                ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI*2);
+                ctx.fillStyle = pickColor(); ctx.globalAlpha = 0.7;
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+        }
+        function drawWaves() {
+            for (let yOff = 20; yOff &lt; canvas.height; yOff += 36) {
+                ctx.beginPath();
+                for (let x = 0; x &lt;= canvas.width; x += 4) {
+                    const y = yOff + Math.sin(x*0.018 + yOff*0.04)*40;
+                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = pickColor();
+                ctx.globalAlpha = rand(0.25, 0.65);
+                ctx.lineWidth = rand(1, 4);
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+        function drawStarburst() {
+            const cx = canvas.width/2, cy = canvas.height/2;
+            for (let a = 0; a &lt; Math.PI*2; a += 0.08) {
+                const len = rand(200, canvas.width*0.65);
+                ctx.beginPath(); ctx.moveTo(cx, cy);
+                ctx.lineTo(cx + Math.cos(a)*len, cy + Math.sin(a)*len);
+                ctx.strokeStyle = pickColor();
+                ctx.globalAlpha = rand(0.15, 0.5);
+                ctx.lineWidth = rand(0.5, 3);
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+        function drawCombo() { drawCircles(); drawWaves(); drawSpiral(); }
+
+        function drawText(name, subtitle) {
+            const cx = canvas.width/2, cy = canvas.height/2;
+            const accent = themes[currentTheme][0];
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'rgba(0,0,0,0.55)';
+            ctx.fillRect(0, cy-90, canvas.width, 180);
+            ctx.strokeStyle = accent; ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.moveTo(cx-140, cy-66); ctx.lineTo(cx+140, cy-66); ctx.stroke();
+            ctx.font = 'bold 78px Arial'; ctx.fillStyle = 'white';
+            ctx.fillText(name, cx, cy-10);
+            ctx.font = '28px Arial'; ctx.fillStyle = accent;
+            ctx.fillText(subtitle.toUpperCase(), cx, cy+46);
+            ctx.beginPath(); ctx.moveTo(cx-140, cy+74); ctx.lineTo(cx+140, cy+74); ctx.stroke();
+        }
+
+        function generate() {
+            const name     = document.getElementById('artistName').value || 'My Name';
+            const subtitle = document.getElementById('subtitle').value   || 'Release 2025';
+            ctx.fillStyle  = `hsl(${Math.random()*360}, 18%, 8%)`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            if (currentStyle === 'circles')   drawCircles();
+            if (currentStyle === 'spiral')    drawSpiral();
+            if (currentStyle === 'waves')     drawWaves();
+            if (currentStyle === 'starburst') drawStarburst();
+            if (currentStyle === 'combo')     drawCombo();
+            drawText(name, subtitle);
+        }
+
+        function downloadPoster() {
+            const link    = document.createElement('a');
+            link.download = `poster-${Date.now()}.png`;
+            link.href     = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        document.getElementById('themeRow').addEventListener('click', e => {
+            if (!e.target.dataset.theme) return;
+            currentTheme = e.target.dataset.theme;
+            document.querySelectorAll('.theme').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            generate();
+        });
+        document.getElementById('styleRow').addEventListener('click', e => {
+            if (!e.target.dataset.style) return;
+            currentStyle = e.target.dataset.style;
+            document.querySelectorAll('.style').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            generate();
+        });
+        document.getElementById('generateBtn').addEventListener('click', generate);
+        document.getElementById('downloadBtn').addEventListener('click', downloadPoster);
+
+        generate();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+    </div>
+
+    <!-- WHAT YOU BUILT -->
+    <div class="concept-box">
+        <h3>🎉 What You Just Built — And What You Used</h3>
+        <div class="card-grid" style="margin-top:12px;">
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
+                <strong style="color:var(--accent3);">🧱 HTML</strong>
+                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+                    <li><code>&lt;input type="text"&gt;</code> for user input</li>
+                    <li>Buttons with <code>data-theme</code>, <code>data-style</code></li>
+                    <li>Square canvas for album-art ratio</li>
+                </ul>
+            </div>
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
+                <strong style="color:var(--accent3);">🎨 CSS</strong>
+                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+                    <li>CSS Grid for the input row</li>
+                    <li><code>.active</code> class toggling</li>
+                    <li>Focus states on inputs</li>
+                    <li>Dark theme layout</li>
+                </ul>
+            </div>
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
+                <strong style="color:var(--accent3);">⚡ JavaScript</strong>
+                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
+                    <li>Text on canvas — <code>ctx.fillText()</code></li>
+                    <li>Reading inputs — <code>.value</code></li>
+                    <li>Objects as theme stores</li>
+                    <li>Event delegation</li>
+                    <li>Download — <code>toDataURL()</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHALLENGES -->
+    <h3>🚀 Challenges — Make It Yours</h3>
+    <div class="step-list">
+        <div class="step">
+            <h4>Challenge 1 — Add a third line of text</h4>
+            <p>Add a third <code>&lt;input&gt;</code> for a date or location (e.g. "Berlin · 12 Apr 2025"). Draw it below the subtitle in a smaller size — try <code>ctx.font = '20px Arial'</code> and a muted colour like <code>'rgba(255,255,255,0.45)'</code>.</p>
+        </div>
+        <div class="step">
+            <h4>Challenge 2 — Add a corner watermark</h4>
+            <p>After <code>drawText()</code> completes, add a small logo circle in the bottom-right corner. Draw a filled circle at <code>(canvas.width - 40, canvas.height - 40)</code> with radius 18, then draw a letter inside it with <code>ctx.fillText()</code>. This is how labels brand their releases.</p>
+        </div>
+        <div class="step">
+            <h4>Challenge 3 — Your own colour palette</h4>
+            <p>Add a 6th theme to the <code>themes</code> object — name it after yourself. Pick 5 colours using <a href="https://coolors.co" target="_blank" style="color:var(--accent);">coolors.co</a> and add a matching button in the HTML. Your custom palette, your brand.</p>
+        </div>
+        <div class="step">
+            <h4>Challenge 4 — Scale up to 2× for sharp downloads</h4>
+            <p>Screen pixels are fine, but downloaded images should be crisp on high-density screens. Research <code>canvas.width = 1600; canvas.height = 1600; ctx.scale(2, 2);</code> — doubling the canvas size while scaling up the drawing context produces a 2× resolution image. Try it before calling <code>generate()</code>.</p>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <h4>💡 Something Not Working?</h4>
+        <ul style="padding-left:16px;line-height:2;font-size:0.88rem;">
+            <li>Text not visible? Make sure <code>drawText()</code> is called <strong>after</strong> the background functions, not before</li>
+            <li>Buttons not responding? Open F12 → Console and look for the error message</li>
+            <li>Download gives a blank image? The canvas may be in a <code>tainted</code> state — this can happen with cross-origin images. Keep everything local</li>
+            <li>Text cut off? The canvas is 800×800 — if the name is very long, reduce the font size: <code>'bold 56px Arial'</code></li>
+        </ul>
+    </div>
+
+    <!-- CONNECTIONS BACK TO THE SESSION -->
+    <div class="card" style="margin-top:24px;">
+        <h3 style="margin-top:0;">🔗 How This Connects to Everything You Learned Today</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px;text-align:left;">
+            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
+                <strong>🔄 Loops tab</strong>
+                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;">Every background style uses <code>for</code> loops — circles, spiral, waves, and starburst all loop through hundreds of shapes.</p>
+            </div>
+            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
+                <strong>🎲 Randomness tab</strong>
+                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;"><code>rand()</code> and <code>Math.random()</code> are called dozens of times per generation — for position, size, colour, and opacity.</p>
+            </div>
+            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
+                <strong>📚 Arrays tab</strong>
+                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;">Every colour theme is an array. <code>pickColor()</code> picks a random item from the current palette — exactly the pattern from the Arrays tab.</p>
+            </div>
+            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
+                <strong>🔶 Patterns tab</strong>
+                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;">The spiral uses <code>cos/sin × angle</code>, the waves use <code>Math.sin()</code>, the starburst uses angles from the centre. All from the Patterns tab.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+    <p style="font-size:1rem;color:white;font-weight:700;margin-bottom:8px;">🎨 Code & Create Workshop</p>
+    <p>Session 2: Generative Art</p>
+    <p style="margin-top:16px;">
+        <a href="../session1/index.html">← Session 1</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="../index.html">Home</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="../session3/index.html">Session 3 →</a>
+    </p>
+    <p style="margin-top:12px;">Every refresh is a new creation. 🌈</p>
+</footer>
+
+
+<script>
+/* ═══════════════════════════════════════════════
+   TAB NAVIGATION
+═══════════════════════════════════════════════ */
+const tabProgress = {
+    intro:10, loops:25, randomness:40, arrays:55, patterns:70, project:88, cheatsheet:100, advanced:100
+};
+
+function openTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(name).classList.add('active');
+    if (btn) btn.classList.add('active');
+    document.getElementById('progressFill').style.width = (tabProgress[name] || 10) + '%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (btn) setTimeout(() => btn.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' }), 50);
+}
+
+/* ═══════════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════════ */
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function getPos(e, canvas) {
+    const r = canvas.getBoundingClientRect();
+    const sx = canvas.width / r.width, sy = canvas.height / r.height;
+    if (e.touches) return { x:(e.touches[0].clientX - r.left)*sx, y:(e.touches[0].clientY - r.top)*sy };
+    return { x:(e.clientX - r.left)*sx, y:(e.clientY - r.top)*sy };
+}
+
+function randN(min, max) { return Math.random() * (max - min) + min; }
+
+/* ═══════════════════════════════════════════════
+   RUNNER HELPER
+═══════════════════════════════════════════════ */
+function execRunner(editorId, outputId, extraVars) {
+    const code = document.getElementById(editorId).value;
+    const out  = document.getElementById(outputId);
+    const logs = [];
+    const origLog = console.log;
+    console.log = (...args) => {
+        logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' '));
+        origLog(...args);
+    };
+    try {
+        const fn = new Function(...Object.keys(extraVars), 'console', code);
+        fn(...Object.values(extraVars), { log: (...a) => logs.push(a.map(x=>typeof x==='object'?JSON.stringify(x):String(x)).join(' ')) });
+        out.className = 'run-output visible';
+        out.innerHTML = logs.length
+            ? logs.map(l => `<div>→ ${escHtml(l)}</div>`).join('')
+            : '<div style="color:var(--muted)">Ran! (no console.log output)</div>';
+    } catch(err) {
+        out.className = 'run-output visible error';
+        out.innerHTML = `<div>❌ ${escHtml(err.message)}</div><div style="color:rgba(255,100,100,0.5);font-size:0.78rem;margin-top:4px;">Check for typos — missing quotes, brackets, or semicolons.</div>`;
+    } finally { console.log = origLog; }
+}
+
+/* ═══════════════════════════════════════════════
+   LOOPS CANVAS
+═══════════════════════════════════════════════ */
+const loopCanvas = document.getElementById('loopCanvas');
+const loopCtx    = loopCanvas.getContext('2d');
+
+function clearLoop() { loopCtx.clearRect(0,0,loopCanvas.width,loopCanvas.height); }
+
+function demoRow() {
+    clearLoop();
+    for (let i = 0; i < 12; i++) {
+        loopCtx.beginPath();
+        loopCtx.arc(i*60+30, 150, 22, 0, Math.PI*2);
+        loopCtx.fillStyle = `hsl(${i*30},70%,60%)`;
+        loopCtx.fill();
+    }
+}
+function demoGrid() {
+    clearLoop();
+    for (let row=0;row<5;row++) for (let col=0;col<12;col++) {
+        loopCtx.beginPath();
+        loopCtx.arc(col*60+30, row*55+30, 20, 0, Math.PI*2);
+        loopCtx.fillStyle = `hsl(${(row+col)*18},65%,62%)`;
+        loopCtx.fill();
+    }
+}
+function demoRainbow() {
+    clearLoop();
+    for (let i=0;i<12;i++) {
+        loopCtx.beginPath();
+        loopCtx.arc(i*60+30, 150, 22, 0, Math.PI*2);
+        loopCtx.fillStyle = `hsl(${i*30},80%,60%)`;
+        loopCtx.globalAlpha = 0.85;
+        loopCtx.fill();
+    }
+    loopCtx.globalAlpha = 1;
+}
+function runLoopCode() {
+    clearLoop();
+    execRunner('loopRunner','loopOut',{ loopCtx, loopCanvas });
+}
+
+/* ═══════════════════════════════════════════════
+   RANDOMNESS CANVAS
+═══════════════════════════════════════════════ */
+const randomCanvas = document.getElementById('randomCanvas');
+const randomCtx    = randomCanvas.getContext('2d');
+
+function clearRandom() { randomCtx.clearRect(0,0,randomCanvas.width,randomCanvas.height); }
+
+function demoRandPos() {
+    clearRandom();
+    for (let i=0;i<60;i++) {
+        randomCtx.beginPath();
+        randomCtx.arc(Math.random()*randomCanvas.width, Math.random()*randomCanvas.height, 18, 0, Math.PI*2);
+        randomCtx.fillStyle = '#f093fb';
+        randomCtx.fill();
+    }
+}
+function demoRandColor() {
+    clearRandom();
+    for (let i=0;i<60;i++) {
+        randomCtx.beginPath();
+        randomCtx.arc(Math.random()*randomCanvas.width, Math.random()*randomCanvas.height, 18, 0, Math.PI*2);
+        randomCtx.fillStyle = `hsl(${Math.random()*360},70%,62%)`;
+        randomCtx.fill();
+    }
+}
+function demoRandSize() {
+    clearRandom();
+    for (let i=0;i<50;i++) {
+        randomCtx.beginPath();
+        randomCtx.arc(Math.random()*randomCanvas.width, Math.random()*randomCanvas.height, randN(5,45), 0, Math.PI*2);
+        randomCtx.fillStyle = '#f5576c';
+        randomCtx.globalAlpha = 0.6;
+        randomCtx.fill();
+    }
+    randomCtx.globalAlpha = 1;
+}
+function demoRandAll() {
+    clearRandom();
+    for (let i=0;i<60;i++) {
+        randomCtx.beginPath();
+        randomCtx.arc(Math.random()*randomCanvas.width, Math.random()*randomCanvas.height, randN(5,45), 0, Math.PI*2);
+        randomCtx.fillStyle = `hsl(${Math.random()*360},70%,60%)`;
+        randomCtx.globalAlpha = randN(0.3,0.9);
+        randomCtx.fill();
+    }
+    randomCtx.globalAlpha = 1;
+}
+function runRandCode() {
+    clearRandom();
+    execRunner('randRunner','randOut',{ randomCtx, randomCanvas });
+}
+function runArrayCode() {
+    clearRandom();
+    execRunner('arrayRunner','arrayOut',{ randomCtx, randomCanvas });
+}
+
+/* ═══════════════════════════════════════════════
+   PATTERNS CANVAS
+═══════════════════════════════════════════════ */
+const patternCanvas = document.getElementById('patternCanvas');
+const patternCtx    = patternCanvas.getContext('2d');
+
+function clearPattern() { patternCtx.clearRect(0,0,patternCanvas.width,patternCanvas.height); }
+
+function demoConcentricCircles() {
+    clearPattern();
+    const cx = patternCanvas.width/2, cy = patternCanvas.height/2;
+    for (let i=1;i<=12;i++) {
+        patternCtx.beginPath();
+        patternCtx.arc(cx, cy, i*14, 0, Math.PI*2);
+        patternCtx.strokeStyle = `hsl(${i*30},72%,55%)`;
+        patternCtx.lineWidth = 3;
+        patternCtx.stroke();
+    }
+}
+function demoSpiral() {
+    clearPattern();
+    const cx=patternCanvas.width/2, cy=patternCanvas.height/2;
+    for (let a=0;a<Math.PI*12;a+=0.12) {
+        const d=a*4.2, x=cx+Math.cos(a)*d, y=cy+Math.sin(a)*d;
+        patternCtx.beginPath();
+        patternCtx.arc(x,y,3.5,0,Math.PI*2);
+        patternCtx.fillStyle = `hsl(${a*20},80%,60%)`;
+        patternCtx.fill();
+    }
+}
+function demoWaves() {
+    clearPattern();
+    for (let yOff=30;yOff<patternCanvas.height;yOff+=28) {
+        patternCtx.beginPath();
+        for (let x=0;x<patternCanvas.width;x+=4) {
+            const y = yOff + Math.sin(x*0.025 + yOff*0.05)*25;
+            x===0 ? patternCtx.moveTo(x,y) : patternCtx.lineTo(x,y);
+        }
+        patternCtx.strokeStyle = `hsl(${yOff*3},70%,58%)`;
+        patternCtx.lineWidth = 2;
+        patternCtx.stroke();
+    }
+}
+function demoStarburst() {
+    clearPattern();
+    const cx=patternCanvas.width/2, cy=patternCanvas.height/2;
+    for (let a=0;a<Math.PI*2;a+=0.18) {
+        patternCtx.beginPath();
+        patternCtx.moveTo(cx,cy);
+        patternCtx.lineTo(cx+Math.cos(a)*160, cy+Math.sin(a)*160);
+        patternCtx.strokeStyle = `hsl(${a*60},75%,55%)`;
+        patternCtx.lineWidth = 1.5;
+        patternCtx.stroke();
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   ART GENERATOR
+═══════════════════════════════════════════════ */
+const artCanvas = document.getElementById('artCanvas');
+const artCtx    = artCanvas.getContext('2d');
+const artPalette = ['#f093fb','#f5576c','#ffd93d','#6bcb77','#4d96ff','#c77dff','#ff9a3c'];
+
+function artRandColor() { return artPalette[Math.floor(Math.random()*artPalette.length)]; }
+
+function generateArt() {
+    artCtx.fillStyle = `hsl(${Math.random()*360},25%,10%)`;
+    artCtx.fillRect(0,0,artCanvas.width,artCanvas.height);
+
+    // Layer 1: scattered shapes
+    for (let i=0;i<90;i++) {
+        const x=randN(0,artCanvas.width), y=randN(0,artCanvas.height), s=randN(5,55);
+        artCtx.beginPath();
+        artCtx.arc(x,y,s,0,Math.PI*2);
+        artCtx.fillStyle   = artRandColor();
+        artCtx.globalAlpha = randN(0.2,0.75);
+        artCtx.fill();
+    }
+    artCtx.globalAlpha = 1;
+
+    // Layer 2: spiral
+    const cx=artCanvas.width/2, cy=artCanvas.height/2, sc=artRandColor();
+    for (let a=0;a<Math.PI*12;a+=0.12) {
+        const d=a*5.5, x=cx+Math.cos(a)*d, y=cy+Math.sin(a)*d;
+        artCtx.beginPath();
+        artCtx.arc(x,y,3,0,Math.PI*2);
+        artCtx.fillStyle = sc;
+        artCtx.fill();
+    }
+
+    // Layer 3: wave lines
+    for (let yOff=20;yOff<artCanvas.height;yOff+=40) {
+        artCtx.beginPath();
+        for (let x=0;x<artCanvas.width;x+=4) {
+            const y=yOff+Math.sin(x*0.025+yOff*0.03)*30;
+            x===0 ? artCtx.moveTo(x,y) : artCtx.lineTo(x,y);
+        }
+        artCtx.strokeStyle = artRandColor();
+        artCtx.globalAlpha = 0.25;
+        artCtx.lineWidth   = 1.5;
+        artCtx.stroke();
+    }
+    artCtx.globalAlpha = 1;
+}
+
+function saveArt() {
+    const link = document.createElement('a');
+    link.download = `art-${Date.now()}.png`;
+    link.href = artCanvas.toDataURL();
+    link.click();
+}
+
+/* ═══════════════════════════════════════════════
+   ADVANCED TAB — POSTER GENERATOR DEMO
+═══════════════════════════════════════════════ */
+(function() {
+    const posterCanvas = document.getElementById('posterCanvas');
+    if (!posterCanvas) return;
+    const pCtx = posterCanvas.getContext('2d');
+
+    const advThemes = {
+        neon:  ['#f093fb','#c77dff','#4cc9f0','#f5576c','#ffd93d'],
+        warm:  ['#ffd93d','#ff9a3c','#f5576c','#ff6b6b','#ffa07a'],
+        cool:  ['#4d96ff','#4cc9f0','#06d6a0','#118ab2','#90e0ef'],
+        earth: ['#6bcb77','#4d9e6a','#ffd93d','#8b9d6a','#c5e8b0'],
+        mono:  ['#ffffff','#d0d0d0','#a0a0a0','#606060','#303030']
+    };
+
+    let advTheme = 'neon', advStyle = 'circles';
+
+    function advRand(a, b) { return Math.random() * (b - a) + a; }
+    function advPick() {
+        const p = advThemes[advTheme];
+        return p[Math.floor(Math.random() * p.length)];
+    }
+
+    function advCircles() {
+        for (let i = 0; i < 120; i++) {
+            pCtx.beginPath();
+            pCtx.arc(advRand(0, 800), advRand(0, 800), advRand(4, 80), 0, Math.PI*2);
+            pCtx.fillStyle = advPick(); pCtx.globalAlpha = advRand(0.12, 0.6); pCtx.fill();
+        }
+        pCtx.globalAlpha = 1;
+    }
+    function advSpiral() {
+        for (let a = 0; a < Math.PI*16; a += 0.1) {
+            const d = a*20, x = 400+Math.cos(a)*d, y = 400+Math.sin(a)*d;
+            pCtx.beginPath(); pCtx.arc(x, y, 3.5, 0, Math.PI*2);
+            pCtx.fillStyle = advPick(); pCtx.globalAlpha = 0.7; pCtx.fill();
+        }
+        pCtx.globalAlpha = 1;
+    }
+    function advWaves() {
+        for (let yOff = 20; yOff < 800; yOff += 36) {
+            pCtx.beginPath();
+            for (let x = 0; x <= 800; x += 4) {
+                const y = yOff + Math.sin(x*0.018 + yOff*0.04)*40;
+                x === 0 ? pCtx.moveTo(x, y) : pCtx.lineTo(x, y);
+            }
+            pCtx.strokeStyle = advPick(); pCtx.globalAlpha = advRand(0.25, 0.65);
+            pCtx.lineWidth = advRand(1, 4); pCtx.stroke();
+        }
+        pCtx.globalAlpha = 1;
+    }
+    function advStarburst() {
+        for (let a = 0; a < Math.PI*2; a += 0.08) {
+            const len = advRand(200, 520);
+            pCtx.beginPath(); pCtx.moveTo(400, 400);
+            pCtx.lineTo(400+Math.cos(a)*len, 400+Math.sin(a)*len);
+            pCtx.strokeStyle = advPick(); pCtx.globalAlpha = advRand(0.15, 0.5);
+            pCtx.lineWidth = advRand(0.5, 3); pCtx.stroke();
+        }
+        pCtx.globalAlpha = 1;
+    }
+    function advCombo() { advCircles(); advWaves(); advSpiral(); }
+
+    function advText(name, sub) {
+        const accent = advThemes[advTheme][0];
+        pCtx.textAlign = 'center'; pCtx.textBaseline = 'middle';
+        pCtx.fillStyle = 'rgba(0,0,0,0.55)'; pCtx.globalAlpha = 1;
+        pCtx.fillRect(0, 310, 800, 180);
+        pCtx.strokeStyle = accent; pCtx.lineWidth = 3;
+        pCtx.beginPath(); pCtx.moveTo(260, 334); pCtx.lineTo(540, 334); pCtx.stroke();
+        pCtx.font = 'bold 78px Arial'; pCtx.fillStyle = 'white';
+        pCtx.fillText(name.length > 16 ? name.slice(0, 16) + '…' : name, 400, 390);
+        pCtx.font = '28px Arial'; pCtx.fillStyle = accent;
+        pCtx.fillText(sub.toUpperCase().slice(0, 24), 400, 446);
+        pCtx.beginPath(); pCtx.moveTo(260, 474); pCtx.lineTo(540, 474); pCtx.stroke();
+    }
+
+    function advGenerate() {
+        const name = document.getElementById('adv-name').value || 'My Name';
+        const sub  = document.getElementById('adv-subtitle').value || 'Release 2025';
+        pCtx.fillStyle = `hsl(${Math.random()*360}, 18%, 8%)`;
+        pCtx.fillRect(0, 0, 800, 800);
+        ({ circles: advCircles, spiral: advSpiral, waves: advWaves,
+           starburst: advStarburst, combo: advCombo })[advStyle]();
+        advText(name, sub);
+    }
+
+    window.advGenerate = advGenerate;
+
+    window.advDownload = function() {
+        const link = document.createElement('a');
+        link.download = `poster-${Date.now()}.png`;
+        link.href = posterCanvas.toDataURL('image/png');
+        link.click();
+    };
+
+    // Theme buttons
+    document.getElementById('adv-themes').addEventListener('click', e => {
+        const t = e.target.closest('[data-theme]');
+        if (!t) return;
+        advTheme = t.dataset.theme;
+        document.querySelectorAll('#adv-themes [data-theme]').forEach(b => b.classList.remove('active'));
+        t.classList.add('active');
+        advGenerate();
+    });
+
+    // Style buttons
+    document.getElementById('adv-styles').addEventListener('click', e => {
+        const s = e.target.closest('[data-style]');
+        if (!s) return;
+        advStyle = s.dataset.style;
+        document.querySelectorAll('#adv-styles [data-style]').forEach(b => b.classList.remove('active'));
+        s.classList.add('active');
+        advGenerate();
+    });
+
+    // Generate on load
+    advGenerate();
+})();
+
+// Generate on load
+generateArt();
+</script>
 </body>
 </html>
