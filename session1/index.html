@@ -36,10 +36,7 @@
             --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
         }
 
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
             font-family: var(--font-sans);
@@ -67,31 +64,9 @@
             width: 100%;
             box-sizing: border-box;
         }
-
-        .nav-brand {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--accent);
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
+        .nav-brand { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent); font-weight: 700; white-space: nowrap; }
+        .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+        .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem; font-weight: 600; padding: 5px 10px; border-radius: 6px; transition: all 0.2s; }
         .nav-links a:hover { color: white; background: rgba(255,255,255,0.1); }
         .nav-links a.current { color: var(--accent); background: rgba(0,229,160,0.1); }
 
@@ -105,7 +80,6 @@
             overflow: hidden;
             width: 100%;
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -114,699 +88,153 @@
                 radial-gradient(ellipse 60% 60% at 20% 50%, rgba(0,229,160,0.08) 0%, transparent 70%),
                 radial-gradient(ellipse 50% 60% at 80% 50%, rgba(167,139,250,0.08) 0%, transparent 70%);
         }
-
-        .header-badge {
-            display: inline-block;
-            background: rgba(0,229,160,0.15);
-            color: var(--accent);
-            border: 1px solid rgba(0,229,160,0.3);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: 4px 14px;
-            border-radius: 20px;
-            margin-bottom: 16px;
-            letter-spacing: 0.05em;
-            position: relative;
-        }
-
-        header h1 {
-            font-size: clamp(1.8rem, 6vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 12px;
-            position: relative;
-        }
-
+        .header-badge { display: inline-block; background: rgba(0,229,160,0.15); color: var(--accent); border: 1px solid rgba(0,229,160,0.3); font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.05em; position: relative; }
+        header h1 { font-size: clamp(1.8rem, 6vw, 3.5rem); font-weight: 700; line-height: 1.15; margin-bottom: 12px; position: relative; }
         header h1 span { color: var(--accent); }
-
-        header p {
-            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
-            color: rgba(255,255,255,0.7);
-            max-width: 550px;
-            margin: 0 auto 24px;
-            position: relative;
-        }
-
-        .header-pills {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            position: relative;
-            padding: 0 10px;
-        }
-
-        .pill {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.85);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            white-space: nowrap;
-        }
+        header p { font-size: clamp(0.95rem, 2.5vw, 1.2rem); color: rgba(255,255,255,0.7); max-width: 550px; margin: 0 auto 24px; position: relative; }
+        .header-pills { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; position: relative; padding: 0 10px; }
+        .pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 500; white-space: nowrap; }
 
         /* ── TABS ── */
-        .tabs-wrapper {
-            background: var(--ink);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            position: sticky;
-            top: 45px;
-            z-index: 100;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
+        .tabs-wrapper { background: var(--ink); border-bottom: 1px solid rgba(255,255,255,0.08); position: sticky; top: 45px; z-index: 100; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .tabs-wrapper::-webkit-scrollbar { display: none; }
-
-        .tabs {
-            display: flex;
-            min-width: max-content;
-            padding: 0 8px;
-        }
-
-        .tab-btn {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.5);
-            padding: 14px 16px;
-            cursor: pointer;
-            font-family: var(--font-sans);
-            font-size: 0.82rem;
-            font-weight: 600;
-            white-space: nowrap;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
+        .tabs { display: flex; min-width: max-content; padding: 0 8px; }
+        .tab-btn { background: none; border: none; color: rgba(255,255,255,0.5); padding: 14px 16px; cursor: pointer; font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .tab-btn:hover { color: white; }
-
-        .tab-btn.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
+        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
         .tab-icon { font-size: 1rem; }
 
         /* ── PROGRESS BAR ── */
-        .progress-bar {
-            height: 3px;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--purple));
-            transition: width 0.4s ease;
-        }
+        .progress-bar { height: 3px; background: rgba(255,255,255,0.05); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); transition: width 0.4s ease; }
 
         /* ── TAB CONTENT ── */
-        .tab-content {
-            display: none;
-            max-width: 860px;
-            margin: 0 auto;
-            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px);
-            animation: fadeUp 0.3s ease;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
+        .tab-content { display: none; max-width: 860px; margin: 0 auto; padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px); animation: fadeUp 0.3s ease; width: 100%; overflow-x: hidden; }
         .tab-content.active { display: block; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ── TYPOGRAPHY ── */
-        .section-title {
-            font-size: clamp(1.4rem, 4vw, 2rem);
-            font-weight: 700;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-sub {
-            color: var(--muted);
-            margin-bottom: 28px;
-            font-size: 0.95rem;
-        }
-
-        h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin: 28px 0 12px;
-            color: var(--ink);
-        }
-
+        .section-title { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+        .section-sub { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; }
+        h3 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 12px; color: var(--ink); }
         p { margin-bottom: 12px; }
 
         /* ── CARDS ── */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            width: 100%;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-            width: 100%;
-        }
-
-        .mini-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
-            min-width: 0;
-        }
-
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow); width: 100%; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 20px 0; width: 100%; }
+        .mini-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; min-width: 0; }
         .mini-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
 
         /* ── CONCEPT BOX ── */
-        .concept-box {
-            background: var(--ink);
-            color: white;
-            border-radius: var(--radius-lg);
-            padding: 24px 28px;
-            margin: 20px 0;
-            border-left: 4px solid var(--accent);
-        }
-
+        .concept-box { background: var(--ink); color: white; border-radius: var(--radius-lg); padding: 24px 28px; margin: 20px 0; border-left: 4px solid var(--accent); }
         .concept-box h3 { color: var(--accent); margin-top: 0; }
 
         /* ── ANALOGY / TIP / WARN ── */
-        .analogy {
-            background: #fffbeb;
-            border: 1px solid #fde68a;
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            margin: 16px 0;
-        }
-
+        .analogy { background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius); padding: 18px 20px; margin: 16px 0; }
         .analogy h4 { color: #92400e; font-size: 0.9rem; margin-bottom: 8px; }
-
-        .tip-box {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            margin: 16px 0;
-        }
-
+        .tip-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius); padding: 18px 20px; margin: 16px 0; }
         .tip-box h4 { color: #1e40af; font-size: 0.9rem; margin-bottom: 8px; }
-
-        .warn-box {
-            background: #fff1f2;
-            border: 1px solid #fecdd3;
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            margin: 16px 0;
-        }
-
+        .warn-box { background: #fff1f2; border: 1px solid #fecdd3; border-radius: var(--radius); padding: 18px 20px; margin: 16px 0; }
         .warn-box h4 { color: #be123c; font-size: 0.9rem; margin-bottom: 8px; }
-
-        .checkpoint {
-            background: var(--step-bg);
-            border: 1px solid #a7f3d0;
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            margin: 16px 0;
-        }
-
+        .checkpoint { background: var(--step-bg); border: 1px solid #a7f3d0; border-radius: var(--radius); padding: 18px 20px; margin: 16px 0; }
         .checkpoint h4 { color: #065f46; font-size: 0.9rem; margin-bottom: 8px; }
 
         /* ── CODE BLOCKS ── */
-        .code-block {
-            background: var(--code-bg);
-            color: var(--code-fg);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin: 16px 0;
-            overflow-x: auto;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.05);
-            max-width: 100%;
-        }
-
-        .code-block pre {
-            font-family: var(--font-mono);
-            font-size: clamp(0.72rem, 2vw, 0.85rem);
-            line-height: 1.8;
-            white-space: pre;
-            word-break: normal;
-            display: block;
-            min-width: 0;
-        }
-
-        .code-tag {
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            background: rgba(0,229,160,0.15);
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        /* Syntax highlighting colors */
-        .kw  { color: #ff79c6; }  /* keywords */
-        .fn  { color: #50fa7b; }  /* function names */
-        .str { color: #f1fa8c; }  /* strings */
-        .num { color: #bd93f9; }  /* numbers */
-        .cmt { color: #6272a4; font-style: italic; }  /* comments */
-        .var { color: #8be9fd; }  /* variables */
+        .code-block { background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius); padding: 20px; margin: 16px 0; overflow-x: auto; position: relative; border: 1px solid rgba(255,255,255,0.05); max-width: 100%; }
+        .code-block pre { font-family: var(--font-mono); font-size: clamp(0.72rem, 2vw, 0.85rem); line-height: 1.8; white-space: pre; word-break: normal; display: block; min-width: 0; }
+        .code-tag { position: absolute; top: 10px; right: 12px; background: rgba(0,229,160,0.15); color: var(--accent); font-family: var(--font-mono); font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; }
+        .kw  { color: #ff79c6; }
+        .fn  { color: #50fa7b; }
+        .str { color: #f1fa8c; }
+        .num { color: #bd93f9; }
+        .cmt { color: #6272a4; font-style: italic; }
+        .var { color: #8be9fd; }
 
         /* ── LIVE CODE RUNNER ── */
-        .runner {
-            background: var(--card);
-            border: 2px solid var(--accent);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin: 20px 0;
-            box-shadow: 0 0 0 4px rgba(0,229,160,0.08);
-        }
-
-        .runner-header {
-            background: var(--ink);
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .runner-title {
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            font-weight: 700;
-        }
-
+        .runner { background: var(--card); border: 2px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; margin: 20px 0; box-shadow: 0 0 0 4px rgba(0,229,160,0.08); }
+        .runner-header { background: var(--ink); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .runner-title { color: var(--accent); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; }
         .runner-body { padding: 16px; }
-
-        .runner-instructions {
-            font-size: 0.88rem;
-            color: var(--muted);
-            margin-bottom: 10px;
-        }
-
-        .code-editor {
-            width: 100%;
-            min-height: 140px;
-            background: var(--code-bg);
-            color: var(--code-fg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius);
-            padding: 14px;
-            font-family: var(--font-mono);
-            font-size: clamp(0.72rem, 2vw, 0.85rem);
-            line-height: 1.8;
-            resize: vertical;
-            transition: border-color 0.2s;
-            box-sizing: border-box;
-        }
-
-        .code-editor:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .runner-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 8px;
-            font-family: var(--font-sans);
-            font-size: 0.88rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--ink);
-        }
-
-        .btn-primary:hover {
-            background: #00c98a;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--paper);
-            color: var(--ink);
-            border: 1px solid var(--border);
-        }
-
+        .runner-instructions { font-size: 0.88rem; color: var(--muted); margin-bottom: 10px; }
+        .code-editor { width: 100%; min-height: 140px; background: var(--code-bg); color: var(--code-fg); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 14px; font-family: var(--font-mono); font-size: clamp(0.72rem, 2vw, 0.85rem); line-height: 1.8; resize: vertical; transition: border-color 0.2s; box-sizing: border-box; }
+        .code-editor:focus { outline: none; border-color: var(--accent); }
+        .runner-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border: none; border-radius: 8px; font-family: var(--font-sans); font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .btn-primary { background: var(--accent); color: var(--ink); }
+        .btn-primary:hover { background: #00c98a; transform: translateY(-1px); }
+        .btn-secondary { background: var(--paper); color: var(--ink); border: 1px solid var(--border); }
         .btn-secondary:hover { background: var(--border); }
-
         .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
-
-        .run-output {
-            margin-top: 12px;
-            background: var(--code-bg);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--radius);
-            padding: 14px;
-            min-height: 50px;
-            font-family: var(--font-mono);
-            font-size: 0.82rem;
-            color: var(--accent);
-            display: none;
-        }
-
+        .run-output { margin-top: 12px; background: var(--code-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 14px; min-height: 50px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); display: none; }
         .run-output.visible { display: block; }
         .run-output.error { color: var(--accent2); }
 
         /* ── STEP GUIDE ── */
-        .step-list {
-            counter-reset: steps;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin: 16px 0;
-        }
-
-        .step {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px 20px 20px 60px;
-            position: relative;
-            counter-increment: steps;
-        }
-
-        .step::before {
-            content: counter(steps);
-            position: absolute;
-            left: 16px;
-            top: 18px;
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
-            color: var(--ink);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
+        .step-list { counter-reset: steps; display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
+        .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 20px 20px 60px; position: relative; counter-increment: steps; }
+        .step::before { content: counter(steps); position: absolute; left: 16px; top: 18px; width: 28px; height: 28px; background: var(--accent); color: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
         .step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
         .step p { margin-bottom: 0; font-size: 0.9rem; color: #374151; }
 
         /* ── INTERACTIVE DEMOS ── */
-        .demo-area {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            text-align: center;
-            margin: 20px 0;
-            box-shadow: var(--shadow);
-        }
-
-        .demo-title {
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 20px;
-        }
-
-        #demoBox {
-            width: 160px;
-            height: 160px;
-            background: #bfdbfe;
-            margin: 0 auto 20px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 56px;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        #clickArea {
-            width: 100%;
-            max-width: 320px;
-            height: 100px;
-            background: var(--paper);
-            border: 2px dashed var(--border);
-            margin: 0 auto 16px;
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.2s;
-        }
-
+        .demo-area { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; margin: 20px 0; box-shadow: var(--shadow); }
+        .demo-title { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
+        #demoBox { width: 160px; height: 160px; background: #bfdbfe; margin: 0 auto 20px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 56px; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        #clickArea { width: 100%; max-width: 320px; height: 100px; background: var(--paper); border: 2px dashed var(--border); margin: 0 auto 16px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; cursor: pointer; user-select: none; transition: all 0.2s; }
         #clickArea:hover { background: #eff6ff; border-color: #93c5fd; }
-
-        .click-count-display {
-            font-size: 2.5rem;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1;
-            margin: 8px 0;
-        }
-
+        .click-count-display { font-size: 2.5rem; font-family: var(--font-mono); font-weight: 700; color: var(--accent); line-height: 1; margin: 8px 0; }
         .click-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
-
-        canvas {
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            cursor: crosshair;
-            display: block;
-            margin: 16px auto;
-            background: white;
-            box-shadow: var(--shadow);
-            max-width: 100%;
-            height: auto;
-            touch-action: none;
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 12px 0;
-            max-width: 100%;
-        }
-
-        .color-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .color-btn:hover, .color-btn.active {
-            transform: scale(1.15);
-            border-color: var(--ink);
-        }
+        canvas { border: 2px solid var(--border); border-radius: var(--radius); cursor: crosshair; display: block; margin: 16px auto; background: white; box-shadow: var(--shadow); max-width: 100%; height: auto; touch-action: none; }
+        .btn-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 12px 0; max-width: 100%; }
+        .color-btn { width: 36px; height: 36px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: all 0.2s; }
+        .color-btn:hover, .color-btn.active { transform: scale(1.15); border-color: var(--ink); }
 
         /* ── WHAT IS CODE DEMO ── */
-        #demoOutput {
-            min-height: 80px;
-            padding: 20px;
-            background: var(--paper);
-            border-radius: var(--radius);
-            margin: 16px 0;
-            border: 1px solid var(--border);
-        }
+        #demoOutput { min-height: 80px; padding: 20px; background: var(--paper); border-radius: var(--radius); margin: 16px 0; border: 1px solid var(--border); }
 
         /* ── TIMELINE ── */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .tl-item {
-            display: flex;
-            gap: 16px;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
+        .timeline { display: flex; flex-direction: column; gap: 0; }
+        .tl-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
         .tl-item:last-child { border-bottom: none; }
-
-        .tl-time {
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--accent);
-            min-width: 80px;
-            padding-top: 2px;
-        }
-
+        .tl-time { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--accent); min-width: 80px; padding-top: 2px; }
         .tl-content strong { display: block; font-size: 0.95rem; margin-bottom: 2px; }
         .tl-content span { font-size: 0.85rem; color: var(--muted); }
 
         /* ── OBJECTIVES GRID ── */
-        .obj-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-            margin: 20px 0;
-            width: 100%;
-        }
-
-        .obj-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
-        }
-
-        .obj-card h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .obj-card ul {
-            padding-left: 16px;
-            font-size: 0.82rem;
-            color: var(--muted);
-            line-height: 2;
-        }
+        .obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 20px 0; width: 100%; }
+        .obj-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+        .obj-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .obj-card ul { padding-left: 16px; font-size: 0.82rem; color: var(--muted); line-height: 2; }
 
         /* ── WEB LAYER CARDS ── */
-        .web-layers {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 16px 0;
-            width: 100%;
-        }
-
-        @media (max-width: 500px) {
-            .web-layers { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 360px) {
-            .web-layers { grid-template-columns: 1fr; }
-        }
-
-        .layer-card {
-            border-radius: var(--radius);
-            padding: 16px;
-            text-align: center;
-        }
-
+        .web-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; width: 100%; }
+        @media (max-width: 500px) { .web-layers { grid-template-columns: 1fr; } }
+        .layer-card { border-radius: var(--radius); padding: 16px; text-align: center; }
         .layer-card.html { background: #fff7ed; border: 1px solid #fed7aa; }
         .layer-card.css  { background: #fdf4ff; border: 1px solid #e9d5ff; }
         .layer-card.js   { background: #fefce8; border: 1px solid #fef08a; }
-
         .layer-card .icon { font-size: 2rem; margin-bottom: 8px; }
         .layer-card strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
         .layer-card span { font-size: 0.78rem; color: var(--muted); }
 
         /* ── CHEATSHEET TAGS ── */
-        code {
-            font-family: var(--font-mono);
-            font-size: 0.85em;
-            background: #f1f5f9;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #7c3aed;
-        }
+        code { font-family: var(--font-mono); font-size: 0.85em; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #7c3aed; }
 
         /* ── ADVANCED ── */
-        .feature-card {
-            background: var(--ink);
-            color: white;
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-
+        .feature-card { background: var(--ink); color: white; border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
         .feature-card h4 { color: var(--accent3); margin-bottom: 8px; font-size: 1rem; }
         .feature-card p { color: rgba(255,255,255,0.75); font-size: 0.88rem; margin-bottom: 12px; }
 
         /* ── SLIDER ── */
-        .slider-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 12px 0;
-            flex-wrap: wrap;
-        }
-
+        .slider-row { display: flex; align-items: center; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
         .slider-row label { font-size: 0.85rem; font-weight: 600; min-width: 100px; }
-
-        input[type="range"] {
-            flex: 1;
-            min-width: 120px;
-            accent-color: var(--accent);
-        }
-
-        .slider-val {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            background: var(--paper);
-            padding: 2px 8px;
-            border-radius: 4px;
-            min-width: 30px;
-            text-align: center;
-        }
+        input[type="range"] { flex: 1; min-width: 120px; accent-color: var(--accent); }
+        .slider-val { font-family: var(--font-mono); font-size: 0.8rem; background: var(--paper); padding: 2px 8px; border-radius: 4px; min-width: 30px; text-align: center; }
 
         /* ── FOOTER ── */
-        footer {
-            background: var(--ink);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
+        footer { background: var(--ink); color: white; padding: 40px 20px; text-align: center; }
         footer a { color: var(--accent); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
-
         footer p { margin-bottom: 8px; font-size: 0.9rem; color: rgba(255,255,255,0.6); }
 
         /* ── RESPONSIVE ── */
@@ -819,7 +247,6 @@
             .step { padding: 16px 16px 16px 52px; }
             .step::before { left: 12px; top: 14px; }
         }
-
         @media (max-width: 400px) {
             .nav-brand { font-size: 0.78rem; }
             .nav-links a { font-size: 0.72rem; padding: 4px 7px; }
@@ -828,28 +255,133 @@
         /* ── UTILITY ── */
         .mt-0 { margin-top: 0; }
         .mb-0 { margin-bottom: 0; }
-        ul.check-list {
-            list-style: none;
-            padding-left: 0;
-        }
+        ul.check-list { list-style: none; padding-left: 0; }
         ul.check-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
         ul.check-list li { line-height: 1.9; font-size: 0.9rem; }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-        }
-
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; font-family: var(--font-mono); }
         .badge-green { background: #d1fae5; color: #065f46; }
         .badge-blue  { background: #dbeafe; color: #1e40af; }
         .badge-red   { background: #fee2e2; color: #991b1b; }
+
+        /* ═══════════════════════════════════════════
+           LOCK SCREEN
+           To reset a student's saved unlock:
+             DevTools (F12) → Application → Local Storage
+             → delete key:  cc_s1_unlocked
+        ═══════════════════════════════════════════ */
+        #lockScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #0d0f14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', sans-serif;
+        }
+        #lockScreen.hidden { display: none; }
+
+        .lock-card {
+            width: min(380px, 90vw);
+            text-align: center;
+            animation: lockFadeIn 0.6s cubic-bezier(.22,1,.36,1) both;
+        }
+        @keyframes lockFadeIn {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .lock-icon  { font-size: 3rem; display: block; margin-bottom: 10px; }
+        .lock-title {
+            font-family: 'Space Mono', monospace;
+            color: #00e5a0;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .lock-sub {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+            margin-bottom: 32px;
+        }
+        #lockInput {
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.15rem;
+            letter-spacing: 0.25em;
+            padding: 14px 20px;
+            text-align: center;
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            transition: border-color 0.2s;
+        }
+        #lockInput:focus  { border-color: #00e5a0; }
+        #lockInput.shake  { animation: lockShake 0.45s ease; border-color: #ff6b6b; }
+        @keyframes lockShake {
+            0%,100% { transform: translateX(0); }
+            15%     { transform: translateX(-9px); }
+            30%     { transform: translateX(9px); }
+            45%     { transform: translateX(-6px); }
+            60%     { transform: translateX(6px); }
+            75%     { transform: translateX(-3px); }
+            90%     { transform: translateX(3px); }
+        }
+        #lockError {
+            color: #ff6b6b;
+            font-size: 0.76rem;
+            font-family: 'Space Mono', monospace;
+            min-height: 20px;
+            margin-bottom: 10px;
+        }
+        #lockBtn {
+            width: 100%;
+            background: #00e5a0;
+            color: #0d0f14;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        #lockBtn:hover  { background: #00c98a; transform: translateY(-1px); }
+        #lockBtn:active { transform: translateY(0); }
+        .lock-hint {
+            margin-top: 22px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.18);
+            font-family: 'Space Mono', monospace;
+        }
     </style>
 </head>
 <body>
+
+<!-- ════════════════════════════════════════
+     LOCK SCREEN OVERLAY
+     ↓ Change SESSION_PASSWORD in the <script> at bottom of file ↓
+     To reset a student's remembered unlock:
+       F12 → Application → Local Storage → delete key: cc_s1_unlocked
+════════════════════════════════════════ -->
+<div id="lockScreen">
+    <div class="lock-card">
+        <span class="lock-icon">🔐</span>
+        <div class="lock-title">Code &amp; Create</div>
+        <div class="lock-sub">Enter the session password to continue</div>
+        <input id="lockInput" type="password" placeholder="password"
+               autocomplete="off" spellcheck="false" autofocus>
+        <div id="lockError"></div>
+        <button id="lockBtn">Unlock →</button>
+        <div class="lock-hint">Hint: ask your teacher 😊</div>
+    </div>
+</div>
 
 <!-- TOP NAV -->
 <nav class="top-nav">
@@ -878,36 +410,16 @@
 <!-- TABS -->
 <div class="tabs-wrapper">
     <div class="tabs" id="tabsRow">
-        <button class="tab-btn active" onclick="openTab('intro', this)">
-            <span class="tab-icon">👋</span> Intro
-        </button>
-        <button class="tab-btn" onclick="openTab('timeline', this)">
-            <span class="tab-icon">⏰</span> Timeline
-        </button>
-        <button class="tab-btn" onclick="openTab('what-is-code', this)">
-            <span class="tab-icon">💡</span> Code?
-        </button>
-        <button class="tab-btn" onclick="openTab('variables', this)">
-            <span class="tab-icon">📦</span> Variables
-        </button>
-        <button class="tab-btn" onclick="openTab('functions', this)">
-            <span class="tab-icon">🍳</span> Functions
-        </button>
-        <button class="tab-btn" onclick="openTab('practice1', this)">
-            <span class="tab-icon">🎨</span> Practice 1
-        </button>
-        <button class="tab-btn" onclick="openTab('practice2', this)">
-            <span class="tab-icon">🖱️</span> Practice 2
-        </button>
-        <button class="tab-btn" onclick="openTab('drawing', this)">
-            <span class="tab-icon">✏️</span> Drawing
-        </button>
-        <button class="tab-btn" onclick="openTab('advanced', this)">
-            <span class="tab-icon">🌟</span> Advanced
-        </button>
-        <button class="tab-btn" onclick="openTab('cheatsheet', this)">
-            <span class="tab-icon">📋</span> Cheat Sheet
-        </button>
+        <button class="tab-btn active" onclick="openTab('intro', this)"><span class="tab-icon">👋</span> Intro</button>
+        <button class="tab-btn" onclick="openTab('timeline', this)"><span class="tab-icon">⏰</span> Timeline</button>
+        <button class="tab-btn" onclick="openTab('what-is-code', this)"><span class="tab-icon">💡</span> Code?</button>
+        <button class="tab-btn" onclick="openTab('variables', this)"><span class="tab-icon">📦</span> Variables</button>
+        <button class="tab-btn" onclick="openTab('functions', this)"><span class="tab-icon">🍳</span> Functions</button>
+        <button class="tab-btn" onclick="openTab('practice1', this)"><span class="tab-icon">🎨</span> Practice 1</button>
+        <button class="tab-btn" onclick="openTab('practice2', this)"><span class="tab-icon">🖱️</span> Practice 2</button>
+        <button class="tab-btn" onclick="openTab('drawing', this)"><span class="tab-icon">✏️</span> Drawing</button>
+        <button class="tab-btn" onclick="openTab('advanced', this)"><span class="tab-icon">🌟</span> Advanced</button>
+        <button class="tab-btn" onclick="openTab('cheatsheet', this)"><span class="tab-icon">📋</span> Cheat Sheet</button>
     </div>
     <div class="progress-bar">
         <div class="progress-fill" id="progressFill" style="width: 10%"></div>
@@ -920,43 +432,16 @@
 <div id="intro" class="tab-content active">
     <h2 class="section-title">👋 Welcome to Code & Create!</h2>
     <p class="section-sub">Today you learn the fundamentals of coding by creating interactive art. Let's start from zero.</p>
-
     <div class="concept-box">
         <h3>🎯 The Big Idea</h3>
         <p>By the end of today you will have built a <strong>real drawing app</strong> — just like the ones professionals use — using only your own code. Every step is guided. You can do this.</p>
     </div>
-
     <h3>What You'll Learn & Make</h3>
     <div class="obj-grid">
-        <div class="obj-card">
-            <h4>💡 Concepts</h4>
-            <ul style="padding-left:16px; font-size:0.85rem; color:var(--muted); line-height:2;">
-                <li>What is code?</li>
-                <li>Variables</li>
-                <li>Functions</li>
-                <li>Events</li>
-            </ul>
-        </div>
-        <div class="obj-card">
-            <h4>🛠️ Skills</h4>
-            <ul style="padding-left:16px; font-size:0.85rem; color:var(--muted); line-height:2;">
-                <li>Change colors & sizes</li>
-                <li>Respond to clicks</li>
-                <li>Build counters</li>
-                <li>Draw on canvas</li>
-            </ul>
-        </div>
-        <div class="obj-card">
-            <h4>🎨 Projects</h4>
-            <ul style="padding-left:16px; font-size:0.85rem; color:var(--muted); line-height:2;">
-                <li>Color-changing box</li>
-                <li>Click counter</li>
-                <li>Drawing app</li>
-                <li>Your ideas!</li>
-            </ul>
-        </div>
+        <div class="obj-card"><h4>💡 Concepts</h4><ul style="padding-left:16px; font-size:0.85rem; color:var(--muted); line-height:2;"><li>What is code?</li><li>Variables</li><li>Functions</li><li>Events</li></ul></div>
+        <div class="obj-card"><h4>🛠️ Skills</h4><ul style="padding-left:16px; font-size:0.85rem; color:var(--muted); line-height:2;"><li>Change colors & sizes</li><li>Respond to clicks</li><li>Build counters</li><li>Draw on canvas</li></ul></div>
+        <div class="obj-card"><h4>🎨 Projects</h4><ul style="padding-left:16px; font-size:0.85rem; color:var(--muted); line-height:2;"><li>Color-changing box</li><li>Click counter</li><li>Drawing app</li><li>Your ideas!</li></ul></div>
     </div>
-
     <div class="checkpoint">
         <h4>✅ By the End of Today</h4>
         <ul class="check-list">
@@ -967,18 +452,14 @@
             <li>Call yourself a developer 🎉</li>
         </ul>
     </div>
-
     <div class="tip-box">
         <h4>💡 Learning Philosophy</h4>
         <p><strong>Confusion is normal — it means you're learning.</strong></p>
         <p>Don't try to memorize everything. Focus on understanding the ideas. We repeat every concept multiple times in different ways. When something doesn't work, that's called a "bug" — fixing bugs is what developers do!</p>
     </div>
-
     <div class="card" style="text-align:center; padding: 28px;">
         <p style="font-size:1.1rem; font-weight:700; margin-bottom:12px;">Ready to begin?</p>
-        <button class="btn btn-primary" onclick="openTab('timeline', document.querySelectorAll('.tab-btn')[1])">
-            Next: Timeline →
-        </button>
+        <button class="btn btn-primary" onclick="openTab('timeline', document.querySelectorAll('.tab-btn')[1])">Next: Timeline →</button>
     </div>
 </div>
 
@@ -988,65 +469,16 @@
 <div id="timeline" class="tab-content">
     <h2 class="section-title">⏰ Session Plan</h2>
     <p class="section-sub">150 minutes — here's what we're doing and when.</p>
-
     <div class="card">
         <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">0–20 min</div>
-                <div class="tl-content">
-                    <strong>Introduction: What is Code?</strong>
-                    <span>Analogies, live demos, HTML / CSS / JavaScript explained</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">20–40 min</div>
-                <div class="tl-content">
-                    <strong>Variables</strong>
-                    <span>Boxes with labels, storing info, live console practice</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">40–60 min</div>
-                <div class="tl-content">
-                    <strong>Functions</strong>
-                    <span>Recipes, reusable code, parameters</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">60–80 min</div>
-                <div class="tl-content">
-                    <strong>Practice 1: Changing Things</strong>
-                    <span>Make a box change color, size, emoji — step by step</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">80–100 min</div>
-                <div class="tl-content">
-                    <strong>Practice 2: Click Events</strong>
-                    <span>Build a click counter, understand events</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">100–130 min</div>
-                <div class="tl-content">
-                    <strong>Mini-Project: Drawing App</strong>
-                    <span>Canvas drawing with mouse — built in guided steps</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">130–145 min</div>
-                <div class="tl-content">
-                    <strong>Showcase & Play</strong>
-                    <span>Share creations, explore the advanced tools, customize</span>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">145–150 min</div>
-                <div class="tl-content">
-                    <strong>Wrap-Up</strong>
-                    <span>Review key concepts, preview Session 2</span>
-                </div>
-            </div>
+            <div class="tl-item"><div class="tl-time">0–20 min</div><div class="tl-content"><strong>Introduction: What is Code?</strong><span>Analogies, live demos, HTML / CSS / JavaScript explained</span></div></div>
+            <div class="tl-item"><div class="tl-time">20–40 min</div><div class="tl-content"><strong>Variables</strong><span>Boxes with labels, storing info, live console practice</span></div></div>
+            <div class="tl-item"><div class="tl-time">40–60 min</div><div class="tl-content"><strong>Functions</strong><span>Recipes, reusable code, parameters</span></div></div>
+            <div class="tl-item"><div class="tl-time">60–80 min</div><div class="tl-content"><strong>Practice 1: Changing Things</strong><span>Make a box change color, size, emoji — step by step</span></div></div>
+            <div class="tl-item"><div class="tl-time">80–100 min</div><div class="tl-content"><strong>Practice 2: Click Events</strong><span>Build a click counter, understand events</span></div></div>
+            <div class="tl-item"><div class="tl-time">100–130 min</div><div class="tl-content"><strong>Mini-Project: Drawing App</strong><span>Canvas drawing with mouse — built in guided steps</span></div></div>
+            <div class="tl-item"><div class="tl-time">130–145 min</div><div class="tl-content"><strong>Showcase & Play</strong><span>Share creations, explore the advanced tools, customize</span></div></div>
+            <div class="tl-item"><div class="tl-time">145–150 min</div><div class="tl-content"><strong>Wrap-Up</strong><span>Review key concepts, preview Session 2</span></div></div>
         </div>
     </div>
 </div>
@@ -1057,40 +489,19 @@
 <div id="what-is-code" class="tab-content">
     <h2 class="section-title">💡 What is Code?</h2>
     <p class="section-sub">Before we write a single line, let's understand what we're actually doing.</p>
-
     <div class="concept-box">
         <h3>Code = Instructions for Computers</h3>
         <p>Computers are very fast, but also very dumb. They only do <em>exactly</em> what you tell them. Code is the language we use to give those instructions.</p>
         <p style="margin-bottom:0;">Just like a recipe tells a chef how to make a cake, code tells a computer what to do.</p>
     </div>
-
     <h3>🏠 The Three Languages of Every Website</h3>
-
-    <div class="analogy">
-        <h4>🏠 Think of Building a House</h4>
-        <p>Every house has three things: structure, decoration, and functionality. Websites are the same!</p>
-    </div>
-
+    <div class="analogy"><h4>🏠 Think of Building a House</h4><p>Every house has three things: structure, decoration, and functionality. Websites are the same!</p></div>
     <div class="web-layers">
-        <div class="layer-card html">
-            <div class="icon">🧱</div>
-            <strong>HTML</strong>
-            <span>The walls, doors, and rooms — the <em>structure</em></span>
-        </div>
-        <div class="layer-card css">
-            <div class="icon">🎨</div>
-            <strong>CSS</strong>
-            <span>The paint, furniture — how it <em>looks</em></span>
-        </div>
-        <div class="layer-card js">
-            <div class="icon">⚡</div>
-            <strong>JavaScript</strong>
-            <span>The lights & doors — what it <em>does</em></span>
-        </div>
+        <div class="layer-card html"><div class="icon">🧱</div><strong>HTML</strong><span>The walls, doors, and rooms — the <em>structure</em></span></div>
+        <div class="layer-card css"><div class="icon">🎨</div><strong>CSS</strong><span>The paint, furniture — how it <em>looks</em></span></div>
+        <div class="layer-card js"><div class="icon">⚡</div><strong>JavaScript</strong><span>The lights & doors — what it <em>does</em></span></div>
     </div>
-
     <h3>👀 Live Demo — Watch Code Build a Page</h3>
-
     <div class="demo-area">
         <div class="demo-title">Click each button in order →</div>
         <div class="btn-row">
@@ -1099,34 +510,15 @@
             <button class="btn btn-secondary btn-sm" onclick="showStep3()">Step 3: + JS</button>
             <button class="btn btn-secondary btn-sm" onclick="resetCodeDemo()">Reset</button>
         </div>
-        <div id="demoOutput">
-            <p style="text-align:center; color:var(--muted); font-size:0.88rem;">Click "Step 1" to start!</p>
-        </div>
-        <div class="code-block" id="demoCodeBlock" style="display:none; margin-top:12px;">
-            <span class="code-tag">Code</span>
-            <pre id="demoCodePre"></pre>
-        </div>
+        <div id="demoOutput"><p style="text-align:center; color:var(--muted); font-size:0.88rem;">Click "Step 1" to start!</p></div>
+        <div class="code-block" id="demoCodeBlock" style="display:none; margin-top:12px;"><span class="code-tag">Code</span><pre id="demoCodePre"></pre></div>
     </div>
-
-    <div class="checkpoint">
-        <h4>✅ Key Takeaway</h4>
-        <p>HTML, CSS, and JavaScript work <strong>together</strong>. Today we focus on JavaScript — making things interactive and alive!</p>
-    </div>
-
+    <div class="checkpoint"><h4>✅ Key Takeaway</h4><p>HTML, CSS, and JavaScript work <strong>together</strong>. Today we focus on JavaScript — making things interactive and alive!</p></div>
     <h3>🤔 Why JavaScript?</h3>
     <div class="card-grid" style="margin-top:12px;">
-        <div class="mini-card">
-            <h4>📱 It's Everywhere</h4>
-            <p style="font-size:0.85rem; color:var(--muted);">Every website, app, and game on the web uses JavaScript. It's the most popular language in the world.</p>
-        </div>
-        <div class="mini-card">
-            <h4>🚀 Instant Results</h4>
-            <p style="font-size:0.85rem; color:var(--muted);">You write code, refresh the browser, and see it working immediately — no complicated setup.</p>
-        </div>
-        <div class="mini-card">
-            <h4>🎨 Made for Creating</h4>
-            <p style="font-size:0.85rem; color:var(--muted);">You can animate things, draw on a canvas, respond to clicks — perfect for interactive art.</p>
-        </div>
+        <div class="mini-card"><h4>📱 It's Everywhere</h4><p style="font-size:0.85rem; color:var(--muted);">Every website, app, and game on the web uses JavaScript. It's the most popular language in the world.</p></div>
+        <div class="mini-card"><h4>🚀 Instant Results</h4><p style="font-size:0.85rem; color:var(--muted);">You write code, refresh the browser, and see it working immediately — no complicated setup.</p></div>
+        <div class="mini-card"><h4>🎨 Made for Creating</h4><p style="font-size:0.85rem; color:var(--muted);">You can animate things, draw on a canvas, respond to clicks — perfect for interactive art.</p></div>
     </div>
 </div>
 
@@ -1136,41 +528,20 @@
 <div id="variables" class="tab-content">
     <h2 class="section-title">📦 Variables</h2>
     <p class="section-sub">A variable is a named box where you can store information.</p>
-
     <div class="concept-box">
         <h3>Imagine Labeled Boxes</h3>
         <p>You have a box labeled <strong>FAVORITE_FOOD</strong>. You put a note inside that says "Pizza". Anytime you need to remember your favorite food, you look in that box.</p>
         <p style="margin-bottom:0;">Later you can change "Pizza" to "Sushi" — the box stays, only the content changes. That's why it's called a <em>variable</em> — it varies!</p>
     </div>
-
     <h3>Step by Step — Creating a Variable</h3>
-
     <div class="step-list">
-        <div class="step">
-            <h4>Write the keyword <code>let</code></h4>
-            <p>This tells JavaScript: "I want to create a new box."</p>
-        </div>
-        <div class="step">
-            <h4>Give the box a name</h4>
-            <p>Names can't have spaces. Use camelCase: <code>myName</code> not <code>my name</code>. Make it descriptive!</p>
-        </div>
-        <div class="step">
-            <h4>Write <code>=</code> (equals sign)</h4>
-            <p>This means "put this inside". It's NOT asking "is it equal" — it's saying "put this value in the box".</p>
-        </div>
-        <div class="step">
-            <h4>Write the value</h4>
-            <p>Text goes inside quotes: <code>"Sofia"</code> — Numbers don't: <code>25</code></p>
-        </div>
-        <div class="step">
-            <h4>End with <code>;</code></h4>
-            <p>The semicolon is like a full stop — it tells JavaScript the instruction is finished.</p>
-        </div>
+        <div class="step"><h4>Write the keyword <code>let</code></h4><p>This tells JavaScript: "I want to create a new box."</p></div>
+        <div class="step"><h4>Give the box a name</h4><p>Names can't have spaces. Use camelCase: <code>myName</code> not <code>my name</code>. Make it descriptive!</p></div>
+        <div class="step"><h4>Write <code>=</code> (equals sign)</h4><p>This means "put this inside". It's NOT asking "is it equal" — it's saying "put this value in the box".</p></div>
+        <div class="step"><h4>Write the value</h4><p>Text goes inside quotes: <code>"Sofia"</code> — Numbers don't: <code>25</code></p></div>
+        <div class="step"><h4>End with <code>;</code></h4><p>The semicolon is like a full stop — it tells JavaScript the instruction is finished.</p></div>
     </div>
-
-    <div class="code-block">
-        <span class="code-tag">JavaScript</span>
-        <pre><span class="cmt">// Full example — reads like a sentence:</span>
+    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="cmt">// Full example — reads like a sentence:</span>
 <span class="cmt">// "Create a box called myName and put Sofia inside"</span>
 <span class="kw">let</span> <span class="var">myName</span> = <span class="str">"Sofia"</span>;
 
@@ -1179,35 +550,16 @@
 <span class="kw">let</span> <span class="var">isHappy</span> = <span class="kw">true</span>;
 
 <span class="cmt">// See what's inside:</span>
-console.<span class="fn">log</span>(<span class="var">myName</span>);  <span class="cmt">// → Sofia</span></pre>
-    </div>
-
+console.<span class="fn">log</span>(<span class="var">myName</span>);  <span class="cmt">// → Sofia</span></pre></div>
     <h3>Three Types of Values</h3>
     <div class="card-grid">
-        <div class="mini-card">
-            <h4>📝 Text (String)</h4>
-            <code>let name = "Maria";</code>
-            <p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Always use quotes. Can be any text, even emojis!</p>
-        </div>
-        <div class="mini-card">
-            <h4>🔢 Number</h4>
-            <code>let age = 30;</code>
-            <p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">No quotes. Works with decimals too: <code>3.14</code></p>
-        </div>
-        <div class="mini-card">
-            <h4>✅ True / False</h4>
-            <code>let isHappy = true;</code>
-            <p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Called a "boolean". Only two values: <code>true</code> or <code>false</code></p>
-        </div>
+        <div class="mini-card"><h4>📝 Text (String)</h4><code>let name = "Maria";</code><p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Always use quotes. Can be any text, even emojis!</p></div>
+        <div class="mini-card"><h4>🔢 Number</h4><code>let age = 30;</code><p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">No quotes. Works with decimals too: <code>3.14</code></p></div>
+        <div class="mini-card"><h4>✅ True / False</h4><code>let isHappy = true;</code><p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Called a "boolean". Only two values: <code>true</code> or <code>false</code></p></div>
     </div>
-
     <h3>🧪 Try It — Variables Live</h3>
-
     <div class="runner">
-        <div class="runner-header">
-            <span class="runner-title">▶ Live Code Runner</span>
-            <span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">Edit the code and press Run!</span>
-        </div>
+        <div class="runner-header"><span class="runner-title">▶ Live Code Runner</span><span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">Edit the code and press Run!</span></div>
         <div class="runner-body">
             <p class="runner-instructions">Change "Your Name" to your actual name, then click <strong>Run Code</strong>:</p>
             <textarea class="code-editor" id="varRunner">// Change the values to match YOU!
@@ -1229,25 +581,10 @@ console.log("City: " + myCity);
             <div class="run-output" id="varOutput"></div>
         </div>
     </div>
-
-    <div class="tip-box">
-        <h4>💡 Changing a Variable</h4>
-        <p>After creating a variable with <code>let</code>, you can change it <em>without</em> writing <code>let</code> again:</p>
-        <div class="code-block" style="margin-top:8px;">
-            <pre><span class="kw">let</span> <span class="var">mood</span> = <span class="str">"happy"</span>;
+    <div class="tip-box"><h4>💡 Changing a Variable</h4><p>After creating a variable with <code>let</code>, you can change it <em>without</em> writing <code>let</code> again:</p><div class="code-block" style="margin-top:8px;"><pre><span class="kw">let</span> <span class="var">mood</span> = <span class="str">"happy"</span>;
 <span class="var">mood</span> = <span class="str">"excited"</span>;  <span class="cmt">// No 'let' needed this time!</span>
-console.<span class="fn">log</span>(<span class="var">mood</span>);  <span class="cmt">// → excited</span></pre>
-        </div>
-    </div>
-
-    <div class="checkpoint">
-        <h4>✅ Before Moving On — Can You Answer?</h4>
-        <ul class="check-list">
-            <li>What is a variable? (A labeled box that holds information)</li>
-            <li>What does <code>let</code> do? (Creates a new variable)</li>
-            <li>Why do strings need quotes? (So JavaScript knows it's text, not code)</li>
-        </ul>
-    </div>
+console.<span class="fn">log</span>(<span class="var">mood</span>);  <span class="cmt">// → excited</span></pre></div></div>
+    <div class="checkpoint"><h4>✅ Before Moving On — Can You Answer?</h4><ul class="check-list"><li>What is a variable? (A labeled box that holds information)</li><li>What does <code>let</code> do? (Creates a new variable)</li><li>Why do strings need quotes? (So JavaScript knows it's text, not code)</li></ul></div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1256,41 +593,16 @@ console.<span class="fn">log</span>(<span class="var">mood</span>);  <span class
 <div id="functions" class="tab-content">
     <h2 class="section-title">🍳 Functions</h2>
     <p class="section-sub">A function is a recipe — a set of instructions you write once and use many times.</p>
-
-    <div class="concept-box">
-        <h3>The Problem Functions Solve</h3>
-        <p>Imagine you need to say "Hello! Welcome! Nice to meet you!" 100 times on your website. Would you write those 3 lines 100 times? No!</p>
-        <p style="margin-bottom:0;">You write them <strong>once inside a function</strong>, then just call that function 100 times.</p>
-    </div>
-
+    <div class="concept-box"><h3>The Problem Functions Solve</h3><p>Imagine you need to say "Hello! Welcome! Nice to meet you!" 100 times on your website. Would you write those 3 lines 100 times? No!</p><p style="margin-bottom:0;">You write them <strong>once inside a function</strong>, then just call that function 100 times.</p></div>
     <h3>Step by Step — Creating a Function</h3>
-
     <div class="step-list">
-        <div class="step">
-            <h4>Write the keyword <code>function</code></h4>
-            <p>"I am creating a recipe."</p>
-        </div>
-        <div class="step">
-            <h4>Give the function a name</h4>
-            <p>Same rules as variables: camelCase, no spaces. Pick an action name like <code>sayHello</code> or <code>makeRed</code>.</p>
-        </div>
-        <div class="step">
-            <h4>Add parentheses <code>()</code></h4>
-            <p>Inputs (ingredients) go here. Leave empty if it doesn't need any inputs yet.</p>
-        </div>
-        <div class="step">
-            <h4>Add curly braces <code>{ }</code></h4>
-            <p>Everything between <code>{</code> and <code>}</code> is the recipe — the instructions that run when you call the function.</p>
-        </div>
-        <div class="step">
-            <h4>Call it with <code>functionName()</code></h4>
-            <p>Writing the name with <code>()</code> at the end <em>executes</em> the function — it runs all the instructions inside.</p>
-        </div>
+        <div class="step"><h4>Write the keyword <code>function</code></h4><p>"I am creating a recipe."</p></div>
+        <div class="step"><h4>Give the function a name</h4><p>Same rules as variables: camelCase, no spaces. Pick an action name like <code>sayHello</code> or <code>makeRed</code>.</p></div>
+        <div class="step"><h4>Add parentheses <code>()</code></h4><p>Inputs (ingredients) go here. Leave empty if it doesn't need any inputs yet.</p></div>
+        <div class="step"><h4>Add curly braces <code>{ }</code></h4><p>Everything between <code>{</code> and <code>}</code> is the recipe — the instructions that run when you call the function.</p></div>
+        <div class="step"><h4>Call it with <code>functionName()</code></h4><p>Writing the name with <code>()</code> at the end <em>executes</em> the function — it runs all the instructions inside.</p></div>
     </div>
-
-    <div class="code-block">
-        <span class="code-tag">JavaScript</span>
-        <pre><span class="cmt">// DEFINE the function (write the recipe once)</span>
+    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="cmt">// DEFINE the function (write the recipe once)</span>
 <span class="kw">function</span> <span class="fn">sayHello</span>() {
     console.<span class="fn">log</span>(<span class="str">"Hello!"</span>);
     console.<span class="fn">log</span>(<span class="str">"Welcome!"</span>);
@@ -1300,15 +612,10 @@ console.<span class="fn">log</span>(<span class="var">mood</span>);  <span class
 <span class="cmt">// CALL the function (follow the recipe)</span>
 <span class="fn">sayHello</span>();  <span class="cmt">// Runs all 3 lines above</span>
 <span class="fn">sayHello</span>();  <span class="cmt">// Runs again!</span>
-<span class="fn">sayHello</span>();  <span class="cmt">// And again!</span></pre>
-    </div>
-
+<span class="fn">sayHello</span>();  <span class="cmt">// And again!</span></pre></div>
     <h3>🧪 Try It — Functions Live</h3>
-
     <div class="runner">
-        <div class="runner-header">
-            <span class="runner-title">▶ Live Code Runner</span>
-        </div>
+        <div class="runner-header"><span class="runner-title">▶ Live Code Runner</span></div>
         <div class="runner-body">
             <p class="runner-instructions">Read the code, then run it. Then <strong>add your own</strong> function at the bottom!</p>
             <textarea class="code-editor" id="fnRunner">// Define a function
@@ -1330,35 +637,19 @@ greet("Sofia");
             <div class="run-output" id="fnOutput"></div>
         </div>
     </div>
-
     <h3>📥 Functions with Inputs (Parameters)</h3>
-
     <p>The <code>name</code> in parentheses is called a <strong>parameter</strong> — it's a variable that holds whatever value you pass in when you call the function.</p>
-
-    <div class="analogy">
-        <h4>🍞 The Toast Analogy</h4>
-        <p><strong>Recipe: makeToast(numberOfSlices)</strong></p>
-        <p>1. Get <em>[numberOfSlices]</em> of bread → 2. Put in toaster → 3. Wait → 4. Take out</p>
-        <p>Now: <code>makeToast(1)</code> makes 1 slice. <code>makeToast(4)</code> makes 4 slices! Same recipe, different result.</p>
-    </div>
-
+    <div class="analogy"><h4>🍞 The Toast Analogy</h4><p><strong>Recipe: makeToast(numberOfSlices)</strong></p><p>1. Get <em>[numberOfSlices]</em> of bread → 2. Put in toaster → 3. Wait → 4. Take out</p><p>Now: <code>makeToast(1)</code> makes 1 slice. <code>makeToast(4)</code> makes 4 slices! Same recipe, different result.</p></div>
     <h3>🔙 Functions That Return a Value</h3>
-
-    <div class="code-block">
-        <span class="code-tag">JavaScript</span>
-        <pre><span class="kw">function</span> <span class="fn">addNumbers</span>(a, b) {
+    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="kw">function</span> <span class="fn">addNumbers</span>(a, b) {
     <span class="kw">let</span> <span class="var">sum</span> = a + b;
     <span class="kw">return</span> <span class="var">sum</span>;  <span class="cmt">// ← send the result back</span>
 }
 
 <span class="kw">let</span> <span class="var">result</span> = <span class="fn">addNumbers</span>(<span class="num">5</span>, <span class="num">3</span>);
-console.<span class="fn">log</span>(<span class="var">result</span>);  <span class="cmt">// → 8</span></pre>
-    </div>
-
+console.<span class="fn">log</span>(<span class="var">result</span>);  <span class="cmt">// → 8</span></pre></div>
     <div class="runner">
-        <div class="runner-header">
-            <span class="runner-title">▶ Challenge — Write Your Own Function</span>
-        </div>
+        <div class="runner-header"><span class="runner-title">▶ Challenge — Write Your Own Function</span></div>
         <div class="runner-body">
             <p class="runner-instructions">The function <code>makeExcited</code> is started for you. Complete it so that it adds "!!!" to any word you give it.</p>
             <textarea class="code-editor" id="fnChallenge">function makeExcited(word) {
@@ -1379,16 +670,7 @@ console.log(makeExcited("Amazing"));
             <div class="run-output" id="fnChallengeOut"></div>
         </div>
     </div>
-
-    <div class="checkpoint">
-        <h4>✅ Before Moving On</h4>
-        <ul class="check-list">
-            <li>What is a function? (A reusable set of instructions)</li>
-            <li>How do you call a function? (Write its name with <code>()</code>)</li>
-            <li>What is a parameter? (A variable that receives the input)</li>
-            <li>What does <code>return</code> do? (Sends a result back)</li>
-        </ul>
-    </div>
+    <div class="checkpoint"><h4>✅ Before Moving On</h4><ul class="check-list"><li>What is a function? (A reusable set of instructions)</li><li>How do you call a function? (Write its name with <code>()</code>)</li><li>What is a parameter? (A variable that receives the input)</li><li>What does <code>return</code> do? (Sends a result back)</li></ul></div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1397,7 +679,6 @@ console.log(makeExcited("Amazing"));
 <div id="practice1" class="tab-content">
     <h2 class="section-title">🎨 Practice 1: Changing Things</h2>
     <p class="section-sub">Let's use variables and functions to make things on screen change!</p>
-
     <div class="demo-area">
         <div class="demo-title">Interactive Demo — Magic Box</div>
         <div id="demoBox">😊</div>
@@ -1410,42 +691,17 @@ console.log(makeExcited("Amazing"));
             <button class="btn btn-secondary btn-sm" onclick="changeEmoji()">🎲 Emoji</button>
         </div>
     </div>
-
     <h3>How Does It Work? Step by Step</h3>
-
     <p>Every element on a webpage has an <strong>ID</strong> — a unique name so JavaScript can find it. Our box has <code>id="demoBox"</code>. Here's how we grab it and change it:</p>
-
     <div class="step-list">
-        <div class="step">
-            <h4>Find the element — <code>document.getElementById()</code></h4>
-            <p>This is like asking: "Hey, page — give me the element with this ID." The answer goes into a variable.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <pre><span class="kw">let</span> <span class="var">box</span> = document.<span class="fn">getElementById</span>(<span class="str">'demoBox'</span>);</pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Change a style property</h4>
-            <p>Use <code>.style.propertyName</code> to change CSS from JavaScript.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <pre><span class="var">box</span>.style.background = <span class="str">'red'</span>;
+        <div class="step"><h4>Find the element — <code>document.getElementById()</code></h4><p>This is like asking: "Hey, page — give me the element with this ID." The answer goes into a variable.</p><div class="code-block" style="margin-top:10px;"><pre><span class="kw">let</span> <span class="var">box</span> = document.<span class="fn">getElementById</span>(<span class="str">'demoBox'</span>);</pre></div></div>
+        <div class="step"><h4>Change a style property</h4><p>Use <code>.style.propertyName</code> to change CSS from JavaScript.</p><div class="code-block" style="margin-top:10px;"><pre><span class="var">box</span>.style.background = <span class="str">'red'</span>;
 <span class="var">box</span>.style.width      = <span class="str">'400px'</span>;
-<span class="var">box</span>.style.borderRadius = <span class="str">'50%'</span>;</pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Change the content</h4>
-            <p>Use <code>.textContent</code> to change the text or emoji inside.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <pre><span class="var">box</span>.textContent = <span class="str">'🎉'</span>;</pre>
-            </div>
-        </div>
+<span class="var">box</span>.style.borderRadius = <span class="str">'50%'</span>;</pre></div></div>
+        <div class="step"><h4>Change the content</h4><p>Use <code>.textContent</code> to change the text or emoji inside.</p><div class="code-block" style="margin-top:10px;"><pre><span class="var">box</span>.textContent = <span class="str">'🎉'</span>;</pre></div></div>
     </div>
-
     <h3>Full Example: makeRed()</h3>
-
-    <div class="code-block">
-        <span class="code-tag">JavaScript</span>
-        <pre><span class="kw">function</span> <span class="fn">makeRed</span>() {
+    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="kw">function</span> <span class="fn">makeRed</span>() {
     <span class="cmt">// Step 1: grab the element</span>
     <span class="kw">let</span> <span class="var">box</span> = document.<span class="fn">getElementById</span>(<span class="str">'demoBox'</span>);
 
@@ -1453,15 +709,10 @@ console.log(makeExcited("Amazing"));
     <span class="var">box</span>.style.background = <span class="str">'red'</span>;
 
     console.<span class="fn">log</span>(<span class="str">'Box is now red! 🔴'</span>);
-}</pre>
-    </div>
-
+}</pre></div>
     <h3>🧪 Your Turn — Add New Colors</h3>
-
     <div class="runner">
-        <div class="runner-header">
-            <span class="runner-title">▶ Live Code Runner — Practice Changing Things</span>
-        </div>
+        <div class="runner-header"><span class="runner-title">▶ Live Code Runner — Practice Changing Things</span></div>
         <div class="runner-body">
             <p class="runner-instructions">This code grabs our box and changes it. Try editing the values and pressing Run!</p>
             <textarea class="code-editor" id="p1Runner">// Grab the box
@@ -1489,25 +740,8 @@ console.log('Done! Look at the box above 👆');
             <div class="run-output" id="p1Output"></div>
         </div>
     </div>
-
-    <div class="warn-box">
-        <h4>⚠️ Common Mistakes</h4>
-        <ul style="padding-left:16px; line-height:2; font-size:0.88rem;">
-            <li><strong>Wrong ID:</strong> <code>'demobox'</code> ≠ <code>'demoBox'</code> — capital letters matter!</li>
-            <li><strong>Missing quotes:</strong> <code>= red</code> should be <code>= 'red'</code></li>
-            <li><strong>Missing quotes around ID:</strong> <code>getElementById(demoBox)</code> won't work — needs <code>'demoBox'</code></li>
-        </ul>
-    </div>
-
-    <div class="checkpoint">
-        <h4>✅ Challenge</h4>
-        <p>Can you write a function that:</p>
-        <ul style="padding-left:16px; line-height:2; font-size:0.88rem;">
-            <li>Makes the box turn purple with a gold border?</li>
-            <li>Makes the box spin? (Hint: <code>box.style.transform = 'rotate(45deg)'</code>)</li>
-            <li>Resets the box back to the original blue?</li>
-        </ul>
-    </div>
+    <div class="warn-box"><h4>⚠️ Common Mistakes</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li><strong>Wrong ID:</strong> <code>'demobox'</code> ≠ <code>'demoBox'</code> — capital letters matter!</li><li><strong>Missing quotes:</strong> <code>= red</code> should be <code>= 'red'</code></li><li><strong>Missing quotes around ID:</strong> <code>getElementById(demoBox)</code> won't work — needs <code>'demoBox'</code></li></ul></div>
+    <div class="checkpoint"><h4>✅ Challenge</h4><p>Can you write a function that:</p><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Makes the box turn purple with a gold border?</li><li>Makes the box spin? (Hint: <code>box.style.transform = 'rotate(45deg)'</code>)</li><li>Resets the box back to the original blue?</li></ul></div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1516,82 +750,41 @@ console.log('Done! Look at the box above 👆');
 <div id="practice2" class="tab-content">
     <h2 class="section-title">🖱️ Practice 2: Events</h2>
     <p class="section-sub">Events are things that happen — clicks, movement, key presses. We can listen and react!</p>
-
-    <div class="concept-box">
-        <h3>What is an Event?</h3>
-        <p>Every time something happens on a webpage — someone clicks, moves the mouse, presses a key — JavaScript can "hear" it and run a function in response.</p>
-        <p style="margin-bottom:0;">We call this <strong>event listening</strong>. Think of it as setting a trap: "When THIS happens, do THAT."</p>
-    </div>
-
+    <div class="concept-box"><h3>What is an Event?</h3><p>Every time something happens on a webpage — someone clicks, moves the mouse, presses a key — JavaScript can "hear" it and run a function in response.</p><p style="margin-bottom:0;">We call this <strong>event listening</strong>. Think of it as setting a trap: "When THIS happens, do THAT."</p></div>
     <h3>🎯 Demo — Click Counter</h3>
-
     <div class="demo-area">
         <div id="clickArea">Click Me!</div>
         <div class="click-count-display" id="clickCounter">0</div>
         <div class="click-label">clicks</div>
         <button class="btn btn-secondary btn-sm" onclick="resetCounter()">↺ Reset</button>
     </div>
-
     <h3>Building the Counter — Step by Step</h3>
-
     <div class="step-list">
-        <div class="step">
-            <h4>Create a variable to keep track of the count</h4>
-            <p>This variable is our "memory" — it stores how many times we've clicked.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <pre><span class="kw">let</span> <span class="var">clickCount</span> = <span class="num">0</span>;  <span class="cmt">// Start at zero</span></pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Grab both elements — the area to click, and the number display</h4>
-            <div class="code-block" style="margin-top:10px;">
-                <pre><span class="kw">let</span> <span class="var">area</span>    = document.<span class="fn">getElementById</span>(<span class="str">'clickArea'</span>);
-<span class="kw">let</span> <span class="var">counter</span> = document.<span class="fn">getElementById</span>(<span class="str">'clickCounter'</span>);</pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Add an event listener — "tell me when someone clicks"</h4>
-            <div class="code-block" style="margin-top:10px;">
-                <pre>area.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
-    <span class="cmt">// This runs every time someone clicks</span>
-    <span class="var">clickCount</span>++;                          <span class="cmt">// Add 1</span>
-    <span class="var">counter</span>.textContent = <span class="var">clickCount</span>;  <span class="cmt">// Update display</span>
-});</pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Understanding <code>clickCount++</code></h4>
-            <p>The <code>++</code> is a shortcut for <code>clickCount = clickCount + 1</code>. It adds 1 to the variable. Programmers love shortcuts!</p>
-        </div>
-        <div class="step">
-            <h4>Optional: React when reaching a milestone</h4>
-            <div class="code-block" style="margin-top:10px;">
-                <pre><span class="kw">if</span> (<span class="var">clickCount</span> === <span class="num">10</span>) {
+        <div class="step"><h4>Create a variable to keep track of the count</h4><p>This variable is our "memory" — it stores how many times we've clicked.</p><div class="code-block" style="margin-top:10px;"><pre><span class="kw">let</span> <span class="var">clickCount</span> = <span class="num">0</span>;  <span class="cmt">// Start at zero</span></pre></div></div>
+        <div class="step"><h4>Grab both elements</h4><div class="code-block" style="margin-top:10px;"><pre><span class="kw">let</span> <span class="var">area</span>    = document.<span class="fn">getElementById</span>(<span class="str">'clickArea'</span>);
+<span class="kw">let</span> <span class="var">counter</span> = document.<span class="fn">getElementById</span>(<span class="str">'clickCounter'</span>);</pre></div></div>
+        <div class="step"><h4>Add an event listener</h4><div class="code-block" style="margin-top:10px;"><pre>area.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+    <span class="var">clickCount</span>++;
+    <span class="var">counter</span>.textContent = <span class="var">clickCount</span>;
+});</pre></div></div>
+        <div class="step"><h4>Understanding <code>clickCount++</code></h4><p>The <code>++</code> is a shortcut for <code>clickCount = clickCount + 1</code>. It adds 1 to the variable. Programmers love shortcuts!</p></div>
+        <div class="step"><h4>Optional: React when reaching a milestone</h4><div class="code-block" style="margin-top:10px;"><pre><span class="kw">if</span> (<span class="var">clickCount</span> === <span class="num">10</span>) {
     area.style.background = <span class="str">'gold'</span>;
     area.textContent = <span class="str">'🎉 10 clicks!'</span>;
-}</pre>
-            </div>
-        </div>
+}</pre></div></div>
     </div>
-
     <h3>🧪 Try It — Events Live</h3>
-
     <div class="runner">
-        <div class="runner-header">
-            <span class="runner-title">▶ Live Code Runner — Event Practice</span>
-        </div>
+        <div class="runner-header"><span class="runner-title">▶ Live Code Runner — Event Practice</span></div>
         <div class="runner-body">
             <p class="runner-instructions">This code runs in the page context — after running, click the Click Area above to see your changes!</p>
             <textarea class="code-editor" id="p2Runner">// Grab the click area
 let area = document.getElementById('clickArea');
 
 // Change what happens on click!
-// Try changing the message or colors.
 area.addEventListener('click', function() {
-    // What do you want to happen each click?
     area.style.background = 'lightblue';
     area.textContent = 'You did it!';
-    
     console.log('Clicked!');
 });
 </textarea>
@@ -1602,36 +795,14 @@ area.addEventListener('click', function() {
             <div class="run-output" id="p2Output"></div>
         </div>
     </div>
-
     <h3>More Event Types</h3>
-
     <div class="card-grid">
-        <div class="mini-card">
-            <h4>🖱️ <code>'click'</code></h4>
-            <p style="font-size:0.82rem; color:var(--muted);">Mouse button pressed and released</p>
-        </div>
-        <div class="mini-card">
-            <h4>🖱️ <code>'mousemove'</code></h4>
-            <p style="font-size:0.82rem; color:var(--muted);">Mouse is moving over element</p>
-        </div>
-        <div class="mini-card">
-            <h4>⬇️ <code>'mousedown'</code></h4>
-            <p style="font-size:0.82rem; color:var(--muted);">Mouse button pressed down</p>
-        </div>
-        <div class="mini-card">
-            <h4>⬆️ <code>'mouseup'</code></h4>
-            <p style="font-size:0.82rem; color:var(--muted);">Mouse button released</p>
-        </div>
+        <div class="mini-card"><h4>🖱️ <code>'click'</code></h4><p style="font-size:0.82rem; color:var(--muted);">Mouse button pressed and released</p></div>
+        <div class="mini-card"><h4>🖱️ <code>'mousemove'</code></h4><p style="font-size:0.82rem; color:var(--muted);">Mouse is moving over element</p></div>
+        <div class="mini-card"><h4>⬇️ <code>'mousedown'</code></h4><p style="font-size:0.82rem; color:var(--muted);">Mouse button pressed down</p></div>
+        <div class="mini-card"><h4>⬆️ <code>'mouseup'</code></h4><p style="font-size:0.82rem; color:var(--muted);">Mouse button released</p></div>
     </div>
-
-    <div class="checkpoint">
-        <h4>✅ Challenge Ideas</h4>
-        <ul style="padding-left:16px; line-height:2; font-size:0.88rem;">
-            <li>Make the counter add 2 per click (change <code>clickCount++</code> to <code>clickCount += 2</code>)</li>
-            <li>Show a special message at 5, 10, and 20 clicks</li>
-            <li>Change the emoji inside the box based on click count</li>
-        </ul>
-    </div>
+    <div class="checkpoint"><h4>✅ Challenge Ideas</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Make the counter add 2 per click (change <code>clickCount++</code> to <code>clickCount += 2</code>)</li><li>Show a special message at 5, 10, and 20 clicks</li><li>Change the emoji inside the box based on click count</li></ul></div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1640,8 +811,6 @@ area.addEventListener('click', function() {
 <div id="drawing" class="tab-content">
     <h2 class="section-title">✏️ Mini-Project: Drawing App</h2>
     <p class="section-sub">You're going to build this from scratch — a real file on your computer. Follow every step in order.</p>
-
-    <!-- FINISHED RESULT PREVIEW -->
     <div class="demo-area">
         <div class="demo-title">🎯 What You're Building — Try It First!</div>
         <canvas id="drawCanvas" width="760" height="300"></canvas>
@@ -1661,105 +830,39 @@ area.addEventListener('click', function() {
         </div>
         <p style="font-size:0.78rem; color:var(--muted); margin-top:10px;">Click and drag to draw. This is exactly what you'll build in the steps below.</p>
     </div>
-
-    <!-- SETUP -->
-    <div class="concept-box">
-        <h3>📁 Before You Start — Create Your File</h3>
-        <p>Open your code editor (VS Code, Notepad++, or any text editor). Create a new file called <strong>drawing.html</strong> and save it on your Desktop or in a folder you can find.</p>
-        <p style="margin-bottom:0; margin-top:8px;">That's it — one file. HTML, CSS, and JavaScript all go inside it.</p>
-    </div>
-
-    <!-- ── PHASE 1: HTML ── -->
-    <div style="margin: 32px 0 8px;">
-        <span style="display:inline-flex;align-items:center;gap:8px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:6px 14px;">
-            <span style="font-size:1.2rem;">🧱</span>
-            <strong style="color:#9a3412;font-size:0.95rem;">PHASE 1 — HTML: The Structure</strong>
-        </span>
-    </div>
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">HTML defines what elements exist on the page. We need a canvas to draw on and buttons to control it.</p>
-
+    <div class="concept-box"><h3>📁 Before You Start — Create Your File</h3><p>Open your code editor (VS Code, Notepad++, or any text editor). Create a new file called <strong>drawing.html</strong> and save it on your Desktop or in a folder you can find.</p><p style="margin-bottom:0; margin-top:8px;">That's it — one file. HTML, CSS, and JavaScript all go inside it.</p></div>
+    <div style="margin: 32px 0 8px;"><span style="display:inline-flex;align-items:center;gap:8px;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:6px 14px;"><span style="font-size:1.2rem;">🧱</span><strong style="color:#9a3412;font-size:0.95rem;">PHASE 1 — HTML: The Structure</strong></span></div>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">HTML defines what elements exist on the page.</p>
     <div class="step-list">
-        <div class="step">
-            <h4>Start with the HTML skeleton</h4>
-            <p>Every HTML file starts with this. Copy it exactly into your <strong>drawing.html</strong> file:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">drawing.html</span>
-                <pre><span class="cmt">&lt;!-- Every webpage starts with this --&gt;</span>
-&lt;!DOCTYPE html&gt;
+        <div class="step"><h4>Start with the HTML skeleton</h4><p>Copy it exactly into your <strong>drawing.html</strong> file:</p><div class="code-block" style="margin-top:10px;"><span class="code-tag">drawing.html</span><pre>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
-
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My Drawing App&lt;/title&gt;
 &lt;/head&gt;
-
 &lt;body&gt;
-    <span class="cmt">&lt;!-- Your content goes here --&gt;</span>
+    &lt;!-- Your content goes here --&gt;
 &lt;/body&gt;
-
-&lt;/html&gt;</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save the file and open it in your browser (double-click the file). You should see a blank white page — that's correct!</p>
-        </div>
-
-        <div class="step">
-            <h4>Add a title heading inside <code>&lt;body&gt;</code></h4>
-            <p>Replace the comment <code>&lt;!-- Your content goes here --&gt;</code> with this:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;body&gt;</span>
-                <pre>&lt;h1&gt;🎨 My Drawing App&lt;/h1&gt;</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. You should now see a big heading on the page.</p>
-        </div>
-
-        <div class="step">
-            <h4>Add the <code>&lt;canvas&gt;</code> element</h4>
-            <p>The canvas is our drawing area. It's like a blank piece of paper on the page. Add it below the heading:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;body&gt;, after &lt;h1&gt;</span>
-                <pre>&lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;</pre>
-            </div>
-            <div class="tip-box" style="margin-top:10px;">
-                <h4>💡 What do width and height do?</h4>
-                <p><code>width="800"</code> and <code>height="500"</code> set the drawing area size in pixels. The <code>id="myCanvas"</code> is the name we'll use to find it in JavaScript later.</p>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. You won't see anything yet — the canvas exists but has no style or colour.</p>
-        </div>
-
-        <div class="step">
-            <h4>Add the colour buttons</h4>
-            <p>Below the canvas, add a row of buttons — one for each colour. The <code>onclick</code> attribute calls a JavaScript function when the button is clicked (we'll write that function in Phase 3):</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;body&gt;, after &lt;canvas&gt;</span>
-                <pre>&lt;div id="controls"&gt;
+&lt;/html&gt;</pre></div><p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and open in your browser. You should see a blank white page — that's correct!</p></div>
+        <div class="step"><h4>Add a title heading inside <code>&lt;body&gt;</code></h4><div class="code-block" style="margin-top:10px;"><pre>&lt;h1&gt;🎨 My Drawing App&lt;/h1&gt;</pre></div><p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. You should see a big heading.</p></div>
+        <div class="step"><h4>Add the <code>&lt;canvas&gt;</code> element</h4><div class="code-block" style="margin-top:10px;"><pre>&lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;</pre></div><div class="tip-box" style="margin-top:10px;"><h4>💡 What do width and height do?</h4><p>They set the drawing area size in pixels. The <code>id="myCanvas"</code> is the name we'll use in JavaScript.</p></div></div>
+        <div class="step"><h4>Add the colour buttons</h4><div class="code-block" style="margin-top:10px;"><pre>&lt;div id="controls"&gt;
     &lt;button onclick="setColor('black')"&gt;⚫ Black&lt;/button&gt;
     &lt;button onclick="setColor('red')"&gt;🔴 Red&lt;/button&gt;
     &lt;button onclick="setColor('blue')"&gt;🔵 Blue&lt;/button&gt;
     &lt;button onclick="setColor('green')"&gt;🟢 Green&lt;/button&gt;
     &lt;button onclick="clearCanvas()"&gt;🗑️ Clear&lt;/button&gt;
-&lt;/div&gt;</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. You should see buttons appear, but clicking them will show an error in the console (F12) — that's expected! We haven't written those functions yet.</p>
-        </div>
+&lt;/div&gt;</pre></div></div>
     </div>
-
-    <div class="checkpoint" style="margin: 24px 0;">
-        <h4>✅ End of Phase 1 — Your HTML should look like this:</h4>
-        <div class="code-block" style="margin-top:10px;">
-            <span class="code-tag">drawing.html — full file so far</span>
-            <pre>&lt;!DOCTYPE html&gt;
+    <div class="checkpoint" style="margin: 24px 0;"><h4>✅ End of Phase 1 — Full HTML so far:</h4><div class="code-block" style="margin-top:10px;"><span class="code-tag">drawing.html</span><pre>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
-
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My Drawing App&lt;/title&gt;
 &lt;/head&gt;
-
 &lt;body&gt;
     &lt;h1&gt;🎨 My Drawing App&lt;/h1&gt;
-
     &lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;
-
     &lt;div id="controls"&gt;
         &lt;button onclick="setColor('black')"&gt;⚫ Black&lt;/button&gt;
         &lt;button onclick="setColor('red')"&gt;🔴 Red&lt;/button&gt;
@@ -1767,85 +870,29 @@ area.addEventListener('click', function() {
         &lt;button onclick="setColor('green')"&gt;🟢 Green&lt;/button&gt;
         &lt;button onclick="clearCanvas()"&gt;🗑️ Clear&lt;/button&gt;
     &lt;/div&gt;
-
 &lt;/body&gt;
-
-&lt;/html&gt;</pre>
-        </div>
-    </div>
-
-    <!-- ── PHASE 2: CSS ── -->
-    <div style="margin: 32px 0 8px;">
-        <span style="display:inline-flex;align-items:center;gap:8px;background:#fdf4ff;border:1px solid #e9d5ff;border-radius:8px;padding:6px 14px;">
-            <span style="font-size:1.2rem;">🎨</span>
-            <strong style="color:#6b21a8;font-size:0.95rem;">PHASE 2 — CSS: Making It Look Good</strong>
-        </span>
-    </div>
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">The canvas exists but looks invisible. CSS will make it visible, centred, and give it a border so students can see where to draw.</p>
-
+&lt;/html&gt;</pre></div></div>
+    <div style="margin: 32px 0 8px;"><span style="display:inline-flex;align-items:center;gap:8px;background:#fdf4ff;border:1px solid #e9d5ff;border-radius:8px;padding:6px 14px;"><span style="font-size:1.2rem;">🎨</span><strong style="color:#6b21a8;font-size:0.95rem;">PHASE 2 — CSS: Making It Look Good</strong></span></div>
     <div class="step-list">
-        <div class="step">
-            <h4>Add a <code>&lt;style&gt;</code> tag inside <code>&lt;head&gt;</code></h4>
-            <p>CSS goes inside a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code> section. Add it after the <code>&lt;title&gt;</code>:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;head&gt;</span>
-                <pre>&lt;style&gt;
-    /* CSS goes here — we'll add rules in the next steps */
-&lt;/style&gt;</pre>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Style the page background and font</h4>
-            <p>Inside your <code>&lt;style&gt;</code> tag, add rules for the <code>body</code>:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;style&gt;</span>
-                <pre>body {
-    background: #f0f0f0;   /* light grey background */
+        <div class="step"><h4>Add a <code>&lt;style&gt;</code> tag inside <code>&lt;head&gt;</code></h4><div class="code-block" style="margin-top:10px;"><pre>&lt;style&gt;
+    /* CSS goes here */
+&lt;/style&gt;</pre></div></div>
+        <div class="step"><h4>Style the page background and font</h4><div class="code-block" style="margin-top:10px;"><pre>body {
+    background: #f0f0f0;
     font-family: Arial, sans-serif;
-    text-align: center;    /* centre everything */
+    text-align: center;
     padding: 20px;
-}</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. The background should turn light grey and your heading should be centred.</p>
-        </div>
-
-        <div class="step">
-            <h4>Style the canvas — give it a visible border</h4>
-            <p>Without any style, the canvas is invisible. Add this rule to make it visible and give it a white drawing background:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;style&gt;</span>
-                <pre>#myCanvas {
-    background: white;           /* white drawing area */
-    border: 3px solid #333;      /* dark border */
-    border-radius: 10px;         /* rounded corners */
-    cursor: crosshair;           /* crosshair cursor */
-    display: block;              /* block so margin works */
-    margin: 20px auto;           /* centre horizontally */
-    max-width: 100%;             /* don't overflow on mobile */
-}</pre>
-            </div>
-            <div class="analogy" style="margin-top:10px;">
-                <h4>💡 Why these properties?</h4>
-                <ul style="padding-left:16px; line-height:2; font-size:0.85rem; margin:0;">
-                    <li><code>cursor: crosshair</code> — changes the mouse pointer to a + when hovering over the canvas, so it feels like a drawing tool</li>
-                    <li><code>display: block; margin: 0 auto</code> — the standard trick to horizontally centre a block element</li>
-                    <li><code>max-width: 100%</code> — prevents the canvas from going off-screen on small devices</li>
-                </ul>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. You should now see a white rectangle with a dark border — your canvas!</p>
-        </div>
-
-        <div class="step">
-            <h4>Style the control buttons</h4>
-            <p>Make the buttons look nicer and space them out:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;style&gt;</span>
-                <pre>#controls {
-    margin: 10px 0;
-}
-
-#controls button {
+}</pre></div></div>
+        <div class="step"><h4>Style the canvas</h4><div class="code-block" style="margin-top:10px;"><pre>#myCanvas {
+    background: white;
+    border: 3px solid #333;
+    border-radius: 10px;
+    cursor: crosshair;
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+}</pre></div></div>
+        <div class="step"><h4>Style the buttons</h4><div class="code-block" style="margin-top:10px;"><pre>#controls button {
     padding: 10px 20px;
     margin: 5px;
     font-size: 16px;
@@ -1855,257 +902,53 @@ area.addEventListener('click', function() {
     color: white;
     cursor: pointer;
 }
-
-#controls button:hover {
-    background: #555;   /* slightly lighter on hover */
-}</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. The buttons should now look clean and dark. Hover over them — they change colour!</p>
-        </div>
+#controls button:hover { background: #555; }</pre></div></div>
     </div>
-
-    <div class="checkpoint" style="margin: 24px 0;">
-        <h4>✅ End of Phase 2 — Your full &lt;style&gt; block should look like this:</h4>
-        <div class="code-block" style="margin-top:10px;">
-            <span class="code-tag">inside &lt;head&gt;</span>
-            <pre>&lt;style&gt;
-    body {
-        background: #f0f0f0;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-    }
-
-    #myCanvas {
-        background: white;
-        border: 3px solid #333;
-        border-radius: 10px;
-        cursor: crosshair;
-        display: block;
-        margin: 20px auto;
-        max-width: 100%;
-    }
-
-    #controls {
-        margin: 10px 0;
-    }
-
-    #controls button {
-        padding: 10px 20px;
-        margin: 5px;
-        font-size: 16px;
-        border: none;
-        border-radius: 8px;
-        background: #333;
-        color: white;
-        cursor: pointer;
-    }
-
-    #controls button:hover {
-        background: #555;
-    }
-&lt;/style&gt;</pre>
-        </div>
-    </div>
-
-    <!-- ── PHASE 3: JAVASCRIPT ── -->
-    <div style="margin: 32px 0 8px;">
-        <span style="display:inline-flex;align-items:center;gap:8px;background:#fefce8;border:1px solid #fef08a;border-radius:8px;padding:6px 14px;">
-            <span style="font-size:1.2rem;">⚡</span>
-            <strong style="color:#854d0e;font-size:0.95rem;">PHASE 3 — JavaScript: Making It Work</strong>
-        </span>
-    </div>
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">This is where the magic happens. We write JavaScript to respond to mouse events and draw lines on the canvas.</p>
-
+    <div style="margin: 32px 0 8px;"><span style="display:inline-flex;align-items:center;gap:8px;background:#fefce8;border:1px solid #fef08a;border-radius:8px;padding:6px 14px;"><span style="font-size:1.2rem;">⚡</span><strong style="color:#854d0e;font-size:0.95rem;">PHASE 3 — JavaScript: Making It Work</strong></span></div>
     <div class="step-list">
-        <div class="step">
-            <h4>Add a <code>&lt;script&gt;</code> tag — at the bottom of <code>&lt;body&gt;</code></h4>
-            <p>JavaScript goes inside a <code>&lt;script&gt;</code> tag. Put it <strong>just before</strong> the closing <code>&lt;/body&gt;</code> tag (not in <code>&lt;head&gt;</code>) — this ensures the HTML elements exist before the script runs:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">at the bottom of &lt;body&gt;, before &lt;/body&gt;</span>
-                <pre>&lt;script&gt;
-    // JavaScript goes here — we'll add code in the next steps
-&lt;/script&gt;</pre>
-            </div>
-            <div class="warn-box" style="margin-top:10px;">
-                <h4>⚠️ Why at the bottom?</h4>
-                <p>If the script runs before the HTML loads, <code>getElementById</code> won't find the canvas — it doesn't exist yet! Putting <code>&lt;script&gt;</code> at the bottom of <code>&lt;body&gt;</code> guarantees all elements are ready first.</p>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Grab the canvas and get the drawing context</h4>
-            <p>Inside your <code>&lt;script&gt;</code> tag, add these two lines. They find the canvas and get the "paintbrush" (<code>ctx</code>) we use to draw:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="cmt">// Step 1: find the canvas element by its id</span>
-<span class="kw">let</span> <span class="var">canvas</span> = document.<span class="fn">getElementById</span>(<span class="str">'myCanvas'</span>);
-
-<span class="cmt">// Step 2: get the "2d drawing context" — our paintbrush</span>
-<span class="kw">let</span> <span class="var">ctx</span> = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);</pre>
-            </div>
-            <div class="tip-box" style="margin-top:10px;">
-                <h4>💡 What is ctx?</h4>
-                <p><code>ctx</code> is short for "context". Think of it as your paintbrush — all drawing commands go through it: <code>ctx.lineTo()</code>, <code>ctx.stroke()</code>, <code>ctx.fillRect()</code> etc. The <code>'2d'</code> means we want to draw in 2 dimensions (as opposed to 3D / WebGL).</p>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Create variables to track drawing state</h4>
-            <p>We need two pieces of information stored as variables: <em>are we currently drawing?</em> and <em>what colour are we using?</em></p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;, after getting ctx</span>
-                <pre><span class="cmt">// Is the mouse button held down right now?</span>
-<span class="kw">let</span> <span class="var">isDrawing</span> = <span class="kw">false</span>;
-
-<span class="cmt">// What colour are we drawing with?</span>
-<span class="kw">let</span> <span class="var">currentColor</span> = <span class="str">'black'</span>;</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">These are like on/off switches and memory slots that our event listeners will read and update.</p>
-        </div>
-
-        <div class="step">
-            <h4>Listen for <code>mousedown</code> — when the mouse button is pressed</h4>
-            <p>When the user presses the mouse button on the canvas, we want to <em>start</em> drawing. We set <code>isDrawing</code> to <code>true</code> and tell the canvas where the line begins:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre>canvas.<span class="fn">addEventListener</span>(<span class="str">'mousedown'</span>, <span class="kw">function</span>(e) {
-    <span class="var">isDrawing</span> = <span class="kw">true</span>;         <span class="cmt">// pen is now ON the paper</span>
-
-    ctx.<span class="fn">beginPath</span>();           <span class="cmt">// start a new line</span>
-    ctx.<span class="fn">moveTo</span>(e.offsetX, e.offsetY); <span class="cmt">// move to where the mouse is</span>
-});</pre>
-            </div>
-            <div class="analogy" style="margin-top:10px;">
-                <h4>📍 What is e.offsetX and e.offsetY?</h4>
-                <p>When an event fires, JavaScript gives us an <code>e</code> object (short for "event") full of information about what happened. <code>e.offsetX</code> and <code>e.offsetY</code> are the X and Y pixel coordinates of the mouse <em>relative to the canvas</em>. So if the mouse is in the top-left corner of the canvas, <code>offsetX = 0</code> and <code>offsetY = 0</code>.</p>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Listen for <code>mousemove</code> — when the mouse is dragged</h4>
-            <p>While the mouse moves, <em>if</em> the button is held down, we draw a line to the new position and call <code>stroke()</code> to make it visible:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre>canvas.<span class="fn">addEventListener</span>(<span class="str">'mousemove'</span>, <span class="kw">function</span>(e) {
-    <span class="cmt">// Only draw if the mouse button is being held</span>
-    <span class="kw">if</span> (<span class="var">isDrawing</span> === <span class="kw">false</span>) {
-        <span class="kw">return</span>;  <span class="cmt">// stop here — don't draw</span>
-    }
-
-    ctx.<span class="fn">lineTo</span>(e.offsetX, e.offsetY);  <span class="cmt">// draw line to new position</span>
-
-    ctx.strokeStyle = <span class="var">currentColor</span>;  <span class="cmt">// use our colour variable</span>
-    ctx.lineWidth   = <span class="num">5</span>;              <span class="cmt">// thickness in pixels</span>
-    ctx.lineCap     = <span class="str">'round'</span>;        <span class="cmt">// round line ends (nicer!)</span>
-
-    ctx.<span class="fn">stroke</span>();  <span class="cmt">// actually draw the line on screen</span>
-});</pre>
-            </div>
-            <div class="tip-box" style="margin-top:10px;">
-                <h4>💡 Why check isDrawing?</h4>
-                <p>The <code>mousemove</code> event fires constantly — even when you're just moving the mouse over the canvas without clicking. Without the <code>if</code> check, it would draw a line every time the mouse moves, even when you don't want it to!</p>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. Try clicking and dragging on the canvas — you should see a black line appear!</p>
-        </div>
-
-        <div class="step">
-            <h4>Listen for <code>mouseup</code> and <code>mouseleave</code> — when to stop drawing</h4>
-            <p>When the user releases the mouse button OR moves the mouse off the canvas, we stop drawing:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="cmt">// Mouse button released → stop drawing</span>
-canvas.<span class="fn">addEventListener</span>(<span class="str">'mouseup'</span>, <span class="kw">function</span>() {
-    <span class="var">isDrawing</span> = <span class="kw">false</span>;  <span class="cmt">// pen is now OFF the paper</span>
-});
-
-<span class="cmt">// Mouse left the canvas → also stop drawing</span>
-canvas.<span class="fn">addEventListener</span>(<span class="str">'mouseleave'</span>, <span class="kw">function</span>() {
-    <span class="var">isDrawing</span> = <span class="kw">false</span>;
-});</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">Without <code>mouseleave</code>, if you drag the mouse off the edge and release outside the canvas, it keeps drawing when you come back. Try adding this event and see the difference!</p>
-        </div>
-
-        <div class="step">
-            <h4>Write the <code>setColor()</code> function</h4>
-            <p>The buttons call <code>setColor('red')</code> etc — now we write that function. All it does is update the <code>currentColor</code> variable:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="kw">function</span> <span class="fn">setColor</span>(newColor) {
-    <span class="cmt">// Update our colour variable</span>
+        <div class="step"><h4>Add a <code>&lt;script&gt;</code> tag before <code>&lt;/body&gt;</code></h4><div class="warn-box" style="margin-top:10px;"><h4>⚠️ Why at the bottom?</h4><p>If the script runs before the HTML loads, <code>getElementById</code> won't find the canvas — it doesn't exist yet!</p></div></div>
+        <div class="step"><h4>Grab the canvas and get the drawing context</h4><div class="code-block" style="margin-top:10px;"><pre><span class="kw">let</span> <span class="var">canvas</span> = document.<span class="fn">getElementById</span>(<span class="str">'myCanvas'</span>);
+<span class="kw">let</span> <span class="var">ctx</span> = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);</pre></div><div class="tip-box" style="margin-top:10px;"><h4>💡 What is ctx?</h4><p><code>ctx</code> is your paintbrush — all drawing commands go through it.</p></div></div>
+        <div class="step"><h4>Create state variables</h4><div class="code-block" style="margin-top:10px;"><pre><span class="kw">let</span> <span class="var">isDrawing</span> = <span class="kw">false</span>;
+<span class="kw">let</span> <span class="var">currentColor</span> = <span class="str">'black'</span>;</pre></div></div>
+        <div class="step"><h4>Listen for mousedown</h4><div class="code-block" style="margin-top:10px;"><pre>canvas.<span class="fn">addEventListener</span>(<span class="str">'mousedown'</span>, <span class="kw">function</span>(e) {
+    <span class="var">isDrawing</span> = <span class="kw">true</span>;
+    ctx.<span class="fn">beginPath</span>();
+    ctx.<span class="fn">moveTo</span>(e.offsetX, e.offsetY);
+});</pre></div></div>
+        <div class="step"><h4>Listen for mousemove</h4><div class="code-block" style="margin-top:10px;"><pre>canvas.<span class="fn">addEventListener</span>(<span class="str">'mousemove'</span>, <span class="kw">function</span>(e) {
+    <span class="kw">if</span> (<span class="var">isDrawing</span> === <span class="kw">false</span>) { <span class="kw">return</span>; }
+    ctx.<span class="fn">lineTo</span>(e.offsetX, e.offsetY);
+    ctx.strokeStyle = <span class="var">currentColor</span>;
+    ctx.lineWidth   = <span class="num">5</span>;
+    ctx.lineCap     = <span class="str">'round'</span>;
+    ctx.<span class="fn">stroke</span>();
+});</pre></div><p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. Click and drag on the canvas — you should see a line appear!</p></div>
+        <div class="step"><h4>Listen for mouseup and mouseleave</h4><div class="code-block" style="margin-top:10px;"><pre>canvas.<span class="fn">addEventListener</span>(<span class="str">'mouseup'</span>,    <span class="kw">function</span>() { <span class="var">isDrawing</span> = <span class="kw">false</span>; });
+canvas.<span class="fn">addEventListener</span>(<span class="str">'mouseleave'</span>, <span class="kw">function</span>() { <span class="var">isDrawing</span> = <span class="kw">false</span>; });</pre></div></div>
+        <div class="step"><h4>Write setColor() and clearCanvas()</h4><div class="code-block" style="margin-top:10px;"><pre><span class="kw">function</span> <span class="fn">setColor</span>(newColor) {
     <span class="var">currentColor</span> = newColor;
-
-    console.<span class="fn">log</span>(<span class="str">'Colour changed to: '</span> + newColor);
-}</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Save and refresh. Click a colour button, then draw. The line colour should change!</p>
-        </div>
-
-        <div class="step">
-            <h4>Write the <code>clearCanvas()</code> function</h4>
-            <p>The Clear button calls <code>clearCanvas()</code>. The canvas API has a built-in method for this — <code>clearRect()</code> which erases a rectangle. We erase the whole canvas:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="kw">function</span> <span class="fn">clearCanvas</span>() {
-    <span class="cmt">// clearRect(x, y, width, height)</span>
-    <span class="cmt">// Start at 0,0 and erase the full canvas size</span>
+}
+<span class="kw">function</span> <span class="fn">clearCanvas</span>() {
     ctx.<span class="fn">clearRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);
-
-    console.<span class="fn">log</span>(<span class="str">'Canvas cleared!'</span>);
-}</pre>
-            </div>
-            <p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Draw something, then click Clear. The canvas should wipe clean.</p>
-        </div>
+}</pre></div><p style="margin-top:8px; font-size:0.85rem; color:var(--muted);">👉 Click a colour button and draw. The Clear button should wipe the canvas.</p></div>
     </div>
-
-    <!-- FINAL FILE -->
-    <div class="checkpoint" style="margin: 24px 0;">
-        <h4>✅ End of Phase 3 — Your complete drawing.html file:</h4>
-        <div class="code-block" style="margin-top:10px;">
-            <span class="code-tag">drawing.html — complete finished file</span>
-            <pre>&lt;!DOCTYPE html&gt;
+    <div class="checkpoint" style="margin: 24px 0;"><h4>✅ Complete drawing.html:</h4><div class="code-block" style="margin-top:10px;"><span class="code-tag">complete file</span><pre>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
-
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My Drawing App&lt;/title&gt;
     &lt;style&gt;
-        body {
-            background: #f0f0f0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        #myCanvas {
-            background: white;
-            border: 3px solid #333;
-            border-radius: 10px;
-            cursor: crosshair;
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
-        }
+        body { background: #f0f0f0; font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #myCanvas { background: white; border: 3px solid #333; border-radius: 10px; cursor: crosshair; display: block; margin: 20px auto; max-width: 100%; }
         #controls { margin: 10px 0; }
-        #controls button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            background: #333;
-            color: white;
-            cursor: pointer;
-        }
+        #controls button { padding: 10px 20px; margin: 5px; font-size: 16px; border: none; border-radius: 8px; background: #333; color: white; cursor: pointer; }
         #controls button:hover { background: #555; }
     &lt;/style&gt;
 &lt;/head&gt;
-
 &lt;body&gt;
     &lt;h1&gt;🎨 My Drawing App&lt;/h1&gt;
-
     &lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;
-
     &lt;div id="controls"&gt;
         &lt;button onclick="setColor('black')"&gt;⚫ Black&lt;/button&gt;
         &lt;button onclick="setColor('red')"&gt;🔴 Red&lt;/button&gt;
@@ -2113,128 +956,30 @@ canvas.<span class="fn">addEventListener</span>(<span class="str">'mouseleave'</
         &lt;button onclick="setColor('green')"&gt;🟢 Green&lt;/button&gt;
         &lt;button onclick="clearCanvas()"&gt;🗑️ Clear&lt;/button&gt;
     &lt;/div&gt;
-
     &lt;script&gt;
         let canvas = document.getElementById('myCanvas');
         let ctx    = canvas.getContext('2d');
-
         let isDrawing    = false;
         let currentColor = 'black';
-
-        canvas.addEventListener('mousedown', function(e) {
-            isDrawing = true;
-            ctx.beginPath();
-            ctx.moveTo(e.offsetX, e.offsetY);
-        });
-
-        canvas.addEventListener('mousemove', function(e) {
-            if (isDrawing === false) { return; }
-            ctx.lineTo(e.offsetX, e.offsetY);
-            ctx.strokeStyle = currentColor;
-            ctx.lineWidth   = 5;
-            ctx.lineCap     = 'round';
-            ctx.stroke();
-        });
-
-        canvas.addEventListener('mouseup', function() {
-            isDrawing = false;
-        });
-
-        canvas.addEventListener('mouseleave', function() {
-            isDrawing = false;
-        });
-
-        function setColor(newColor) {
-            currentColor = newColor;
-        }
-
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
+        canvas.addEventListener('mousedown', function(e) { isDrawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
+        canvas.addEventListener('mousemove', function(e) { if (!isDrawing) return; ctx.lineTo(e.offsetX, e.offsetY); ctx.strokeStyle = currentColor; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.stroke(); });
+        canvas.addEventListener('mouseup',    function() { isDrawing = false; });
+        canvas.addEventListener('mouseleave', function() { isDrawing = false; });
+        function setColor(c) { currentColor = c; }
+        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
     &lt;/script&gt;
-
 &lt;/body&gt;
-&lt;/html&gt;</pre>
-        </div>
-    </div>
-
-    <!-- WHAT YOU USED -->
-    <div class="concept-box">
-        <h3>🎉 What You Just Built — And What You Used</h3>
-        <div class="card-grid" style="margin-top:12px;">
-            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
-                <strong style="color:var(--accent3);">🧱 HTML</strong>
-                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
-                    <li><code>&lt;canvas&gt;</code> — drawing area</li>
-                    <li><code>&lt;button onclick&gt;</code> — calls JS functions</li>
-                </ul>
-            </div>
-            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
-                <strong style="color:var(--accent3);">🎨 CSS</strong>
-                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
-                    <li><code>cursor: crosshair</code></li>
-                    <li><code>border</code>, <code>border-radius</code></li>
-                    <li><code>display: block; margin: auto</code></li>
-                    <li><code>:hover</code> state on buttons</li>
-                </ul>
-            </div>
-            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
-                <strong style="color:var(--accent3);">⚡ JavaScript</strong>
-                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
-                    <li>Variables — <code>isDrawing</code>, <code>currentColor</code></li>
-                    <li>Functions — <code>setColor()</code>, <code>clearCanvas()</code></li>
-                    <li>Events — <code>mousedown</code>, <code>mousemove</code>, <code>mouseup</code></li>
-                    <li>Canvas API — <code>ctx.lineTo()</code>, <code>ctx.stroke()</code></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHALLENGES -->
+&lt;/html&gt;</pre></div></div>
+    <div class="concept-box"><h3>🎉 What You Just Built</h3><div class="card-grid" style="margin-top:12px;"><div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;"><strong style="color:var(--accent3);">🧱 HTML</strong><ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;"><li><code>&lt;canvas&gt;</code> — drawing area</li><li><code>&lt;button onclick&gt;</code> — calls JS functions</li></ul></div><div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;"><strong style="color:var(--accent3);">🎨 CSS</strong><ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;"><li><code>cursor: crosshair</code></li><li><code>border</code>, <code>border-radius</code></li><li><code>display: block; margin: auto</code></li></ul></div><div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;"><strong style="color:var(--accent3);">⚡ JavaScript</strong><ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;"><li>Variables — <code>isDrawing</code>, <code>currentColor</code></li><li>Functions — <code>setColor()</code>, <code>clearCanvas()</code></li><li>Events — <code>mousedown</code>, <code>mousemove</code>, <code>mouseup</code></li></ul></div></div></div>
     <h3>🚀 Challenges — Make It Your Own</h3>
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">Finished early? Try extending your app. Each one is one or two lines of code:</p>
-
     <div class="step-list">
-        <div class="step">
-            <h4>Challenge 1 — Add more colours</h4>
-            <p>Copy one of the colour buttons in your HTML and change the colour name. Any CSS colour name works: <code>'orange'</code>, <code>'hotpink'</code>, <code>'purple'</code>, <code>'#ff6b6b'</code>…</p>
-        </div>
-        <div class="step">
-            <h4>Challenge 2 — Add a brush size slider</h4>
-            <p>Add an <code>&lt;input type="range"&gt;</code> to the HTML, then in JavaScript change <code>lineWidth</code> to use the slider value instead of a fixed <code>5</code>.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">HTML hint</span>
-                <pre>&lt;input type="range" id="sizeSlider" min="2" max="30" value="5"&gt;</pre>
-            </div>
-            <div class="code-block" style="margin-top:6px;">
-                <span class="code-tag">JS hint — replace the fixed lineWidth with this</span>
-                <pre><span class="kw">let</span> <span class="var">sizeSlider</span> = document.<span class="fn">getElementById</span>(<span class="str">'sizeSlider'</span>);
-ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Challenge 3 — Add an Eraser button</h4>
-            <p>An eraser is just a white brush! Add a button that calls <code>setColor('white')</code>:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">HTML</span>
-                <pre>&lt;button onclick="setColor('white')"&gt;⬜ Eraser&lt;/button&gt;</pre>
-            </div>
-        </div>
-        <div class="step">
-            <h4>Challenge 4 — Change the background colour</h4>
-            <p>Use CSS or JavaScript to change the canvas background from white to something else. What happens to your eraser when you do?</p>
-        </div>
+        <div class="step"><h4>Challenge 1 — Add more colours</h4><p>Copy one of the colour buttons and change the colour name. Try <code>'orange'</code>, <code>'hotpink'</code>, <code>'purple'</code>…</p></div>
+        <div class="step"><h4>Challenge 2 — Add a brush size slider</h4><div class="code-block" style="margin-top:10px;"><span class="code-tag">HTML hint</span><pre>&lt;input type="range" id="sizeSlider" min="2" max="30" value="5"&gt;</pre></div><div class="code-block" style="margin-top:6px;"><span class="code-tag">JS hint</span><pre><span class="kw">let</span> <span class="var">sizeSlider</span> = document.<span class="fn">getElementById</span>(<span class="str">'sizeSlider'</span>);
+ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre></div></div>
+        <div class="step"><h4>Challenge 3 — Add an Eraser button</h4><div class="code-block" style="margin-top:10px;"><span class="code-tag">HTML</span><pre>&lt;button onclick="setColor('white')"&gt;⬜ Eraser&lt;/button&gt;</pre></div></div>
+        <div class="step"><h4>Challenge 4 — Change the background colour</h4><p>Use CSS or JavaScript to change the canvas background from white. What happens to your eraser when you do?</p></div>
     </div>
-
-    <div class="tip-box">
-        <h4>💡 Something not working?</h4>
-        <ul style="padding-left:16px; line-height:2; font-size:0.88rem;">
-            <li>Open the browser console (<strong>F12 → Console</strong>) — error messages appear there in red</li>
-            <li>Check that your <code>id="myCanvas"</code> in HTML matches exactly <code>'myCanvas'</code> in JavaScript (capital C!)</li>
-            <li>Make sure your <code>&lt;script&gt;</code> tag is <em>before</em> <code>&lt;/body&gt;</code>, not inside <code>&lt;head&gt;</code></li>
-            <li>If nothing draws, check you're clicking AND dragging, not just hovering</li>
-        </ul>
-    </div>
+    <div class="tip-box"><h4>💡 Something not working?</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Open the browser console (<strong>F12 → Console</strong>) — error messages appear there in red</li><li>Check that <code>id="myCanvas"</code> matches exactly <code>'myCanvas'</code> in JavaScript (capital C!)</li><li>Make sure your <code>&lt;script&gt;</code> tag is <em>before</em> <code>&lt;/body&gt;</code></li><li>If nothing draws, check you're clicking AND dragging, not just hovering</li></ul></div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -2243,7 +988,6 @@ ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre>
 <div id="advanced" class="tab-content">
     <h2 class="section-title">🌟 Advanced Effects</h2>
     <p class="section-sub">A glimpse of what's possible — the same concepts, taken further.</p>
-
     <div class="demo-area">
         <div class="demo-title">Advanced Canvas Playground</div>
         <canvas id="advancedCanvas" width="760" height="420"></canvas>
@@ -2264,60 +1008,24 @@ ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre>
             <input type="range" id="intensity" min="1" max="100" value="50" oninput="updateIntensity(this.value)">
             <span class="slider-val" id="intensityValue">50</span>
         </div>
-        <p style="font-size:0.8rem; color:var(--muted); margin-top:8px;">
-            Mode: <strong id="currentMode" style="color:var(--accent)">Spray Paint</strong>
-        </p>
+        <p style="font-size:0.8rem; color:var(--muted); margin-top:8px;">Mode: <strong id="currentMode" style="color:var(--accent)">Spray Paint</strong></p>
     </div>
-
     <h3>How Each Effect Is Built</h3>
-
-    <div class="feature-card">
-        <h4>💨 Spray Paint — Random Dots</h4>
-        <p>Instead of one line, we scatter many tiny dots around the cursor. Each uses <code>Math.random()</code> to pick a random position within a radius.</p>
-        <div class="code-block" style="margin-top:8px;">
-            <pre><span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; density; <span class="var">i</span>++) {
+    <div class="feature-card"><h4>💨 Spray Paint — Random Dots</h4><p>Instead of one line, we scatter many tiny dots around the cursor using <code>Math.random()</code>.</p><div class="code-block" style="margin-top:8px;"><pre><span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; density; <span class="var">i</span>++) {
     <span class="kw">let</span> <span class="var">angle</span>  = Math.<span class="fn">random</span>() * Math.PI * <span class="num">2</span>;
     <span class="kw">let</span> <span class="var">radius</span> = Math.<span class="fn">random</span>() * brushSize;
     <span class="kw">let</span> <span class="var">x</span> = mouseX + Math.<span class="fn">cos</span>(angle) * <span class="var">radius</span>;
     <span class="kw">let</span> <span class="var">y</span> = mouseY + Math.<span class="fn">sin</span>(angle) * <span class="var">radius</span>;
     ctx.<span class="fn">fillRect</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">2</span>, <span class="num">2</span>);
-}</pre>
-        </div>
-    </div>
-
-    <div class="feature-card">
-        <h4>🌈 Rainbow Trail — Color Math</h4>
-        <p>We cycle a <code>hue</code> variable from 0 to 360. CSS HSL colors let us use this directly — hue 0 = red, 120 = green, 240 = blue.</p>
-        <div class="code-block" style="margin-top:8px;">
-            <pre><span class="kw">let</span> <span class="var">hue</span> = <span class="num">0</span>;
-
+}</pre></div></div>
+    <div class="feature-card"><h4>🌈 Rainbow Trail — Color Math</h4><p>We cycle a <code>hue</code> variable from 0 to 360. CSS HSL colors let us use this directly.</p><div class="code-block" style="margin-top:8px;"><pre><span class="kw">let</span> <span class="var">hue</span> = <span class="num">0</span>;
 <span class="kw">function</span> <span class="fn">draw</span>(x, y) {
-    <span class="var">hue</span> = (<span class="var">hue</span> + <span class="num">3</span>) % <span class="num">360</span>;  <span class="cmt">// Cycle colours</span>
+    <span class="var">hue</span> = (<span class="var">hue</span> + <span class="num">3</span>) % <span class="num">360</span>;
     ctx.strokeStyle = <span class="str">`hsl(${</span><span class="var">hue</span><span class="str">}, 100%, 50%)`</span>;
-}</pre>
-        </div>
-    </div>
-
-    <div class="feature-card">
-        <h4>🦋 Symmetry — Mirror Drawing</h4>
-        <p>Every stroke you make is mirrored across the canvas centre. We calculate the mirror X position mathematically.</p>
-        <div class="code-block" style="margin-top:8px;">
-            <pre><span class="kw">let</span> <span class="var">centerX</span> = canvas.width / <span class="num">2</span>;
-<span class="kw">let</span> <span class="var">mirrorX</span> = centerX - (x - centerX);
-<span class="cmt">// Then draw at both x AND mirrorX</span></pre>
-        </div>
-    </div>
-
-    <div class="checkpoint">
-        <h4>🚀 The Same Concepts, Deeper</h4>
-        <p>Every one of these effects uses only what you learned today:</p>
-        <ul class="check-list">
-            <li>Variables to store state (hue, mode, brush size)</li>
-            <li>Functions to organise logic</li>
-            <li>Mouse events to track movement</li>
-            <li>Canvas drawing commands — plus a little math!</li>
-        </ul>
-    </div>
+}</pre></div></div>
+    <div class="feature-card"><h4>🦋 Symmetry — Mirror Drawing</h4><p>Every stroke you make is mirrored across the canvas centre using math.</p><div class="code-block" style="margin-top:8px;"><pre><span class="kw">let</span> <span class="var">centerX</span> = canvas.width / <span class="num">2</span>;
+<span class="kw">let</span> <span class="var">mirrorX</span> = centerX - (x - centerX);</pre></div></div>
+    <div class="checkpoint"><h4>🚀 The Same Concepts, Deeper</h4><ul class="check-list"><li>Variables to store state (hue, mode, brush size)</li><li>Functions to organise logic</li><li>Mouse events to track movement</li><li>Canvas drawing commands — plus a little math!</li></ul></div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -2326,152 +1034,103 @@ ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre>
 <div id="cheatsheet" class="tab-content">
     <h2 class="section-title">📋 Cheat Sheet</h2>
     <p class="section-sub">Everything from today on one page — keep this open while you code!</p>
-
-    <div class="card">
-        <h3 style="margin-top:0;">🎯 Three Languages</h3>
-        <div class="web-layers">
-            <div class="layer-card html"><div class="icon">🧱</div><strong>HTML</strong><span>Structure</span></div>
-            <div class="layer-card css"><div class="icon">🎨</div><strong>CSS</strong><span>Style</span></div>
-            <div class="layer-card js"><div class="icon">⚡</div><strong>JavaScript</strong><span>Behaviour</span></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3 style="margin-top:0;">📦 Variables</h3>
-        <div class="code-block">
-            <pre><span class="kw">let</span> <span class="var">name</span>    = <span class="str">"Sofia"</span>;    <span class="cmt">// text (string)</span>
+    <div class="card"><h3 style="margin-top:0;">🎯 Three Languages</h3><div class="web-layers"><div class="layer-card html"><div class="icon">🧱</div><strong>HTML</strong><span>Structure</span></div><div class="layer-card css"><div class="icon">🎨</div><strong>CSS</strong><span>Style</span></div><div class="layer-card js"><div class="icon">⚡</div><strong>JavaScript</strong><span>Behaviour</span></div></div></div>
+    <div class="card"><h3 style="margin-top:0;">📦 Variables</h3><div class="code-block"><pre><span class="kw">let</span> <span class="var">name</span>    = <span class="str">"Sofia"</span>;    <span class="cmt">// text (string)</span>
 <span class="kw">let</span> <span class="var">age</span>     = <span class="num">25</span>;         <span class="cmt">// number</span>
 <span class="kw">let</span> <span class="var">isHappy</span> = <span class="kw">true</span>;       <span class="cmt">// boolean</span>
-
 <span class="var">age</span> = <span class="num">26</span>;                  <span class="cmt">// change it</span>
-console.<span class="fn">log</span>(<span class="var">name</span>);        <span class="cmt">// print it</span></pre>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3 style="margin-top:0;">🍳 Functions</h3>
-        <div class="code-block">
-            <pre><span class="cmt">// Basic function</span>
-<span class="kw">function</span> <span class="fn">sayHi</span>() {
-    console.<span class="fn">log</span>(<span class="str">"Hi!"</span>);
-}
+console.<span class="fn">log</span>(<span class="var">name</span>);        <span class="cmt">// print it</span></pre></div></div>
+    <div class="card"><h3 style="margin-top:0;">🍳 Functions</h3><div class="code-block"><pre><span class="kw">function</span> <span class="fn">sayHi</span>() { console.<span class="fn">log</span>(<span class="str">"Hi!"</span>); }
 <span class="fn">sayHi</span>();
-
-<span class="cmt">// With parameter</span>
-<span class="kw">function</span> <span class="fn">greet</span>(name) {
-    console.<span class="fn">log</span>(<span class="str">"Hello, "</span> + name);
-}
+<span class="kw">function</span> <span class="fn">greet</span>(name) { console.<span class="fn">log</span>(<span class="str">"Hello, "</span> + name); }
 <span class="fn">greet</span>(<span class="str">"João"</span>);
-
-<span class="cmt">// With return value</span>
 <span class="kw">function</span> <span class="fn">add</span>(a, b) { <span class="kw">return</span> a + b; }
-<span class="kw">let</span> <span class="var">result</span> = <span class="fn">add</span>(<span class="num">5</span>, <span class="num">3</span>);</pre>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3 style="margin-top:0;">🎨 Changing Elements</h3>
-        <div class="code-block">
-            <pre><span class="kw">let</span> <span class="var">box</span> = document.<span class="fn">getElementById</span>(<span class="str">'myBox'</span>);
-
+<span class="kw">let</span> <span class="var">result</span> = <span class="fn">add</span>(<span class="num">5</span>, <span class="num">3</span>);</pre></div></div>
+    <div class="card"><h3 style="margin-top:0;">🎨 Changing Elements</h3><div class="code-block"><pre><span class="kw">let</span> <span class="var">box</span> = document.<span class="fn">getElementById</span>(<span class="str">'myBox'</span>);
 box.style.background   = <span class="str">'red'</span>;
 box.style.width        = <span class="str">'200px'</span>;
-box.style.height       = <span class="str">'200px'</span>;
 box.style.borderRadius = <span class="str">'50%'</span>;
 box.style.transform    = <span class="str">'rotate(45deg)'</span>;
-box.textContent        = <span class="str">'Hello!'</span>;</pre>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3 style="margin-top:0;">🖱️ Events</h3>
-        <div class="code-block">
-            <pre>element.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
+box.textContent        = <span class="str">'Hello!'</span>;</pre></div></div>
+    <div class="card"><h3 style="margin-top:0;">🖱️ Events</h3><div class="code-block"><pre>element.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>() {
     <span class="cmt">// runs when clicked</span>
 });
-
 <span class="cmt">// Common events:</span>
 <span class="str">'click'</span>      <span class="cmt">// mouse click</span>
 <span class="str">'mousemove'</span>  <span class="cmt">// mouse moves</span>
 <span class="str">'mousedown'</span>  <span class="cmt">// button pressed</span>
-<span class="str">'mouseup'</span>    <span class="cmt">// button released</span>
-<span class="str">'keydown'</span>    <span class="cmt">// key pressed</span></pre>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3 style="margin-top:0;">✏️ Canvas Drawing</h3>
-        <div class="code-block">
-            <pre><span class="kw">let</span> <span class="var">ctx</span> = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);
-
-ctx.<span class="fn">beginPath</span>();          <span class="cmt">// start new path</span>
-ctx.<span class="fn">moveTo</span>(<span class="num">100</span>, <span class="num">100</span>);     <span class="cmt">// move to</span>
-ctx.<span class="fn">lineTo</span>(<span class="num">200</span>, <span class="num">200</span>);     <span class="cmt">// draw line to</span>
-ctx.strokeStyle = <span class="str">'blue'</span>; <span class="cmt">// colour</span>
-ctx.lineWidth   = <span class="num">5</span>;      <span class="cmt">// thickness</span>
-ctx.lineCap     = <span class="str">'round'</span>;<span class="cmt">// round ends</span>
-ctx.<span class="fn">stroke</span>();             <span class="cmt">// draw it!</span>
-
-ctx.<span class="fn">clearRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);</pre>
-        </div>
-    </div>
-
-    <div class="warn-box">
-        <h4>⚠️ Top Mistakes to Avoid</h4>
-        <ul style="padding-left:16px; line-height:2; font-size:0.88rem;">
-            <li>Forgetting quotes around strings: <code>= red</code> → <code>= 'red'</code></li>
-            <li>Wrong capitalisation in IDs: <code>'mybox'</code> ≠ <code>'myBox'</code></li>
-            <li>Missing parentheses on functions: <code>sayHi</code> ≠ <code>sayHi()</code></li>
-            <li>Using <code>let</code> when changing (not creating) a variable</li>
-        </ul>
-    </div>
-
-    <div class="tip-box">
-        <h4>💡 Golden Tips</h4>
-        <ul style="padding-left:16px; line-height:2; font-size:0.88rem;">
-            <li>Use <code>console.log()</code> constantly — it's your best debugging tool</li>
-            <li>Read error messages! They tell you exactly what's wrong (mostly)</li>
-            <li>Open DevTools (F12) to see errors and test code live</li>
-            <li>Google is always allowed: "how to [thing] in JavaScript"</li>
-            <li>Errors are not failures — they're feedback</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h3 style="margin-top:0; margin-bottom:16px;">📚 Good Resources</h3>
-        <div class="card-grid">
-            <div class="mini-card">
-                <h4>MDN Web Docs</h4>
-                <p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Official JavaScript reference</p>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a>
-            </div>
-            <div class="mini-card">
-                <h4>JavaScript.info</h4>
-                <p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Beginner-friendly tutorials</p>
-                <a href="https://javascript.info/" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a>
-            </div>
-            <div class="mini-card">
-                <h4>CodePen</h4>
-                <p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Practice and share code</p>
-                <a href="https://codepen.io/" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a>
-            </div>
-        </div>
-    </div>
+<span class="str">'mouseup'</span>    <span class="cmt">// button released</span></pre></div></div>
+    <div class="card"><h3 style="margin-top:0;">✏️ Canvas Drawing</h3><div class="code-block"><pre><span class="kw">let</span> <span class="var">ctx</span> = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);
+ctx.<span class="fn">beginPath</span>();
+ctx.<span class="fn">moveTo</span>(<span class="num">100</span>, <span class="num">100</span>);
+ctx.<span class="fn">lineTo</span>(<span class="num">200</span>, <span class="num">200</span>);
+ctx.strokeStyle = <span class="str">'blue'</span>;
+ctx.lineWidth   = <span class="num">5</span>;
+ctx.lineCap     = <span class="str">'round'</span>;
+ctx.<span class="fn">stroke</span>();
+ctx.<span class="fn">clearRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);</pre></div></div>
+    <div class="warn-box"><h4>⚠️ Top Mistakes to Avoid</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Forgetting quotes around strings: <code>= red</code> → <code>= 'red'</code></li><li>Wrong capitalisation in IDs: <code>'mybox'</code> ≠ <code>'myBox'</code></li><li>Missing parentheses on functions: <code>sayHi</code> ≠ <code>sayHi()</code></li></ul></div>
+    <div class="tip-box"><h4>💡 Golden Tips</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Use <code>console.log()</code> constantly — it's your best debugging tool</li><li>Read error messages! They tell you exactly what's wrong</li><li>Open DevTools (F12) to see errors and test code live</li><li>Google is always allowed: "how to [thing] in JavaScript"</li></ul></div>
+    <div class="card"><h3 style="margin-top:0; margin-bottom:16px;">📚 Good Resources</h3><div class="card-grid"><div class="mini-card"><h4>MDN Web Docs</h4><p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Official JavaScript reference</p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a></div><div class="mini-card"><h4>JavaScript.info</h4><p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Beginner-friendly tutorials</p><a href="https://javascript.info/" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a></div><div class="mini-card"><h4>CodePen</h4><p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Practice and share code</p><a href="https://codepen.io/" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a></div></div></div>
 </div>
 
 <!-- FOOTER -->
 <footer>
     <p style="font-size:1rem; color:white; font-weight:700; margin-bottom:8px;">🎨 Code & Create Workshop</p>
     <p>Session 1: What is Code? — Making Your First Marks</p>
-    <p style="margin-top:16px;">
-        <a href="../index.html">← Home</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="../session2/index.html">Session 2 →</a>
-    </p>
+    <p style="margin-top:16px;"><a href="../index.html">← Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="../session2/index.html">Session 2 →</a></p>
     <p style="margin-top:12px;">Errors are just feedback. Keep experimenting! 🚀</p>
 </footer>
 
 <script>
+/* ═══════════════════════════════════════════════════════
+   LOCK SCREEN
+   ↓ Change this ONE line to update the password ↓
+═══════════════════════════════════════════════════════ */
+const SESSION_PASSWORD = 'createS12026';
+const LS_KEY = 'cc_s1_unlocked';
+
+(function initLock() {
+    const screen = document.getElementById('lockScreen');
+    if (!screen) return;
+
+    // Already unlocked in this browser? Skip instantly.
+    if (localStorage.getItem(LS_KEY) === 'yes') {
+        screen.classList.add('hidden');
+        return;
+    }
+
+    const input  = document.getElementById('lockInput');
+    const btn    = document.getElementById('lockBtn');
+    const errMsg = document.getElementById('lockError');
+
+    function tryUnlock() {
+        const val = input.value.trim();
+        if (val === SESSION_PASSWORD) {
+            // ✅ Correct — remember and fade out
+            localStorage.setItem(LS_KEY, 'yes');
+            screen.style.transition = 'opacity 0.5s ease';
+            screen.style.opacity = '0';
+            setTimeout(() => screen.classList.add('hidden'), 500);
+        } else {
+            // ❌ Wrong — shake and show error
+            input.classList.remove('shake');
+            void input.offsetWidth; // force reflow to restart animation
+            input.classList.add('shake');
+            input.value = '';
+            errMsg.textContent = 'Wrong password — try again.';
+            setTimeout(() => { errMsg.textContent = ''; }, 2500);
+            input.focus();
+        }
+    }
+
+    btn.addEventListener('click', tryUnlock);
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') tryUnlock();
+        else errMsg.textContent = '';
+    });
+})();
+
 /* ═══════════════════════════════════════════════════════
    TAB NAVIGATION
 ═══════════════════════════════════════════════════════ */
@@ -2488,56 +1147,41 @@ function openTab(tabName, btn) {
     if (btn) btn.classList.add('active');
     document.getElementById('progressFill').style.width = (tabProgress[tabName] || 10) + '%';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Scroll active tab into view
-    if (btn) {
-        setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }), 50);
-    }
+    if (btn) setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }), 50);
 }
 
 /* ═══════════════════════════════════════════════════════
    LIVE CODE RUNNERS
 ═══════════════════════════════════════════════════════ */
 const varStartCode = `// Change the values to match YOU!\nlet myName = "Your Name";\nlet myAge = 20;\nlet myCity = "Lisbon";\n\n// Print them all\nconsole.log("Name: " + myName);\nconsole.log("Age: " + myAge);\nconsole.log("City: " + myCity);\n\n// Try adding a new variable below:\n`;
-
 const fnStartCode = `// Define a function\nfunction greet(name) {\n    console.log("Hello, " + name + "!");\n}\n\n// Call it with different names\ngreet("Maria");\ngreet("João");\ngreet("Sofia");\n\n// YOUR TURN: Add a call with your name below:\n`;
-
-const fnChallengeStart = `function makeExcited(word) {\n    // Complete this: return the word with "!!!" added\n    return word + "!!!";\n}\n\n// Test it:\nconsole.log(makeExcited("Hello"));\nconsole.log(makeExcited("Amazing"));\n\n// YOUR TURN: Call it with your own word below:\n`;
+const fnChallengeStart = `function makeExcited(word) {\n    return word + "!!!";\n}\n\nconsole.log(makeExcited("Hello"));\nconsole.log(makeExcited("Amazing"));\n`;
 
 function runCode(editorId, outputId) {
     const code = document.getElementById(editorId).value;
     const output = document.getElementById(outputId);
     const logs = [];
-
-    // Intercept console.log
     const origLog = console.log;
     console.log = function(...args) {
         logs.push(args.map(a => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' '));
         origLog.apply(console, args);
     };
-
     try {
-        // Use Function constructor to run in a sandboxed scope that can access the DOM
         const fn = new Function('document', 'console', code);
         fn(document, { log: (...args) => logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ')) });
-        
         output.className = 'run-output visible';
         output.innerHTML = logs.length
             ? logs.map(l => `<div>→ ${escHtml(l)}</div>`).join('')
             : '<div style="color:var(--muted)">Code ran! (No console.log output)</div>';
     } catch(err) {
         output.className = 'run-output visible error';
-        output.innerHTML = `<div>❌ Error: ${escHtml(err.message)}</div>
-<div style="color:rgba(255,100,100,0.6); font-size:0.78rem; margin-top:4px;">Check for typos — missing quotes, brackets, or semicolons are common causes!</div>`;
+        output.innerHTML = `<div>❌ Error: ${escHtml(err.message)}</div><div style="color:rgba(255,100,100,0.6); font-size:0.78rem; margin-top:4px;">Check for typos — missing quotes, brackets, or semicolons!</div>`;
     } finally {
         console.log = origLog;
     }
 }
 
-function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
+function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function resetRunner(editorId, startCode) {
     document.getElementById(editorId).value = startCode;
     const outputId = editorId.replace('Runner','Output').replace('Challenge','ChallengeOut');
@@ -2581,7 +1225,7 @@ function resetCodeDemo() {
 /* ═══════════════════════════════════════════════════════
    DEMO BOX (Practice 1)
 ═══════════════════════════════════════════════════════ */
-function makeRed()   { const b = document.getElementById('demoBox'); b.style.background = 'red';   b.style.borderRadius='15px'; }
+function makeRed()   { const b = document.getElementById('demoBox'); b.style.background = 'red';    b.style.borderRadius='15px'; }
 function makeBlue()  { const b = document.getElementById('demoBox'); b.style.background = '#3b82f6'; b.style.borderRadius='15px'; }
 function makeGreen() { const b = document.getElementById('demoBox'); b.style.background = '#10b981'; b.style.borderRadius='15px'; }
 function makeBig()   { const b = document.getElementById('demoBox'); b.style.width = '240px'; b.style.height = '240px'; b.style.fontSize = '80px'; }
@@ -2590,98 +1234,57 @@ function changeEmoji() {
     const emojis = ['😊','🎉','🌟','🎨','🔥','💎','🚀','✨','🌈','⭐','🦄','🎸','🌸','🍕'];
     document.getElementById('demoBox').textContent = emojis[Math.floor(Math.random() * emojis.length)];
 }
-function resetDemoBox() {
-    const b = document.getElementById('demoBox');
-    b.style.cssText = '';
-    b.textContent = '😊';
-}
+function resetDemoBox() { const b = document.getElementById('demoBox'); b.style.cssText = ''; b.textContent = '😊'; }
 
 /* ═══════════════════════════════════════════════════════
    CLICK COUNTER (Practice 2)
 ═══════════════════════════════════════════════════════ */
 let clickCount = 0;
-const clickAreaEl = document.getElementById('clickArea');
+const clickAreaEl    = document.getElementById('clickArea');
 const clickCounterEl = document.getElementById('clickCounter');
-
 if (clickAreaEl) {
     clickAreaEl.addEventListener('click', function() {
         clickCount++;
         clickCounterEl.textContent = clickCount;
-
-        if (clickCount >= 20) {
-            clickAreaEl.style.background = '#fde68a';
-            clickAreaEl.textContent = '🎊 20 clicks!';
-        } else if (clickCount >= 10) {
-            clickAreaEl.style.background = '#d1fae5';
-            clickAreaEl.textContent = '🎉 10 clicks!';
-        } else if (clickCount >= 5) {
-            clickAreaEl.style.background = '#dbeafe';
-            clickAreaEl.textContent = 'Keep going!';
-        }
+        if      (clickCount >= 20) { clickAreaEl.style.background = '#fde68a'; clickAreaEl.textContent = '🎊 20 clicks!'; }
+        else if (clickCount >= 10) { clickAreaEl.style.background = '#d1fae5'; clickAreaEl.textContent = '🎉 10 clicks!'; }
+        else if (clickCount >= 5)  { clickAreaEl.style.background = '#dbeafe'; clickAreaEl.textContent = 'Keep going!'; }
     });
 }
-
 function resetCounter() {
     clickCount = 0;
     if (clickCounterEl) clickCounterEl.textContent = '0';
-    if (clickAreaEl) {
-        clickAreaEl.style.cssText = '';
-        clickAreaEl.textContent = 'Click Me!';
-    }
+    if (clickAreaEl) { clickAreaEl.style.cssText = ''; clickAreaEl.textContent = 'Click Me!'; }
 }
 
 /* ═══════════════════════════════════════════════════════
    BASIC DRAWING APP
 ═══════════════════════════════════════════════════════ */
 const drawCanvas = document.getElementById('drawCanvas');
-const drawCtx = drawCanvas ? drawCanvas.getContext('2d') : null;
+const drawCtx    = drawCanvas ? drawCanvas.getContext('2d') : null;
 let drawIsDrawing = false;
-let drawColor = '#0d0f14';
+let drawColor     = '#0d0f14';
 let drawBrushSize = 5;
 
 function getPos(e, canvas) {
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
-    if (e.touches) {
-        return {
-            x: (e.touches[0].clientX - rect.left) * scaleX,
-            y: (e.touches[0].clientY - rect.top) * scaleY
-        };
-    }
-    return {
-        x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top) * scaleY
-    };
+    if (e.touches) return { x: (e.touches[0].clientX - rect.left) * scaleX, y: (e.touches[0].clientY - rect.top) * scaleY };
+    return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
 }
 
 if (drawCanvas && drawCtx) {
-    const startDraw = (e) => {
-        drawIsDrawing = true;
-        const p = getPos(e, drawCanvas);
-        drawCtx.beginPath();
-        drawCtx.moveTo(p.x, p.y);
-    };
-    const moveDraw = (e) => {
-        if (!drawIsDrawing) return;
-        e.preventDefault();
-        const p = getPos(e, drawCanvas);
-        drawCtx.lineTo(p.x, p.y);
-        drawCtx.strokeStyle = drawColor;
-        drawCtx.lineWidth = drawBrushSize;
-        drawCtx.lineCap = 'round';
-        drawCtx.lineJoin = 'round';
-        drawCtx.stroke();
-    };
-    const endDraw = () => { drawIsDrawing = false; };
-
-    drawCanvas.addEventListener('mousedown', startDraw);
-    drawCanvas.addEventListener('mousemove', moveDraw);
-    drawCanvas.addEventListener('mouseup', endDraw);
+    const startDraw = (e) => { drawIsDrawing = true; const p = getPos(e, drawCanvas); drawCtx.beginPath(); drawCtx.moveTo(p.x, p.y); };
+    const moveDraw  = (e) => { if (!drawIsDrawing) return; e.preventDefault(); const p = getPos(e, drawCanvas); drawCtx.lineTo(p.x, p.y); drawCtx.strokeStyle = drawColor; drawCtx.lineWidth = drawBrushSize; drawCtx.lineCap = 'round'; drawCtx.lineJoin = 'round'; drawCtx.stroke(); };
+    const endDraw   = () => { drawIsDrawing = false; };
+    drawCanvas.addEventListener('mousedown',  startDraw);
+    drawCanvas.addEventListener('mousemove',  moveDraw);
+    drawCanvas.addEventListener('mouseup',    endDraw);
     drawCanvas.addEventListener('mouseleave', endDraw);
     drawCanvas.addEventListener('touchstart', startDraw, { passive: false });
-    drawCanvas.addEventListener('touchmove', moveDraw, { passive: false });
-    drawCanvas.addEventListener('touchend', endDraw);
+    drawCanvas.addEventListener('touchmove',  moveDraw,  { passive: false });
+    drawCanvas.addEventListener('touchend',   endDraw);
 }
 
 function setDrawColor(color, btn) {
@@ -2689,21 +1292,14 @@ function setDrawColor(color, btn) {
     document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 }
-
-function updateBrush(input) {
-    drawBrushSize = parseInt(input.value);
-    document.getElementById('brushLabel').textContent = drawBrushSize;
-}
-
-function clearDrawCanvas() {
-    if (drawCtx) drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-}
+function updateBrush(input) { drawBrushSize = parseInt(input.value); document.getElementById('brushLabel').textContent = drawBrushSize; }
+function clearDrawCanvas()  { if (drawCtx) drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height); }
 
 /* ═══════════════════════════════════════════════════════
    ADVANCED DRAWING APP
 ═══════════════════════════════════════════════════════ */
 const advCanvas = document.getElementById('advancedCanvas');
-const advCtx = advCanvas ? advCanvas.getContext('2d') : null;
+const advCtx    = advCanvas ? advCanvas.getContext('2d') : null;
 let advIsDrawing = false;
 let advMode = 'spray';
 let advBrushSize = 15;
@@ -2713,13 +1309,8 @@ let advLastX = 0, advLastY = 0;
 let advParticles = [];
 
 if (advCanvas && advCtx) {
-    const startAdv = (e) => {
-        advIsDrawing = true;
-        const p = getPos(e, advCanvas);
-        advLastX = p.x; advLastY = p.y;
-        if (advMode === 'particle') createBurst(p.x, p.y);
-    };
-    const moveAdv = (e) => {
+    const startAdv = (e) => { advIsDrawing = true; const p = getPos(e, advCanvas); advLastX = p.x; advLastY = p.y; if (advMode === 'particle') createBurst(p.x, p.y); };
+    const moveAdv  = (e) => {
         if (!advIsDrawing && advMode !== 'particle') return;
         e.preventDefault();
         const p = getPos(e, advCanvas);
@@ -2733,110 +1324,34 @@ if (advCanvas && advCtx) {
         advLastX = p.x; advLastY = p.y;
     };
     const endAdv = () => { advIsDrawing = false; };
-
-    advCanvas.addEventListener('mousedown', startAdv);
-    advCanvas.addEventListener('mousemove', moveAdv);
-    advCanvas.addEventListener('mouseup', endAdv);
+    advCanvas.addEventListener('mousedown',  startAdv);
+    advCanvas.addEventListener('mousemove',  moveAdv);
+    advCanvas.addEventListener('mouseup',    endAdv);
     advCanvas.addEventListener('mouseleave', endAdv);
     advCanvas.addEventListener('touchstart', startAdv, { passive: false });
-    advCanvas.addEventListener('touchmove', moveAdv, { passive: false });
-    advCanvas.addEventListener('touchend', endAdv);
+    advCanvas.addEventListener('touchmove',  moveAdv,  { passive: false });
+    advCanvas.addEventListener('touchend',   endAdv);
 }
 
-function doSpray(x, y) {
-    const d = advIntensity / 4;
-    for (let i = 0; i < d; i++) {
-        const a = Math.random() * Math.PI * 2;
-        const r = Math.random() * advBrushSize;
-        advCtx.fillStyle = `hsla(${Math.random()*360},80%,50%,0.7)`;
-        advCtx.fillRect(x + Math.cos(a)*r, y + Math.sin(a)*r, 2, 2);
-    }
-}
-function doGlow(x, y) {
-    for (let i = 5; i > 0; i--) {
-        advCtx.beginPath();
-        advCtx.arc(x, y, advBrushSize * i * 0.4, 0, Math.PI * 2);
-        advCtx.fillStyle = `rgba(255,${100+i*20},200,${(0.15/i)*(advIntensity/50)})`;
-        advCtx.fill();
-    }
-}
-function doRainbow(x, y) {
-    advHue = (advHue + 3) % 360;
-    advCtx.beginPath();
-    advCtx.moveTo(advLastX, advLastY);
-    advCtx.lineTo(x, y);
-    advCtx.strokeStyle = `hsl(${advHue},100%,50%)`;
-    advCtx.lineWidth = advBrushSize;
-    advCtx.lineCap = 'round';
-    advCtx.stroke();
-}
+function doSpray(x,y) { const d=advIntensity/4; for(let i=0;i<d;i++){const a=Math.random()*Math.PI*2,r=Math.random()*advBrushSize;advCtx.fillStyle=`hsla(${Math.random()*360},80%,50%,0.7)`;advCtx.fillRect(x+Math.cos(a)*r,y+Math.sin(a)*r,2,2);}}
+function doGlow(x,y) { for(let i=5;i>0;i--){advCtx.beginPath();advCtx.arc(x,y,advBrushSize*i*0.4,0,Math.PI*2);advCtx.fillStyle=`rgba(255,${100+i*20},200,${(0.15/i)*(advIntensity/50)})`;advCtx.fill();}}
+function doRainbow(x,y) { advHue=(advHue+3)%360;advCtx.beginPath();advCtx.moveTo(advLastX,advLastY);advCtx.lineTo(x,y);advCtx.strokeStyle=`hsl(${advHue},100%,50%)`;advCtx.lineWidth=advBrushSize;advCtx.lineCap='round';advCtx.stroke();}
 
 class AdvParticle {
-    constructor(x,y) {
-        this.x=x; this.y=y;
-        this.vx=(Math.random()-.5)*(advIntensity/4);
-        this.vy=(Math.random()-.5)*(advIntensity/4);
-        this.life=100;
-        this.hue=Math.random()*360;
-        this.size=Math.random()*advBrushSize/3+1;
-    }
-    update() { this.x+=this.vx; this.y+=this.vy; this.vy+=.25; this.life-=2; }
-    draw() {
-        advCtx.beginPath();
-        advCtx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        advCtx.fillStyle=`hsla(${this.hue},100%,55%,${this.life/100})`;
-        advCtx.fill();
-    }
+    constructor(x,y){this.x=x;this.y=y;this.vx=(Math.random()-.5)*(advIntensity/4);this.vy=(Math.random()-.5)*(advIntensity/4);this.life=100;this.hue=Math.random()*360;this.size=Math.random()*advBrushSize/3+1;}
+    update(){this.x+=this.vx;this.y+=this.vy;this.vy+=.25;this.life-=2;}
+    draw(){advCtx.beginPath();advCtx.arc(this.x,this.y,this.size,0,Math.PI*2);advCtx.fillStyle=`hsla(${this.hue},100%,55%,${this.life/100})`;advCtx.fill();}
 }
-function createBurst(x,y) {
-    for(let i=0;i<advIntensity;i++) advParticles.push(new AdvParticle(x,y));
-}
-(function animAdv(){
-    if(advMode==='particle' && advParticles.length) {
-        for(let i=advParticles.length-1;i>=0;i--) {
-            advParticles[i].update(); advParticles[i].draw();
-            if(advParticles[i].life<=0) advParticles.splice(i,1);
-        }
-    }
-    requestAnimationFrame(animAdv);
-})();
+function createBurst(x,y){for(let i=0;i<advIntensity;i++)advParticles.push(new AdvParticle(x,y));}
+(function animAdv(){if(advMode==='particle'&&advParticles.length){for(let i=advParticles.length-1;i>=0;i--){advParticles[i].update();advParticles[i].draw();if(advParticles[i].life<=0)advParticles.splice(i,1);}}requestAnimationFrame(animAdv);})();
 
-function doSymmetry(x,y) {
-    const cx = advCanvas.width/2;
-    const color = `hsl(${Math.random()*360},70%,50%)`;
-    [[x,y],[cx-(x-cx),y]].forEach(([px,py],i)=>{
-        const lx = i===0 ? advLastX : cx-(advLastX-cx);
-        advCtx.beginPath();
-        advCtx.moveTo(lx,advLastY);
-        advCtx.lineTo(px,py);
-        advCtx.strokeStyle = color;
-        advCtx.lineWidth = advBrushSize;
-        advCtx.lineCap = 'round';
-        advCtx.stroke();
-    });
-}
-function doKaleidoscope(x,y) {
-    const cx=advCanvas.width/2, cy=advCanvas.height/2;
-    for(let i=0;i<8;i++) {
-        const a=(Math.PI*2/8)*i, cos=Math.cos(a), sin=Math.sin(a);
-        const p=(px,py)=>[ cx+(px-cx)*cos-(py-cy)*sin, cy+(px-cx)*sin+(py-cy)*cos ];
-        const [x1,y1]=p(advLastX,advLastY), [x2,y2]=p(x,y);
-        advCtx.beginPath();
-        advCtx.moveTo(x1,y1); advCtx.lineTo(x2,y2);
-        advCtx.strokeStyle=`hsl(${(advHue+i*45)%360},80%,60%)`;
-        advCtx.lineWidth=advBrushSize; advCtx.lineCap='round'; advCtx.stroke();
-    }
-    advHue=(advHue+1)%360;
-}
+function doSymmetry(x,y){const cx=advCanvas.width/2,color=`hsl(${Math.random()*360},70%,50%)`;[[x,y],[cx-(x-cx),y]].forEach(([px,py],i)=>{const lx=i===0?advLastX:cx-(advLastX-cx);advCtx.beginPath();advCtx.moveTo(lx,advLastY);advCtx.lineTo(px,py);advCtx.strokeStyle=color;advCtx.lineWidth=advBrushSize;advCtx.lineCap='round';advCtx.stroke();});}
+function doKaleidoscope(x,y){const cx=advCanvas.width/2,cy=advCanvas.height/2;for(let i=0;i<8;i++){const a=(Math.PI*2/8)*i,cos=Math.cos(a),sin=Math.sin(a);const p=(px,py)=>[cx+(px-cx)*cos-(py-cy)*sin,cy+(px-cx)*sin+(py-cy)*cos];const[x1,y1]=p(advLastX,advLastY),[x2,y2]=p(x,y);advCtx.beginPath();advCtx.moveTo(x1,y1);advCtx.lineTo(x2,y2);advCtx.strokeStyle=`hsl(${(advHue+i*45)%360},80%,60%)`;advCtx.lineWidth=advBrushSize;advCtx.lineCap='round';advCtx.stroke();}advHue=(advHue+1)%360;}
 
-function advSetMode(m) {
-    advMode=m;
-    const names={spray:'Spray Paint',glow:'Glow Brush',rainbow:'Rainbow Trail',particle:'Particle Burst',symmetry:'Symmetry',kaleidoscope:'Kaleidoscope'};
-    document.getElementById('currentMode').textContent=names[m];
-}
-function updateBrushSize(v) { advBrushSize=parseInt(v); document.getElementById('brushSizeValue').textContent=v; }
-function updateIntensity(v) { advIntensity=parseInt(v); document.getElementById('intensityValue').textContent=v; }
-function advClearCanvas() { if(advCtx) advCtx.clearRect(0,0,advCanvas.width,advCanvas.height); advParticles=[]; }
+function advSetMode(m){advMode=m;const names={spray:'Spray Paint',glow:'Glow Brush',rainbow:'Rainbow Trail',particle:'Particle Burst',symmetry:'Symmetry',kaleidoscope:'Kaleidoscope'};document.getElementById('currentMode').textContent=names[m];}
+function updateBrushSize(v){advBrushSize=parseInt(v);document.getElementById('brushSizeValue').textContent=v;}
+function updateIntensity(v){advIntensity=parseInt(v);document.getElementById('intensityValue').textContent=v;}
+function advClearCanvas(){if(advCtx)advCtx.clearRect(0,0,advCanvas.width,advCanvas.height);advParticles=[];}
 
 console.log('🎨 Session 1 loaded! Open DevTools (F12) to debug your code here.');
 </script>

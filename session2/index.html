@@ -530,9 +530,113 @@
             .step::before { left: 12px; top: 14px; }
             .demo-area { padding: 16px 12px; }
         }
+
+    /* ── LOCK SCREEN ── */
+    #lockScreen {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #0d0f14;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: lockFadeIn 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    #lockScreen.hidden { display: none; }
+    @keyframes lockFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    .lock-card {
+        background: #1a1c24;
+        border: 1px solid rgba(240,147,251,0.2);
+        border-radius: 20px;
+        padding: 40px 36px;
+        width: min(380px, 90vw);
+        text-align: center;
+        box-shadow: 0 0 60px rgba(240,147,251,0.08);
+    }
+    .lock-card .lock-icon { font-size: 2.8rem; margin-bottom: 16px; }
+    .lock-card h2 {
+        font-family: var(--font-mono);
+        font-size: 1.1rem;
+        color: var(--accent);
+        margin-bottom: 6px;
+    }
+    .lock-card p {
+        color: rgba(255,255,255,0.45);
+        font-size: 0.82rem;
+        margin-bottom: 24px;
+    }
+    #lockInput {
+        width: 100%;
+        background: #0d0f14;
+        border: 1.5px solid rgba(255,255,255,0.12);
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        color: white;
+        text-align: center;
+        letter-spacing: 0.15em;
+        outline: none;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+        margin-bottom: 12px;
+    }
+    #lockInput:focus { border-color: var(--accent); }
+    #lockInput.shake { animation: lockShake 0.45s ease; }
+    @keyframes lockShake {
+        0%,100% { transform: translateX(0); }
+        15%      { transform: translateX(-8px); }
+        30%      { transform: translateX(7px); }
+        45%      { transform: translateX(-5px); }
+        60%      { transform: translateX(4px); }
+        75%      { transform: translateX(-2px); }
+        90%      { transform: translateX(1px); }
+    }
+    #lockBtn {
+        width: 100%;
+        background: var(--accent);
+        color: #0d0f14;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+    }
+    #lockBtn:hover { background: #e070f0; transform: translateY(-1px); }
+    #lockError {
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        margin-top: 10px;
+        min-height: 20px;
+    }
+    .lock-hint {
+        margin-top: 20px;
+        color: rgba(255,255,255,0.2);
+        font-size: 0.72rem;
+        font-family: var(--font-mono);
+    }
     </style>
 </head>
 <body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+    <div class="lock-card">
+        <div class="lock-icon">🌈</div>
+        <h2>Code &amp; Create</h2>
+        <p>Session 2 — Generative Art<br>Enter the session password to begin.</p>
+        <input id="lockInput" type="password" placeholder="password" autocomplete="off">
+        <button id="lockBtn" onclick="tryUnlock()">Unlock →</button>
+        <div id="lockError"></div>
+        <div class="lock-hint">Ask your teacher for the password</div>
+    </div>
+</div>
 
 <!-- TOP NAV -->
 <nav class="top-nav">
@@ -1390,7 +1494,6 @@ h1 {
 
         <div class="step">
             <h4>Write the <code>generateArt()</code> function — paint a background</h4>
-            <p>This is the main function. Start by painting a solid dark background so each new generation is clean:</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">inside &lt;script&gt;</span>
                 <pre><span class="kw">function</span> <span class="fn">generateArt</span>() {
@@ -1401,12 +1504,10 @@ h1 {
 
 }</pre>
             </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and click the Generate button. The canvas should fill with dark blue.</p>
         </div>
 
         <div class="step">
             <h4>Add Pattern 1 — scattered circles</h4>
-            <p>Inside <code>generateArt()</code>, after the background, add a loop that draws 80 random circles using the palette:</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">inside generateArt(), after the background</span>
                 <pre>    <span class="cmt">// Step 2: Draw 80 random circles</span>
@@ -1418,17 +1519,15 @@ h1 {
         ctx.<span class="fn">beginPath</span>();
         ctx.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="var">size</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
         ctx.fillStyle = <span class="fn">randomColor</span>();
-        ctx.globalAlpha = <span class="fn">rand</span>(<span class="num">0.3</span>, <span class="num">0.9</span>);  <span class="cmt">// semi-transparent</span>
+        ctx.globalAlpha = <span class="fn">rand</span>(<span class="num">0.3</span>, <span class="num">0.9</span>);
         ctx.<span class="fn">fill</span>();
     }
-    ctx.globalAlpha = <span class="num">1</span>;  <span class="cmt">// always reset alpha!</span></pre>
+    ctx.globalAlpha = <span class="num">1</span>;</pre>
             </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and click Generate. You should see colourful circles! Click again — a new pattern each time.</p>
         </div>
 
         <div class="step">
             <h4>Add Pattern 2 — a spiral on top</h4>
-            <p>After the circles loop, add a spiral using the maths from the Patterns tab:</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">inside generateArt(), after circles loop</span>
                 <pre>    <span class="cmt">// Step 3: Draw a spiral on top</span>
@@ -1447,28 +1546,23 @@ h1 {
         ctx.<span class="fn">fill</span>();
     }</pre>
             </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and click Generate. A spiral now overlays the circles!</p>
         </div>
 
         <div class="step">
             <h4>Write the <code>saveArt()</code> function</h4>
-            <p>This converts the canvas to an image file and triggers a download:</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">inside &lt;script&gt;, after generateArt()</span>
                 <pre><span class="kw">function</span> <span class="fn">saveArt</span>() {
-    <span class="cmt">// Create a temporary link element</span>
     <span class="kw">let</span> <span class="var">link</span> = document.<span class="fn">createElement</span>(<span class="str">'a'</span>);
     <span class="var">link</span>.download = <span class="str">'my-art.png'</span>;
     <span class="var">link</span>.href = canvas.<span class="fn">toDataURL</span>();
     <span class="var">link</span>.<span class="fn">click</span>();
 }</pre>
             </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Generate some art then click Save. A .png file downloads to your computer!</p>
         </div>
 
         <div class="step">
             <h4>Auto-generate on page load</h4>
-            <p>Call <code>generateArt()</code> at the very end of your script so art appears immediately when the page opens:</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">last line inside &lt;script&gt;</span>
                 <pre><span class="cmt">// Generate art as soon as the page loads</span>
@@ -1477,7 +1571,6 @@ h1 {
         </div>
     </div>
 
-    <!-- COMPLETE FILE -->
     <div class="checkpoint" style="margin:24px 0;">
         <h4>✅ Complete File — art-generator.html</h4>
         <div class="code-block" style="margin-top:10px;">
@@ -1488,106 +1581,55 @@ h1 {
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My Art Generator&lt;/title&gt;
     &lt;style&gt;
-        body {
-            background: #0d0f14;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
+        body { background: #0d0f14; color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; }
         h1 { margin-bottom: 20px; font-size: 2em; }
-        #myCanvas {
-            background: #1a1a2e;
-            border-radius: 12px;
-            display: block;
-            margin: 0 auto 20px;
-            max-width: 100%;
-        }
+        #myCanvas { background: #1a1a2e; border-radius: 12px; display: block; margin: 0 auto 20px; max-width: 100%; }
         #controls { margin-top: 10px; }
-        #controls button {
-            padding: 12px 24px;
-            margin: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.15s;
-        }
+        #controls button { padding: 12px 24px; margin: 5px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.15s; }
         #controls button:first-child { background: #f093fb; color: #0d0f14; }
         #controls button:last-child  { background: transparent; color: white; border: 2px solid #555; }
         #controls button:hover { transform: translateY(-2px); }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-
     &lt;h1&gt;🎨 My Art Generator&lt;/h1&gt;
     &lt;canvas id="myCanvas" width="800" height="500"&gt;&lt;/canvas&gt;
     &lt;div id="controls"&gt;
         &lt;button onclick="generateArt()"&gt;🎲 Generate New Art&lt;/button&gt;
         &lt;button onclick="saveArt()"&gt;💾 Save Image&lt;/button&gt;
     &lt;/div&gt;
-
     &lt;script&gt;
         let canvas = document.getElementById('myCanvas');
         let ctx    = canvas.getContext('2d');
-
-        function rand(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
+        function rand(min, max) { return Math.random() * (max - min) + min; }
         let palette = ['#f093fb','#f5576c','#ffd93d','#6bcb77','#4d96ff','#c77dff'];
-
-        function randomColor() {
-            return palette[Math.floor(Math.random() * palette.length)];
-        }
-
+        function randomColor() { return palette[Math.floor(Math.random() * palette.length)]; }
         function generateArt() {
             ctx.fillStyle = '#1a1a2e';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < 80; i++) {
-                let x    = rand(0, canvas.width);
-                let y    = rand(0, canvas.height);
-                let size = rand(5, 50);
-                ctx.beginPath();
-                ctx.arc(x, y, size, 0, Math.PI * 2);
-                ctx.fillStyle    = randomColor();
-                ctx.globalAlpha  = rand(0.3, 0.9);
-                ctx.fill();
+            for (let i = 0; i &lt; 80; i++) {
+                let x = rand(0, canvas.width), y = rand(0, canvas.height), size = rand(5, 50);
+                ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = randomColor(); ctx.globalAlpha = rand(0.3, 0.9); ctx.fill();
             }
             ctx.globalAlpha = 1;
-
-            let cx = canvas.width / 2;
-            let cy = canvas.height / 2;
-            let spiralColor = randomColor();
+            let cx = canvas.width/2, cy = canvas.height/2, sc = randomColor();
             for (let a = 0; a &lt; Math.PI * 12; a += 0.15) {
-                let dist = a * 5;
-                let x = cx + Math.cos(a) * dist;
-                let y = cy + Math.sin(a) * dist;
-                ctx.beginPath();
-                ctx.arc(x, y, 3, 0, Math.PI * 2);
-                ctx.fillStyle = spiralColor;
-                ctx.fill();
+                let dist = a * 5, x = cx + Math.cos(a)*dist, y = cy + Math.sin(a)*dist;
+                ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI*2); ctx.fillStyle = sc; ctx.fill();
             }
         }
-
         function saveArt() {
             let link = document.createElement('a');
-            link.download = 'my-art.png';
-            link.href = canvas.toDataURL();
-            link.click();
+            link.download = 'my-art.png'; link.href = canvas.toDataURL(); link.click();
         }
-
         generateArt();
     &lt;/script&gt;
-
 &lt;/body&gt;
 &lt;/html&gt;</pre>
         </div>
     </div>
 
-    <!-- WHAT YOU USED -->
     <div class="concept-box">
         <h3>🎉 What You Just Built — And What You Used</h3>
         <div class="card-grid" style="margin-top:12px;">
@@ -1633,7 +1675,7 @@ h1 {
         </div>
         <div class="step">
             <h4>Challenge 3 — Randomly choose which patterns to draw</h4>
-            <p>Use <code>Math.random() &gt; 0.5</code> as a condition — if true draw circles, if false draw rectangles. Now each generation chooses randomly which elements to include.</p>
+            <p>Use <code>Math.random() &gt; 0.5</code> as a condition — if true draw circles, if false draw rectangles.</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">Hint</span>
                 <pre><span class="kw">if</span> (Math.<span class="fn">random</span>() &gt; <span class="num">0.5</span>) {
@@ -1645,7 +1687,7 @@ h1 {
         </div>
         <div class="step">
             <h4>Challenge 4 — Random canvas background</h4>
-            <p>Instead of always using <code>'#1a1a2e'</code>, pick a random dark colour for the background using <code>hsl(${Math.random()*360}, 30%, 10%)</code>. Low saturation and lightness keeps it dark and moody.</p>
+            <p>Instead of always using <code>'#1a1a2e'</code>, pick a random dark colour: <code>hsl(${Math.random()*360}, 30%, 10%)</code>.</p>
         </div>
     </div>
 
@@ -1842,7 +1884,6 @@ ctx.<span class="fn">strokeRect</span>(x, y, width, height);
         <p style="font-size:0.78rem;color:var(--muted);margin-top:10px;">Type your name, pick a theme, hit Generate. Every click creates a unique variation.</p>
     </div>
 
-    <!-- WHY THIS MATTERS -->
     <div class="concept-box">
         <h3>🎨 Why This Is Useful For You As An Artist</h3>
         <p>You're going to need dozens — maybe hundreds — of unique promo images. Social media headers, album art, event flyers, SoundCloud thumbnails. Hiring a designer for each one is expensive. Using the same static image is boring.</p>
@@ -1869,22 +1910,19 @@ ctx.<span class="fn">strokeRect</span>(x, y, width, height);
         </div>
     </div>
 
-    <!-- ── BEFORE YOU START ── -->
     <div class="concept-box" style="margin-top:28px;">
         <h3>📁 Before You Start — Create Your File</h3>
         <p>Create a new file called <strong>poster-generator.html</strong>. This builds on everything from Session 2 — loops, randomness, arrays, and patterns — but now it actually <em>does something</em> for you as an artist.</p>
     </div>
 
-    <!-- ══ PHASE 1: HTML ══ -->
     <div style="margin:32px 0 8px;">
         <span class="phase-html"><span style="font-size:1.2rem;">🧱</span><strong>PHASE 1 — HTML: The Controls</strong></span>
     </div>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">We need a canvas to draw on, two text inputs (name + subtitle), and buttons for theme, style, and download.</p>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">We need a canvas, two text inputs, and buttons for theme, style, and download.</p>
 
     <div class="step-list">
         <div class="step">
             <h4>Start with the HTML skeleton</h4>
-            <p>This is the same boilerplate as always — copy it as-is:</p>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">poster-generator.html</span>
                 <pre>&lt;!DOCTYPE html&gt;
@@ -1894,560 +1932,106 @@ ctx.<span class="fn">strokeRect</span>(x, y, width, height);
     &lt;title&gt;My Poster Generator&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-
     &lt;!-- Content goes here --&gt;
-
 &lt;/body&gt;
 &lt;/html&gt;</pre>
             </div>
         </div>
 
         <div class="step">
-            <h4>Add the heading, canvas, and text inputs</h4>
-            <p>Replace <code>&lt;!-- Content goes here --&gt;</code> with the following. The <code>&lt;input&gt;</code> elements let users type their name and subtitle — JavaScript will read these later with <code>.value</code>.</p>
+            <h4>Add the heading, canvas, and controls</h4>
             <div class="code-block" style="margin-top:10px;">
                 <span class="code-tag">inside &lt;body&gt;</span>
                 <pre>&lt;h1&gt;🎨 Poster Generator&lt;/h1&gt;
-
 &lt;canvas id="poster" width="800" height="800"&gt;&lt;/canvas&gt;
-
 &lt;div id="controls"&gt;
-
-    &lt;!-- Text inputs ──────────────────── --&gt;
     &lt;div class="row"&gt;
-        &lt;input id="artistName" type="text"
-               placeholder="Your Name / Artist Name"
-               value="My Artist Name"&gt;
-
-        &lt;input id="subtitle" type="text"
-               placeholder="Release Title or Subtitle"
-               value="New Release 2025"&gt;
+        &lt;input id="artistName" type="text" value="My Artist Name"&gt;
+        &lt;input id="subtitle" type="text" value="New Release 2025"&gt;
     &lt;/div&gt;
-
-    &lt;!-- Colour theme buttons ─────────── --&gt;
     &lt;p class="label"&gt;Colour Theme&lt;/p&gt;
     &lt;div id="themeRow"&gt;
         &lt;button class="theme active" data-theme="neon"&gt;Neon&lt;/button&gt;
-        &lt;button class="theme"        data-theme="warm"&gt;Warm&lt;/button&gt;
-        &lt;button class="theme"        data-theme="cool"&gt;Cool&lt;/button&gt;
-        &lt;button class="theme"        data-theme="earth"&gt;Earth&lt;/button&gt;
-        &lt;button class="theme"        data-theme="mono"&gt;Mono&lt;/button&gt;
+        &lt;button class="theme" data-theme="warm"&gt;Warm&lt;/button&gt;
+        &lt;button class="theme" data-theme="cool"&gt;Cool&lt;/button&gt;
+        &lt;button class="theme" data-theme="earth"&gt;Earth&lt;/button&gt;
+        &lt;button class="theme" data-theme="mono"&gt;Mono&lt;/button&gt;
     &lt;/div&gt;
-
-    &lt;!-- Background style buttons ────── --&gt;
     &lt;p class="label"&gt;Background Style&lt;/p&gt;
     &lt;div id="styleRow"&gt;
         &lt;button class="style active" data-style="circles"&gt;Circles&lt;/button&gt;
-        &lt;button class="style"        data-style="spiral"&gt;Spiral&lt;/button&gt;
-        &lt;button class="style"        data-style="waves"&gt;Waves&lt;/button&gt;
-        &lt;button class="style"        data-style="starburst"&gt;Starburst&lt;/button&gt;
-        &lt;button class="style"        data-style="combo"&gt;Combo&lt;/button&gt;
+        &lt;button class="style" data-style="spiral"&gt;Spiral&lt;/button&gt;
+        &lt;button class="style" data-style="waves"&gt;Waves&lt;/button&gt;
+        &lt;button class="style" data-style="starburst"&gt;Starburst&lt;/button&gt;
+        &lt;button class="style" data-style="combo"&gt;Combo&lt;/button&gt;
     &lt;/div&gt;
-
-    &lt;!-- Action buttons ───────────────── --&gt;
     &lt;div class="actions"&gt;
         &lt;button id="generateBtn"&gt;🎲 Generate&lt;/button&gt;
         &lt;button id="downloadBtn"&gt;💾 Download PNG&lt;/button&gt;
     &lt;/div&gt;
-
 &lt;/div&gt;</pre>
             </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. You'll see the text inputs and buttons, but no styling yet.</p>
         </div>
     </div>
 
-    <div class="checkpoint" style="margin:20px 0;">
-        <h4>💡 New HTML Concept — <code>&lt;input&gt;</code> elements</h4>
-        <p>An <code>&lt;input type="text"&gt;</code> creates a text box the user can type into. The <code>value</code> attribute sets the default text. In JavaScript, you read whatever the user has typed with <code>document.getElementById('artistName').value</code>. The <code>placeholder</code> is the grey hint text that disappears when typing starts.</p>
-        <p style="margin-bottom:0;">The <code>data-theme</code> and <code>data-style</code> attributes on the buttons are <strong>custom data attributes</strong> — a way to attach extra information to any HTML element that JavaScript can then read.</p>
-    </div>
-
-    <!-- ══ PHASE 2: CSS ══ -->
     <div style="margin:32px 0 8px;">
         <span class="phase-css"><span style="font-size:1.2rem;">🎨</span><strong>PHASE 2 — CSS: The Layout</strong></span>
     </div>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">Style the inputs, buttons, and layout so it looks professional.</p>
 
     <div class="step-list">
         <div class="step">
-            <h4>Add a <code>&lt;style&gt;</code> tag — body and canvas</h4>
-            <p>Inside <code>&lt;head&gt;</code>, add a style tag with these rules. The canvas becomes square — perfect for album art and Instagram posts.</p>
+            <h4>Add styles for the poster generator</h4>
             <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;head&gt;</span>
-                <pre>&lt;style&gt;
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    background: #0d0f14;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 24px 16px;
-    min-height: 100vh;
-}
-
-h1 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    letter-spacing: 0.05em;
-}
-
-#poster {
-    background: #111;
-    border-radius: 12px;
-    display: block;
-    margin: 0 auto 24px;
-    max-width: 100%;        /* shrinks on mobile */
-    max-height: 80vw;       /* stays square-ish */
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-}</pre>
-            </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. You should now see a dark square canvas centred on the page.</p>
-        </div>
-
-        <div class="step">
-            <h4>Style the controls panel</h4>
-            <p>Add this inside the same <code>&lt;style&gt;</code> tag, after what you just wrote:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">continuing inside &lt;style&gt;</span>
-                <pre>#controls {
-    max-width: 540px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-/* The two text inputs in a row */
-.row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px 14px;
-    font-size: 0.95rem;
-    border-radius: 8px;
-    border: 1.5px solid #333;
-    background: #1a1a2e;
-    color: white;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-input[type="text"]:focus {
-    border-color: #f093fb;      /* highlight when typing */
-}
-
-/* Section label */
-.label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #888;
-    text-align: left;
-    margin-bottom: -8px;        /* pull the buttons up slightly */
-}
-
-/* Button rows */
-#themeRow, #styleRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.theme, .style {
-    padding: 7px 14px;
-    border-radius: 6px;
-    border: 1.5px solid #444;
-    background: transparent;
-    color: #aaa;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-
-.theme:hover, .style:hover  { border-color: #f093fb; color: white; }
+                <span class="code-tag">inside &lt;head&gt; &lt;style&gt;</span>
+                <pre>* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d0f14; color: white; font-family: Arial, sans-serif; text-align: center; padding: 24px 16px; }
+h1 { font-size: 1.8rem; margin-bottom: 20px; }
+#poster { background: #111; border-radius: 12px; display: block; margin: 0 auto 24px; max-width: 100%; }
+#controls { max-width: 540px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+input[type="text"] { width: 100%; padding: 10px 14px; font-size: 0.95rem; border-radius: 8px; border: 1.5px solid #333; background: #1a1a2e; color: white; outline: none; }
+input[type="text"]:focus { border-color: #f093fb; }
+.label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: #888; text-align: left; }
+#themeRow, #styleRow { display: flex; flex-wrap: wrap; gap: 6px; }
+.theme, .style { padding: 7px 14px; border-radius: 6px; border: 1.5px solid #444; background: transparent; color: #aaa; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 .theme.active, .style.active { background: #f093fb; border-color: #f093fb; color: #0d0f14; }
-
-/* Main action buttons */
-.actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 6px;
-}
-
-#generateBtn {
-    flex: 1;
-    padding: 13px;
-    font-size: 1rem;
-    font-weight: 700;
-    background: #f093fb;
-    color: #0d0f14;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.15s, filter 0.15s;
-}
-#generateBtn:hover { filter: brightness(1.12); transform: translateY(-2px); }
-
-#downloadBtn {
-    padding: 13px 20px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    background: transparent;
-    color: white;
-    border: 1.5px solid #444;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: border-color 0.15s;
-}
-#downloadBtn:hover { border-color: #f093fb; }
-
-&lt;/style&gt;</pre>
+.actions { display: flex; gap: 10px; }
+#generateBtn { flex: 1; padding: 13px; font-size: 1rem; font-weight: 700; background: #f093fb; color: #0d0f14; border: none; border-radius: 8px; cursor: pointer; }
+#downloadBtn { padding: 13px 20px; font-size: 0.9rem; font-weight: 700; background: transparent; color: white; border: 1.5px solid #444; border-radius: 8px; cursor: pointer; }</pre>
             </div>
-            <p style="margin-top:8px;font-size:0.85rem;color:var(--muted);">👉 Save and refresh. The controls now look polished. Clicking buttons doesn't work yet — that's Phase 3.</p>
         </div>
     </div>
 
-    <!-- ══ PHASE 3: JAVASCRIPT ══ -->
     <div style="margin:32px 0 8px;">
         <span class="phase-js"><span style="font-size:1.2rem;">⚡</span><strong>PHASE 3 — JavaScript: Making It Work</strong></span>
     </div>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;">We'll write five functions, then wire them together. Each function has one clear job.</p>
 
     <div class="step-list">
-
         <div class="step">
-            <h4>Add a <code>&lt;script&gt;</code> tag and set up the variables</h4>
-            <p>Just before <code>&lt;/body&gt;</code>, add a script tag with these starting variables. We grab the canvas once at the top so we don't have to keep looking it up.</p>
+            <h4>Complete poster-generator.html — full file</h4>
             <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">just before &lt;/body&gt;</span>
-                <pre>&lt;script&gt;
-
-<span class="cmt">// ── Canvas setup ──────────────────────────────────</span>
-<span class="kw">const</span> <span class="var">canvas</span> = document.<span class="fn">getElementById</span>(<span class="str">'poster'</span>);
-<span class="kw">const</span> <span class="var">ctx</span>    = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);
-
-<span class="cmt">// ── State ─────────────────────────────────────────
-// These store the user's current selections.
-// We read them inside generate() when the button is clicked.</span>
-<span class="kw">let</span> <span class="var">currentTheme</span> = <span class="str">'neon'</span>;
-<span class="kw">let</span> <span class="var">currentStyle</span> = <span class="str">'circles'</span>;
-
-<span class="cmt">// ── Colour themes ─────────────────────────────────
-// Each theme is an array of hex colours.
-// We use arrays here exactly as we learned in the Arrays tab.</span>
-<span class="kw">const</span> <span class="var">themes</span> = {
-    neon:  [<span class="str">'#f093fb'</span>, <span class="str">'#c77dff'</span>, <span class="str">'#4cc9f0'</span>, <span class="str">'#f5576c'</span>, <span class="str">'#ffd93d'</span>],
-    warm:  [<span class="str">'#ffd93d'</span>, <span class="str">'#ff9a3c'</span>, <span class="str">'#f5576c'</span>, <span class="str">'#ff6b6b'</span>, <span class="str">'#ffa07a'</span>],
-    cool:  [<span class="str">'#4d96ff'</span>, <span class="str">'#4cc9f0'</span>, <span class="str">'#06d6a0'</span>, <span class="str">'#118ab2'</span>, <span class="str">'#90e0ef'</span>],
-    earth: [<span class="str">'#6bcb77'</span>, <span class="str">'#4d9e6a'</span>, <span class="str">'#ffd93d'</span>, <span class="str">'#8b9d6a'</span>, <span class="str">'#c5e8b0'</span>],
-    mono:  [<span class="str">'#ffffff'</span>, <span class="str">'#d0d0d0'</span>, <span class="str">'#a0a0a0'</span>, <span class="str">'#606060'</span>, <span class="str">'#303030'</span>]
-};
-
-<span class="cmt">// ── Helper: random number in a range ─────────────</span>
-<span class="kw">function</span> <span class="fn">rand</span>(min, max) {
-    <span class="kw">return</span> Math.<span class="fn">random</span>() * (max - min) + min;
-}
-
-<span class="cmt">// ── Helper: random colour from the active palette ─</span>
-<span class="kw">function</span> <span class="fn">pickColor</span>() {
-    <span class="kw">const</span> <span class="var">palette</span> = themes[<span class="var">currentTheme</span>];
-    <span class="kw">return</span> <span class="var">palette</span>[Math.<span class="fn">floor</span>(Math.<span class="fn">random</span>() * <span class="var">palette</span>.length)];
-}</pre>
-            </div>
-            <div class="analogy" style="margin-top:10px;">
-                <h4>🔑 Concept — <code>const</code> vs <code>let</code></h4>
-                <p><code>const</code> is for things that never get reassigned — the canvas, the ctx, the themes object. <code>let</code> is for things that change — <code>currentTheme</code> changes when the user clicks a different theme button. Always use <code>const</code> unless you know it needs to change.</p>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Write the background drawing functions</h4>
-            <p>These are <strong>the exact same patterns</strong> from the Patterns tab — just organised as named functions so we can call them by name. Add all of these inside your script tag:</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="cmt">// ── 1. Scattered circles ──────────────────────────
-// Uses loops and randomness (from Loops + Randomness tabs)</span>
-<span class="kw">function</span> <span class="fn">drawCircles</span>() {
-    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="num">120</span>; <span class="var">i</span>++) {
-        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
-        <span class="var">ctx</span>.<span class="fn">arc</span>(<span class="fn">rand</span>(<span class="num">0</span>, canvas.width), <span class="fn">rand</span>(<span class="num">0</span>, canvas.height),
-                  <span class="fn">rand</span>(<span class="num">4</span>, <span class="num">80</span>), <span class="num">0</span>, Math.PI * <span class="num">2</span>);
-        <span class="var">ctx</span>.fillStyle   = <span class="fn">pickColor</span>();
-        <span class="var">ctx</span>.globalAlpha = <span class="fn">rand</span>(<span class="num">0.12</span>, <span class="num">0.6</span>);
-        <span class="var">ctx</span>.<span class="fn">fill</span>();
-    }
-    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
-}
-
-<span class="cmt">// ── 2. Spiral ─────────────────────────────────────
-// From the Patterns tab: cos/sin × growing angle</span>
-<span class="kw">function</span> <span class="fn">drawSpiral</span>() {
-    <span class="kw">const</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>, <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
-    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">a</span> = <span class="num">0</span>; <span class="var">a</span> &lt; Math.PI * <span class="num">16</span>; <span class="var">a</span> += <span class="num">0.1</span>) {
-        <span class="kw">const</span> <span class="var">d</span> = <span class="var">a</span> * <span class="num">20</span>;  <span class="cmt">// distance grows with angle</span>
-        <span class="kw">const</span> <span class="var">x</span> = <span class="var">cx</span> + Math.<span class="fn">cos</span>(<span class="var">a</span>) * <span class="var">d</span>;
-        <span class="kw">const</span> <span class="var">y</span> = <span class="var">cy</span> + Math.<span class="fn">sin</span>(<span class="var">a</span>) * <span class="var">d</span>;
-        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
-        <span class="var">ctx</span>.<span class="fn">arc</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">3.5</span>, <span class="num">0</span>, Math.PI * <span class="num">2</span>);
-        <span class="var">ctx</span>.fillStyle   = <span class="fn">pickColor</span>();
-        <span class="var">ctx</span>.globalAlpha = <span class="num">0.7</span>;
-        <span class="var">ctx</span>.<span class="fn">fill</span>();
-    }
-    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
-}
-
-<span class="cmt">// ── 3. Waves ──────────────────────────────────────
-// Math.sin() creates the wavy shape (from Patterns tab)</span>
-<span class="kw">function</span> <span class="fn">drawWaves</span>() {
-    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">yOff</span> = <span class="num">20</span>; <span class="var">yOff</span> &lt; canvas.height; <span class="var">yOff</span> += <span class="num">36</span>) {
-        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
-        <span class="kw">for</span> (<span class="kw">let</span> <span class="var">x</span> = <span class="num">0</span>; <span class="var">x</span> &lt;= canvas.width; <span class="var">x</span> += <span class="num">4</span>) {
-            <span class="kw">const</span> <span class="var">y</span> = <span class="var">yOff</span> + Math.<span class="fn">sin</span>(<span class="var">x</span> * <span class="num">0.018</span> + <span class="var">yOff</span> * <span class="num">0.04</span>) * <span class="num">40</span>;
-            <span class="var">x</span> === <span class="num">0</span> ? <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">x</span>, <span class="var">y</span>) : <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">x</span>, <span class="var">y</span>);
-        }
-        <span class="var">ctx</span>.strokeStyle = <span class="fn">pickColor</span>();
-        <span class="var">ctx</span>.globalAlpha = <span class="fn">rand</span>(<span class="num">0.25</span>, <span class="num">0.65</span>);
-        <span class="var">ctx</span>.lineWidth   = <span class="fn">rand</span>(<span class="num">1</span>, <span class="num">4</span>);
-        <span class="var">ctx</span>.<span class="fn">stroke</span>();
-    }
-    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
-}
-
-<span class="cmt">// ── 4. Starburst ──────────────────────────────────
-// Lines radiating from centre at every angle</span>
-<span class="kw">function</span> <span class="fn">drawStarburst</span>() {
-    <span class="kw">const</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>, <span class="var">cy</span> = canvas.height / <span class="num">2</span>;
-    <span class="kw">for</span> (<span class="kw">let</span> <span class="var">a</span> = <span class="num">0</span>; <span class="var">a</span> &lt; Math.PI * <span class="num">2</span>; <span class="var">a</span> += <span class="num">0.08</span>) {
-        <span class="kw">const</span> <span class="var">len</span> = <span class="fn">rand</span>(<span class="num">200</span>, canvas.width * <span class="num">0.65</span>);
-        <span class="var">ctx</span>.<span class="fn">beginPath</span>();
-        <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">cx</span>, <span class="var">cy</span>);
-        <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">cx</span> + Math.<span class="fn">cos</span>(<span class="var">a</span>) * <span class="var">len</span>, <span class="var">cy</span> + Math.<span class="fn">sin</span>(<span class="var">a</span>) * <span class="var">len</span>);
-        <span class="var">ctx</span>.strokeStyle = <span class="fn">pickColor</span>();
-        <span class="var">ctx</span>.globalAlpha = <span class="fn">rand</span>(<span class="num">0.15</span>, <span class="num">0.5</span>);
-        <span class="var">ctx</span>.lineWidth   = <span class="fn">rand</span>(<span class="num">0.5</span>, <span class="num">3</span>);
-        <span class="var">ctx</span>.<span class="fn">stroke</span>();
-    }
-    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
-}
-
-<span class="cmt">// ── 5. Combo — all patterns layered ──────────────</span>
-<span class="kw">function</span> <span class="fn">drawCombo</span>() {
-    <span class="fn">drawCircles</span>();
-    <span class="fn">drawWaves</span>();
-    <span class="fn">drawSpiral</span>();
-}</pre>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Write the text overlay function</h4>
-            <p>This is new. <code>ctx.fillText()</code> draws text on the canvas, just like drawing a shape. We set the font, size, and position, then call fillText with the string we want to draw. The <code>textAlign = 'center'</code> setting makes it easy to centre text horizontally.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="cmt">// ── Draw the artist name and subtitle ─────────────</span>
-<span class="kw">function</span> <span class="fn">drawText</span>(name, subtitle) {
-
-    <span class="kw">const</span> <span class="var">cx</span> = canvas.width / <span class="num">2</span>;    <span class="cmt">// horizontal centre</span>
-    <span class="kw">const</span> <span class="var">cy</span> = canvas.height / <span class="num">2</span>;   <span class="cmt">// vertical centre</span>
-    <span class="kw">const</span> <span class="var">accent</span> = themes[<span class="var">currentTheme</span>][<span class="num">0</span>];  <span class="cmt">// first colour in the palette</span>
-
-    <span class="var">ctx</span>.textAlign    = <span class="str">'center'</span>;
-    <span class="var">ctx</span>.textBaseline = <span class="str">'middle'</span>;
-
-    <span class="cmt">// Dark semi-transparent backing rectangle
-    // This makes the text readable over any background</span>
-    <span class="var">ctx</span>.fillStyle   = <span class="str">'rgba(0, 0, 0, 0.55)'</span>;
-    <span class="var">ctx</span>.globalAlpha = <span class="num">1</span>;
-    <span class="var">ctx</span>.<span class="fn">fillRect</span>(<span class="num">0</span>, <span class="var">cy</span> - <span class="num">90</span>, canvas.width, <span class="num">180</span>);
-
-    <span class="cmt">// Thin accent line above the name</span>
-    <span class="var">ctx</span>.strokeStyle = <span class="var">accent</span>;
-    <span class="var">ctx</span>.lineWidth   = <span class="num">3</span>;
-    <span class="var">ctx</span>.<span class="fn">beginPath</span>();
-    <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">cx</span> - <span class="num">140</span>, <span class="var">cy</span> - <span class="num">66</span>);
-    <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">cx</span> + <span class="num">140</span>, <span class="var">cy</span> - <span class="num">66</span>);
-    <span class="var">ctx</span>.<span class="fn">stroke</span>();
-
-    <span class="cmt">// Artist name — large and bold</span>
-    <span class="var">ctx</span>.font      = <span class="str">'bold 78px Arial'</span>;
-    <span class="var">ctx</span>.fillStyle = <span class="str">'white'</span>;
-    <span class="var">ctx</span>.<span class="fn">fillText</span>(<span class="var">name</span>, <span class="var">cx</span>, <span class="var">cy</span> - <span class="num">10</span>);
-
-    <span class="cmt">// Subtitle — smaller, in the accent colour</span>
-    <span class="var">ctx</span>.font      = <span class="str">'28px Arial'</span>;
-    <span class="var">ctx</span>.fillStyle = <span class="var">accent</span>;
-    <span class="var">ctx</span>.letterSpacing = <span class="str">'0.15em'</span>;
-    <span class="var">ctx</span>.<span class="fn">fillText</span>(<span class="var">subtitle</span>.toUpperCase(), <span class="var">cx</span>, <span class="var">cy</span> + <span class="num">46</span>);
-
-    <span class="cmt">// Thin accent line below the subtitle</span>
-    <span class="var">ctx</span>.strokeStyle = <span class="var">accent</span>;
-    <span class="var">ctx</span>.<span class="fn">beginPath</span>();
-    <span class="var">ctx</span>.<span class="fn">moveTo</span>(<span class="var">cx</span> - <span class="num">140</span>, <span class="var">cy</span> + <span class="num">74</span>);
-    <span class="var">ctx</span>.<span class="fn">lineTo</span>(<span class="var">cx</span> + <span class="num">140</span>, <span class="var">cy</span> + <span class="num">74</span>);
-    <span class="var">ctx</span>.<span class="fn">stroke</span>();
-
-    ctx.letterSpacing = <span class="str">'0'</span>; <span class="cmt">// reset</span>
-}</pre>
-            </div>
-            <div class="why-box" style="margin-top:10px;">
-                <h4>💜 Why a backing rectangle?</h4>
-                <p>Without it, light text on a light background becomes invisible. The dark semi-transparent rectangle (<code>rgba(0,0,0,0.55)</code>) creates a band that darkens the area behind the text just enough to guarantee legibility — regardless of what colours or patterns are underneath. This is a standard technique in poster design.</p>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Write the main <code>generate()</code> function</h4>
-            <p>This is the function called when the Generate button is clicked. It reads the text inputs, draws the background in the chosen style, then lays the text on top. The order matters — background first, text second.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="kw">function</span> <span class="fn">generate</span>() {
-
-    <span class="cmt">// Step 1: Read what the user typed</span>
-    <span class="kw">const</span> <span class="var">name</span>     = document.<span class="fn">getElementById</span>(<span class="str">'artistName'</span>).value || <span class="str">'My Name'</span>;
-    <span class="kw">const</span> <span class="var">subtitle</span> = document.<span class="fn">getElementById</span>(<span class="str">'subtitle'</span>).value   || <span class="str">'Release 2025'</span>;
-
-    <span class="cmt">// Step 2: Fill the background with a dark colour
-    // hsl(hue, saturation, lightness) — low saturation = subtle
-    // Math.random() * 360 gives us a different hue every time</span>
-    <span class="var">ctx</span>.fillStyle = <span class="str">`hsl(${Math.random() * 360}, 18%, 8%)`</span>;
-    <span class="var">ctx</span>.<span class="fn">fillRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);
-
-    <span class="cmt">// Step 3: Draw the chosen background pattern
-    // currentStyle is set when the user clicks a style button</span>
-    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'circles'</span>)   <span class="fn">drawCircles</span>();
-    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'spiral'</span>)    <span class="fn">drawSpiral</span>();
-    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'waves'</span>)     <span class="fn">drawWaves</span>();
-    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'starburst'</span>) <span class="fn">drawStarburst</span>();
-    <span class="kw">if</span> (<span class="var">currentStyle</span> === <span class="str">'combo'</span>)     <span class="fn">drawCombo</span>();
-
-    <span class="cmt">// Step 4: Draw the text on top of the background</span>
-    <span class="fn">drawText</span>(<span class="var">name</span>, <span class="var">subtitle</span>);
-}</pre>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Write the download function</h4>
-            <p>This creates a download link invisibly, points it at the canvas image data, and clicks it programmatically. The user gets a <code>.png</code> file, perfect for uploading to Instagram, SoundCloud, or anywhere else.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="kw">function</span> <span class="fn">downloadPoster</span>() {
-    <span class="kw">const</span> <span class="var">link</span>      = document.<span class="fn">createElement</span>(<span class="str">'a'</span>);
-    <span class="var">link</span>.download   = <span class="str">`poster-${Date.now()}.png`</span>;  <span class="cmt">// unique filename</span>
-    <span class="var">link</span>.href       = canvas.<span class="fn">toDataURL</span>(<span class="str">'image/png'</span>);
-    <span class="var">link</span>.<span class="fn">click</span>();
-}</pre>
-            </div>
-            <div class="analogy" style="margin-top:10px;">
-                <h4>🔑 What is <code>toDataURL()</code>?</h4>
-                <p><code>canvas.toDataURL()</code> converts every pixel on the canvas into a long text string starting with <code>data:image/png;base64,...</code>. A browser can use that string exactly like a real image URL — so we set it as the <code>href</code> of a download link and click it. No server, no upload — everything happens locally in the browser.</p>
-            </div>
-        </div>
-
-        <div class="step">
-            <h4>Wire up all the buttons</h4>
-            <p>This is the "glue" code. We find every button, listen for clicks, update state, update the active class, and call generate. This pattern — listening for events and updating state — is the foundation of all interactive web apps.</p>
-            <div class="code-block" style="margin-top:10px;">
-                <span class="code-tag">inside &lt;script&gt;</span>
-                <pre><span class="cmt">// ── Wire theme buttons ────────────────────────────</span>
-document.<span class="fn">getElementById</span>(<span class="str">'themeRow'</span>)
-    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(<span class="var">e</span>) {
-        <span class="kw">if</span> (!<span class="var">e</span>.target.dataset.theme) <span class="kw">return</span>;  <span class="cmt">// clicked empty space</span>
-
-        <span class="cmt">// Update state</span>
-        <span class="var">currentTheme</span> = <span class="var">e</span>.target.dataset.theme;
-
-        <span class="cmt">// Move the .active class to the clicked button</span>
-        document.<span class="fn">querySelectorAll</span>(<span class="str">'.theme'</span>)
-            .<span class="fn">forEach</span>(<span class="var">b</span> => <span class="var">b</span>.classList.<span class="fn">remove</span>(<span class="str">'active'</span>));
-        <span class="var">e</span>.target.classList.<span class="fn">add</span>(<span class="str">'active'</span>);
-
-        <span class="fn">generate</span>();  <span class="cmt">// regenerate immediately</span>
-    });
-
-<span class="cmt">// ── Wire style buttons ────────────────────────────</span>
-document.<span class="fn">getElementById</span>(<span class="str">'styleRow'</span>)
-    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(<span class="var">e</span>) {
-        <span class="kw">if</span> (!<span class="var">e</span>.target.dataset.style) <span class="kw">return</span>;
-
-        <span class="var">currentStyle</span> = <span class="var">e</span>.target.dataset.style;
-
-        document.<span class="fn">querySelectorAll</span>(<span class="str">'.style'</span>)
-            .<span class="fn">forEach</span>(<span class="var">b</span> => <span class="var">b</span>.classList.<span class="fn">remove</span>(<span class="str">'active'</span>));
-        <span class="var">e</span>.target.classList.<span class="fn">add</span>(<span class="str">'active'</span>);
-
-        <span class="fn">generate</span>();
-    });
-
-<span class="cmt">// ── Wire Generate button ──────────────────────────</span>
-document.<span class="fn">getElementById</span>(<span class="str">'generateBtn'</span>)
-    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="fn">generate</span>);
-
-<span class="cmt">// ── Wire Download button ──────────────────────────</span>
-document.<span class="fn">getElementById</span>(<span class="str">'downloadBtn'</span>)
-    .<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="fn">downloadPoster</span>);
-
-<span class="cmt">// ── Generate one on page load ─────────────────────</span>
-<span class="fn">generate</span>();
-
-&lt;/script&gt;</pre>
-            </div>
-            <div class="tip-box" style="margin-top:10px;">
-                <h4>💡 Event delegation — one listener for many buttons</h4>
-                <p>Instead of adding a click listener to each button individually, we add <em>one</em> listener to the <em>parent</em> <code>div</code>. When any button inside is clicked, the event "bubbles up" to the parent. We check <code>e.target.dataset.theme</code> to know which button was clicked. This technique is called <strong>event delegation</strong> — it's cleaner and works even if buttons are added or removed later.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- FULL FILE CHECKPOINT -->
-    <div class="checkpoint" style="margin:24px 0;">
-        <h4>✅ End of Phase 3 — Your complete file:</h4>
-        <p style="font-size:0.88rem;color:#374151;margin-bottom:10px;">Here is everything together. Compare yours to this if something isn't working.</p>
-        <div class="code-block">
-            <span class="code-tag">poster-generator.html — full file</span>
-            <pre>&lt;!DOCTYPE html&gt;
+                <span class="code-tag">poster-generator.html — full file</span>
+                <pre>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My Poster Generator&lt;/title&gt;
     &lt;style&gt;
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #0d0f14; color: white;
-               font-family: Arial, sans-serif;
-               text-align: center; padding: 24px 16px; }
+        body { background: #0d0f14; color: white; font-family: Arial, sans-serif; text-align: center; padding: 24px 16px; }
         h1 { font-size: 1.8rem; margin-bottom: 20px; }
-        #poster { background: #111; border-radius: 12px;
-                  display: block; margin: 0 auto 24px;
-                  max-width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
-        #controls { max-width: 540px; margin: 0 auto;
-                    display: flex; flex-direction: column; gap: 14px; }
+        #poster { background: #111; border-radius: 12px; display: block; margin: 0 auto 24px; max-width: 100%; }
+        #controls { max-width: 540px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
         .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        input[type="text"] { width: 100%; padding: 10px 14px; font-size: 0.95rem;
-            border-radius: 8px; border: 1.5px solid #333;
-            background: #1a1a2e; color: white; outline: none; }
+        input[type="text"] { width: 100%; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #333; background: #1a1a2e; color: white; outline: none; }
         input[type="text"]:focus { border-color: #f093fb; }
-        .label { font-size: 0.72rem; font-weight: 700;
-                 letter-spacing: 0.12em; color: #888; text-align: left; }
+        .label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: #888; text-align: left; }
         #themeRow, #styleRow { display: flex; flex-wrap: wrap; gap: 6px; }
-        .theme, .style { padding: 7px 14px; border-radius: 6px;
-            border: 1.5px solid #444; background: transparent;
-            color: #aaa; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
-        .theme.active, .style.active { background: #f093fb;
-            border-color: #f093fb; color: #0d0f14; }
+        .theme, .style { padding: 7px 14px; border-radius: 6px; border: 1.5px solid #444; background: transparent; color: #aaa; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+        .theme.active, .style.active { background: #f093fb; border-color: #f093fb; color: #0d0f14; }
         .actions { display: flex; gap: 10px; }
-        #generateBtn { flex: 1; padding: 13px; font-size: 1rem; font-weight: 700;
-            background: #f093fb; color: #0d0f14; border: none;
-            border-radius: 8px; cursor: pointer; }
-        #downloadBtn { padding: 13px 20px; font-size: 0.9rem; font-weight: 700;
-            background: transparent; color: white;
-            border: 1.5px solid #444; border-radius: 8px; cursor: pointer; }
+        #generateBtn { flex: 1; padding: 13px; font-size: 1rem; font-weight: 700; background: #f093fb; color: #0d0f14; border: none; border-radius: 8px; cursor: pointer; }
+        #downloadBtn { padding: 13px 20px; background: transparent; color: white; border: 1.5px solid #444; border-radius: 8px; cursor: pointer; }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -2483,7 +2067,6 @@ document.<span class="fn">getElementById</span>(<span class="str">'downloadBtn'<
         const canvas = document.getElementById('poster');
         const ctx    = canvas.getContext('2d');
         let currentTheme = 'neon', currentStyle = 'circles';
-
         const themes = {
             neon:  ['#f093fb','#c77dff','#4cc9f0','#f5576c','#ffd93d'],
             warm:  ['#ffd93d','#ff9a3c','#f5576c','#ff6b6b','#ffa07a'],
@@ -2491,207 +2074,116 @@ document.<span class="fn">getElementById</span>(<span class="str">'downloadBtn'<
             earth: ['#6bcb77','#4d9e6a','#ffd93d','#8b9d6a','#c5e8b0'],
             mono:  ['#ffffff','#d0d0d0','#a0a0a0','#606060','#303030']
         };
-
         function rand(min, max) { return Math.random() * (max - min) + min; }
         function pickColor() {
             const p = themes[currentTheme];
             return p[Math.floor(Math.random() * p.length)];
         }
-
         function drawCircles() {
             for (let i = 0; i &lt; 120; i++) {
                 ctx.beginPath();
-                ctx.arc(rand(0, canvas.width), rand(0, canvas.height),
-                        rand(4, 80), 0, Math.PI * 2);
-                ctx.fillStyle = pickColor();
-                ctx.globalAlpha = rand(0.12, 0.6);
-                ctx.fill();
+                ctx.arc(rand(0,canvas.width), rand(0,canvas.height), rand(4,80), 0, Math.PI*2);
+                ctx.fillStyle = pickColor(); ctx.globalAlpha = rand(0.12,0.6); ctx.fill();
             }
             ctx.globalAlpha = 1;
         }
         function drawSpiral() {
-            const cx = canvas.width/2, cy = canvas.height/2;
-            for (let a = 0; a &lt; Math.PI*16; a += 0.1) {
-                const d = a*20, x = cx+Math.cos(a)*d, y = cy+Math.sin(a)*d;
-                ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI*2);
-                ctx.fillStyle = pickColor(); ctx.globalAlpha = 0.7;
-                ctx.fill();
+            const cx=canvas.width/2, cy=canvas.height/2;
+            for (let a=0; a&lt;Math.PI*16; a+=0.1) {
+                const d=a*20, x=cx+Math.cos(a)*d, y=cy+Math.sin(a)*d;
+                ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2);
+                ctx.fillStyle=pickColor(); ctx.globalAlpha=0.7; ctx.fill();
             }
-            ctx.globalAlpha = 1;
+            ctx.globalAlpha=1;
         }
         function drawWaves() {
-            for (let yOff = 20; yOff &lt; canvas.height; yOff += 36) {
+            for (let yOff=20; yOff&lt;canvas.height; yOff+=36) {
                 ctx.beginPath();
-                for (let x = 0; x &lt;= canvas.width; x += 4) {
-                    const y = yOff + Math.sin(x*0.018 + yOff*0.04)*40;
-                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                for (let x=0; x&lt;=canvas.width; x+=4) {
+                    const y=yOff+Math.sin(x*0.018+yOff*0.04)*40;
+                    x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
                 }
-                ctx.strokeStyle = pickColor();
-                ctx.globalAlpha = rand(0.25, 0.65);
-                ctx.lineWidth = rand(1, 4);
-                ctx.stroke();
+                ctx.strokeStyle=pickColor(); ctx.globalAlpha=rand(0.25,0.65); ctx.lineWidth=rand(1,4); ctx.stroke();
             }
-            ctx.globalAlpha = 1;
+            ctx.globalAlpha=1;
         }
         function drawStarburst() {
-            const cx = canvas.width/2, cy = canvas.height/2;
-            for (let a = 0; a &lt; Math.PI*2; a += 0.08) {
-                const len = rand(200, canvas.width*0.65);
-                ctx.beginPath(); ctx.moveTo(cx, cy);
-                ctx.lineTo(cx + Math.cos(a)*len, cy + Math.sin(a)*len);
-                ctx.strokeStyle = pickColor();
-                ctx.globalAlpha = rand(0.15, 0.5);
-                ctx.lineWidth = rand(0.5, 3);
-                ctx.stroke();
+            const cx=canvas.width/2, cy=canvas.height/2;
+            for (let a=0; a&lt;Math.PI*2; a+=0.08) {
+                const len=rand(200,canvas.width*0.65);
+                ctx.beginPath(); ctx.moveTo(cx,cy);
+                ctx.lineTo(cx+Math.cos(a)*len, cy+Math.sin(a)*len);
+                ctx.strokeStyle=pickColor(); ctx.globalAlpha=rand(0.15,0.5); ctx.lineWidth=rand(0.5,3); ctx.stroke();
             }
-            ctx.globalAlpha = 1;
+            ctx.globalAlpha=1;
         }
         function drawCombo() { drawCircles(); drawWaves(); drawSpiral(); }
-
         function drawText(name, subtitle) {
-            const cx = canvas.width/2, cy = canvas.height/2;
-            const accent = themes[currentTheme][0];
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillStyle = 'rgba(0,0,0,0.55)';
-            ctx.fillRect(0, cy-90, canvas.width, 180);
-            ctx.strokeStyle = accent; ctx.lineWidth = 3;
-            ctx.beginPath(); ctx.moveTo(cx-140, cy-66); ctx.lineTo(cx+140, cy-66); ctx.stroke();
-            ctx.font = 'bold 78px Arial'; ctx.fillStyle = 'white';
-            ctx.fillText(name, cx, cy-10);
-            ctx.font = '28px Arial'; ctx.fillStyle = accent;
-            ctx.fillText(subtitle.toUpperCase(), cx, cy+46);
-            ctx.beginPath(); ctx.moveTo(cx-140, cy+74); ctx.lineTo(cx+140, cy+74); ctx.stroke();
+            const cx=canvas.width/2, cy=canvas.height/2, accent=themes[currentTheme][0];
+            ctx.textAlign='center'; ctx.textBaseline='middle';
+            ctx.fillStyle='rgba(0,0,0,0.55)'; ctx.fillRect(0, cy-90, canvas.width, 180);
+            ctx.strokeStyle=accent; ctx.lineWidth=3;
+            ctx.beginPath(); ctx.moveTo(cx-140,cy-66); ctx.lineTo(cx+140,cy-66); ctx.stroke();
+            ctx.font='bold 78px Arial'; ctx.fillStyle='white'; ctx.fillText(name, cx, cy-10);
+            ctx.font='28px Arial'; ctx.fillStyle=accent; ctx.fillText(subtitle.toUpperCase(), cx, cy+46);
+            ctx.beginPath(); ctx.moveTo(cx-140,cy+74); ctx.lineTo(cx+140,cy+74); ctx.stroke();
         }
-
         function generate() {
-            const name     = document.getElementById('artistName').value || 'My Name';
-            const subtitle = document.getElementById('subtitle').value   || 'Release 2025';
-            ctx.fillStyle  = `hsl(${Math.random()*360}, 18%, 8%)`;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            if (currentStyle === 'circles')   drawCircles();
-            if (currentStyle === 'spiral')    drawSpiral();
-            if (currentStyle === 'waves')     drawWaves();
-            if (currentStyle === 'starburst') drawStarburst();
-            if (currentStyle === 'combo')     drawCombo();
+            const name=document.getElementById('artistName').value||'My Name';
+            const subtitle=document.getElementById('subtitle').value||'Release 2025';
+            ctx.fillStyle=`hsl(${Math.random()*360}, 18%, 8%)`;
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            if (currentStyle==='circles')   drawCircles();
+            if (currentStyle==='spiral')    drawSpiral();
+            if (currentStyle==='waves')     drawWaves();
+            if (currentStyle==='starburst') drawStarburst();
+            if (currentStyle==='combo')     drawCombo();
             drawText(name, subtitle);
         }
-
         function downloadPoster() {
-            const link    = document.createElement('a');
-            link.download = `poster-${Date.now()}.png`;
-            link.href     = canvas.toDataURL('image/png');
-            link.click();
+            const link=document.createElement('a');
+            link.download=`poster-${Date.now()}.png`;
+            link.href=canvas.toDataURL('image/png'); link.click();
         }
-
-        document.getElementById('themeRow').addEventListener('click', e => {
+        document.getElementById('themeRow').addEventListener('click', e=&gt;{
             if (!e.target.dataset.theme) return;
-            currentTheme = e.target.dataset.theme;
-            document.querySelectorAll('.theme').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            generate();
+            currentTheme=e.target.dataset.theme;
+            document.querySelectorAll('.theme').forEach(b=&gt;b.classList.remove('active'));
+            e.target.classList.add('active'); generate();
         });
-        document.getElementById('styleRow').addEventListener('click', e => {
+        document.getElementById('styleRow').addEventListener('click', e=&gt;{
             if (!e.target.dataset.style) return;
-            currentStyle = e.target.dataset.style;
-            document.querySelectorAll('.style').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            generate();
+            currentStyle=e.target.dataset.style;
+            document.querySelectorAll('.style').forEach(b=&gt;b.classList.remove('active'));
+            e.target.classList.add('active'); generate();
         });
         document.getElementById('generateBtn').addEventListener('click', generate);
         document.getElementById('downloadBtn').addEventListener('click', downloadPoster);
-
         generate();
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
-        </div>
-    </div>
-
-    <!-- WHAT YOU BUILT -->
-    <div class="concept-box">
-        <h3>🎉 What You Just Built — And What You Used</h3>
-        <div class="card-grid" style="margin-top:12px;">
-            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
-                <strong style="color:var(--accent3);">🧱 HTML</strong>
-                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
-                    <li><code>&lt;input type="text"&gt;</code> for user input</li>
-                    <li>Buttons with <code>data-theme</code>, <code>data-style</code></li>
-                    <li>Square canvas for album-art ratio</li>
-                </ul>
-            </div>
-            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
-                <strong style="color:var(--accent3);">🎨 CSS</strong>
-                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
-                    <li>CSS Grid for the input row</li>
-                    <li><code>.active</code> class toggling</li>
-                    <li>Focus states on inputs</li>
-                    <li>Dark theme layout</li>
-                </ul>
-            </div>
-            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:14px;">
-                <strong style="color:var(--accent3);">⚡ JavaScript</strong>
-                <ul style="padding-left:16px;margin-top:6px;font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.9;">
-                    <li>Text on canvas — <code>ctx.fillText()</code></li>
-                    <li>Reading inputs — <code>.value</code></li>
-                    <li>Objects as theme stores</li>
-                    <li>Event delegation</li>
-                    <li>Download — <code>toDataURL()</code></li>
-                </ul>
             </div>
         </div>
     </div>
 
-    <!-- CHALLENGES -->
     <h3>🚀 Challenges — Make It Yours</h3>
     <div class="step-list">
         <div class="step">
             <h4>Challenge 1 — Add a third line of text</h4>
-            <p>Add a third <code>&lt;input&gt;</code> for a date or location (e.g. "Berlin · 12 Apr 2025"). Draw it below the subtitle in a smaller size — try <code>ctx.font = '20px Arial'</code> and a muted colour like <code>'rgba(255,255,255,0.45)'</code>.</p>
+            <p>Add a third <code>&lt;input&gt;</code> for a date or location. Draw it below the subtitle in a smaller size.</p>
         </div>
         <div class="step">
             <h4>Challenge 2 — Add a corner watermark</h4>
-            <p>After <code>drawText()</code> completes, add a small logo circle in the bottom-right corner. Draw a filled circle at <code>(canvas.width - 40, canvas.height - 40)</code> with radius 18, then draw a letter inside it with <code>ctx.fillText()</code>. This is how labels brand their releases.</p>
+            <p>Draw a filled circle at <code>(canvas.width - 40, canvas.height - 40)</code> with radius 18, then draw a letter inside it.</p>
         </div>
         <div class="step">
             <h4>Challenge 3 — Your own colour palette</h4>
-            <p>Add a 6th theme to the <code>themes</code> object — name it after yourself. Pick 5 colours using <a href="https://coolors.co" target="_blank" style="color:var(--accent);">coolors.co</a> and add a matching button in the HTML. Your custom palette, your brand.</p>
+            <p>Add a 6th theme using your own colours from <a href="https://coolors.co" target="_blank" style="color:var(--accent);">coolors.co</a>.</p>
         </div>
         <div class="step">
             <h4>Challenge 4 — Scale up to 2× for sharp downloads</h4>
-            <p>Screen pixels are fine, but downloaded images should be crisp on high-density screens. Research <code>canvas.width = 1600; canvas.height = 1600; ctx.scale(2, 2);</code> — doubling the canvas size while scaling up the drawing context produces a 2× resolution image. Try it before calling <code>generate()</code>.</p>
-        </div>
-    </div>
-
-    <div class="tip-box">
-        <h4>💡 Something Not Working?</h4>
-        <ul style="padding-left:16px;line-height:2;font-size:0.88rem;">
-            <li>Text not visible? Make sure <code>drawText()</code> is called <strong>after</strong> the background functions, not before</li>
-            <li>Buttons not responding? Open F12 → Console and look for the error message</li>
-            <li>Download gives a blank image? The canvas may be in a <code>tainted</code> state — this can happen with cross-origin images. Keep everything local</li>
-            <li>Text cut off? The canvas is 800×800 — if the name is very long, reduce the font size: <code>'bold 56px Arial'</code></li>
-        </ul>
-    </div>
-
-    <!-- CONNECTIONS BACK TO THE SESSION -->
-    <div class="card" style="margin-top:24px;">
-        <h3 style="margin-top:0;">🔗 How This Connects to Everything You Learned Today</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px;text-align:left;">
-            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
-                <strong>🔄 Loops tab</strong>
-                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;">Every background style uses <code>for</code> loops — circles, spiral, waves, and starburst all loop through hundreds of shapes.</p>
-            </div>
-            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
-                <strong>🎲 Randomness tab</strong>
-                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;"><code>rand()</code> and <code>Math.random()</code> are called dozens of times per generation — for position, size, colour, and opacity.</p>
-            </div>
-            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
-                <strong>📚 Arrays tab</strong>
-                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;">Every colour theme is an array. <code>pickColor()</code> picks a random item from the current palette — exactly the pattern from the Arrays tab.</p>
-            </div>
-            <div style="background:var(--step-bg);border-radius:10px;padding:14px;">
-                <strong>🔶 Patterns tab</strong>
-                <p style="font-size:0.83rem;color:var(--muted);margin-top:4px;margin-bottom:0;">The spiral uses <code>cos/sin × angle</code>, the waves use <code>Math.sin()</code>, the starburst uses angles from the centre. All from the Patterns tab.</p>
-            </div>
+            <p>Research <code>canvas.width = 1600; ctx.scale(2, 2);</code> for high-resolution output.</p>
         </div>
     </div>
 </div>
@@ -2734,13 +2226,6 @@ function openTab(name, btn) {
    UTILITY
 ═══════════════════════════════════════════════ */
 function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function getPos(e, canvas) {
-    const r = canvas.getBoundingClientRect();
-    const sx = canvas.width / r.width, sy = canvas.height / r.height;
-    if (e.touches) return { x:(e.touches[0].clientX - r.left)*sx, y:(e.touches[0].clientY - r.top)*sy };
-    return { x:(e.clientX - r.left)*sx, y:(e.clientY - r.top)*sy };
-}
 
 function randN(min, max) { return Math.random() * (max - min) + min; }
 
@@ -2937,7 +2422,6 @@ function generateArt() {
     artCtx.fillStyle = `hsl(${Math.random()*360},25%,10%)`;
     artCtx.fillRect(0,0,artCanvas.width,artCanvas.height);
 
-    // Layer 1: scattered shapes
     for (let i=0;i<90;i++) {
         const x=randN(0,artCanvas.width), y=randN(0,artCanvas.height), s=randN(5,55);
         artCtx.beginPath();
@@ -2948,7 +2432,6 @@ function generateArt() {
     }
     artCtx.globalAlpha = 1;
 
-    // Layer 2: spiral
     const cx=artCanvas.width/2, cy=artCanvas.height/2, sc=artRandColor();
     for (let a=0;a<Math.PI*12;a+=0.12) {
         const d=a*5.5, x=cx+Math.cos(a)*d, y=cy+Math.sin(a)*d;
@@ -2958,7 +2441,6 @@ function generateArt() {
         artCtx.fill();
     }
 
-    // Layer 3: wave lines
     for (let yOff=20;yOff<artCanvas.height;yOff+=40) {
         artCtx.beginPath();
         for (let x=0;x<artCanvas.width;x+=4) {
@@ -3077,7 +2559,6 @@ function saveArt() {
         link.click();
     };
 
-    // Theme buttons
     document.getElementById('adv-themes').addEventListener('click', e => {
         const t = e.target.closest('[data-theme]');
         if (!t) return;
@@ -3087,7 +2568,6 @@ function saveArt() {
         advGenerate();
     });
 
-    // Style buttons
     document.getElementById('adv-styles').addEventListener('click', e => {
         const s = e.target.closest('[data-style]');
         if (!s) return;
@@ -3097,12 +2577,46 @@ function saveArt() {
         advGenerate();
     });
 
-    // Generate on load
     advGenerate();
 })();
 
 // Generate on load
 generateArt();
+
+    // ── LOCK SCREEN ──────────────────────────────────
+    const SESSION_PASSWORD = 'create2025';
+    const LS_KEY           = 'cc_s2_unlocked';
+
+    (function initLock() {
+        if (localStorage.getItem(LS_KEY) === '1') {
+            document.getElementById('lockScreen').classList.add('hidden');
+            return;
+        }
+        document.getElementById('lockInput').focus();
+        document.getElementById('lockInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') tryUnlock();
+        });
+    })();
+
+    function tryUnlock() {
+        const input = document.getElementById('lockInput');
+        const error = document.getElementById('lockError');
+        if (input.value === SESSION_PASSWORD) {
+            localStorage.setItem(LS_KEY, '1');
+            const ls = document.getElementById('lockScreen');
+            ls.style.transition = 'opacity 0.5s';
+            ls.style.opacity = '0';
+            setTimeout(function() { ls.classList.add('hidden'); }, 500);
+        } else {
+            input.classList.remove('shake');
+            void input.offsetWidth;
+            input.classList.add('shake');
+            input.value = '';
+            error.textContent = 'Incorrect password — try again.';
+            setTimeout(function() { error.textContent = ''; }, 2500);
+            input.focus();
+        }
+    }
 </script>
 </body>
 </html>

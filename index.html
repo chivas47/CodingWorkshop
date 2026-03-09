@@ -629,6 +629,110 @@
         .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
         .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
 
+        /* ─── PASSWORD MODAL ─── */
+        #pw-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(8,9,13,0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        #pw-overlay.open { display: flex; }
+
+        #pw-modal {
+            background: #14151c;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px 36px;
+            width: min(420px, 90vw);
+            text-align: center;
+            animation: fadeUp 0.3s ease;
+        }
+
+        #pw-modal .pw-icon { font-size: 2rem; margin-bottom: 14px; }
+        #pw-modal h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+        #pw-modal p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+            margin-bottom: 24px;
+        }
+
+        #pw-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.2s;
+            margin-bottom: 14px;
+        }
+        #pw-input:focus { border-color: var(--s1); }
+        #pw-input.error { border-color: #f5576c; animation: shake 0.3s ease; }
+
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        #pw-submit {
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+            border: none;
+            background: var(--s1);
+            color: var(--ink);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+        #pw-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        #pw-cancel {
+            display: block;
+            margin-top: 12px;
+            color: rgba(255,255,255,0.28);
+            font-size: 0.78rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+        }
+        #pw-cancel:hover { color: rgba(255,255,255,0.6); }
+
+        /* lock badge on cards */
+        .session-card .lock-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(8,9,13,0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            font-family: var(--font-mono);
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
@@ -699,7 +803,7 @@
         <div class="sessions-grid reveal-stagger">
 
             <!-- SESSION 1 -->
-            <a href="session1/index.html" class="session-card s1">
+            <a href="#" data-href="session1/index.html" class="session-card s1 locked">
                 <div class="card-visual" id="vis1">
                     <canvas id="c1"></canvas>
                     <div class="card-visual-overlay"></div>
@@ -724,7 +828,7 @@
             </a>
 
             <!-- SESSION 2 -->
-            <a href="session2/index.html" class="session-card s2">
+            <a href="#" data-href="session2/index.html" class="session-card s2 locked">
                 <div class="card-visual" id="vis2">
                     <canvas id="c2"></canvas>
                     <div class="card-visual-overlay"></div>
@@ -749,7 +853,7 @@
             </a>
 
             <!-- SESSION 3 — TATTOO VISUALISER -->
-            <a href="session3/index.html" class="session-card s3">
+            <a href="#" data-href="session3/index.html" class="session-card s3 locked">
                 <div class="card-visual" id="vis3">
                     <canvas id="c3"></canvas>
                     <div class="card-visual-overlay"></div>
@@ -774,7 +878,7 @@
             </a>
 
             <!-- SESSION 4 -->
-            <a href="session4/index.html" class="session-card s4">
+            <a href="#" data-href="session4/index.html" class="session-card s4 locked">
                 <div class="card-visual" id="vis4">
                     <canvas id="c4"></canvas>
                     <div class="card-visual-overlay"></div>
@@ -806,7 +910,7 @@
             <div class="cta-inner">
                 <h2>Ready to start?</h2>
                 <p>No setup. No installs. Just open Session 1 and follow along.</p>
-                <a href="session1/index.html" class="btn-start">
+                <a href="#" data-href="session1/index.html" class="btn-start locked">
                     🚀 Begin Session 1
                 </a>
             </div>
@@ -820,8 +924,20 @@
     <div class="footer-wordmark">Code &amp; <span>Create</span></div>
     <p>From zero to creative coder in 4 sessions</p>
     <div class="footer-sep"></div>
-    <p>Questions? <a href="mailto:nuno.menezes12@gmail.com">nuno.menezes12@gmail.com</a></p>
+    <p>Questions? <a href="mailto:nuno.menezes12@gmail.com">nuno.menezes12@gmail.com</a> &nbsp;·&nbsp; <a href="https://instagram.com/code.create.workshop" target="_blank" rel="noopener">@code.create.workshop</a></p>
 </footer>
+
+<!-- PASSWORD MODAL -->
+<div id="pw-overlay">
+    <div id="pw-modal">
+        <div class="pw-icon">🔒</div>
+        <h3>Session Access</h3>
+        <p>Enter the workshop password to continue</p>
+        <input id="pw-input" type="password" placeholder="password" autocomplete="off" />
+        <button id="pw-submit">Unlock Session →</button>
+        <button id="pw-cancel">Cancel</button>
+    </div>
+</div>
 
 
 <script>
@@ -1205,6 +1321,79 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+/* ═══════════════════════════════════════════════════════════════
+   SESSION PASSWORD GATE
+   Change SESSION_PASSWORD below to set your workshop password.
+═══════════════════════════════════════════════════════════════ */
+(function() {
+    const SESSION_PASSWORD = 'code&create';
+    const STORAGE_KEY = 'cc_unlocked';
+
+    const overlay  = document.getElementById('pw-overlay');
+    const input    = document.getElementById('pw-input');
+    const submit   = document.getElementById('pw-submit');
+    const cancel   = document.getElementById('pw-cancel');
+
+    let pendingHref = null;
+
+    function isUnlocked() {
+        return sessionStorage.getItem(STORAGE_KEY) === '1';
+    }
+
+    function openModal(href) {
+        pendingHref = href;
+        input.value = '';
+        input.classList.remove('error');
+        overlay.classList.add('open');
+        setTimeout(() => input.focus(), 80);
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        pendingHref = null;
+    }
+
+    function tryUnlock() {
+        if (input.value === SESSION_PASSWORD) {
+            sessionStorage.setItem(STORAGE_KEY, '1');
+            overlay.classList.remove('open');
+            if (pendingHref) window.location.href = pendingHref;
+        } else {
+            input.classList.remove('error');
+            void input.offsetWidth; // reflow to restart animation
+            input.classList.add('error');
+            input.value = '';
+            input.focus();
+        }
+    }
+
+    // Intercept all locked links
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a.locked');
+        if (!link) return;
+        e.preventDefault();
+        const href = link.dataset.href;
+        if (!href) return;
+        if (isUnlocked()) {
+            window.location.href = href;
+        } else {
+            openModal(href);
+        }
+    });
+
+    submit.addEventListener('click', tryUnlock);
+    cancel.addEventListener('click', closeModal);
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') tryUnlock();
+        if (e.key === 'Escape') closeModal();
+    });
+
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+    });
+})();
 
 </script>
 </body>
