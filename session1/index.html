@@ -300,6 +300,102 @@
             line-height: 1.35;
         }
 
+        /* ─── FUNCTIONS — anatomy grid ─── */
+        .fn-anatomy {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin: 14px 0 4px;
+        }
+        @media (max-width: 500px) {
+            .fn-anatomy { grid-template-columns: repeat(2, 1fr); }
+        }
+        .fn-kw  { background: #fef3c7; border: 1px solid #fde68a; }
+        .fn-nm  { background: #ede9fe; border: 1px solid #c4b5fd; }
+        .fn-pm  { background: #fee2e2; border: 1px solid #fca5a5; }
+        .fn-bd  { background: #d1fae5; border: 1px solid #6ee7b7; }
+        .fn-kw  .var-code { color: #92400e; }
+        .fn-nm  .var-code { color: #5b21b6; }
+        .fn-pm  .var-code { color: #991b1b; }
+        .fn-bd  .var-code { color: #065f46; }
+
+        /* ─── FUNCTIONS — define vs call compare ─── */
+        .fn-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+        @media (max-width: 560px) {
+            .fn-compare { grid-template-columns: 1fr; }
+        }
+        .fn-compare-card {
+            border-radius: var(--radius);
+            padding: 16px;
+            border: 2px solid transparent;
+        }
+        .fn-define { background: #eff6ff; border-color: #93c5fd; }
+        .fn-call   { background: #f0fdf4; border-color: #86efac; }
+        .fn-compare-card .fc-title {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .fn-define .fc-title { color: #1d4ed8; }
+        .fn-call   .fc-title { color: #15803d; }
+        .fn-compare-card pre {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            margin: 0;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* ─── FUNCTIONS — param flow visual ─── */
+        .fn-param-visual {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin: 10px 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        .fn-param-visual .pv-val {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-weight: 700;
+        }
+        .fn-param-visual .pv-arrow {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+        .fn-param-visual .pv-param {
+            background: #ede9fe;
+            border: 1px solid #c4b5fd;
+            color: #5b21b6;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-weight: 700;
+        }
+        .fn-param-visual .pv-label {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
         /* ─── VARIABLES — type cards ─── */
         .var-types-grid {
             display: grid;
@@ -1091,32 +1187,103 @@ console.<span class="fn">log</span>(<span class="var">myColor</span>);</pre></di
 ════════════════════════════════════════ -->
 <div id="functions" class="tab-content">
     <h2 class="section-title">🍳 Functions</h2>
-    <p class="section-sub">A function is a recipe — a set of instructions you write once and use many times.</p>
-    <div class="concept-box"><h3>The Problem Functions Solve</h3><p>Imagine you need to say "Hello! Welcome! Nice to meet you!" 100 times on your website. Would you write those 3 lines 100 times? No!</p><p style="margin-bottom:0;">You write them <strong>once inside a function</strong>, then just call that function 100 times.</p></div>
-    <h3>Step by Step — Creating a Function</h3>
-    <div class="step-list">
-        <div class="step"><h4>Write the keyword <code>function</code></h4><p>"I am creating a recipe."</p></div>
-        <div class="step"><h4>Give the function a name</h4><p>Same rules as variables: camelCase, no spaces. Pick an action name like <code>sayHello</code> or <code>makeRed</code>.</p></div>
-        <div class="step"><h4>Add parentheses <code>()</code></h4><p>Inputs (ingredients) go here. Leave empty if it doesn't need any inputs yet.</p></div>
-        <div class="step"><h4>Add curly braces <code>{ }</code></h4><p>Everything between <code>{</code> and <code>}</code> is the recipe — the instructions that run when you call the function.</p></div>
-        <div class="step"><h4>Call it with <code>functionName()</code></h4><p>Writing the name with <code>()</code> at the end <em>executes</em> the function — it runs all the instructions inside.</p></div>
-    </div>
-    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="cmt">// DEFINE the function (write the recipe once)</span>
-<span class="kw">function</span> <span class="fn">sayHello</span>() {
-    console.<span class="fn">log</span>(<span class="str">"Hello!"</span>);
-    console.<span class="fn">log</span>(<span class="str">"Welcome!"</span>);
-    console.<span class="fn">log</span>(<span class="str">"Nice to meet you!"</span>);
-}
+    <p class="section-sub">A function is a reusable recipe — write the instructions once, use them as many times as you need.</p>
 
-<span class="cmt">// CALL the function (follow the recipe)</span>
-<span class="fn">sayHello</span>();  <span class="cmt">// Runs all 3 lines above</span>
-<span class="fn">sayHello</span>();  <span class="cmt">// Runs again!</span>
-<span class="fn">sayHello</span>();  <span class="cmt">// And again!</span></pre></div>
-    <h3>🧪 Try It — Functions Live</h3>
+    <!-- WHY FUNCTIONS -->
+    <div class="concept-box">
+        <h3>Why Do We Need Functions?</h3>
+        <p>Imagine you need to greet every visitor to your website. Without functions you'd copy the same 3 lines of code hundreds of times. Functions let you write those lines <strong>once</strong>, give the block a name, and run it whenever you want.</p>
+        <p style="margin-bottom:0;">Think of it like a recipe card: write the recipe once, cook it as many times as you like.</p>
+    </div>
+
+    <!-- ANATOMY -->
+    <h3>Anatomy of a Function</h3>
+    <p>Every function is built from four parts. Hover or tap each one to understand what it does.</p>
+    <div class="fn-anatomy">
+        <div class="var-part fn-kw">
+            <span class="var-code">function</span>
+            <span class="var-label">Keyword</span>
+            <span class="var-desc">"I am creating a reusable block of code"</span>
+        </div>
+        <div class="var-part fn-nm">
+            <span class="var-code">greet</span>
+            <span class="var-label">Name</span>
+            <span class="var-desc">camelCase, describes the action — like a recipe title</span>
+        </div>
+        <div class="var-part fn-pm">
+            <span class="var-code">(name)</span>
+            <span class="var-label">Parameters</span>
+            <span class="var-desc">Inputs the function needs. Empty <code>()</code> means no inputs.</span>
+        </div>
+        <div class="var-part fn-bd">
+            <span class="var-code">{ … }</span>
+            <span class="var-label">Body</span>
+            <span class="var-desc">The instructions that run every time the function is called</span>
+        </div>
+    </div>
+    <div class="code-block" style="margin-top:6px;"><span class="code-tag">JavaScript</span><pre><span class="kw">function</span> <span class="fn">greet</span>(<span class="var">name</span>) {
+    console.<span class="fn">log</span>(<span class="str">"Hello, "</span> + <span class="var">name</span> + <span class="str">"!"</span>);
+}</pre></div>
+
+    <!-- DEFINE vs CALL -->
+    <h3>The Most Important Rule — DEFINE then CALL</h3>
+    <p>Writing a function does <strong>nothing by itself</strong>. You have to <em>call</em> it to make it run. Beginners often forget this!</p>
+    <div class="fn-compare">
+        <div class="fn-compare-card fn-define">
+            <div class="fc-title">📝 Define — write it once</div>
+            <pre><span class="kw">function</span> <span class="fn">sayHello</span>() {
+  console.<span class="fn">log</span>(<span class="str">"Hello!"</span>);
+}</pre>
+            <p style="font-size:0.8rem;color:#374151;margin:8px 0 0;">Nothing happens yet. The recipe is written, not cooked.</p>
+        </div>
+        <div class="fn-compare-card fn-call">
+            <div class="fc-title">▶ Call — run it</div>
+            <pre><span class="fn">sayHello</span>();
+<span class="fn">sayHello</span>();
+<span class="fn">sayHello</span>();</pre>
+            <p style="font-size:0.8rem;color:#374151;margin:8px 0 0;">Each line runs all the instructions inside <code>sayHello</code>.</p>
+        </div>
+    </div>
+
+    <!-- STEP BY STEP BUILD -->
+    <h3>Build a Function — Step by Step</h3>
+    <div class="step-list">
+        <div class="step">
+            <h4>Start with the keyword <code>function</code></h4>
+            <p>This tells JavaScript: "I'm about to define a reusable block."</p>
+            <div class="code-block" style="margin-top:8px;"><pre><span class="kw">function</span></pre></div>
+        </div>
+        <div class="step">
+            <h4>Give it a name — use camelCase</h4>
+            <p>Use an action word that describes what it does. No spaces, no starting with numbers.</p>
+            <div class="code-block" style="margin-top:8px;"><pre><span class="kw">function</span> <span class="fn">sayHello</span></pre></div>
+        </div>
+        <div class="step">
+            <h4>Add parentheses <code>()</code></h4>
+            <p>If the function needs information from outside, name those inputs here. If not, leave them empty.</p>
+            <div class="code-block" style="margin-top:8px;"><pre><span class="kw">function</span> <span class="fn">sayHello</span>()</pre></div>
+        </div>
+        <div class="step">
+            <h4>Add the body with curly braces <code>{ }</code></h4>
+            <p>Everything between <code>{</code> and <code>}</code> runs whenever you call the function. Indent the code inside.</p>
+            <div class="code-block" style="margin-top:8px;"><pre><span class="kw">function</span> <span class="fn">sayHello</span>() {
+    console.<span class="fn">log</span>(<span class="str">"Hello!"</span>);
+}</pre></div>
+        </div>
+        <div class="step">
+            <h4>Call it to make it run</h4>
+            <p>Write the function name followed by <code>()</code>. You can call it multiple times!</p>
+            <div class="code-block" style="margin-top:8px;"><pre><span class="fn">sayHello</span>();  <span class="cmt">// → Hello!</span>
+<span class="fn">sayHello</span>();  <span class="cmt">// → Hello! again</span></pre></div>
+        </div>
+    </div>
+
+    <!-- TRY IT -->
+    <h3>🧪 Try It Here First — Then Do It in CodePen</h3>
     <div class="runner">
         <div class="runner-header"><span class="runner-title">▶ Live Code Runner</span></div>
         <div class="runner-body">
-            <p class="runner-instructions">Read the code, then run it. Then <strong>add your own</strong> function at the bottom!</p>
+            <p class="runner-instructions">Run the code and read the output. Then add a new <code>greet()</code> call with your own name.</p>
             <textarea class="code-editor" id="fnRunner">// Define a function
 function greet(name) {
     console.log("Hello, " + name + "!");
@@ -1136,31 +1303,57 @@ greet("Sofia");
             <div class="run-output" id="fnOutput"></div>
         </div>
     </div>
-    <h3>📥 Functions with Inputs (Parameters)</h3>
-    <p>The <code>name</code> in parentheses is called a <strong>parameter</strong> — it's a variable that holds whatever value you pass in when you call the function.</p>
-    <div class="analogy"><h4>🍞 The Toast Analogy</h4><p><strong>Recipe: makeToast(numberOfSlices)</strong></p><p>1. Get <em>[numberOfSlices]</em> of bread → 2. Put in toaster → 3. Wait → 4. Take out</p><p>Now: <code>makeToast(1)</code> makes 1 slice. <code>makeToast(4)</code> makes 4 slices! Same recipe, different result.</p></div>
-    <h3>🔙 Functions That Return a Value</h3>
+
+    <!-- PARAMETERS -->
+    <h3>📥 Parameters — Passing Information In</h3>
+    <p>A <strong>parameter</strong> is a placeholder variable inside the <code>()</code>. When you call the function you replace it with a real value (called an <strong>argument</strong>).</p>
+    <div class="fn-param-visual">
+        <span class="pv-label">Call:</span>
+        <span class="pv-val">"Maria"</span>
+        <span class="pv-arrow">→</span>
+        <span class="pv-label">goes into parameter</span>
+        <span class="pv-param">name</span>
+        <span class="pv-arrow">→</span>
+        <span class="pv-label">used inside body as</span>
+        <span class="pv-param">name</span>
+    </div>
+    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="kw">function</span> <span class="fn">greet</span>(<span class="var">name</span>) {                 <span class="cmt">// name is the parameter</span>
+    console.<span class="fn">log</span>(<span class="str">"Hello, "</span> + <span class="var">name</span>);    <span class="cmt">// name holds the value we pass in</span>
+}
+
+<span class="fn">greet</span>(<span class="str">"Maria"</span>);   <span class="cmt">// → Hello, Maria    ("Maria" is the argument)</span>
+<span class="fn">greet</span>(<span class="str">"João"</span>);    <span class="cmt">// → Hello, João</span>
+<span class="fn">greet</span>(<span class="str">"Sofia"</span>);   <span class="cmt">// → Hello, Sofia</span></pre></div>
+    <div class="analogy">
+        <h4>🍞 Analogy — The Toaster Recipe</h4>
+        <p><strong>makeToast(numberOfSlices)</strong> — the recipe is always the same, but the input changes the result.</p>
+        <p><code>makeToast(1)</code> → 1 slice &nbsp;|&nbsp; <code>makeToast(4)</code> → 4 slices. Same function, different result each time.</p>
+    </div>
+
+    <!-- RETURN -->
+    <h3>🔙 Functions That Give Back a Value — <code>return</code></h3>
+    <p>Sometimes a function calculates something and you need the result. Use <code>return</code> to send a value back to wherever the function was called.</p>
     <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="kw">function</span> <span class="fn">addNumbers</span>(a, b) {
     <span class="kw">let</span> <span class="var">sum</span> = a + b;
-    <span class="kw">return</span> <span class="var">sum</span>;  <span class="cmt">// ← send the result back</span>
+    <span class="kw">return</span> <span class="var">sum</span>;          <span class="cmt">// ← sends the result back out</span>
 }
 
 <span class="kw">let</span> <span class="var">result</span> = <span class="fn">addNumbers</span>(<span class="num">5</span>, <span class="num">3</span>);
-console.<span class="fn">log</span>(<span class="var">result</span>);  <span class="cmt">// → 8</span></pre></div>
+console.<span class="fn">log</span>(<span class="var">result</span>);      <span class="cmt">// → 8</span></pre></div>
+
+    <!-- CHALLENGE RUNNER -->
     <div class="runner">
         <div class="runner-header"><span class="runner-title">▶ Challenge — Write Your Own Function</span></div>
         <div class="runner-body">
-            <p class="runner-instructions">The function <code>makeExcited</code> is started for you. Complete it so that it adds "!!!" to any word you give it.</p>
+            <p class="runner-instructions">The function <code>makeExcited</code> adds "!!!" to any word. Run it, then change the words you pass in!</p>
             <textarea class="code-editor" id="fnChallenge">function makeExcited(word) {
-    // Complete this: return the word with "!!!" added
     return word + "!!!";
 }
 
-// Test it:
 console.log(makeExcited("Hello"));
 console.log(makeExcited("Amazing"));
 
-// YOUR TURN: Call it with your own word below:
+// YOUR TURN: call makeExcited() with your own word:
 </textarea>
             <div class="runner-actions">
                 <button class="btn btn-primary" onclick="runCode('fnChallenge', 'fnChallengeOut')">▶ Run Code</button>
@@ -1169,7 +1362,86 @@ console.log(makeExcited("Amazing"));
             <div class="run-output" id="fnChallengeOut"></div>
         </div>
     </div>
-    <div class="checkpoint"><h4>✅ Before Moving On</h4><ul class="check-list"><li>What is a function? (A reusable set of instructions)</li><li>How do you call a function? (Write its name with <code>()</code>)</li><li>What is a parameter? (A variable that receives the input)</li><li>What does <code>return</code> do? (Sends a result back)</li></ul></div>
+
+    <!-- CODEPEN EXERCISE -->
+    <div class="concept-box">
+        <h3>💻 CodePen Exercise — Write Your Own Functions</h3>
+        <p style="opacity:0.9; margin-bottom:14px;">Open your CodePen, go to the <strong>JS panel</strong>, and type this code. Fill in the <code>_____</code> blanks.</p>
+        <div class="code-block" style="background:#0d0f14; border-color:#374151;">
+            <span class="code-tag" style="background:#374151; color:#e5e7eb;">CodePen — JS Panel</span>
+            <pre style="color:#e2e8f0;"><span style="color:#94a3b8;">// 1. Define a function that greets someone</span>
+<span style="color:#fbbf24;">_____</span> greetMe(<span style="color:#f87171;">yourName</span>) {
+    console.log(<span style="color:#86efac;">"Hello, "</span> + <span style="color:#f87171;">yourName</span> + <span style="color:#86efac;">"!"</span>);
+}
+
+<span style="color:#94a3b8;">// 2. Call the function with YOUR name</span>
+greetMe(<span style="color:#fbbf24;">"_____"</span>);
+
+<span style="color:#94a3b8;">// 3. Define a function that doubles a number</span>
+<span style="color:#fbbf24;">function</span> doubleIt(num) {
+    return num <span style="color:#fbbf24;">*</span> <span style="color:#fbbf24;">_____</span>;
+}
+
+console.log(doubleIt(5));    <span style="color:#94a3b8;">// should print 10</span>
+console.log(doubleIt(21));   <span style="color:#94a3b8;">// should print 42</span></pre>
+        </div>
+        <ol style="margin:14px 0 0; padding-left:20px; opacity:0.9; line-height:1.9;">
+            <li>Fill in the blank keyword on line 2 — hint: it's the word that starts every function.</li>
+            <li>Replace <code>"_____"</code> with your actual name.</li>
+            <li>Fill in the multiplication number so <code>doubleIt(5)</code> prints <code>10</code>.</li>
+        </ol>
+        <div class="warn-box" style="margin-top:14px; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); color:#fef3c7;">
+            <strong>Reminder:</strong> Click the <strong>Console</strong> tab at the bottom of CodePen to see your output!
+        </div>
+    </div>
+
+    <!-- COMMON MISTAKES -->
+    <h3>⚠️ Common Mistakes</h3>
+    <div class="mistakes-table" style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+            <thead>
+                <tr style="background:#fee2e2;">
+                    <th style="padding:10px 14px; text-align:left; border-bottom:2px solid #fca5a5;">❌ Wrong</th>
+                    <th style="padding:10px 14px; text-align:left; border-bottom:2px solid #86efac; background:#d1fae5;">✅ Right</th>
+                    <th style="padding:10px 14px; text-align:left; border-bottom:2px solid #e5e7eb;">Why</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom:1px solid #f3f4f6;">
+                    <td style="padding:10px 14px;"><code>function sayHello</code> <em>(no call)</em></td>
+                    <td style="padding:10px 14px;"><code>function sayHello() { … }</code><br><code>sayHello();</code></td>
+                    <td style="padding:10px 14px; color:#6b7280;">Defining a function doesn't run it — you must call it too.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #f3f4f6;">
+                    <td style="padding:10px 14px;"><code>sayHello</code> <em>(no parentheses)</em></td>
+                    <td style="padding:10px 14px;"><code>sayHello()</code></td>
+                    <td style="padding:10px 14px; color:#6b7280;">Without <code>()</code> you reference the function, not call it.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #f3f4f6;">
+                    <td style="padding:10px 14px;"><code>Function greet()</code> <em>(capital F)</em></td>
+                    <td style="padding:10px 14px;"><code>function greet()</code></td>
+                    <td style="padding:10px 14px; color:#6b7280;">Keywords are always lowercase in JavaScript.</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px 14px;"><code>function greet(name) { }</code><br><em>body is empty</em></td>
+                    <td style="padding:10px 14px;">Add code inside <code>{ }</code></td>
+                    <td style="padding:10px 14px; color:#6b7280;">An empty function body does nothing when called.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- CHECKPOINT -->
+    <div class="checkpoint">
+        <h4>✅ Before Moving On — Quick Check</h4>
+        <ul class="check-list">
+            <li>What is a function? <em style="color:var(--muted);">(A named, reusable block of instructions)</em></li>
+            <li>What's the difference between <strong>defining</strong> and <strong>calling</strong>? <em style="color:var(--muted);">(Define = write the recipe; Call = cook it)</em></li>
+            <li>What is a parameter? <em style="color:var(--muted);">(A variable that receives the input you pass in)</em></li>
+            <li>What does <code>return</code> do? <em style="color:var(--muted);">(Sends a result back to where the function was called)</em></li>
+        </ul>
+    </div>
+
     <div style="text-align:center; margin-top:28px;">
         <button class="btn btn-primary" onclick="openTab('practice1', document.querySelectorAll('.tab-btn')[6])">Next: Practice 1 — Changing Things →</button>
     </div>
@@ -1674,7 +1946,7 @@ function openTab(tabName, btn) {
 ═══════════════════════════════════════════════════════ */
 const varStartCode = `// Change the values to match YOU!\nlet myName = "Your Name";\nlet myAge = 20;\nlet myCity = "Lisbon";\n\n// Print them all\nconsole.log("Name: " + myName);\nconsole.log("Age: " + myAge);\nconsole.log("City: " + myCity);\n\n// Try adding a new variable below:\n`;
 const fnStartCode = `// Define a function\nfunction greet(name) {\n    console.log("Hello, " + name + "!");\n}\n\n// Call it with different names\ngreet("Maria");\ngreet("João");\ngreet("Sofia");\n\n// YOUR TURN: Add a call with your name below:\n`;
-const fnChallengeStart = `function makeExcited(word) {\n    return word + "!!!";\n}\n\nconsole.log(makeExcited("Hello"));\nconsole.log(makeExcited("Amazing"));\n`;
+const fnChallengeStart = `function makeExcited(word) {\n    return word + "!!!";\n}\n\nconsole.log(makeExcited("Hello"));\nconsole.log(makeExcited("Amazing"));\n\n// YOUR TURN: call makeExcited() with your own word:\n`;
 
 function runCode(editorId, outputId) {
     const code = document.getElementById(editorId).value;
