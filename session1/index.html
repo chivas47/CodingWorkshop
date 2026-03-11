@@ -252,6 +252,78 @@
             .nav-links a { font-size: 0.72rem; padding: 4px 7px; }
         }
 
+        /* ─── CODEPEN MOCKUP (What is Code demo) ─── */
+        .codepen-mock {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            background: #0d0f14;
+            border-radius: var(--radius) var(--radius) 0 0;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-bottom: none;
+        }
+        @media (max-width: 620px) {
+            .codepen-mock { grid-template-columns: 1fr; }
+        }
+        .cp-panel-header {
+            background: #1e2030;
+            padding: 8px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            letter-spacing: 0.06em;
+        }
+        .cp-html .cp-panel-header { color: #e07733; }
+        .cp-css  .cp-panel-header { color: #4facfe; }
+        .cp-js   .cp-panel-header { color: #ffd93d; }
+        .cp-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+        .cp-html .cp-dot { background: #e07733; }
+        .cp-css  .cp-dot  { background: #4facfe; }
+        .cp-js   .cp-dot  { background: #ffd93d; }
+        .cp-panel-body {
+            padding: 14px;
+            min-height: 130px;
+            background: #141820;
+            opacity: 0.38;
+            transition: opacity 0.3s;
+        }
+        .cp-panel-body.active { opacity: 1; }
+        .cp-panel-body pre {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            line-height: 1.9;
+            color: #c8d3e0;
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .cp-preview {
+            border: 1px solid rgba(0,0,0,0.15);
+            border-top: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+            overflow: hidden;
+        }
+        .cp-preview-header {
+            background: #1e2030;
+            color: rgba(255,255,255,0.4);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 7px 14px;
+        }
+        #wicPreview {
+            min-height: 130px;
+            background: white;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wic-step-btn.active { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+
         /* ── UTILITY ── */
         .mt-0 { margin-top: 0; }
         .mb-0 { margin-bottom: 0; }
@@ -411,6 +483,7 @@
 <div class="tabs-wrapper">
     <div class="tabs" id="tabsRow">
         <button class="tab-btn active" onclick="openTab('intro', this)"><span class="tab-icon">👋</span> Intro</button>
+        <button class="tab-btn" onclick="openTab('codepen-setup', this)"><span class="tab-icon">🖥️</span> CodePen Setup</button>
         <button class="tab-btn" onclick="openTab('timeline', this)"><span class="tab-icon">⏰</span> Timeline</button>
         <button class="tab-btn" onclick="openTab('what-is-code', this)"><span class="tab-icon">💡</span> Code?</button>
         <button class="tab-btn" onclick="openTab('variables', this)"><span class="tab-icon">📦</span> Variables</button>
@@ -459,8 +532,176 @@
     </div>
     <div class="card" style="text-align:center; padding: 28px;">
         <p style="font-size:1.1rem; font-weight:700; margin-bottom:12px;">Ready to begin?</p>
-        <button class="btn btn-primary" onclick="openTab('timeline', document.querySelectorAll('.tab-btn')[1])">Next: Timeline →</button>
+        <button class="btn btn-primary" onclick="openTab('codepen-setup', document.querySelectorAll('.tab-btn')[1])">Next: Set up CodePen →</button>
     </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     CODEPEN SETUP TAB
+════════════════════════════════════════ -->
+<div id="codepen-setup" class="tab-content">
+    <h2 class="section-title">🖥️ Your Coding Environment</h2>
+    <p class="section-sub">We code in the browser — nothing to install. Follow these steps before anything else.</p>
+
+    <div class="concept-box">
+        <h3>🤔 What is CodePen?</h3>
+        <p>CodePen is a website where you type code and see results <strong>instantly</strong> — right next to your code. Think of it as a scratchpad for the web. No setup, no install, no stress.</p>
+        <p style="margin-bottom:0;">👉 Go to: <strong style="color:var(--accent); font-family:var(--font-mono);"><a href="https://codepen.io" target="_blank">codepen.io</a></strong></p>
+    </div>
+
+    <h3 style="margin-top:32px;">Step-by-step: Create your first Pen</h3>
+
+    <div class="step-list">
+
+        <div class="step">
+            <h4>Open CodePen in your browser</h4>
+            <p>Go to <strong>codepen.io</strong> in any browser (Edge or Chrome works best). You'll see the CodePen homepage.</p>
+            <div class="tip-box" style="margin-top:12px; margin-bottom:0;">
+                <h4>💡 Tip</h4>
+                <p style="margin-bottom:0;">Bookmark this page — you'll use it every session!</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Create a free account</h4>
+            <p>Click <strong>"Sign Up"</strong> in the top right. You can sign up with Google (fastest) or with an email. It's free — no credit card needed.</p>
+            <div class="tip-box" style="margin-top:12px; margin-bottom:0;">
+                <h4>💡 Already have an account?</h4>
+                <p style="margin-bottom:0;">Just click <strong>"Log In"</strong> instead — then skip to Step 3.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Create a new Pen</h4>
+            <p>Once logged in, click the big <strong>"+ New Pen"</strong> button (usually top-right or on your dashboard). A blank editor will open.</p>
+        </div>
+
+        <div class="step">
+            <h4>Get familiar with the 3 panels</h4>
+            <p>You'll see three boxes at the top and a preview below. These are the three languages of the web:</p>
+            <div class="web-layers" style="margin-top:14px;">
+                <div class="layer-card html">
+                    <div class="icon">🏗️</div>
+                    <strong>HTML</strong>
+                    <span>The structure — what's on the page (buttons, text, images)</span>
+                </div>
+                <div class="layer-card css">
+                    <div class="icon">🎨</div>
+                    <strong>CSS</strong>
+                    <span>The style — colours, fonts, sizes, layout</span>
+                </div>
+                <div class="layer-card js">
+                    <div class="icon">⚡</div>
+                    <strong>JavaScript</strong>
+                    <span>The behaviour — making things move, click, react</span>
+                </div>
+            </div>
+            <div class="tip-box" style="margin-top:12px; margin-bottom:0;">
+                <h4>💡 Today we focus on JavaScript</h4>
+                <p style="margin-bottom:0;">We'll use the <strong>JS panel</strong> the most. HTML gives us the things to play with, JS makes them come alive.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Write your very first line of code</h4>
+            <p>Click inside the <strong>JS panel</strong> (bottom-left or right panel labelled "JS"). Type this exactly:</p>
+            <div class="code-block">
+                <span class="code-tag">JS</span>
+                <pre><span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Hello, World!"</span>);</pre>
+            </div>
+            <p>Then press <strong>Ctrl + Enter</strong> (Windows) or <strong>Cmd + Enter</strong> (Mac) to run it.</p>
+            <div class="checkpoint" style="margin-bottom:0;">
+                <h4>✅ Did it work?</h4>
+                <p style="margin-bottom:0;">Open the <strong>Console</strong> to see the result: click <strong>Console</strong> at the bottom of the page, or press <strong>F12 → Console</strong> in your browser. You should see <code>Hello, World!</code> printed there!</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Open the Console — your best friend</h4>
+            <p>The <strong>Console</strong> is where JavaScript talks back to you. You'll use it constantly.</p>
+            <div class="card-grid" style="margin-top:12px;">
+                <div class="mini-card">
+                    <h4>🖥️ In CodePen</h4>
+                    <p style="font-size:0.82rem; color:var(--muted); margin:0;">Click <strong>"Console"</strong> tab at the very bottom of the page</p>
+                </div>
+                <div class="mini-card">
+                    <h4>🌐 In your browser</h4>
+                    <p style="font-size:0.82rem; color:var(--muted); margin:0;">Press <strong>F12</strong> then click the <strong>"Console"</strong> tab</p>
+                </div>
+                <div class="mini-card">
+                    <h4>🍎 On Mac</h4>
+                    <p style="font-size:0.82rem; color:var(--muted); margin:0;">Press <strong>Cmd + Option + J</strong> in your browser</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h4>Save your Pen</h4>
+            <p>Press <strong>Ctrl + S</strong> (Windows) or <strong>Cmd + S</strong> (Mac). CodePen saves automatically too, but get into the habit of saving.</p>
+            <p style="margin-bottom:0;">Your Pen now has a URL you can share with anyone — including your teacher!</p>
+        </div>
+
+    </div>
+
+    <div class="concept-box" style="margin-top:32px;">
+        <h3>🗺️ The CodePen Layout — Quick Reference</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap:12px; margin-top:14px;">
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;">
+                <strong style="color:var(--accent); display:block; margin-bottom:6px;">Top panels</strong>
+                <span style="font-size:0.82rem; color:rgba(255,255,255,0.65);">HTML · CSS · JS editors — type your code here</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;">
+                <strong style="color:var(--accent3); display:block; margin-bottom:6px;">Preview area</strong>
+                <span style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Live result — updates as you type</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;">
+                <strong style="color:var(--purple); display:block; margin-bottom:6px;">Console tab</strong>
+                <span style="font-size:0.82rem; color:rgba(255,255,255,0.65);">See output from console.log() and error messages</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:14px;">
+                <strong style="color:#f093fb; display:block; margin-bottom:6px;">Save button</strong>
+                <span style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Ctrl/Cmd + S — saves your Pen and keeps your work</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:28px;">
+        <h4>⌨️ Shortcuts you'll use every session</h4>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:10px; margin-top:8px;">
+            <div><code>Ctrl + Enter</code> — Run your code</div>
+            <div><code>Ctrl + S</code> — Save your Pen</div>
+            <div><code>Ctrl + Z</code> — Undo a mistake</div>
+            <div><code>F12</code> — Open browser DevTools</div>
+            <div><code>Ctrl + /</code> — Comment out a line</div>
+            <div><code>Tab</code> — Indent code (keep it tidy!)</div>
+        </div>
+    </div>
+
+    <div class="warn-box" style="margin-top:20px;">
+        <h4>🚨 Common beginner mistakes</h4>
+        <ul style="padding-left:16px; font-size:0.9rem; line-height:2.2;">
+            <li><strong>Typing in the wrong panel</strong> — make sure you click the JS panel before typing JS code</li>
+            <li><strong>Missing quotes</strong> — text (strings) need quotes around them: <code>"like this"</code></li>
+            <li><strong>Missing semicolons</strong> — end each statement with <code>;</code></li>
+            <li><strong>Uppercase vs lowercase</strong> — <code>console.log</code> not <code>Console.Log</code></li>
+        </ul>
+    </div>
+
+    <div class="checkpoint" style="margin-top:24px;">
+        <h4>✅ Before we move on — checklist</h4>
+        <ul class="check-list">
+            <li>I have a CodePen account</li>
+            <li>I can create a new Pen</li>
+            <li>I typed <code>console.log("Hello, World!")</code> and it worked</li>
+            <li>I can see the Console at the bottom</li>
+            <li>I know where HTML, CSS, and JS panels are</li>
+        </ul>
+        <p style="margin:12px 0 0; font-size:0.88rem;">All done? ✊ Switch to the next tab — let's build something real.</p>
+    </div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('timeline', document.querySelectorAll('.tab-btn')[2])">Next: Session Timeline →</button>
+    </div>
+
 </div>
 
 <!-- ════════════════════════════════════════
@@ -480,6 +721,9 @@
             <div class="tl-item"><div class="tl-time">130–145 min</div><div class="tl-content"><strong>Showcase & Play</strong><span>Share creations, explore the advanced tools, customize</span></div></div>
             <div class="tl-item"><div class="tl-time">145–150 min</div><div class="tl-content"><strong>Wrap-Up</strong><span>Review key concepts, preview Session 2</span></div></div>
         </div>
+    </div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('what-is-code', document.querySelectorAll('.tab-btn')[3])">Next: What is Code? →</button>
     </div>
 </div>
 
@@ -501,24 +745,51 @@
         <div class="layer-card css"><div class="icon">🎨</div><strong>CSS</strong><span>The paint, furniture — how it <em>looks</em></span></div>
         <div class="layer-card js"><div class="icon">⚡</div><strong>JavaScript</strong><span>The lights & doors — what it <em>does</em></span></div>
     </div>
-    <h3>👀 Live Demo — Watch Code Build a Page</h3>
-    <div class="demo-area">
-        <div class="demo-title">Click each button in order →</div>
-        <div class="btn-row">
-            <button class="btn btn-secondary btn-sm" onclick="showStep1()">Step 1: HTML</button>
-            <button class="btn btn-secondary btn-sm" onclick="showStep2()">Step 2: + CSS</button>
-            <button class="btn btn-secondary btn-sm" onclick="showStep3()">Step 3: + JS</button>
-            <button class="btn btn-secondary btn-sm" onclick="resetCodeDemo()">Reset</button>
-        </div>
-        <div id="demoOutput"><p style="text-align:center; color:var(--muted); font-size:0.88rem;">Click "Step 1" to start!</p></div>
-        <div class="code-block" id="demoCodeBlock" style="display:none; margin-top:12px;"><span class="code-tag">Code</span><pre id="demoCodePre"></pre></div>
+    <h3>👀 See It Live — Exactly Like in CodePen</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:14px;">In CodePen you have <strong>three panels</strong> — one for each language. Click each step below to see what each one adds:</p>
+
+    <div class="btn-row" style="justify-content:flex-start; gap:6px; margin-bottom:12px;">
+        <button class="btn btn-secondary btn-sm wic-step-btn" id="wicBtn1" onclick="wicStep(1)">① HTML only</button>
+        <button class="btn btn-secondary btn-sm wic-step-btn" id="wicBtn2" onclick="wicStep(2)">② + CSS</button>
+        <button class="btn btn-secondary btn-sm wic-step-btn" id="wicBtn3" onclick="wicStep(3)">③ + JavaScript</button>
     </div>
-    <div class="checkpoint"><h4>✅ Key Takeaway</h4><p>HTML, CSS, and JavaScript work <strong>together</strong>. Today we focus on JavaScript — making things interactive and alive!</p></div>
+
+    <!-- CodePen-style 3-panel mockup -->
+    <div class="codepen-mock">
+        <div class="cp-panel cp-html">
+            <div class="cp-panel-header"><span class="cp-dot"></span>HTML — structure</div>
+            <div class="cp-panel-body active" id="wicHtmlPanel">
+                <pre id="wicHtmlCode">Click ① to start</pre>
+            </div>
+        </div>
+        <div class="cp-panel cp-css">
+            <div class="cp-panel-header"><span class="cp-dot"></span>CSS — style</div>
+            <div class="cp-panel-body" id="wicCssPanel">
+                <pre id="wicCssCode">/* empty */</pre>
+            </div>
+        </div>
+        <div class="cp-panel cp-js">
+            <div class="cp-panel-header"><span class="cp-dot"></span>JS — behaviour</div>
+            <div class="cp-panel-body" id="wicJsPanel">
+                <pre id="wicJsCode">// empty</pre>
+            </div>
+        </div>
+    </div>
+    <div class="cp-preview">
+        <div class="cp-preview-header">▶ Preview</div>
+        <div id="wicPreview"><p style="color:var(--muted); font-size:0.88rem;">Click ① HTML only to start!</p></div>
+    </div>
+    <div id="wicExplanation" style="margin-top:12px; display:none;"></div>
+
+    <div class="checkpoint" style="margin-top:20px;"><h4>✅ Key Takeaway</h4><p>HTML, CSS, and JavaScript work <strong>together</strong>, each in its own panel in CodePen. Today we focus on JavaScript — making things interactive and alive!</p></div>
     <h3>🤔 Why JavaScript?</h3>
     <div class="card-grid" style="margin-top:12px;">
         <div class="mini-card"><h4>📱 It's Everywhere</h4><p style="font-size:0.85rem; color:var(--muted);">Every website, app, and game on the web uses JavaScript. It's the most popular language in the world.</p></div>
         <div class="mini-card"><h4>🚀 Instant Results</h4><p style="font-size:0.85rem; color:var(--muted);">You write code, refresh the browser, and see it working immediately — no complicated setup.</p></div>
         <div class="mini-card"><h4>🎨 Made for Creating</h4><p style="font-size:0.85rem; color:var(--muted);">You can animate things, draw on a canvas, respond to clicks — perfect for interactive art.</p></div>
+    </div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('variables', document.querySelectorAll('.tab-btn')[4])">Next: Variables →</button>
     </div>
 </div>
 
@@ -585,6 +856,9 @@ console.log("City: " + myCity);
 <span class="var">mood</span> = <span class="str">"excited"</span>;  <span class="cmt">// No 'let' needed this time!</span>
 console.<span class="fn">log</span>(<span class="var">mood</span>);  <span class="cmt">// → excited</span></pre></div></div>
     <div class="checkpoint"><h4>✅ Before Moving On — Can You Answer?</h4><ul class="check-list"><li>What is a variable? (A labeled box that holds information)</li><li>What does <code>let</code> do? (Creates a new variable)</li><li>Why do strings need quotes? (So JavaScript knows it's text, not code)</li></ul></div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('functions', document.querySelectorAll('.tab-btn')[5])">Next: Functions →</button>
+    </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -671,6 +945,9 @@ console.log(makeExcited("Amazing"));
         </div>
     </div>
     <div class="checkpoint"><h4>✅ Before Moving On</h4><ul class="check-list"><li>What is a function? (A reusable set of instructions)</li><li>How do you call a function? (Write its name with <code>()</code>)</li><li>What is a parameter? (A variable that receives the input)</li><li>What does <code>return</code> do? (Sends a result back)</li></ul></div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('practice1', document.querySelectorAll('.tab-btn')[6])">Next: Practice 1 — Changing Things →</button>
+    </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -742,6 +1019,9 @@ console.log('Done! Look at the box above 👆');
     </div>
     <div class="warn-box"><h4>⚠️ Common Mistakes</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li><strong>Wrong ID:</strong> <code>'demobox'</code> ≠ <code>'demoBox'</code> — capital letters matter!</li><li><strong>Missing quotes:</strong> <code>= red</code> should be <code>= 'red'</code></li><li><strong>Missing quotes around ID:</strong> <code>getElementById(demoBox)</code> won't work — needs <code>'demoBox'</code></li></ul></div>
     <div class="checkpoint"><h4>✅ Challenge</h4><p>Can you write a function that:</p><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Makes the box turn purple with a gold border?</li><li>Makes the box spin? (Hint: <code>box.style.transform = 'rotate(45deg)'</code>)</li><li>Resets the box back to the original blue?</li></ul></div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('practice2', document.querySelectorAll('.tab-btn')[7])">Next: Practice 2 — Events →</button>
+    </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -803,6 +1083,9 @@ area.addEventListener('click', function() {
         <div class="mini-card"><h4>⬆️ <code>'mouseup'</code></h4><p style="font-size:0.82rem; color:var(--muted);">Mouse button released</p></div>
     </div>
     <div class="checkpoint"><h4>✅ Challenge Ideas</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Make the counter add 2 per click (change <code>clickCount++</code> to <code>clickCount += 2</code>)</li><li>Show a special message at 5, 10, and 20 clicks</li><li>Change the emoji inside the box based on click count</li></ul></div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('drawing', document.querySelectorAll('.tab-btn')[8])">Next: Mini-Project — Drawing App →</button>
+    </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -980,6 +1263,9 @@ ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre></div></div>
         <div class="step"><h4>Challenge 4 — Change the background colour</h4><p>Use CSS or JavaScript to change the canvas background from white. What happens to your eraser when you do?</p></div>
     </div>
     <div class="tip-box"><h4>💡 Something not working?</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Open the browser console (<strong>F12 → Console</strong>) — error messages appear there in red</li><li>Check that <code>id="myCanvas"</code> matches exactly <code>'myCanvas'</code> in JavaScript (capital C!)</li><li>Make sure your <code>&lt;script&gt;</code> tag is <em>before</em> <code>&lt;/body&gt;</code></li><li>If nothing draws, check you're clicking AND dragging, not just hovering</li></ul></div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('advanced', document.querySelectorAll('.tab-btn')[9])">Next: Advanced Effects →</button>
+    </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1026,6 +1312,9 @@ ctx.lineWidth = <span class="var">sizeSlider</span>.value;</pre></div></div>
     <div class="feature-card"><h4>🦋 Symmetry — Mirror Drawing</h4><p>Every stroke you make is mirrored across the canvas centre using math.</p><div class="code-block" style="margin-top:8px;"><pre><span class="kw">let</span> <span class="var">centerX</span> = canvas.width / <span class="num">2</span>;
 <span class="kw">let</span> <span class="var">mirrorX</span> = centerX - (x - centerX);</pre></div></div>
     <div class="checkpoint"><h4>🚀 The Same Concepts, Deeper</h4><ul class="check-list"><li>Variables to store state (hue, mode, brush size)</li><li>Functions to organise logic</li><li>Mouse events to track movement</li><li>Canvas drawing commands — plus a little math!</li></ul></div>
+    <div style="text-align:center; margin-top:28px;">
+        <button class="btn btn-primary" onclick="openTab('cheatsheet', document.querySelectorAll('.tab-btn')[10])">Next: Cheat Sheet →</button>
+    </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1072,6 +1361,11 @@ ctx.<span class="fn">clearRect</span>(<span class="num">0</span>, <span class="n
     <div class="warn-box"><h4>⚠️ Top Mistakes to Avoid</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Forgetting quotes around strings: <code>= red</code> → <code>= 'red'</code></li><li>Wrong capitalisation in IDs: <code>'mybox'</code> ≠ <code>'myBox'</code></li><li>Missing parentheses on functions: <code>sayHi</code> ≠ <code>sayHi()</code></li></ul></div>
     <div class="tip-box"><h4>💡 Golden Tips</h4><ul style="padding-left:16px; line-height:2; font-size:0.88rem;"><li>Use <code>console.log()</code> constantly — it's your best debugging tool</li><li>Read error messages! They tell you exactly what's wrong</li><li>Open DevTools (F12) to see errors and test code live</li><li>Google is always allowed: "how to [thing] in JavaScript"</li></ul></div>
     <div class="card"><h3 style="margin-top:0; margin-bottom:16px;">📚 Good Resources</h3><div class="card-grid"><div class="mini-card"><h4>MDN Web Docs</h4><p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Official JavaScript reference</p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a></div><div class="mini-card"><h4>JavaScript.info</h4><p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Beginner-friendly tutorials</p><a href="https://javascript.info/" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a></div><div class="mini-card"><h4>CodePen</h4><p style="font-size:0.82rem; color:var(--muted); margin-bottom:8px;">Practice and share code</p><a href="https://codepen.io/" target="_blank" style="font-size:0.82rem; color:var(--accent); text-decoration:none; font-weight:700;">Visit →</a></div></div></div>
+    <div class="concept-box" style="text-align:center; margin-top:28px;">
+        <h3 style="margin-bottom:8px;">🎉 Session 1 Complete!</h3>
+        <p style="margin-bottom:20px;">You've learned variables, functions, events and built a drawing app. You're a developer now.</p>
+        <a href="../session2/index.html" class="btn btn-primary" style="display:inline-flex; text-decoration:none;">Continue to Session 2: Generative Art →</a>
+    </div>
 </div>
 
 <!-- FOOTER -->
@@ -1135,7 +1429,7 @@ const LS_KEY = 'cc_s1_unlocked';
    TAB NAVIGATION
 ═══════════════════════════════════════════════════════ */
 const tabProgress = {
-    intro: 10, timeline: 20, 'what-is-code': 30,
+    intro: 5, 'codepen-setup': 15, timeline: 22, 'what-is-code': 32,
     variables: 45, functions: 55, practice1: 65,
     practice2: 75, drawing: 88, advanced: 95, cheatsheet: 100
 };
@@ -1192,34 +1486,95 @@ function resetRunner(editorId, startCode) {
 /* ═══════════════════════════════════════════════════════
    WHAT IS CODE DEMO
 ═══════════════════════════════════════════════════════ */
-function showStep1() {
-    document.getElementById('demoOutput').innerHTML = '<h2>Hello World!</h2>';
-    document.getElementById('demoCodePre').textContent = '<h2>Hello World!</h2>';
-    document.getElementById('demoCodeBlock').style.display = 'block';
-}
-function showStep2() {
-    document.getElementById('demoOutput').innerHTML = '<h2 style="color:#7c3aed;font-size:2.5em;font-family:Georgia,serif">Hello World!</h2>';
-    document.getElementById('demoCodePre').textContent = '<h2 style="color: purple; font-size: 2.5em;">\n  Hello World!\n</h2>';
-    document.getElementById('demoCodeBlock').style.display = 'block';
-}
-function showStep3() {
-    document.getElementById('demoOutput').innerHTML =
-        '<h2 style="color:#7c3aed;font-size:2.5em;font-family:Georgia,serif;cursor:pointer;transition:all 0.3s" ' +
-        'onmouseover="this.style.color=\'#10b981\'" onmouseout="this.style.color=\'#7c3aed\'" ' +
-        'onclick="alert(\'JavaScript made this clickable!\')">Hello World! (Hover & Click me!)</h2>';
-    document.getElementById('demoCodePre').textContent =
-`<h2 onclick="alert('Hello!')" onmouseover="this.style.color='green'">
-  Hello World!
-</h2>
+/* ═══════════════════════════════════════════════════════
+   WHAT IS CODE — 3-panel CodePen demo
+═══════════════════════════════════════════════════════ */
+const wicHtml =
+`<div id="card">
 
-<script>
-  // JavaScript makes it interactive!
-<\/script>`;
-    document.getElementById('demoCodeBlock').style.display = 'block';
+  <p id="msg">👋 I am a webpage</p>
+
+  <button id="btn">
+    Click me!
+  </button>
+
+</div>`;
+
+const wicCss =
+`#card {
+  background: #a78bfa;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
 }
-function resetCodeDemo() {
-    document.getElementById('demoOutput').innerHTML = '<p style="text-align:center; color:var(--muted); font-size:0.88rem;">Click "Step 1" to start!</p>';
-    document.getElementById('demoCodeBlock').style.display = 'none';
+
+#msg {
+  color: white;
+  font-size: 1.4em;
+  margin-bottom: 14px;
+}
+
+#btn {
+  background: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}`;
+
+const wicJs =
+`let btn = document.getElementById('btn');
+let card = document.getElementById('card');
+let msg = document.getElementById('msg');
+
+btn.onclick = function() {
+  msg.textContent = '🎉 JavaScript did this!';
+  card.style.background = '#00e5a0';
+};`;
+
+const wicExplanations = {
+    1: { cls: 'tip-box',    icon: '🏗️', title: 'HTML = The Structure',  text: 'HTML creates the <strong>elements</strong> — the card, the text, the button. They exist, but with no style they look completely plain. That\'s totally normal! HTML is just the skeleton.' },
+    2: { cls: 'analogy',    icon: '🎨', title: 'CSS = The Style',        text: '<em>Same HTML. Completely different look.</em> CSS targets elements by their <code>id</code> (like <code>#card</code>) and changes how they appear — colour, size, shape, spacing. Notice the JS panel is still empty!' },
+    3: { cls: 'checkpoint', icon: '⚡', title: 'JS = The Behaviour',     text: '<strong>Try clicking the button in the preview!</strong> The JavaScript says: "when someone clicks the button, change the text and the background colour." This is impossible with HTML or CSS alone.' }
+};
+
+function wicStep(n) {
+    [1, 2, 3].forEach(i => {
+        document.getElementById('wicBtn' + i).classList.toggle('active', i === n);
+    });
+
+    // HTML always visible & active
+    document.getElementById('wicHtmlCode').textContent = wicHtml;
+    document.getElementById('wicHtmlPanel').classList.add('active');
+
+    // CSS — active from step 2
+    const cssPanel = document.getElementById('wicCssPanel');
+    document.getElementById('wicCssCode').textContent = n >= 2 ? wicCss : '/* empty */';
+    cssPanel.classList.toggle('active', n >= 2);
+
+    // JS — active from step 3
+    const jsPanel = document.getElementById('wicJsPanel');
+    document.getElementById('wicJsCode').textContent = n >= 3 ? wicJs : '// empty';
+    jsPanel.classList.toggle('active', n >= 3);
+
+    // Preview
+    const preview = document.getElementById('wicPreview');
+    if (n === 1) {
+        preview.innerHTML = `<div style="text-align:center;"><p style="margin-bottom:12px;">👋 I am a webpage</p><button>Click me!</button></div>`;
+    } else if (n === 2) {
+        preview.innerHTML = `<div style="background:#a78bfa;padding:30px;border-radius:20px;text-align:center;"><p style="color:white;font-size:1.4em;margin-bottom:14px;">👋 I am a webpage</p><button style="background:white;border:none;padding:10px 24px;border-radius:8px;cursor:default;font-size:1em;font-weight:bold;">Click me!</button></div>`;
+    } else {
+        preview.innerHTML = `<div id="wicCard" style="background:#a78bfa;padding:30px;border-radius:20px;text-align:center;transition:background 0.5s;"><p id="wicMsg" style="color:white;font-size:1.4em;margin-bottom:14px;">👋 I am a webpage</p><button onclick="document.getElementById('wicMsg').textContent='🎉 JavaScript did this!';document.getElementById('wicCard').style.background='#00e5a0';" style="background:white;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:1em;font-weight:bold;">Click me!</button></div>`;
+    }
+
+    // Explanation
+    const exp = wicExplanations[n];
+    const el = document.getElementById('wicExplanation');
+    el.style.display = 'block';
+    el.className = exp.cls;
+    el.innerHTML = `<h4>${exp.icon} ${exp.title}</h4><p style="margin:0;">${exp.text}</p>`;
 }
 
 /* ═══════════════════════════════════════════════════════
