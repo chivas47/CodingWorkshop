@@ -173,7 +173,7 @@
         .step-list { counter-reset: steps; display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
         .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 20px 20px 60px; position: relative; counter-increment: steps; }
         .step::before { content: counter(steps); position: absolute; left: 16px; top: 18px; width: 28px; height: 28px; background: var(--accent); color: var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
-        .step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+        .step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
         .step p { margin-bottom: 0; font-size: 0.9rem; color: #374151; }
 
         /* ── INTERACTIVE DEMOS ── */
@@ -251,6 +251,78 @@
             .nav-brand { font-size: 0.78rem; }
             .nav-links a { font-size: 0.72rem; padding: 4px 7px; }
         }
+
+        /* ─── VARIABLES — anatomy display ─── */
+        .var-anatomy {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin: 14px 0 4px;
+        }
+        @media (max-width: 500px) {
+            .var-anatomy { grid-template-columns: repeat(2, 1fr); }
+        }
+        .var-part {
+            border-radius: var(--radius);
+            padding: 14px 10px 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .var-let   { background: #fef3c7; border: 1px solid #fde68a; }
+        .var-name  { background: #ede9fe; border: 1px solid #c4b5fd; }
+        .var-equals{ background: #fee2e2; border: 1px solid #fca5a5; }
+        .var-value { background: #d1fae5; border: 1px solid #6ee7b7; }
+        .var-code {
+            font-family: var(--font-mono);
+            font-size: clamp(0.85rem, 3vw, 1.1rem);
+            font-weight: 700;
+            line-height: 1;
+        }
+        .var-let   .var-code { color: #92400e; }
+        .var-name  .var-code { color: #5b21b6; }
+        .var-equals.var-code { color: #991b1b; }
+        .var-equals .var-code{ color: #991b1b; }
+        .var-value .var-code { color: #065f46; }
+        .var-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            font-family: var(--font-mono);
+        }
+        .var-desc {
+            font-size: 0.75rem;
+            color: #374151;
+            line-height: 1.35;
+        }
+
+        /* ─── VARIABLES — type cards ─── */
+        .var-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin: 0;
+        }
+        .var-type-card {
+            border-radius: var(--radius);
+            padding: 18px;
+            border: 1px solid transparent;
+        }
+        .type-string  { background: #fffbeb; border-color: #fde68a; }
+        .type-number  { background: #eff6ff; border-color: #bfdbfe; }
+        .type-boolean { background: #f0fdf4; border-color: #bbf7d0; }
+        .type-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .type-icon { font-size: 1.2rem; }
+        .type-header strong { font-size: 0.9rem; }
 
         /* ─── CODEPEN MOCKUP (What is Code demo) ─── */
         .codepen-mock {
@@ -798,52 +870,140 @@
 ════════════════════════════════════════ -->
 <div id="variables" class="tab-content">
     <h2 class="section-title">📦 Variables</h2>
-    <p class="section-sub">A variable is a named box where you can store information.</p>
+    <p class="section-sub">A variable is a labeled box that holds information. It's the most fundamental idea in all of programming.</p>
+
+    <!-- Concept -->
     <div class="concept-box">
-        <h3>Imagine Labeled Boxes</h3>
-        <p>You have a box labeled <strong>FAVORITE_FOOD</strong>. You put a note inside that says "Pizza". Anytime you need to remember your favorite food, you look in that box.</p>
-        <p style="margin-bottom:0;">Later you can change "Pizza" to "Sushi" — the box stays, only the content changes. That's why it's called a <em>variable</em> — it varies!</p>
+        <h3>Think of it like a contact in your phone</h3>
+        <p>You save a friend as <strong style="color:var(--accent);">"Maria"</strong> — you don't memorise her number, you just look up the name. A variable is exactly that: a <strong>label</strong> that points to a value.</p>
+        <p style="margin-bottom:0;">When the value changes (new number), the label stays the same. That's why it's called a <em>variable</em> — the value can vary!</p>
     </div>
-    <h3>Step by Step — Creating a Variable</h3>
+
+    <!-- Anatomy of a variable — visual breakdown -->
+    <h3 style="margin-top:28px;">🔬 Anatomy of a Variable</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:14px;">Every variable has exactly 4 parts. Hover or tap each one to see what it does:</p>
+
+    <div class="var-anatomy">
+        <div class="var-part var-let">
+            <span class="var-code">let</span>
+            <span class="var-label">① keyword</span>
+            <span class="var-desc">"Create a new box"</span>
+        </div>
+        <div class="var-part var-name">
+            <span class="var-code">myName</span>
+            <span class="var-label">② name</span>
+            <span class="var-desc">Your label for the box</span>
+        </div>
+        <div class="var-part var-equals">
+            <span class="var-code">=</span>
+            <span class="var-label">③ assign</span>
+            <span class="var-desc">"Put this inside"</span>
+        </div>
+        <div class="var-part var-value">
+            <span class="var-code">"Sofia"</span>
+            <span class="var-label">④ value</span>
+            <span class="var-desc">What goes in the box</span>
+        </div>
+    </div>
+
+    <div class="warn-box" style="margin-top:14px;">
+        <h4>⚠️ The <code>=</code> is NOT "equals"</h4>
+        <p style="margin:0;">In maths, <code>=</code> means "is equal to". In JavaScript it means <strong>"put this value into this box"</strong>. Two different things! You'll get used to it quickly.</p>
+    </div>
+
+    <!-- Step by step -->
+    <h3 style="margin-top:28px;">Step by Step — Write Your First Variable</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:14px;">In CodePen, go to the <strong>JS panel</strong> and type these one line at a time:</p>
+
     <div class="step-list">
-        <div class="step"><h4>Write the keyword <code>let</code></h4><p>This tells JavaScript: "I want to create a new box."</p></div>
-        <div class="step"><h4>Give the box a name</h4><p>Names can't have spaces. Use camelCase: <code>myName</code> not <code>my name</code>. Make it descriptive!</p></div>
-        <div class="step"><h4>Write <code>=</code> (equals sign)</h4><p>This means "put this inside". It's NOT asking "is it equal" — it's saying "put this value in the box".</p></div>
-        <div class="step"><h4>Write the value</h4><p>Text goes inside quotes: <code>"Sofia"</code> — Numbers don't: <code>25</code></p></div>
-        <div class="step"><h4>End with <code>;</code></h4><p>The semicolon is like a full stop — it tells JavaScript the instruction is finished.</p></div>
-    </div>
-    <div class="code-block"><span class="code-tag">JavaScript</span><pre><span class="cmt">// Full example — reads like a sentence:</span>
-<span class="cmt">// "Create a box called myName and put Sofia inside"</span>
-<span class="kw">let</span> <span class="var">myName</span> = <span class="str">"Sofia"</span>;
-
-<span class="kw">let</span> <span class="var">age</span> = <span class="num">25</span>;
-<span class="kw">let</span> <span class="var">favoriteColor</span> = <span class="str">"blue"</span>;
-<span class="kw">let</span> <span class="var">isHappy</span> = <span class="kw">true</span>;
-
-<span class="cmt">// See what's inside:</span>
+        <div class="step">
+            <h4>Type <code>let</code> and a space</h4>
+            <p>This is the keyword that tells JavaScript: <em>"I'm creating a new variable."</em></p>
+            <div class="code-block" style="margin-top:10px; margin-bottom:0;"><pre><span class="kw">let</span> </pre></div>
+        </div>
+        <div class="step">
+            <h4>Choose a name — no spaces allowed</h4>
+            <p>Use <strong>camelCase</strong>: start lowercase, then capitalise each new word. <code>myAge</code> ✅ &nbsp; <code>my age</code> ❌</p>
+            <div class="code-block" style="margin-top:10px; margin-bottom:0;"><pre><span class="kw">let</span> <span class="var">myAge</span></pre></div>
+        </div>
+        <div class="step">
+            <h4>Write <code>=</code> then the value</h4>
+            <p>Numbers go bare. Text always needs <strong>quotes</strong> around it — this is how JavaScript knows it's text and not more code.</p>
+            <div class="code-block" style="margin-top:10px; margin-bottom:0;"><pre><span class="kw">let</span> <span class="var">myAge</span> = <span class="num">25</span>;
+<span class="kw">let</span> <span class="var">myName</span> = <span class="str">"Sofia"</span>;</pre></div>
+        </div>
+        <div class="step">
+            <h4>Use <code>console.log()</code> to see the result</h4>
+            <p>Type the variable name inside the brackets. Open CodePen's <strong>Console tab</strong> at the bottom to see it printed.</p>
+            <div class="code-block" style="margin-top:10px; margin-bottom:0;"><pre>console.<span class="fn">log</span>(<span class="var">myAge</span>);   <span class="cmt">// → 25</span>
 console.<span class="fn">log</span>(<span class="var">myName</span>);  <span class="cmt">// → Sofia</span></pre></div>
-    <h3>Three Types of Values</h3>
-    <div class="card-grid">
-        <div class="mini-card"><h4>📝 Text (String)</h4><code>let name = "Maria";</code><p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Always use quotes. Can be any text, even emojis!</p></div>
-        <div class="mini-card"><h4>🔢 Number</h4><code>let age = 30;</code><p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">No quotes. Works with decimals too: <code>3.14</code></p></div>
-        <div class="mini-card"><h4>✅ True / False</h4><code>let isHappy = true;</code><p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Called a "boolean". Only two values: <code>true</code> or <code>false</code></p></div>
+        </div>
     </div>
-    <h3>🧪 Try It — Variables Live</h3>
+
+    <!-- 3 types — mobile-friendly stacked cards -->
+    <h3 style="margin-top:32px;">📦 Three Types of Values</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:14px;">JavaScript has different kinds of values. The three you'll use most:</p>
+
+    <div class="var-types-grid">
+        <div class="var-type-card type-string">
+            <div class="type-header">
+                <span class="type-icon">📝</span>
+                <strong>String — Text</strong>
+            </div>
+            <div class="code-block" style="margin:10px 0 8px;"><pre><span class="kw">let</span> <span class="var">city</span> = <span class="str">"Lisbon"</span>;
+<span class="kw">let</span> <span class="var">emoji</span> = <span class="str">"🎨"</span>;</pre></div>
+            <p style="font-size:0.84rem; color:var(--muted); margin:0;"><strong>Rule:</strong> always wrap in <code>"quotes"</code> — single <code>'</code> or double <code>"</code> both work.</p>
+        </div>
+        <div class="var-type-card type-number">
+            <div class="type-header">
+                <span class="type-icon">🔢</span>
+                <strong>Number</strong>
+            </div>
+            <div class="code-block" style="margin:10px 0 8px;"><pre><span class="kw">let</span> <span class="var">age</span> = <span class="num">25</span>;
+<span class="kw">let</span> <span class="var">price</span> = <span class="num">9.99</span>;</pre></div>
+            <p style="font-size:0.84rem; color:var(--muted); margin:0;"><strong>Rule:</strong> no quotes. You can do maths with numbers: <code>age + 1</code></p>
+        </div>
+        <div class="var-type-card type-boolean">
+            <div class="type-header">
+                <span class="type-icon">✅</span>
+                <strong>Boolean — Yes / No</strong>
+            </div>
+            <div class="code-block" style="margin:10px 0 8px;"><pre><span class="kw">let</span> <span class="var">isReady</span> = <span class="kw">true</span>;
+<span class="kw">let</span> <span class="var">isRaining</span> = <span class="kw">false</span>;</pre></div>
+            <p style="font-size:0.84rem; color:var(--muted); margin:0;"><strong>Only two values:</strong> <code>true</code> or <code>false</code>. Useful for on/off switches.</p>
+        </div>
+    </div>
+
+    <!-- Changing a variable -->
+    <h3 style="margin-top:32px;">🔄 Changing a Variable</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:14px;">Once created, you can update it — but <strong>don't write <code>let</code> again</strong>:</p>
+    <div class="code-block"><span class="code-tag">JS panel in CodePen</span><pre><span class="kw">let</span> <span class="var">mood</span> = <span class="str">"tired"</span>;     <span class="cmt">// 1. Create it</span>
+console.<span class="fn">log</span>(<span class="var">mood</span>);    <span class="cmt">// → tired</span>
+
+<span class="var">mood</span> = <span class="str">"excited"</span>;     <span class="cmt">// 2. Update it (no 'let'!)</span>
+console.<span class="fn">log</span>(<span class="var">mood</span>);    <span class="cmt">// → excited</span></pre></div>
+
+    <!-- Try it here first -->
+    <h3 style="margin-top:28px;">🧪 Try It Here First</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:4px;">Edit the values below and click Run — the output appears below the code. <em>Then do the same thing in CodePen!</em></p>
     <div class="runner">
-        <div class="runner-header"><span class="runner-title">▶ Live Code Runner</span><span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">Edit the code and press Run!</span></div>
+        <div class="runner-header">
+            <span class="runner-title">▶ Live Runner — same as CodePen's JS panel</span>
+            <span style="font-size:0.72rem; color:rgba(255,255,255,0.4);">Output = CodePen Console</span>
+        </div>
         <div class="runner-body">
-            <p class="runner-instructions">Change "Your Name" to your actual name, then click <strong>Run Code</strong>:</p>
-            <textarea class="code-editor" id="varRunner">// Change the values to match YOU!
+            <p class="runner-instructions">Replace the placeholder values with your own, then press <strong>Run Code</strong>:</p>
+            <textarea class="code-editor" id="varRunner">// Change these to match YOU
 let myName = "Your Name";
-let myAge = 20;
+let myAge  = 20;
 let myCity = "Lisbon";
 
-// Print them all
+// console.log prints to the console
 console.log("Name: " + myName);
-console.log("Age: " + myAge);
+console.log("Age: "  + myAge);
 console.log("City: " + myCity);
 
-// Try adding a new variable below:
+// Try adding one more variable below:
 </textarea>
             <div class="runner-actions">
                 <button class="btn btn-primary" onclick="runCode('varRunner', 'varOutput')">▶ Run Code</button>
@@ -852,10 +1012,75 @@ console.log("City: " + myCity);
             <div class="run-output" id="varOutput"></div>
         </div>
     </div>
-    <div class="tip-box"><h4>💡 Changing a Variable</h4><p>After creating a variable with <code>let</code>, you can change it <em>without</em> writing <code>let</code> again:</p><div class="code-block" style="margin-top:8px;"><pre><span class="kw">let</span> <span class="var">mood</span> = <span class="str">"happy"</span>;
-<span class="var">mood</span> = <span class="str">"excited"</span>;  <span class="cmt">// No 'let' needed this time!</span>
-console.<span class="fn">log</span>(<span class="var">mood</span>);  <span class="cmt">// → excited</span></pre></div></div>
-    <div class="checkpoint"><h4>✅ Before Moving On — Can You Answer?</h4><ul class="check-list"><li>What is a variable? (A labeled box that holds information)</li><li>What does <code>let</code> do? (Creates a new variable)</li><li>Why do strings need quotes? (So JavaScript knows it's text, not code)</li></ul></div>
+
+    <!-- CodePen exercise -->
+    <div class="concept-box" style="margin-top:24px;">
+        <h3>🖥️ Now Do It in CodePen</h3>
+        <p>Open your CodePen Pen, click the <strong>JS panel</strong>, and type this from scratch:</p>
+        <div class="step-list" style="margin-top:14px;">
+            <div class="step"><h4>Create 3 variables about yourself</h4><p>Your name, your age, and your favourite colour.</p></div>
+            <div class="step"><h4>Use <code>console.log()</code> to print each one</h4><p>Click the <strong>Console</strong> tab at the bottom of CodePen to see your output.</p></div>
+            <div class="step"><h4>Change one variable and log it again</h4><p>Update your favourite colour without using <code>let</code> — prove to yourself the value changed.</p></div>
+        </div>
+        <div class="code-block" style="margin-top:12px;"><span class="code-tag">Starter code — type this in your JS panel</span><pre><span class="kw">let</span> <span class="var">myName</span>  = <span class="str">"_____"</span>;   <span class="cmt">// replace _____</span>
+<span class="kw">let</span> <span class="var">myAge</span>   = <span class="num">0</span>;          <span class="cmt">// replace 0</span>
+<span class="kw">let</span> <span class="var">myColor</span> = <span class="str">"_____"</span>;   <span class="cmt">// replace _____</span>
+
+console.<span class="fn">log</span>(<span class="var">myName</span>);
+console.<span class="fn">log</span>(<span class="var">myAge</span>);
+console.<span class="fn">log</span>(<span class="var">myColor</span>);</pre></div>
+    </div>
+
+    <!-- Common mistakes -->
+    <div class="warn-box" style="margin-top:20px;">
+        <h4>🚨 Most Common Mistakes with Variables</h4>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:0.85rem;">
+                <div style="background:#fff1f2; border-radius:8px; padding:10px;">
+                    <strong style="color:#be123c; display:block; margin-bottom:4px;">❌ Wrong</strong>
+                    <code>let my name = "Ana";</code>
+                </div>
+                <div style="background:#f0fdf4; border-radius:8px; padding:10px;">
+                    <strong style="color:#065f46; display:block; margin-bottom:4px;">✅ Correct</strong>
+                    <code>let myName = "Ana";</code>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:0.85rem;">
+                <div style="background:#fff1f2; border-radius:8px; padding:10px;">
+                    <strong style="color:#be123c; display:block; margin-bottom:4px;">❌ Wrong</strong>
+                    <code>let age = "25";</code><br>
+                    <span style="font-size:0.78rem; color:var(--muted);">(number in quotes = text!)</span>
+                </div>
+                <div style="background:#f0fdf4; border-radius:8px; padding:10px;">
+                    <strong style="color:#065f46; display:block; margin-bottom:4px;">✅ Correct</strong>
+                    <code>let age = 25;</code><br>
+                    <span style="font-size:0.78rem; color:var(--muted);">no quotes for numbers</span>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:0.85rem;">
+                <div style="background:#fff1f2; border-radius:8px; padding:10px;">
+                    <strong style="color:#be123c; display:block; margin-bottom:4px;">❌ Wrong</strong>
+                    <code>let mood = happy;</code><br>
+                    <span style="font-size:0.78rem; color:var(--muted);">(no quotes = JS looks for a variable called <em>happy</em>)</span>
+                </div>
+                <div style="background:#f0fdf4; border-radius:8px; padding:10px;">
+                    <strong style="color:#065f46; display:block; margin-bottom:4px;">✅ Correct</strong>
+                    <code>let mood = "happy";</code><br>
+                    <span style="font-size:0.78rem; color:var(--muted);">text needs quotes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkpoint" style="margin-top:20px;">
+        <h4>✅ Before Moving On — 3 Quick Questions</h4>
+        <ul class="check-list">
+            <li>What is a variable? <em style="color:var(--muted); font-size:0.85rem;">(A labeled box that stores a value)</em></li>
+            <li>What does <code>let</code> do? <em style="color:var(--muted); font-size:0.85rem;">(Creates a new variable)</em></li>
+            <li>Which needs quotes — text or numbers? <em style="color:var(--muted); font-size:0.85rem;">(Text always. Numbers never.)</em></li>
+        </ul>
+    </div>
+
     <div style="text-align:center; margin-top:28px;">
         <button class="btn btn-primary" onclick="openTab('functions', document.querySelectorAll('.tab-btn')[5])">Next: Functions →</button>
     </div>
